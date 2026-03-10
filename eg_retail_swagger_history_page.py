@@ -1,33 +1,4 @@
 #!/usr/bin/env python3
-"""
-EG Retail Swagger History Page Generator
-
-Builds a browsable history page from snapshots created by
-`eg_retail_swagger_watch_agent.py`.
-
-What it generates
-- .swagger_watch_state/history.html
-
-What it shows
-- all services/environments with saved snapshots
-- earliest snapshot timestamp
-- latest snapshot timestamp
-- snapshot count
-- quick compare links for:
-  - earliest vs latest
-  - previous vs latest
-
-Optional outputs
-- per-service/env compare reports under:
-  .swagger_watch_state/history_reports/
-
-Usage
-    python eg_retail_swagger_history_page.py
-
-Optional
-    python eg_retail_swagger_history_page.py --state-dir .swagger_watch_state
-"""
-
 from __future__ import annotations
 
 import argparse
@@ -55,10 +26,6 @@ class ServiceEnvHistory:
     environment: str
     directory_name: str
     snapshots: List[SnapshotInfo]
-
-
-def safe_name(name: str) -> str:
-    return re.sub(r"[^a-zA-Z0-9._-]+", "_", name).strip("_").lower()
 
 
 def esc(value: str) -> str:
@@ -167,6 +134,7 @@ def collect_histories(state_dir: Path) -> List[ServiceEnvHistory]:
         snapshots_dir = child / "snapshots"
         if not snapshots_dir.exists():
             continue
+
         snapshot_map: Dict[str, Dict[str, Path]] = {}
         for p in snapshots_dir.iterdir():
             if p.name.endswith(SNAPSHOT_SUFFIX):
@@ -175,6 +143,7 @@ def collect_histories(state_dir: Path) -> List[ServiceEnvHistory]:
             elif p.name.endswith(".sha256"):
                 ts = p.name[: -len(".sha256")]
                 snapshot_map.setdefault(ts, {})["hash"] = p
+
         snapshots = [
             SnapshotInfo(timestamp=ts, normalized_path=parts["normalized"], hash_path=parts.get("hash"))
             for ts, parts in sorted(snapshot_map.items())
@@ -182,6 +151,7 @@ def collect_histories(state_dir: Path) -> List[ServiceEnvHistory]:
         ]
         if not snapshots:
             continue
+
         service_name, env = parse_service_env_from_dirname(child.name)
         histories.append(
             ServiceEnvHistory(
@@ -200,134 +170,39 @@ def compare_snapshots(left: SnapshotInfo, right: SnapshotInfo) -> Dict[str, List
     return diff_specs(left_spec, right_spec)
 
 
-def build_compare_markdown(service: str, env: str, left: SnapshotInfo, right: SnapshotInfo, diff: Dict[str, List[str]]) -> str:
-    lines = [
-        f"# Historical Swagger compare: {service} [{env}]",
-        "",
-        f"- From: `{left.timestamp}`",
-        f"- To: `{right.timestamp}`",
-        f"- From hash: `{sha_short(left.hash_path)}`",
-        f"- To hash: `{sha_short(right.hash_path)}`",
-        "",
-        "## Summary",
-        f"- Added operations: {len(diff['added'])}",
-        f"- Removed operations: {len(diff['removed'])}",
-        f"- Changed operations: {len(diff['changed'])}",
-        "",
-    ]
-    for section in ["added", "removed", "changed"]:
-        lines.append(f"## {section.capitalize()}")
-        items = diff[section]
-        lines.extend([f"- {item}" for item in items] if items else ["- None"])
-        lines.append("")
-    return "\n".join(lines).strip() + "\n"
-
-
-def write_compare_report(state_dir: Path, history: ServiceEnvHistory, left: SnapshotInfo, right: SnapshotInfo) -> Tuple[Path, Dict[str, List[str]]]:
-    diff = compare_snapshots(left, right)
-    reports_dir = state_dir / "history_reports"
-    reports_dir.mkdir(parents=True, exist_ok=True)
-    base = f"{safe_name(history.service_name)}_{history.environment.lower()}_{left.timestamp}_vs_{right.timestamp}"
-    md_path = reports_dir / f"{base}.md"
-    json_path = reports_dir / f"{base}.json"
-
-    markdown = build_compare_markdown(history.service_name, history.environment, left, right, diff)
-    payload = {
-        "service_name": history.service_name,
-        "environment": history.environment,
-        "from": left.timestamp,
-        "to": right.timestamp,
-        "diff": diff,
-    }
-    write_text(md_path, markdown)
-    write_text(json_path, json.dumps(payload, ensure_ascii=False, indent=2))
-    return md_path, diff
-
-
-def render_diff_preview(diff: Dict[str, List[str]]) -> str:
-    def block(title: str, items: List[str]) -> str:
-        if not items:
-            return f"<div class=\"mini-block\"><h5>{esc(title)}</h5><div class=\"muted\">None</div></div>"
-        preview = items[:5]
-        lis = "".join(f"<li><code>{esc(x)}</code></li>" for x in preview)
-        more = "" if len(items) <= 5 else f"<div class=\"muted\">+ {len(items) - 5} more</div>"
-        return f"<div class=\"mini-block\"><h5>{esc(title)}</h5><ul>{lis}</ul>{more}</div>"
-    return block("Added", diff["added"]) + block("Removed", diff["removed"]) + block("Changed", diff["changed"])
+def build_history_index(histories: List[ServiceEnvHistory]) -> Dict[str, Any]:
+    items = []
+    for history in histories:
+        items.append(
+            {
+                "id": f"{history.service_name} [{history.environment}]",
+                "service_name": history.service_name,
+                "environment": history.environment,
+                "snapshots": [
+                    {
+                        "timestamp": s.timestamp,
+                        "hash": sha_short(s.hash_path),
+                        "file": s.normalized_path.name,
+                    }
+                    for s in history.snapshots
+                ],
+            }
+        )
+    return {"services": items}
 
 
 def build_history_page(state_dir: Path) -> Path:
     histories = collect_histories(state_dir)
-    cards: List[str] = []
-
-    for history in histories:
-        snapshots = history.snapshots
-        earliest = snapshots[0]
-        latest = snapshots[-1]
-        previous = snapshots[-2] if len(snapshots) >= 2 else None
-
-        latest_compare_html = "<div class=\"muted\">Need at least 2 snapshots</div>"
-        if previous is not None:
-            latest_md, latest_diff = write_compare_report(state_dir, history, previous, latest)
-            latest_compare_html = f"""
-            <div class=\"compare-card\">
-              <div class=\"compare-head\">
-                <h4>Previous vs Latest</h4>
-                <a href=\"{esc(latest_md.name)}\" target=\"_blank\" rel=\"noreferrer\">Open report</a>
-              </div>
-              <div class=\"muted\">{esc(previous.timestamp)} → {esc(latest.timestamp)}</div>
-              <div class=\"mini-grid\">{render_diff_preview(latest_diff)}</div>
-            </div>
-            """
-
-        earliest_compare_html = "<div class=\"muted\">Need at least 2 snapshots</div>"
-        if len(snapshots) >= 2:
-            earliest_md, earliest_diff = write_compare_report(state_dir, history, earliest, latest)
-            earliest_compare_html = f"""
-            <div class=\"compare-card\">
-              <div class=\"compare-head\">
-                <h4>Earliest vs Latest</h4>
-                <a href=\"{esc(earliest_md.name)}\" target=\"_blank\" rel=\"noreferrer\">Open report</a>
-              </div>
-              <div class=\"muted\">{esc(earliest.timestamp)} → {esc(latest.timestamp)}</div>
-              <div class=\"mini-grid\">{render_diff_preview(earliest_diff)}</div>
-            </div>
-            """
-
-        snapshot_list = "".join(
-            f"<li><code>{esc(s.timestamp)}</code> <span class=\"muted\">{esc(sha_short(s.hash_path))}</span></li>"
-            for s in reversed(snapshots[-10:])
-        )
-
-        cards.append(
-            f"""
-            <article class=\"service-card\">
-              <div class=\"service-head\">
-                <h2>{esc(history.service_name)} [{esc(history.environment)}]</h2>
-                <span class=\"badge\">{len(snapshots)} snapshots</span>
-              </div>
-              <div class=\"stats\">
-                <div class=\"stat\"><span>Earliest</span><strong>{esc(earliest.timestamp)}</strong></div>
-                <div class=\"stat\"><span>Latest</span><strong>{esc(latest.timestamp)}</strong></div>
-                <div class=\"stat\"><span>Count</span><strong>{len(snapshots)}</strong></div>
-              </div>
-              <div class=\"grid\">
-                {latest_compare_html}
-                {earliest_compare_html}
-              </div>
-              <details>
-                <summary>Recent snapshots</summary>
-                <ul>{snapshot_list}</ul>
-              </details>
-            </article>
-            """
-        )
+    history_index = build_history_index(histories)
+    history_index_path = state_dir / "history_index.json"
+    write_text(history_index_path, json.dumps(history_index, ensure_ascii=False, indent=2))
 
     page = f"""
 <!doctype html>
-<html lang=\"en\">
+<html lang="en">
 <head>
-  <meta charset=\"utf-8\" />
-  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>EG Retail Swagger History</title>
   <style>
     :root {{
@@ -343,44 +218,271 @@ def build_history_page(state_dir: Path) -> Path:
     a {{ color: var(--accent); text-decoration: none; }}
     a:hover {{ text-decoration: underline; }}
     .wrap {{ max-width: 1400px; margin: 0 auto; padding: 24px; }}
+    .topnav {{ display: flex; gap: 12px; margin-bottom: 18px; }}
+    .topnav a {{ background: rgba(255,255,255,.05); border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; }}
     .hero {{ display: flex; justify-content: space-between; gap: 16px; align-items: end; margin-bottom: 24px; }}
     .hero h1 {{ margin: 0 0 6px; font-size: 32px; }}
     .muted {{ color: var(--muted); }}
-    .service-card, .compare-card {{ background: var(--card); border: 1px solid var(--border); border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,.18); }}
-    .service-card {{ padding: 18px; margin-bottom: 18px; }}
-    .service-head {{ display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 14px; }}
-    .service-head h2 {{ margin: 0; font-size: 24px; }}
-    .badge {{ display: inline-block; border-radius: 999px; padding: 6px 10px; font-size: 12px; background: rgba(255,255,255,.08); }}
-    .stats {{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 14px; }}
-    .stat {{ background: rgba(255,255,255,.03); border: 1px solid var(--border); border-radius: 14px; padding: 12px; }}
+    .card {{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.18);
+      padding: 18px;
+      margin-bottom: 18px;
+    }}
+    .selectors {{
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr auto;
+      gap: 12px;
+      align-items: end;
+    }}
+    label {{ display: block; margin-bottom: 6px; color: var(--muted); font-size: 13px; }}
+    select, button {{
+      width: 100%;
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+    }}
+    button {{
+      cursor: pointer;
+      background: rgba(124,196,255,.14);
+    }}
+    .stats {{
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }}
+    .stat {{
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+    }}
     .stat span {{ display: block; color: var(--muted); font-size: 12px; margin-bottom: 6px; }}
     .stat strong {{ font-size: 18px; overflow-wrap: anywhere; }}
-    .grid {{ display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }}
-    .compare-card {{ padding: 14px; }}
-    .compare-head {{ display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 8px; }}
-    .compare-head h4 {{ margin: 0; font-size: 18px; }}
-    .mini-grid {{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 12px; }}
-    .mini-block {{ background: rgba(255,255,255,.03); border: 1px solid var(--border); border-radius: 12px; padding: 10px; }}
-    .mini-block h5 {{ margin: 0 0 8px; font-size: 13px; }}
+    .section-title {{ margin: 18px 0 8px; font-size: 18px; }}
     ul {{ margin: 8px 0 0 18px; padding: 0; }}
     li {{ margin: 6px 0; }}
-    code {{ background: rgba(255,255,255,.04); border: 1px solid var(--border); border-radius: 8px; padding: 2px 6px; word-break: break-word; }}
-    details {{ margin-top: 14px; }}
-    summary {{ cursor: pointer; color: var(--accent); }}
-    @media (max-width: 1100px) {{ .grid, .mini-grid, .stats {{ grid-template-columns: 1fr; }} }}
+    code {{
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2px 6px;
+      word-break: break-word;
+    }}
+    @media (max-width: 900px) {{
+      .selectors, .stats {{ grid-template-columns: 1fr; }}
+    }}
   </style>
 </head>
 <body>
-  <div class=\"wrap\">
-    <section class=\"hero\">
+  <div class="wrap">
+    <nav class="topnav">
+      <a href="index.html">Dashboard</a>
+      <a href="history.html">History</a>
+    </nav>
+
+    <section class="hero">
       <div>
         <h1>EG Retail Swagger History</h1>
-        <div class=\"muted\">Generated from saved snapshots under {esc(str(state_dir))}</div>
+        <div class="muted">Choose any two saved snapshots and compare them.</div>
       </div>
-      <div><a href=\"index.html\">Back to dashboard</a></div>
     </section>
-    {''.join(cards) if cards else '<div class="muted">No saved snapshots found yet.</div>'}
+
+    <section class="card">
+      <div class="selectors">
+        <div>
+          <label for="serviceSelect">Service / env</label>
+          <select id="serviceSelect"></select>
+        </div>
+        <div>
+          <label for="fromSelect">From</label>
+          <select id="fromSelect"></select>
+        </div>
+        <div>
+          <label for="toSelect">To</label>
+          <select id="toSelect"></select>
+        </div>
+        <div>
+          <label>&nbsp;</label>
+          <button id="compareBtn" type="button">Compare</button>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><span>Snapshot count</span><strong id="countValue">-</strong></div>
+        <div class="stat"><span>Earliest</span><strong id="earliestValue">-</strong></div>
+        <div class="stat"><span>Latest</span><strong id="latestValue">-</strong></div>
+      </div>
+
+      <h3 class="section-title">Compare result</h3>
+      <div id="result" class="muted">Pick a service and two snapshots, then click Compare.</div>
+    </section>
   </div>
+
+  <script>
+    async function loadIndex() {{
+      const res = await fetch('history_index.json', {{ cache: 'no-store' }});
+      if (!res.ok) throw new Error('Could not load history_index.json');
+      return res.json();
+    }}
+
+    function fillSelect(select, values) {{
+      select.innerHTML = '';
+      for (const value of values) {{
+        const opt = document.createElement('option');
+        opt.value = value;
+        opt.textContent = value;
+        select.appendChild(opt);
+      }}
+    }}
+
+    function renderDiff(diff) {{
+      const section = (title, items) => {{
+        const list = items.length
+          ? `<ul>${{items.map(x => `<li><code>${{x}}</code></li>`).join('')}}</ul>`
+          : `<div class="muted">None</div>`;
+        return `<h4>${{title}}</h4>${{list}}`;
+      }};
+      return `
+        <div class="stats">
+          <div class="stat"><span>Added</span><strong>${{diff.added.length}}</strong></div>
+          <div class="stat"><span>Removed</span><strong>${{diff.removed.length}}</strong></div>
+          <div class="stat"><span>Changed</span><strong>${{diff.changed.length}}</strong></div>
+        </div>
+        ${{section('Added', diff.added)}}
+        ${{section('Removed', diff.removed)}}
+        ${{section('Changed', diff.changed)}}
+      `;
+    }}
+
+    function compareSpecs(oldSpec, newSpec) {{
+      const flattenPaths = (spec) => {{
+        const paths = spec.paths || {{}};
+        const out = {{}};
+        for (const [path, methods] of Object.entries(paths)) {{
+          if (!methods || typeof methods !== 'object') continue;
+          for (const [method, op] of Object.entries(methods)) {{
+            const m = String(method).toLowerCase();
+            if (!['get','post','put','patch','delete','head','options','trace'].includes(m)) continue;
+            out[`${{method.toUpperCase()}} ${{path}}`] = op || {{}};
+          }}
+        }}
+        return out;
+      }};
+
+      const opSig = (op) => JSON.stringify(op);
+      const a = flattenPaths(oldSpec);
+      const b = flattenPaths(newSpec);
+      const aKeys = new Set(Object.keys(a));
+      const bKeys = new Set(Object.keys(b));
+
+      const added = [...bKeys].filter(x => !aKeys.has(x)).sort();
+      const removed = [...aKeys].filter(x => !bKeys.has(x)).sort();
+      const changed = [...aKeys].filter(x => bKeys.has(x) && opSig(a[x]) !== opSig(b[x])).sort();
+
+      return {{ added, removed, changed }};
+    }}
+
+    async function main() {{
+      const data = await loadIndex();
+      const services = data.services || [];
+
+      const serviceSelect = document.getElementById('serviceSelect');
+      const fromSelect = document.getElementById('fromSelect');
+      const toSelect = document.getElementById('toSelect');
+      const compareBtn = document.getElementById('compareBtn');
+      const result = document.getElementById('result');
+
+      const countValue = document.getElementById('countValue');
+      const earliestValue = document.getElementById('earliestValue');
+      const latestValue = document.getElementById('latestValue');
+
+      const map = new Map(services.map(s => [s.id, s]));
+      fillSelect(serviceSelect, services.map(s => s.id));
+
+      function refreshSnapshotSelectors() {{
+        const current = map.get(serviceSelect.value);
+        const snaps = (current?.snapshots || []).map(s => s.timestamp);
+
+        fillSelect(fromSelect, snaps);
+        fillSelect(toSelect, snaps);
+
+        if (snaps.length > 0) {{
+          fromSelect.value = snaps[0];
+          toSelect.value = snaps[snaps.length - 1];
+          countValue.textContent = String(snaps.length);
+          earliestValue.textContent = snaps[0];
+          latestValue.textContent = snaps[snaps.length - 1];
+        }} else {{
+          countValue.textContent = '-';
+          earliestValue.textContent = '-';
+          latestValue.textContent = '-';
+        }}
+      }}
+
+      serviceSelect.addEventListener('change', refreshSnapshotSelectors);
+      refreshSnapshotSelectors();
+
+      compareBtn.addEventListener('click', async () => {{
+        const current = map.get(serviceSelect.value);
+        if (!current) return;
+
+        const fromTs = fromSelect.value;
+        const toTs = toSelect.value;
+        const fromSnap = current.snapshots.find(s => s.timestamp === fromTs);
+        const toSnap = current.snapshots.find(s => s.timestamp === toTs);
+
+        if (!fromSnap || !toSnap) {{
+          result.innerHTML = '<div class="muted">Invalid snapshot selection.</div>';
+          return;
+        }}
+
+        if (fromTs === toTs) {{
+          result.innerHTML = '<div class="muted">Choose two different snapshots.</div>';
+          return;
+        }}
+
+        const dirName = `${{current.service_name}} [${{current.environment}}]`
+          .replace(/[^a-zA-Z0-9._-]+/g, '_')
+          .replace(/^_+|_+$/g, '')
+          .toLowerCase();
+
+        const fromUrl = `${{dirName}}/snapshots/${{fromTs}}.normalized.json`;
+        const toUrl = `${{dirName}}/snapshots/${{toTs}}.normalized.json`;
+
+        try {{
+          const [aRes, bRes] = await Promise.all([
+            fetch(fromUrl, {{ cache: 'no-store' }}),
+            fetch(toUrl, {{ cache: 'no-store' }}),
+          ]);
+
+          if (!aRes.ok || !bRes.ok) {{
+            result.innerHTML = '<div class="muted">Could not load one of the selected snapshots.</div>';
+            return;
+          }}
+
+          const [aSpec, bSpec] = await Promise.all([aRes.json(), bRes.json()]);
+          const diff = compareSpecs(aSpec, bSpec);
+
+          result.innerHTML = `
+            <div class="muted">${{fromTs}} → ${{toTs}}</div>
+            ${{renderDiff(diff)}}
+          `;
+        }} catch (err) {{
+          result.innerHTML = `<div class="muted">Compare failed: ${{err.message}}</div>`;
+        }}
+      }});
+    }}
+
+    main().catch(err => {{
+      document.getElementById('result').innerHTML = `<div class="muted">Initialization failed: ${{err.message}}</div>`;
+    }});
+  </script>
 </body>
 </html>
     """.strip()

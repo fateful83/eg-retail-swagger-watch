@@ -836,13 +836,30 @@ def build_dashboard(rows: List[DashboardServiceRow], output_path: Path) -> None:
     code, pre {{ background: rgba(255,255,255,.04); border: 1px solid var(--border); border-radius: 8px; }}
     code {{ padding: 2px 6px; word-break: break-word; }}
     pre {{ white-space: pre-wrap; overflow-wrap: anywhere; padding: 12px; font-size: 12px; margin-top: 12px; }}
+    .topnav {{
+      display: flex;
+      gap: 12px;
+      margin-bottom: 18px;
+    }}
+    .topnav a {{
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 12px;
+      text-decoration: none;
+    }}
     @media (max-width: 1300px) {{ .env-grid, .drift-grid {{ grid-template-columns: 1fr; }} .summary {{ grid-template-columns: repeat(2, minmax(140px, 1fr)); }} }}
     @media (max-width: 640px) {{ .hero {{ display: block; }} .summary {{ grid-template-columns: 1fr; }} }}
   </style>
 </head>
 <body>
-  <div class=\"wrap\">
-    <section class=\"hero\">
+  <div class="wrap">
+    <nav class="topnav">
+      <a href="index.html">Dashboard</a>
+      <a href="history.html">History</a>
+    </nav>
+
+    <section class="hero">
       <div>
         <h1>EG Retail Swagger Dashboard</h1>
         <div class=\"muted\">Generated at {esc(now_iso())}</div>
