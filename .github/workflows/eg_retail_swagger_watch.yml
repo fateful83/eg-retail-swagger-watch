@@ -48,10 +48,11 @@ jobs:
           AUTH_HEADER: ${{ secrets.AUTH_HEADER }}
           EXTRA_HEADERS_JSON: ${{ secrets.EXTRA_HEADERS_JSON }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          REQUEST_TIMEOUT_SECONDS: '30'
+          REQUEST_TIMEOUT_SECONDS: '60'
           POLL_CRON: '0 */6 * * *'
           RETENTION_DAYS: '180'
           STATE_DIR: '.swagger_watch_state'
+          FAIL_ON_SERVICE_ERRORS: 'false'
         run: |
           python eg_retail_swagger_watch_agent.py
 
