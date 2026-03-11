@@ -1,9 +1,9 @@
 # Swagger/OpenAPI change detected: CustomerOrderV2 [TEST]
 
-- Time: 2026-03-11T11:08:20Z
+- Time: 2026-03-11T12:29:11Z
 - Swagger URL: https://customerorderv2service.egretail-test.cloud/swagger/v1/swagger.json
-- Previous hash: `6b5a3053b3794f1abf58500a9f500e736f64c4f71ec57070b7da75e2d542862f`
-- Current hash: `afec815ac50e99f1b02189c08e8ddb09db90d8f95272e7da677601cf86e2428f`
+- Previous hash: `afec815ac50e99f1b02189c08e8ddb09db90d8f95272e7da677601cf86e2428f`
+- Current hash: `3556425ac6a82e670b232aa1d5f63c7b0aa0373f7d9498969ee429dccb1b0c64`
 
 ## Summary
 - Added operations: 0

@@ -1,9 +1,9 @@
 # Swagger/OpenAPI change detected: POS API [TEST]
 
-- Time: 2026-03-11T11:08:25Z
+- Time: 2026-03-11T12:29:30Z
 - Swagger URL: https://posapi.egretail-test.cloud/swagger/v1/swagger.json
-- Previous hash: `d8eae953ddf08cbb5cd64085740348d617671f113e6ae3cefca8ad3db1524909`
-- Current hash: `f7c88055f0dc72477fc2d6f220379efc3b5e8e4fe41130dbad7f952640fd2e4d`
+- Previous hash: `f7c88055f0dc72477fc2d6f220379efc3b5e8e4fe41130dbad7f952640fd2e4d`
+- Current hash: `737da11ddcd5d1988d55c790fa3806cbe78a25034d731d4292b8688901f5313f`
 
 ## Summary
 - Added operations: 0
