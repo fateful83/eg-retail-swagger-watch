@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EG Retail Swagger Dashboard</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #121933;
+      --muted: #9fb0d0;
+      --text: #eef4ff;
+      --border: #263052;
+      --ok: #153a2a;
+      --warn: #4a3310;
+      --bad: #4c1720;
+      --info: #17324c;
+      --accent: #7cc4ff;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Inter, Segoe UI, Arial, sans-serif; background: var(--bg); color: var(--text); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 1600px; margin: 0 auto; padding: 24px; }
+    .hero { display: flex; justify-content: space-between; gap: 16px; align-items: end; margin-bottom: 24px; }
+    .hero h1 { margin: 0 0 6px; font-size: 32px; }
+    .muted { color: var(--muted); }
+    .summary { display: grid; grid-template-columns: repeat(4, minmax(140px, 1fr)); gap: 12px; margin: 20px 0 28px; }
+    .summary .card, .panel, .service-card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,.18); }
+    .summary .card { padding: 16px; }
+    .summary .card span { display: block; color: var(--muted); font-size: 13px; margin-bottom: 6px; }
+    .summary .card strong { font-size: 28px; }
+    .service-card { padding: 18px; margin-bottom: 18px; }
+    .service-head { margin-bottom: 14px; }
+    .service-head h2 { margin: 0; font-size: 24px; }
+    .grid { display: grid; gap: 14px; }
+    .env-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 14px; }
+    .drift-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .panel { padding: 16px; min-width: 0; }
+    .panel-head { display: flex; justify-content: space-between; gap: 10px; align-items: center; margin-bottom: 12px; }
+    .panel h3 { margin: 0; font-size: 18px; }
+    .badge { display: inline-block; border-radius: 999px; padding: 6px 10px; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+    .badge.ok { background: var(--ok); }
+    .badge.warn { background: var(--warn); }
+    .badge.bad { background: var(--bad); }
+    .badge.info { background: var(--info); }
+    .kv { display: grid; grid-template-columns: 72px 1fr; gap: 10px; font-size: 14px; margin: 8px 0; align-items: start; }
+    .kv span { color: var(--muted); }
+    .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+    .stat { background: rgba(255,255,255,.03); border: 1px solid var(--border); border-radius: 14px; padding: 12px; }
+    .stat span { display: block; color: var(--muted); font-size: 12px; margin-bottom: 6px; }
+    .stat strong { font-size: 22px; }
+    details { margin-top: 14px; }
+    summary { cursor: pointer; color: var(--accent); }
+    ul { margin: 8px 0 0 18px; padding: 0; }
+    li { margin: 6px 0; }
+    code, pre { background: rgba(255,255,255,.04); border: 1px solid var(--border); border-radius: 8px; }
+    code { padding: 2px 6px; word-break: break-word; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; padding: 12px; font-size: 12px; margin-top: 12px; }
+    .topnav {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .topnav a {
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 12px;
+      text-decoration: none;
+    }
+    @media (max-width: 1300px) { .env-grid, .drift-grid { grid-template-columns: 1fr; } .summary { grid-template-columns: repeat(2, minmax(140px, 1fr)); } }
+    @media (max-width: 640px) { .hero { display: block; } .summary { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="topnav">
+      <a href="index.html">Dashboard</a>
+      <a href="history.html">History</a>
+    </nav>
+
+    <section class="hero">
+      <div>
+        <h1>EG Retail Swagger Dashboard</h1>
+        <div class="muted">Generated at 2026-03-11T08:44:19Z</div>
+      </div>
+      <div class="muted">Output: .swagger_watch_state/dashboard.html</div>
+    </section>
+
+    <section class="summary">
+      <div class="card"><span>Services</span><strong>4</strong></div>
+      <div class="card"><span>Env changes</span><strong>0</strong></div>
+      <div class="card"><span>Drifts</span><strong>2</strong></div>
+      <div class="card"><span>Errors</span><strong>0</strong></div>
+    </section>
+
+    
+            <article class="service-card">
+              <div class="service-head">
+                <h2>CustomerOrderV2</h2>
+              </div>
+              <div class="grid env-grid">
+    <section class="panel">
+      <div class="panel-head">
+        <h3>DEV</h3>
+        <span class="badge info">baseline</span>
+      </div>
+      <div class="kv"><span>URL</span><a href="https://customerorderv2service.egretail-dev.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://customerorderv2service.egretail-dev.cloud/swagger/v1/swagger.json</a></div>
+      <div class="kv"><span>Hash</span><code>956229b0ee52</code></div>
+      <div class="kv"><span>Summary</span><strong>Initialized baseline (956229b0ee52)</strong></div>
+      <div class="stats">
+        <div class="stat"><span>Added</span><strong>0</strong></div>
+        <div class="stat"><span>Removed</span><strong>0</strong></div>
+        <div class="stat"><span>Changed</span><strong>0</strong></div>
+      </div>
+      <details>
+        <summary>Details</summary>
+        <h4>Added</h4>
+        <div class="muted">None</div>
+        <h4>Removed</h4>
+        <div class="muted">None</div>
+        <h4>Changed</h4>
+        <div class="muted">None</div>
+        <pre>Initialized baseline for CustomerOrderV2 [DEV] at 2026-03-11T08:43:53Z
+Swagger URL: https://customerorderv2service.egretail-dev.cloud/swagger/v1/swagger.json
+Hash: 956229b0ee52499df89f8ecce8141aed5947f58b0d3e75ec639873fc968133ef
+</pre>
+      </details>
+    </section>
+    
+    <section class="panel">
+      <div class="panel-head">
+        <h3>TEST</h3>
+        <span class="badge info">baseline</span>
+      </div>
+      <div class="kv"><span>URL</span><a href="https://customerorderv2service.egretail-test.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://customerorderv2service.egretail-test.cloud/swagger/v1/swagger.json</a></div>
+      <div class="kv"><span>Hash</span><code>8b1da8079ad9</code></div>
+      <div class="kv"><span>Summary</span><strong>Initialized baseline (8b1da8079ad9)</strong></div>
+      <div class="stats">
+        <div class="stat"><span>Added</span><strong>0</strong></div>
+        <div class="stat"><span>Removed</span><strong>0</strong></div>
+        <div class="stat"><span>Changed</span><strong>0</strong></div>
+      </div>
+      <details>
+        <summary>Details</summary>
+        <h4>Added</h4>
+        <div class="muted">None</div>
+        <h4>Removed</h4>
+        <div class="muted">None</div>
+        <h4>Changed</h4>
+        <div class="muted">None</div>
+        <pre>Initialized baseline for CustomerOrderV2 [TEST] at 2026-03-11T08:43:55Z
+Swagger URL: https://customerorderv2service.egretail-test.cloud/swagger/v1/swagger.json
+Hash: 8b1da8079ad9490b419fd9fcce7721db32f91c7d772b2f17df47feb481ccf950
+</pre>
+      </details>
+    </section>
+    
+    <section class="panel">
+      <div class="panel-head">
+        <h3>PROD</h3>
+        <span class="badge info">baseline</span>
+      </div>
+      <div class="kv"><span>URL</span><a href="https://customerorderv2service.egretail.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://customerorderv2service.egretail.cloud/swagger/v1/swagger.json</a></div>
+      <div class="kv"><span>Hash</span><code>2bb46cc5f793</code></div>
+      <div class="kv"><span>Summary</span><strong>Initialized baseline (2bb46cc5f793)</strong></div>
+      <div class="stats">
+        <div class="stat"><span>Added</span><strong>0</strong></div>
+        <div class="stat"><span>Removed</span><strong>0</strong></div>
+        <div class="stat"><span>Changed</span><strong>0</strong></div>
+      </div>
+      <details>
+        <summary>Details</summary>
+        <h4>Added</h4>
+        <div class="muted">None</div>
+        <h4>Removed</h4>
+        <div class="muted">None</div>
+        <h4>Changed</h4>
+        <div class="muted">None</div>
+        <pre>Initialized baseline for CustomerOrderV2 [PROD] at 2026-03-11T08:43:56Z
+Swagger URL: https://customerorderv2service.egretail.cloud/swagger/v1/swagger.json
+Hash: 2bb46cc5f793aec45edf41dc7a6ec5d1be9ca57213ccf16112dc94951b499c6e
+</pre>
+      </details>
+    </section>
+    </div>
+              <div class="grid drift-grid">
+    <section class="panel drift">
+      <div class="panel-head">
+        <h3>DEV vs TEST</h3>
+        <span class="badge ok">aligned</span>
+      </div>
+      <div class="kv"><span>DEV</span><a href="https://customerorderv2service.egretail-dev.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://customerorderv2service.egretail-dev.cloud/swagger/v1/swagger.json</a></div>
+      <div class="kv"><span>TEST</span><a href="https://customerorderv2service.egretail-test.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://customerorderv2service.egretail-test.cloud/swagger/v1/swagger.json</a></div>
+      <div class="stats">
+        <div class="stat"><span>Only in DEV</span><strong>0</strong></div>
+        <div class="stat"><span>Only in TEST</span><strong>0</strong></div>
+        <div class="stat"><span>Different</span><strong>0</strong></div>
+      </div>
+      <details>
+        <summary>Details</summary>
+        <h4>Only in DEV</h4>
+        <div class="muted">None</div>
+        <h4>Only in TEST</h4>
+        <div class="muted">None</div>
+        <h4>Different</h4>
+        <div class="muted">None</div>
+        <pre>No DEV vs TEST drift for CustomerOrderV2</pre>
+      </details>
+    </section>
+    
+    <section class="panel drift">
+      <div class="panel-head">
+        <h3>TEST vs PROD</h3>
+        <span class="badge ok">aligned</span>
+      </div>
+      <div class="kv"><span>TEST</span><a href="https://customerorderv2service.egretail-test.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://customerorderv2service.egretail-test.cloud/swagger/v1/swagger.json</a></div>
+      <div class="kv"><span>PROD</span><a href="https://customerorderv2service.egretail.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://customerorderv2service.egretail.cloud/swagger/v1/swagger.json</a></div>
+      <div class="stats">
+        <div class="stat"><span>Only in TEST</span><strong>0</strong></div>
+        <div class="stat"><span>Only in PROD</span><strong>0</strong></div>
+        <div class="stat"><span>Different</span><strong>0</strong></div>
+      </div>
+      <details>
+        <summary>Details</summary>
+        <h4>Only in TEST</h4>
+        <div class="muted">None</div>
+        <h4>Only in PROD</h4>
+        <div class="muted">None</div>
+        <h4>Different</h4>
+        <div class="muted">None</div>
+        <pre>No TEST vs PROD drift for CustomerOrderV2</pre>
+      </details>
+    </section>
+    </div>
+            </article>
+            
+            <article class="service-card">
+              <div class="service-head">
+                <h2>ItemService</h2>
+              </div>
+              <div class="grid env-grid">
+    <section class="panel">
+      <div class="panel-head">
+        <h3>DEV</h3>
+        <span class="badge info">baseline</span>
+      </div>
+      <div class="kv"><span>URL</span><a href="https://itemservice.egretail-dev.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://itemservice.egretail-dev.cloud/swagger/v1/swagger.json</a></div>
+      <div class="kv"><span>Hash</span><code>535f35de4d7e</code></div>
+      <div class="kv"><span>Summary</span><strong>Initialized baseline (535f35de4d7e)</strong></div>
+      <div class="stats">
+        <div class="stat"><span>Added</span><strong>0</strong></div>
+        <div class="stat"><span>Removed</span><strong>0</strong></div>
+        <div class="stat"><span>Changed</span><strong>0</strong></div>
+      </div>
+      <details>
+        <summary>Details</summary>
+        <h4>Added</h4>
+        <div class="muted">None</div>
+        <h4>Removed</h4>
+        <div class="muted">None</div>
+        <h4>Changed</h4>
+        <div class="muted">None</div>
+        <pre>Initialized baseline for ItemService [DEV] at 2026-03-11T08:43:57Z
+Swagger URL: https://itemservice.egretail-dev.cloud/swagger/v1/swagger.json
+Hash: 535f35de4d7e6bbf770d58899926334488040affb37091390f2fc678f814b74f
+</pre>
+      </details>
+    </section>
+    
+    <section class="panel">
+      <div class="panel-head">
+        <h3>TEST</h3>
+        <span class="badge info">baseline</span>
+      </div>
+      <div class="kv"><span>URL</span><a href="https://itemservice.egretail-test.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://itemservice.egretail-test.cloud/swagger/v1/swagger.json</a></div>
+      <div class="kv"><span>Hash</span><code>f9c7e9608fc4</code></div>
+      <div class="kv"><span>Summary</span><strong>Initialized baseline (f9c7e9608fc4)</strong></div>
+      <div class="stats">
+        <div class="stat"><span>Added</span><strong>0</strong></div>
+        <div class="stat"><span>Removed</span><strong>0</strong></div>
+        <div class="stat"><span>Changed</span><strong>0</strong></div>
+      </div>
+      <details>
+        <summary>Details</summary>
+        <h4>Added</h4>
+        <div class="muted">None</div>
+        <h4>Removed</h4>
+        <div class="muted">None</div>
+        <h4>Changed</h4>
+        <div class="muted">None</div>
+        <pre>Initialized baseline for ItemService [TEST] at 2026-03-11T08:43:58Z
+Swagger URL: https://itemservice.egretail-test.cloud/swagger/v1/swagger.json
+Hash: f9c7e9608fc43adbe29e64dee2db20c086e35e6d61a6d3c1b58642916401afda
+</pre>
+      </details>
+    </section>
+    
+    <section class="panel">
+      <div class="panel-head">
+        <h3>PROD</h3>
+        <span class="badge info">baseline</span>
+      </div>
+      <div class="kv"><span>URL</span><a href="https://itemservice.egretail.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://itemservice.egretail.cloud/swagger/v1/swagger.json</a></div>
+      <div class="kv"><span>Hash</span><code>8eb10cad53ce</code></div>
+      <div class="kv"><span>Summary</span><strong>Initialized baseline (8eb10cad53ce)</strong></div>
+      <div class="stats">
+        <div class="stat"><span>Added</span><strong>0</strong></div>
+        <div class="stat"><span>Removed</span><strong>0</strong></div>
+        <div class="stat"><span>Changed</span><strong>0</strong></div>
+      </div>
+      <details>
+        <summary>Details</summary>
+        <h4>Added</h4>
+        <div class="muted">None</div>
+        <h4>Removed</h4>
+        <div class="muted">None</div>
+        <h4>Changed</h4>
+        <div class="muted">None</div>
+        <pre>Initialized baseline for ItemService [PROD] at 2026-03-11T08:43:59Z
+Swagger URL: https://itemservice.egretail.cloud/swagger/v1/swagger.json
+Hash: 8eb10cad53ce0abb476923019730c46be0e2c942b387eac187226c9fe39c5583
+</pre>
+      </details>
+    </section>
+    </div>
+              <div class="grid drift-grid">
+    <section class="panel drift">
+      <div class="panel-head">
+        <h3>DEV vs TEST</h3>
+        <span class="badge warn">drift changed</span>
+      </div>
+      <div class="kv"><span>DEV</span><a href="https://itemservice.egretail-dev.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://itemservice.egretail-dev.cloud/swagger/v1/swagger.json</a></div>
+      <div class="kv"><span>TEST</span><a href="https://itemservice.egretail-test.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://itemservice.egretail-test.cloud/swagger/v1/swagger.json</a></div>
+      <div class="stats">
+        <div class="stat"><span>Only in DEV</span><strong>0</strong></div>
+        <div class="stat"><span>Only in TEST</span><strong>0</strong></div>
+        <div class="stat"><span>Different</span><strong>42</strong></div>
+      </div>
+      <details>
+        <summary>Details</summary>
+        <h4>Only in DEV</h4>
+        <div class="muted">None</div>
+        <h4>Only in TEST</h4>
+        <div class="muted">None</div>
+        <h4>Different</h4>
+        <ul><li><code>GET /api/Brands</code></li><li><code>GET /api/Brands/{id}</code></li><li><code>GET /api/Collections</code></li><li><code>GET /api/Collections/{id}</code></li><li><code>GET /api/ItemCategories</code></li><li><code>GET /api/ItemCategories/{id}</code></li><li><code>GET /api/ItemLists</code></li><li><code>GET /api/MarketingCodes</code></li><li><code>GET /api/MarketingCodes/{id}</code></li><li><code>GET /api/MarketingExclusivities</code></li><li><code>GET /api/MarketingExclusivities/{id}</code></li><li><code>GET /api/NonsaleType</code></li><li><code>GET /api/Nutritions</code></li><li><code>GET /api/ProcurementRules</code></li><li><code>GET /api/ProcurementRules/{id}</code></li><li><code>GET /api/ReplenishmentCodes</code></li><li><code>GET /api/ReplenishmentCodes/{id}</code></li><li><code>GET /api/Sizes</code></li><li><code>GET /api/Sizes/{id}</code></li><li><code>POST /api/Brands</code></li><li><code>POST /api/Collections</code></li><li><code>POST /api/Colors/upsertByName</code></li><li><code>POST /api/ItemCategories</code></li><li><code>POST /api/ItemLists</code></li><li><code>POST /api/MarketingCodes</code></li><li><code>POST /api/MarketingExclusivities</code></li><li><code>POST /api/NonsaleType</code></li><li><code>POST /api/ProcurementRules</code></li><li><code>POST /api/ReplenishmentCodes</code></li><li><code>POST /api/Sizes</code></li><li><code>POST /api/TradingUnits</code></li><li><code>PUT /api/Brands/{id}</code></li><li><code>PUT /api/Collections/{id}</code></li><li><code>PUT /api/ItemCategories/{id}</code></li><li><code>PUT /api/ItemLists/{id}</code></li><li><code>PUT /api/MarketingCodes/{id}</code></li><li><code>PUT /api/MarketingExclusivities/{id}</code></li><li><code>PUT /api/NonsaleType/{id}</code></li><li><code>PUT /api/ProcurementRules/{id}</code></li><li><code>PUT /api/ReplenishmentCodes/{id}</code></li><li><code>PUT /api/Sizes/{id}</code></li><li><code>PUT /api/TradingUnits/{id}</code></li></ul>
+        <pre># DEV vs TEST drift detected: ItemService
+
+- Time: 2026-03-11T08:43:59Z
+- DEV Swagger URL: https://itemservice.egretail-dev.cloud/swagger/v1/swagger.json
+- TEST Swagger URL: https://itemservice.egretail-test.cloud/swagger/v1/swagger.json
+- DEV hash: `535f35de4d7e6bbf770d58899926334488040affb37091390f2fc678f814b74f`
+- TEST hash: `f9c7e9608fc43adbe29e64dee2db20c086e35e6d61a6d3c1b58642916401afda`
+
+## Summary
+- Only in DEV: 0
+- Only in TEST: 0
+- Present in both but different: 42
+
+## Only in DEV
+- None
+
+## Only in TEST
+- None
+
+## Different in DEV and TEST
+- GET /api/Brands
+- GET /api/Brands/{id}
+- GET /api/Collections
+- GET /api/Collections/{id}
+- GET /api/ItemCategories
+- GET /api/ItemCategories/{id}
+- GET /api/ItemLists
+- GET /api/MarketingCodes
+- GET /api/MarketingCodes/{id}
+- GET /api/MarketingExclusivities
+- GET /api/MarketingExclusivities/{id}
+- GET /api/NonsaleType
+- GET /api/Nutritions
+- GET /api/ProcurementRules
+- GET /api/ProcurementRules/{id}
+- GET /api/ReplenishmentCodes
+- GET /api/ReplenishmentCodes/{id}
+- GET /api/Sizes
+- GET /api/Sizes/{id}
+- POST /api/Brands
+- POST /api/Collections
+- POST /api/Colors/upsertByName
+- POST /api/ItemCategories
+- POST /api/ItemLists
+- POST /api/MarketingCodes
+- POST /api/MarketingExclusivities
+- POST /api/NonsaleType
+- POST /api/ProcurementRules
+- POST /api/ReplenishmentCodes
+- POST /api/Sizes
+- POST /api/TradingUnits
+- PUT /api/Brands/{id}
+- PUT /api/Collections/{id}
+- PUT /api/ItemCategories/{id}
+- PUT /api/ItemLists/{id}
+- PUT /api/MarketingCodes/{id}
+- PUT /api/MarketingExclusivities/{id}
+- PUT /api/NonsaleType/{id}
+- PUT /api/ProcurementRules/{id}
+- PUT /api/ReplenishmentCodes/{id}
+- PUT /api/Sizes/{id}
+- PUT /api/TradingUnits/{id}
+</pre>
+      </details>
+    </section>
+    
+    <section class="panel drift">
+      <div class="panel-head">
+        <h3>TEST vs PROD</h3>
+        <span class="badge warn">drift changed</span>
+      </div>
+      <div class="kv"><span>TEST</span><a href="https://itemservice.egretail-test.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://itemservice.egretail-test.cloud/swagger/v1/swagger.json</a></div>
+      <div class="kv"><span>PROD</span><a href="https://itemservice.egretail.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://itemservice.egretail.cloud/swagger/v1/swagger.json</a></div>
+      <div class="stats">
+        <div class="stat"><span>Only in TEST</span><strong>0</strong></div>
+        <div class="stat"><span>Only in PROD</span><strong>0</strong></div>
+        <div class="stat"><span>Different</span><strong>48</strong></div>
+      </div>
+      <details>
+        <summary>Details</summary>
+        <h4>Only in TEST</h4>
+        <div class="muted">None</div>
+        <h4>Only in PROD</h4>
+        <div class="muted">None</div>
+        <h4>Different</h4>
+        <ul><li><code>GET /api/Brands</code></li><li><code>GET /api/Brands/{id}</code></li><li><code>GET /api/Collections</code></li><li><code>GET /api/Collections/{id}</code></li><li><code>GET /api/ItemCategories</code></li><li><code>GET /api/ItemCategories/{id}</code></li><li><code>GET /api/ItemLists</code></li><li><code>GET /api/MarketingCodes</code></li><li><code>GET /api/MarketingCodes/{id}</code></li><li><code>GET /api/MarketingExclusivities</code></li><li><code>GET /api/MarketingExclusivities/{id}</code></li><li><code>GET /api/NonsaleType</code></li><li><code>GET /api/Nutritions</code></li><li><code>GET /api/ProcurementRules</code></li><li><code>GET /api/ProcurementRules/{id}</code></li><li><code>GET /api/ReplenishmentCodes</code></li><li><code>GET /api/ReplenishmentCodes/{id}</code></li><li><code>GET /api/Sizes</code></li><li><code>GET /api/Sizes/{id}</code></li><li><code>POST /api/Brands</code></li><li><code>POST /api/Collections</code></li><li><code>POST /api/Colors/upsertByName</code></li><li><code>POST /api/Imports/{id}/filteredItemsCount</code></li><li><code>POST /api/Imports/{id}/filteredItemsSimpleCount</code></li><li><code>POST /api/Imports/{id}/import</code></li><li><code>POST /api/Imports/{id}/reject</code></li><li><code>POST /api/ItemCategories</code></li><li><code>POST /api/ItemLists</code></li><li><code>POST /api/MarketingCodes</code></li><li><code>POST /api/MarketingExclusivities</code></li><li><code>POST /api/NonsaleType</code></li><li><code>POST /api/ProcurementRules</code></li><li><code>POST /api/ReplenishmentCodes</code></li><li><code>POST /api/Sizes</code></li><li><code>POST /api/TradingUnits</code></li><li><code>PUT /api/Brands/{id}</code></li><li><code>PUT /api/Collections/{id}</code></li><li><code>PUT /api/Concession/{id}/updateItemGroups</code></li><li><code>PUT /api/ConcessionStores/{id}/updateStores</code></li><li><code>PUT /api/ItemCategories/{id}</code></li><li><code>PUT /api/ItemLists/{id}</code></li><li><code>PUT /api/MarketingCodes/{id}</code></li><li><code>PUT /api/MarketingExclusivities/{id}</code></li><li><code>PUT /api/NonsaleType/{id}</code></li><li><code>PUT /api/ProcurementRules/{id}</code></li><li><code>PUT /api/ReplenishmentCodes/{id}</code></li><li><code>PUT /api/Sizes/{id}</code></li><li><code>PUT /api/TradingUnits/{id}</code></li></ul>
+        <pre># TEST vs PROD drift detected: ItemService
+
+- Time: 2026-03-11T08:43:59Z
+- TEST Swagger URL: https://itemservice.egretail-test.cloud/swagger/v1/swagger.json
+- PROD Swagger URL: https://itemservice.egretail.cloud/swagger/v1/swagger.json
+- TEST hash: `f9c7e9608fc43adbe29e64dee2db20c086e35e6d61a6d3c1b58642916401afda`
+- PROD hash: `8eb10cad53ce0abb476923019730c46be0e2c942b387eac187226c9fe39c5583`
+
+## Summary
+- Only in TEST: 0
+- Only in PROD: 0
+- Present in both but different: 48
+
+## Only in TEST
+- None
+
+## Only in PROD
+- None
+
+## Different in TEST and PROD
+- GET /api/Brands
+- GET /api/Brands/{id}
+- GET /api/Collections
+- GET /api/Collections/{id}
+- GET /api/ItemCategories
+- GET /api/ItemCategories/{id}
+- GET /api/ItemLists
+- GET /api/MarketingCodes
+- GET /api/MarketingCodes/{id}
+- GET /api/MarketingExclusivities
+- GET /api/MarketingExclusivities/{id}
+- GET /api/NonsaleType
+- GET /api/Nutritions
+- GET /api/ProcurementRules
+- GET /api/ProcurementRules/{id}
+- GET /api/ReplenishmentCodes
+- GET /api/ReplenishmentCodes/{id}
+- GET /api/Sizes
+- GET /api/Sizes/{id}
+- POST /api/Brands
+- POST /api/Collections
+- POST /api/Colors/upsertByName
+- POST /api/Imports/{id}/filteredItemsCount
+- POST /api/Imports/{id}/filteredItemsSimpleCount
+- POST /api/Imports/{id}/import
+- POST /api/Imports/{id}/reject
+- POST /api/ItemCategories
+- POST /api/ItemLists
+- POST /api/MarketingCodes
+- POST /api/MarketingExclusivities
+- POST /api/NonsaleType
+- POST /api/ProcurementRules
+- POST /api/ReplenishmentCodes
+- POST /api/Sizes
+- POST /api/TradingUnits
+- PUT /api/Brands/{id}
+- PUT /api/Collections/{id}
+- PUT /api/Concession/{id}/updateItemGroups
+- PUT /api/ConcessionStores/{id}/updateStores
+- PUT /api/ItemCategories/{id}
+- PUT /api/ItemLists/{id}
+- PUT /api/MarketingCodes/{id}
+- PUT /api/MarketingExclusivities/{id}
+- PUT /api/NonsaleType/{id}
+- PUT /api/ProcurementRules/{id}
+- PUT /api/ReplenishmentCodes/{id}
+- PUT /api/Sizes/{id}
+- PUT /api/TradingUnits/{id}
+</pre>
+      </details>
+    </section>
+    </div>
+            </article>
+            
+            <article class="service-card">
+              <div class="service-head">
+                <h2>POS API</h2>
+              </div>
+              <div class="grid env-grid">
+    <section class="panel">
+      <div class="panel-head">
+        <h3>DEV</h3>
+        <span class="badge info">baseline</span>
+      </div>
+      <div class="kv"><span>URL</span><a href="https://posapi.egretail-dev.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://posapi.egretail-dev.cloud/swagger/v1/swagger.json</a></div>
+      <div class="kv"><span>Hash</span><code>5cfadfc37530</code></div>
+      <div class="kv"><span>Summary</span><strong>Initialized baseline (5cfadfc37530)</strong></div>
+      <div class="stats">
+        <div class="stat"><span>Added</span><strong>0</strong></div>
+        <div class="stat"><span>Removed</span><strong>0</strong></div>
+        <div class="stat"><span>Changed</span><strong>0</strong></div>
+      </div>
+      <details>
+        <summary>Details</summary>
+        <h4>Added</h4>
+        <div class="muted">None</div>
+        <h4>Removed</h4>
+        <div class="muted">None</div>
+        <h4>Changed</h4>
+        <div class="muted">None</div>
+        <pre>Initialized baseline for POS API [DEV] at 2026-03-11T08:44:11Z
+Swagger URL: https://posapi.egretail-dev.cloud/swagger/v1/swagger.json
+Hash: 5cfadfc375306cd8f6e331eadaa3edcaa134341c30195da423660e189c21311d
+</pre>
+      </details>
+    </section>
+    
+    <section class="panel">
+      <div class="panel-head">
+        <h3>TEST</h3>
+        <span class="badge info">baseline</span>
+      </div>
+      <div class="kv"><span>URL</span><a href="https://posapi.egretail-test.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://posapi.egretail-test.cloud/swagger/v1/swagger.json</a></div>
+      <div class="kv"><span>Hash</span><code>f7c88055f0dc</code></div>
+      <div class="kv"><span>Summary</span><strong>Initialized baseline (f7c88055f0dc)</strong></div>
+      <div class="stats">
+        <div class="stat"><span>Added</span><strong>0</strong></div>
+        <div class="stat"><span>Removed</span><strong>0</strong></div>
+        <div class="stat"><span>Changed</span><strong>0</strong></div>
+      </div>
+      <details>
+        <summary>Details</summary>
+        <h4>Added</h4>
+        <div class="muted">None</div>
+        <h4>Removed</h4>
+        <div class="muted">None</div>
+        <h4>Changed</h4>
+        <div class="muted">None</div>
+        <pre>Initialized baseline for POS API [TEST] at 2026-03-11T08:44:11Z
+Swagger URL: https://posapi.egretail-test.cloud/swagger/v1/swagger.json
+Hash: f7c88055f0dc72477fc2d6f220379efc3b5e8e4fe41130dbad7f952640fd2e4d
+</pre>
+      </details>
+    </section>
+    
+    <section class="panel">
+      <div class="panel-head">
+        <h3>PROD</h3>
+        <span class="badge info">baseline</span>
+      </div>
+      <div class="kv"><span>URL</span><a href="https://posapi.egretail.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://posapi.egretail.cloud/swagger/v1/swagger.json</a></div>
+      <div class="kv"><span>Hash</span><code>3b764df24626</code></div>
+      <div class="kv"><span>Summary</span><strong>Initialized baseline (3b764df24626)</strong></div>
+      <div class="stats">
+        <div class="stat"><span>Added</span><strong>0</strong></div>
+        <div class="stat"><span>Removed</span><strong>0</strong></div>
+        <div class="stat"><span>Changed</span><strong>0</strong></div>
+      </div>
+      <details>
+        <summary>Details</summary>
+        <h4>Added</h4>
+        <div class="muted">None</div>
+        <h4>Removed</h4>
+        <div class="muted">None</div>
+        <h4>Changed</h4>
+        <div class="muted">None</div>
+        <pre>Initialized baseline for POS API [PROD] at 2026-03-11T08:44:17Z
+Swagger URL: https://posapi.egretail.cloud/swagger/v1/swagger.json
+Hash: 3b764df24626b31578a66fe9fa601262a43ccade0e261231ddfd0db1a9ed5854
+</pre>
+      </details>
+    </section>
+    </div>
+              <div class="grid drift-grid">
+    <section class="panel drift">
+      <div class="panel-head">
+        <h3>DEV vs TEST</h3>
+        <span class="badge ok">aligned</span>
+      </div>
+      <div class="kv"><span>DEV</span><a href="https://posapi.egretail-dev.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://posapi.egretail-dev.cloud/swagger/v1/swagger.json</a></div>
+      <div class="kv"><span>TEST</span><a href="https://posapi.egretail-test.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://posapi.egretail-test.cloud/swagger/v1/swagger.json</a></div>
+      <div class="stats">
+        <div class="stat"><span>Only in DEV</span><strong>0</strong></div>
+        <div class="stat"><span>Only in TEST</span><strong>0</strong></div>
+        <div class="stat"><span>Different</span><strong>0</strong></div>
+      </div>
+      <details>
+        <summary>Details</summary>
+        <h4>Only in DEV</h4>
+        <div class="muted">None</div>
+        <h4>Only in TEST</h4>
+        <div class="muted">None</div>
+        <h4>Different</h4>
+        <div class="muted">None</div>
+        <pre>No DEV vs TEST drift for POS API</pre>
+      </details>
+    </section>
+    
+    <section class="panel drift">
+      <div class="panel-head">
+        <h3>TEST vs PROD</h3>
+        <span class="badge ok">aligned</span>
+      </div>
+      <div class="kv"><span>TEST</span><a href="https://posapi.egretail-test.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://posapi.egretail-test.cloud/swagger/v1/swagger.json</a></div>
+      <div class="kv"><span>PROD</span><a href="https://posapi.egretail.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://posapi.egretail.cloud/swagger/v1/swagger.json</a></div>
+      <div class="stats">
+        <div class="stat"><span>Only in TEST</span><strong>0</strong></div>
+        <div class="stat"><span>Only in PROD</span><strong>0</strong></div>
+        <div class="stat"><span>Different</span><strong>0</strong></div>
+      </div>
+      <details>
+        <summary>Details</summary>
+        <h4>Only in TEST</h4>
+        <div class="muted">None</div>
+        <h4>Only in PROD</h4>
+        <div class="muted">None</div>
+        <h4>Different</h4>
+        <div class="muted">None</div>
+        <pre>No TEST vs PROD drift for POS API</pre>
+      </details>
+    </section>
+    </div>
+            </article>
+            
+            <article class="service-card">
+              <div class="service-head">
+                <h2>PromotionService</h2>
+              </div>
+              <div class="grid env-grid">
+    <section class="panel">
+      <div class="panel-head">
+        <h3>DEV</h3>
+        <span class="badge info">baseline</span>
+      </div>
+      <div class="kv"><span>URL</span><a href="https://promotionservice.egretail-dev.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://promotionservice.egretail-dev.cloud/swagger/v1/swagger.json</a></div>
+      <div class="kv"><span>Hash</span><code>7d6b4cf376d5</code></div>
+      <div class="kv"><span>Summary</span><strong>Initialized baseline (7d6b4cf376d5)</strong></div>
+      <div class="stats">
+        <div class="stat"><span>Added</span><strong>0</strong></div>
+        <div class="stat"><span>Removed</span><strong>0</strong></div>
+        <div class="stat"><span>Changed</span><strong>0</strong></div>
+      </div>
+      <details>
+        <summary>Details</summary>
+        <h4>Added</h4>
+        <div class="muted">None</div>
+        <h4>Removed</h4>
+        <div class="muted">None</div>
+        <h4>Changed</h4>
+        <div class="muted">None</div>
+        <pre>Initialized baseline for PromotionService [DEV] at 2026-03-11T08:44:18Z
+Swagger URL: https://promotionservice.egretail-dev.cloud/swagger/v1/swagger.json
+Hash: 7d6b4cf376d5e05ae22f9bb88aae8c832c7d156fb6d6140b24f5f920dd3b7c92
+</pre>
+      </details>
+    </section>
+    
+    <section class="panel">
+      <div class="panel-head">
+        <h3>TEST</h3>
+        <span class="badge info">baseline</span>
+      </div>
+      <div class="kv"><span>URL</span><a href="https://promotionservice.egretail-test.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://promotionservice.egretail-test.cloud/swagger/v1/swagger.json</a></div>
+      <div class="kv"><span>Hash</span><code>7d6b4cf376d5</code></div>
+      <div class="kv"><span>Summary</span><strong>Initialized baseline (7d6b4cf376d5)</strong></div>
+      <div class="stats">
+        <div class="stat"><span>Added</span><strong>0</strong></div>
+        <div class="stat"><span>Removed</span><strong>0</strong></div>
+        <div class="stat"><span>Changed</span><strong>0</strong></div>
+      </div>
+      <details>
+        <summary>Details</summary>
+        <h4>Added</h4>
+        <div class="muted">None</div>
+        <h4>Removed</h4>
+        <div class="muted">None</div>
+        <h4>Changed</h4>
+        <div class="muted">None</div>
+        <pre>Initialized baseline for PromotionService [TEST] at 2026-03-11T08:44:19Z
+Swagger URL: https://promotionservice.egretail-test.cloud/swagger/v1/swagger.json
+Hash: 7d6b4cf376d5e05ae22f9bb88aae8c832c7d156fb6d6140b24f5f920dd3b7c92
+</pre>
+      </details>
+    </section>
+    
+    <section class="panel">
+      <div class="panel-head">
+        <h3>PROD</h3>
+        <span class="badge info">baseline</span>
+      </div>
+      <div class="kv"><span>URL</span><a href="https://promotionservice.egretail.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://promotionservice.egretail.cloud/swagger/v1/swagger.json</a></div>
+      <div class="kv"><span>Hash</span><code>7d6b4cf376d5</code></div>
+      <div class="kv"><span>Summary</span><strong>Initialized baseline (7d6b4cf376d5)</strong></div>
+      <div class="stats">
+        <div class="stat"><span>Added</span><strong>0</strong></div>
+        <div class="stat"><span>Removed</span><strong>0</strong></div>
+        <div class="stat"><span>Changed</span><strong>0</strong></div>
+      </div>
+      <details>
+        <summary>Details</summary>
+        <h4>Added</h4>
+        <div class="muted">None</div>
+        <h4>Removed</h4>
+        <div class="muted">None</div>
+        <h4>Changed</h4>
+        <div class="muted">None</div>
+        <pre>Initialized baseline for PromotionService [PROD] at 2026-03-11T08:44:19Z
+Swagger URL: https://promotionservice.egretail.cloud/swagger/v1/swagger.json
+Hash: 7d6b4cf376d5e05ae22f9bb88aae8c832c7d156fb6d6140b24f5f920dd3b7c92
+</pre>
+      </details>
+    </section>
+    </div>
+              <div class="grid drift-grid">
+    <section class="panel drift">
+      <div class="panel-head">
+        <h3>DEV vs TEST</h3>
+        <span class="badge ok">aligned</span>
+      </div>
+      <div class="kv"><span>DEV</span><a href="https://promotionservice.egretail-dev.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://promotionservice.egretail-dev.cloud/swagger/v1/swagger.json</a></div>
+      <div class="kv"><span>TEST</span><a href="https://promotionservice.egretail-test.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://promotionservice.egretail-test.cloud/swagger/v1/swagger.json</a></div>
+      <div class="stats">
+        <div class="stat"><span>Only in DEV</span><strong>0</strong></div>
+        <div class="stat"><span>Only in TEST</span><strong>0</strong></div>
+        <div class="stat"><span>Different</span><strong>0</strong></div>
+      </div>
+      <details>
+        <summary>Details</summary>
+        <h4>Only in DEV</h4>
+        <div class="muted">None</div>
+        <h4>Only in TEST</h4>
+        <div class="muted">None</div>
+        <h4>Different</h4>
+        <div class="muted">None</div>
+        <pre>No DEV vs TEST drift for PromotionService</pre>
+      </details>
+    </section>
+    
+    <section class="panel drift">
+      <div class="panel-head">
+        <h3>TEST vs PROD</h3>
+        <span class="badge ok">aligned</span>
+      </div>
+      <div class="kv"><span>TEST</span><a href="https://promotionservice.egretail-test.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://promotionservice.egretail-test.cloud/swagger/v1/swagger.json</a></div>
+      <div class="kv"><span>PROD</span><a href="https://promotionservice.egretail.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://promotionservice.egretail.cloud/swagger/v1/swagger.json</a></div>
+      <div class="stats">
+        <div class="stat"><span>Only in TEST</span><strong>0</strong></div>
+        <div class="stat"><span>Only in PROD</span><strong>0</strong></div>
+        <div class="stat"><span>Different</span><strong>0</strong></div>
+      </div>
+      <details>
+        <summary>Details</summary>
+        <h4>Only in TEST</h4>
+        <div class="muted">None</div>
+        <h4>Only in PROD</h4>
+        <div class="muted">None</div>
+        <h4>Different</h4>
+        <div class="muted">None</div>
+        <pre>No TEST vs PROD drift for PromotionService</pre>
+      </details>
+    </section>
+    </div>
+            </article>
+            
+  </div>
+</body>
+</html>
