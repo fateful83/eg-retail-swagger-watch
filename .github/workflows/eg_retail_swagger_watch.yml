@@ -87,26 +87,9 @@ jobs:
           done
 
           if [ ! -f site/index.html ]; then
-            printf '%s\n' \
-              '<!doctype html>' \
-              '<html lang="en">' \
-              '<head>' \
-              '  <meta charset="utf-8" />' \
-              '  <meta name="viewport" content="width=device-width, initial-scale=1" />' \
-              '  <title>EG Retail Swagger Dashboard</title>' \
-              '  <style>' \
-              '    body { font-family: Arial, sans-serif; padding: 40px; background: #0b1020; color: #eef4ff; }' \
-              '    a { color: #7cc4ff; }' \
-              '  </style>' \
-              '</head>' \
-              '<body>' \
-              '  <h1>EG Retail Swagger Dashboard</h1>' \
-              '  <p>No dashboard was generated in this run.</p>' \
-              '</body>' \
-              '</html>' \
-              > site/index.html
+            echo '<!doctype html><html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>EG Retail Swagger Dashboard</title><style>body { font-family: Arial, sans-serif; padding: 40px; background: #0b1020; color: #eef4ff; } a { color: #7cc4ff; }</style></head><body><h1>EG Retail Swagger Dashboard</h1><p>No dashboard was generated in this run.</p></body></html>' > site/index.html
           fi
-
+          
       - name: Save updated snapshot state to branch
         run: |
           git config user.name "github-actions[bot]"
