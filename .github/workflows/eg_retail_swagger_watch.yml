@@ -58,24 +58,6 @@ jobs:
         run: |
           python eg_retail_swagger_history_page.py
 
-      - name: Save updated snapshot state to branch
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git switch snapshot-state || git checkout -b snapshot-state
-          mkdir -p .swagger_watch_state
-          git add .swagger_watch_state
-
-          if git diff --cached --quiet; then
-            echo "No snapshot state changes to commit"
-          else
-            git commit -m "Update snapshot state"
-            git push origin snapshot-state
-          fi
-
-          git switch main
-
       - name: Prepare Pages site
         run: |
           mkdir -p site
@@ -101,6 +83,24 @@ jobs:
               cp -r "$dir" "site/$(basename "$dir")"
             fi
           done
+
+      - name: Save updated snapshot state to branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git switch snapshot-state || git checkout -b snapshot-state
+          mkdir -p .swagger_watch_state
+          git add .swagger_watch_state
+
+          if git diff --cached --quiet; then
+            echo "No snapshot state changes to commit"
+          else
+            git commit -m "Update snapshot state"
+            git push origin snapshot-state
+          fi
+
+          git switch main
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
