@@ -126,14 +126,24 @@ def parse_service_env_from_dirname(dirname: str) -> Tuple[str, str]:
 
 def collect_histories(state_dir: Path) -> List[ServiceEnvHistory]:
     histories: List[ServiceEnvHistory] = []
+
     for child in sorted(state_dir.iterdir() if state_dir.exists() else []):
         if not child.is_dir():
             continue
         if child.name in {"history_reports", "data", "reports", "snapshots"}:
             continue
+
         snapshots_dir = child / "snapshots"
         if not snapshots_dir.exists():
             continue
+
+        meta_path = child / "meta.json"
+        if meta_path.exists():
+            meta = load_json(meta_path)
+            service_name = str(meta.get("service_name", child.name))
+            env = str(meta.get("environment", ""))
+        else:
+            service_name, env = parse_service_env_from_dirname(child.name)
 
         snapshot_map: Dict[str, Dict[str, Path]] = {}
         for p in snapshots_dir.iterdir():
@@ -152,7 +162,6 @@ def collect_histories(state_dir: Path) -> List[ServiceEnvHistory]:
         if not snapshots:
             continue
 
-        service_name, env = parse_service_env_from_dirname(child.name)
         histories.append(
             ServiceEnvHistory(
                 service_name=service_name,
@@ -161,6 +170,7 @@ def collect_histories(state_dir: Path) -> List[ServiceEnvHistory]:
                 snapshots=snapshots,
             )
         )
+
     return histories
 
 
@@ -168,6 +178,54 @@ def compare_snapshots(left: SnapshotInfo, right: SnapshotInfo) -> Dict[str, List
     left_spec = load_json(left.normalized_path)
     right_spec = load_json(right.normalized_path)
     return diff_specs(left_spec, right_spec)
+
+
+def build_compare_markdown(service: str, env: str, left: SnapshotInfo, right: SnapshotInfo, diff: Dict[str, List[str]]) -> str:
+    lines = [
+        f"# Historical Swagger compare: {service} [{env}]",
+        "",
+        f"- From: `{left.timestamp}`",
+        f"- To: `{right.timestamp}`",
+        f"- From hash: `{sha_short(left.hash_path)}`",
+        f"- To hash: `{sha_short(right.hash_path)}`",
+        "",
+        "## Summary",
+        f"- Added operations: {len(diff['added'])}",
+        f"- Removed operations: {len(diff['removed'])}",
+        f"- Changed operations: {len(diff['changed'])}",
+        "",
+    ]
+    for section in ["added", "removed", "changed"]:
+        lines.append(f"## {section.capitalize()}")
+        items = diff[section]
+        lines.extend([f"- {item}" for item in items] if items else ["- None"])
+        lines.append("")
+    return "\n".join(lines).strip() + "\n"
+
+
+def safe_name(name: str) -> str:
+    return re.sub(r"[^a-zA-Z0-9._-]+", "_", name).strip("_").lower()
+
+
+def write_compare_report(state_dir: Path, history: ServiceEnvHistory, left: SnapshotInfo, right: SnapshotInfo) -> Tuple[Path, Dict[str, List[str]]]:
+    diff = compare_snapshots(left, right)
+    reports_dir = state_dir / "history_reports"
+    reports_dir.mkdir(parents=True, exist_ok=True)
+    base = f"{safe_name(history.service_name)}_{history.environment.lower()}_{left.timestamp}_vs_{right.timestamp}"
+    md_path = reports_dir / f"{base}.md"
+    json_path = reports_dir / f"{base}.json"
+
+    markdown = build_compare_markdown(history.service_name, history.environment, left, right, diff)
+    payload = {
+        "service_name": history.service_name,
+        "environment": history.environment,
+        "from": left.timestamp,
+        "to": right.timestamp,
+        "diff": diff,
+    }
+    write_text(md_path, markdown)
+    write_text(json_path, json.dumps(payload, ensure_ascii=False, indent=2))
+    return md_path, diff
 
 
 def build_history_index(histories: List[ServiceEnvHistory]) -> Dict[str, Any]:
@@ -178,6 +236,7 @@ def build_history_index(histories: List[ServiceEnvHistory]) -> Dict[str, Any]:
                 "id": f"{history.service_name} [{history.environment}]",
                 "service_name": history.service_name,
                 "environment": history.environment,
+                "directory_name": history.directory_name,
                 "snapshots": [
                     {
                         "timestamp": s.timestamp,
@@ -196,6 +255,13 @@ def build_history_page(state_dir: Path) -> Path:
     history_index = build_history_index(histories)
     history_index_path = state_dir / "history_index.json"
     write_text(history_index_path, json.dumps(history_index, ensure_ascii=False, indent=2))
+
+    # Also write quick compare reports for earliest/latest and previous/latest
+    for history in histories:
+        snaps = history.snapshots
+        if len(snaps) >= 2:
+            write_compare_report(state_dir, history, snaps[0], snaps[-1])
+            write_compare_report(state_dir, history, snaps[-2], snaps[-1])
 
     page = f"""
 <!doctype html>
@@ -434,24 +500,13 @@ def build_history_page(state_dir: Path) -> Path:
 
         const fromTs = fromSelect.value;
         const toTs = toSelect.value;
-        const fromSnap = current.snapshots.find(s => s.timestamp === fromTs);
-        const toSnap = current.snapshots.find(s => s.timestamp === toTs);
-
-        if (!fromSnap || !toSnap) {{
-          result.innerHTML = '<div class="muted">Invalid snapshot selection.</div>';
-          return;
-        }}
 
         if (fromTs === toTs) {{
           result.innerHTML = '<div class="muted">Choose two different snapshots.</div>';
           return;
         }}
 
-        const dirName = `${{current.service_name}} [${{current.environment}}]`
-          .replace(/[^a-zA-Z0-9._-]+/g, '_')
-          .replace(/^_+|_+$/g, '')
-          .toLowerCase();
-
+        const dirName = current.directory_name;
         const fromUrl = `${{dirName}}/snapshots/${{fromTs}}.normalized.json`;
         const toUrl = `${{dirName}}/snapshots/${{toTs}}.normalized.json`;
 

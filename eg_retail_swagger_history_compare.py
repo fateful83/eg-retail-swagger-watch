@@ -1,40 +1,4 @@
 #!/usr/bin/env python3
-"""
-EG Retail Swagger History Compare
-
-Compares any two saved snapshots produced by eg_retail_swagger_watch_agent.py.
-
-Usage examples
-
-List available snapshots for one service/env:
-    python eg_retail_swagger_history_compare.py list \
-      --state-dir .swagger_watch_state \
-      --service "ItemService" \
-      --env TEST
-
-Compare two snapshots by timestamp prefix:
-    python eg_retail_swagger_history_compare.py compare \
-      --state-dir .swagger_watch_state \
-      --service "ItemService" \
-      --env TEST \
-      --from 20260310T060000Z \
-      --to   20260311T120000Z
-
-Compare earliest vs latest snapshot:
-    python eg_retail_swagger_history_compare.py compare \
-      --state-dir .swagger_watch_state \
-      --service "ItemService" \
-      --env TEST \
-      --from earliest \
-      --to latest
-
-Outputs
-- Prints a markdown diff summary to stdout
-- Writes compare report to:
-    .swagger_watch_state/history_reports/<service>_<env>_<from>_vs_<to>.md
-- Writes a JSON payload next to it
-"""
-
 from __future__ import annotations
 
 import argparse
@@ -43,7 +7,7 @@ import json
 import re
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List
 
 HTTP_METHODS = {"get", "post", "put", "patch", "delete", "head", "options", "trace"}
 

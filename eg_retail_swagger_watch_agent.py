@@ -1,12 +1,18 @@
 #!/usr/bin/env python3
 """
-EG Retail Swagger Watch Agent + HTML Dashboard
+EG Retail Swagger Watch Agent V3
 
 What it does
-- Fetches DEV, TEST, and PROD OpenAPI/Swagger specs from DIRECT_SPECS_JSON
+- Fetches DEV / TEST / PROD OpenAPI/Swagger specs from DIRECT_SPECS_JSON
 - Detects changes over time for each service/environment
-- Detects DEV-vs-TEST and TEST-vs-PROD drift for each service
-- Writes Markdown reports and a browsable HTML dashboard
+- Distinguishes:
+    - no_change
+    - docs_only
+    - non_breaking
+    - breaking
+- Detects DEV-vs-TEST and TEST-vs-PROD drift
+- Persists snapshots and reports under STATE_DIR
+- Writes a browsable HTML dashboard
 - Optionally posts compact Slack notifications
 
 Environment variables
@@ -18,41 +24,13 @@ Environment variables
       "prod": "https://.../swagger/v1/swagger.json"
     }
   ]'
-- POLL_INTERVAL_SECONDS=3600
 - STATE_DIR=.swagger_watch_state
+- POLL_INTERVAL_SECONDS=0
+- RETENTION_DAYS=180
 - SLACK_WEBHOOK_URL=https://hooks.slack.com/services/...   # optional
 - AUTH_HEADER=Bearer ...                                   # optional
-- EXTRA_HEADERS_JSON={"X-Api-Key":"..."}                # optional
+- EXTRA_HEADERS_JSON={"X-Api-Key":"..."}                   # optional
 - REQUEST_TIMEOUT_SECONDS=30
-
-How to add more monitored EG Swagger specs
-1. Open the DIRECT_SPECS_JSON secret or environment variable.
-2. Add one more JSON object to the array.
-3. Provide service_name and any of dev, test, prod URLs.
-4. Save and rerun the workflow.
-
-Example:
-[
-  {
-    "service_name": "CustomerOrderV2",
-    "dev":  "https://customerorderv2service.egretail-dev.cloud/swagger/v1/swagger.json",
-    "test": "https://customerorderv2service.egretail-test.cloud/swagger/v1/swagger.json",
-    "prod": "https://customerorderv2service.egretail.cloud/swagger/v1/swagger.json"
-  },
-  {
-    "service_name": "NewService",
-    "dev":  "https://newservice.egretail-dev.cloud/swagger/v1/swagger.json",
-    "test": "https://newservice.egretail-test.cloud/swagger/v1/swagger.json",
-    "prod": "https://newservice.egretail.cloud/swagger/v1/swagger.json"
-  }
-]
-
-Outputs
-- Per-endpoint snapshots and markdown reports under STATE_DIR
-- HTML dashboard at STATE_DIR/dashboard.html
-
-Run
-    python eg_retail_swagger_watch_agent.py
 """
 
 from __future__ import annotations
@@ -65,7 +43,7 @@ import re
 import sys
 import time
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -108,6 +86,9 @@ class EnvCheckResult:
     spec_hash: str
     counts: Dict[str, int]
     changed_items: Dict[str, List[str]]
+    file_changed: bool = False
+    api_changed: bool = False
+    breaking_changed: bool = False
     error: str = ""
 
 
@@ -152,7 +133,7 @@ def load_env_json(name: str) -> Dict[str, str]:
 def build_headers() -> Dict[str, str]:
     headers = {
         "Accept": "application/json, application/yaml, text/yaml, */*",
-        "User-Agent": "eg-retail-swagger-watch-agent/5.0",
+        "User-Agent": "eg-retail-swagger-watch-agent/6.0",
     }
     auth = os.getenv("AUTH_HEADER", "").strip()
     if auth:
@@ -273,6 +254,156 @@ def diff_specs(old: Dict[str, Any], new: Dict[str, Any]) -> Dict[str, List[str]]
     return {"added": added, "removed": removed, "changed": changed}
 
 
+def _param_key(p: Dict[str, Any]) -> tuple:
+    return (p.get("name"), p.get("in"))
+
+
+def _extract_parameters(op: Dict[str, Any]) -> Dict[tuple, Dict[str, Any]]:
+    out = {}
+    for p in op.get("parameters", []) or []:
+        if isinstance(p, dict):
+            out[_param_key(p)] = p
+    return out
+
+
+def _extract_request_content(op: Dict[str, Any]) -> Dict[str, Dict[str, Any]]:
+    rb = op.get("requestBody") or {}
+    return rb.get("content") or {}
+
+
+def _extract_response_content(op: Dict[str, Any]) -> Dict[str, Dict[str, Any]]:
+    out = {}
+    for status, resp in (op.get("responses") or {}).items():
+        out[str(status)] = (resp or {}).get("content") or {}
+    return out
+
+
+def _schema_hash(schema: Any) -> str:
+    if schema is None:
+        return ""
+    return schema_signature(schema)
+
+
+def operation_breaking_change(old_op: Dict[str, Any], new_op: Dict[str, Any]) -> bool:
+    old_params = _extract_parameters(old_op)
+    new_params = _extract_parameters(new_op)
+
+    # New required parameter is breaking
+    for key, new_p in new_params.items():
+        old_p = old_params.get(key)
+        if old_p is None and bool(new_p.get("required", False)):
+            return True
+
+    # Existing optional -> required is breaking
+    for key, old_p in old_params.items():
+        new_p = new_params.get(key)
+        if new_p is None:
+            continue
+        if not bool(old_p.get("required", False)) and bool(new_p.get("required", False)):
+            return True
+
+    # Request content removed or request schema changed: conservatively breaking
+    old_req = _extract_request_content(old_op)
+    new_req = _extract_request_content(new_op)
+
+    for ct in old_req:
+        if ct not in new_req:
+            return True
+
+    for ct, old_desc in old_req.items():
+        if ct in new_req:
+            old_schema = _schema_hash((old_desc or {}).get("schema"))
+            new_schema = _schema_hash((new_req[ct] or {}).get("schema"))
+            if old_schema != new_schema:
+                return True
+
+    # Response status/media type removed or response schema changed: conservatively breaking
+    old_resp = _extract_response_content(old_op)
+    new_resp = _extract_response_content(new_op)
+
+    for status, old_content in old_resp.items():
+        if status not in new_resp:
+            return True
+        for ct in old_content:
+            if ct not in new_resp[status]:
+                return True
+            old_schema = _schema_hash((old_content[ct] or {}).get("schema"))
+            new_schema = _schema_hash((new_resp[status][ct] or {}).get("schema"))
+            if old_schema != new_schema:
+                return True
+
+    return False
+
+
+def breaking_summary(old_spec: Dict[str, Any], new_spec: Dict[str, Any], diff: Dict[str, List[str]]) -> Dict[str, List[str]]:
+    old_ops = flatten_paths(old_spec)
+    new_ops = flatten_paths(new_spec)
+
+    breaking = {
+        "removed_operations": sorted(diff["removed"]),
+        "breaking_changed_operations": [],
+        "non_breaking_changed_operations": [],
+        "added_operations": sorted(diff["added"]),
+    }
+
+    for op_key in diff["changed"]:
+        if operation_breaking_change(old_ops.get(op_key, {}), new_ops.get(op_key, {})):
+            breaking["breaking_changed_operations"].append(op_key)
+        else:
+            breaking["non_breaking_changed_operations"].append(op_key)
+
+    return breaking
+
+
+def classify_change(old_spec: Dict[str, Any], new_spec: Dict[str, Any], old_hash: str, new_hash: str) -> Tuple[str, Dict[str, Any]]:
+    if old_hash == new_hash:
+        return "no_change", {
+            "file_changed": False,
+            "api_changed": False,
+            "breaking_changed": False,
+            "diff": {"added": [], "removed": [], "changed": []},
+            "breaking": {
+                "removed_operations": [],
+                "breaking_changed_operations": [],
+                "non_breaking_changed_operations": [],
+                "added_operations": [],
+            },
+        }
+
+    diff = diff_specs(old_spec or {}, new_spec or {})
+    api_changed = bool(diff["added"] or diff["removed"] or diff["changed"])
+
+    if not api_changed:
+        return "docs_only", {
+            "file_changed": True,
+            "api_changed": False,
+            "breaking_changed": False,
+            "diff": diff,
+            "breaking": {
+                "removed_operations": [],
+                "breaking_changed_operations": [],
+                "non_breaking_changed_operations": [],
+                "added_operations": [],
+            },
+        }
+
+    breaking = breaking_summary(old_spec or {}, new_spec or {}, diff)
+    breaking_changed = bool(
+        breaking["removed_operations"] or breaking["breaking_changed_operations"]
+    )
+
+    return (
+        "breaking" if breaking_changed else "non_breaking",
+        {
+            "file_changed": True,
+            "api_changed": True,
+            "breaking_changed": breaking_changed,
+            "diff": diff,
+            "breaking": breaking,
+        },
+    )
+
+
 def ensure_dir(path: Path) -> None:
     path.mkdir(parents=True, exist_ok=True)
 
@@ -298,11 +429,12 @@ def read_text(path: Path) -> Optional[str]:
 
 
 def write_text(path: Path, content: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(content, encoding="utf-8")
 
 
 def write_json(path: Path, obj: Any) -> None:
-    path.write_text(json.dumps(obj, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_text(path, json.dumps(obj, ensure_ascii=False, indent=2))
 
 
 def load_previous_spec(ep_dir: Path) -> Optional[Dict[str, Any]]:
@@ -312,18 +444,28 @@ def load_previous_spec(ep_dir: Path) -> Optional[Dict[str, Any]]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def save_current_spec(ep_dir: Path, raw_text: str, normalized_obj: Dict[str, Any], digest: str) -> None:
-    ts = now_iso().replace(":", "").replace("-", "")
+def save_current_spec(ep_dir: Path, raw_text: str, normalized_obj: Dict[str, Any], digest: str, svc: ResolvedService) -> str:
+    ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     snapshots = ep_dir / "snapshots"
     ensure_dir(snapshots)
 
     write_text(ep_dir / "latest.raw.txt", raw_text)
     write_json(ep_dir / "latest.normalized.json", normalized_obj)
     write_text(ep_dir / "latest.sha256", digest)
+    write_json(
+        ep_dir / "meta.json",
+        {
+            "service_name": svc.service_name,
+            "environment": svc.environment,
+            "swagger_url": svc.swagger_url,
+            "docs_url": svc.docs_url,
+        },
+    )
 
     write_text(snapshots / f"{ts}.raw.txt", raw_text)
     write_json(snapshots / f"{ts}.normalized.json", normalized_obj)
     write_text(snapshots / f"{ts}.sha256", digest)
+    return ts
 
 
 def direct_specs_from_env() -> List[ResolvedService]:
@@ -359,7 +501,14 @@ def direct_specs_from_env() -> List[ResolvedService]:
     return out
 
 
-def build_change_report(svc: ResolvedService, diff: Dict[str, List[str]], old_hash: str, new_hash: str) -> str:
+def build_change_report(
+    svc: ResolvedService,
+    diff: Dict[str, List[str]],
+    old_hash: str,
+    new_hash: str,
+    status: str,
+    breaking: Dict[str, List[str]],
+) -> str:
     lines = [
         f"# Swagger/OpenAPI change detected: {svc.key}",
         "",
@@ -369,9 +518,13 @@ def build_change_report(svc: ResolvedService, diff: Dict[str, List[str]], old_ha
         f"- Current hash: `{new_hash}`",
         "",
         "## Summary",
+        f"- Status: {status}",
         f"- Added operations: {len(diff['added'])}",
         f"- Removed operations: {len(diff['removed'])}",
         f"- Changed operations: {len(diff['changed'])}",
+        f"- Breaking removed operations: {len(breaking['removed_operations'])}",
+        f"- Breaking changed operations: {len(breaking['breaking_changed_operations'])}",
+        f"- Non-breaking changed operations: {len(breaking['non_breaking_changed_operations'])}",
         "",
     ]
 
@@ -381,7 +534,37 @@ def build_change_report(svc: ResolvedService, diff: Dict[str, List[str]], old_ha
         lines.extend([f"- {item}" for item in items] if items else ["- None"])
         lines.append("")
 
+    lines.append("## Breaking classification")
+    lines.append(f"- Removed operations: {len(breaking['removed_operations'])}")
+    lines.extend([f"  - {x}" for x in breaking["removed_operations"]] if breaking["removed_operations"] else ["- None"])
+    lines.append("")
+    lines.append(f"- Breaking changed operations: {len(breaking['breaking_changed_operations'])}")
+    lines.extend(
+        [f"  - {x}" for x in breaking["breaking_changed_operations"]]
+        if breaking["breaking_changed_operations"]
+        else ["- None"]
+    )
+    lines.append("")
+    lines.append(f"- Non-breaking changed operations: {len(breaking['non_breaking_changed_operations'])}")
+    lines.extend(
+        [f"  - {x}" for x in breaking["non_breaking_changed_operations"]]
+        if breaking["non_breaking_changed_operations"]
+        else ["- None"]
+    )
+    lines.append("")
+
     return "\n".join(lines).strip() + "\n"
+
+
+def build_docs_only_report(svc: ResolvedService, old_hash: str, new_hash: str) -> str:
+    return (
+        f"# Documentation-only change detected: {svc.key}\n\n"
+        f"- Time: {now_iso()}\n"
+        f"- Swagger URL: {svc.swagger_url}\n"
+        f"- Previous hash: `{old_hash}`\n"
+        f"- Current hash: `{new_hash}`\n\n"
+        f"No operation-level API changes were detected.\n"
+    )
 
 
 def build_drift_report(
@@ -431,15 +614,27 @@ def send_slack(text: str) -> None:
     resp.raise_for_status()
 
 
-def summarize_change_for_slack(svc: ResolvedService, diff: Dict[str, List[str]]) -> str:
+def summarize_change_for_slack(
+    svc: ResolvedService,
+    diff: Dict[str, List[str]],
+    status: str,
+    breaking: Dict[str, List[str]],
+) -> str:
     summary = (
-        f"Swagger change detected in *{svc.key}* | "
+        f"Swagger update in *{svc.key}* | "
+        f"status={status} | "
         f"added={len(diff['added'])} | removed={len(diff['removed'])} | changed={len(diff['changed'])}"
     )
     preview = []
     preview += [f"+ {x}" for x in diff["added"][:3]]
     preview += [f"- {x}" for x in diff["removed"][:3]]
     preview += [f"~ {x}" for x in diff["changed"][:3]]
+
+    if breaking["removed_operations"]:
+        preview += [f"BREAK removed: {x}" for x in breaking["removed_operations"][:2]]
+    if breaking["breaking_changed_operations"]:
+        preview += [f"BREAK changed: {x}" for x in breaking["breaking_changed_operations"][:2]]
+
     return summary + (("\n" + "\n".join(preview)) if preview else "")
 
 
@@ -467,7 +662,7 @@ def check_service_change(svc: ResolvedService, state_dir: Path) -> EnvCheckResul
     old_hash = (read_text(ep_dir / "latest.sha256") or "").strip()
     old_spec = load_previous_spec(ep_dir)
 
-    save_current_spec(ep_dir, raw_text, normalized, new_hash)
+    save_current_spec(ep_dir, raw_text, normalized, new_hash, svc)
 
     if not old_hash:
         report = (
@@ -489,30 +684,62 @@ def check_service_change(svc: ResolvedService, state_dir: Path) -> EnvCheckResul
             changed_items={"added": [], "removed": [], "changed": []},
         )
 
-    if old_hash == new_hash:
+    status, meta = classify_change(old_spec or {}, normalized, old_hash, new_hash)
+
+    if status == "no_change":
+        report = f"No change for {svc.key} ({new_hash[:12]})"
+        write_text(ep_dir / "last_report.md", report)
         return EnvCheckResult(
             service_name=svc.service_name,
             environment=svc.environment,
             swagger_url=svc.swagger_url,
             status="no_change",
             summary=f"No change ({new_hash[:12]})",
-            report=f"No change for {svc.key} ({new_hash[:12]})",
+            report=report,
             spec=normalized,
             spec_hash=new_hash,
             counts={"added": 0, "removed": 0, "changed": 0},
             changed_items={"added": [], "removed": [], "changed": []},
+            file_changed=False,
+            api_changed=False,
+            breaking_changed=False,
         )
 
-    diff = diff_specs(old_spec or {}, normalized)
-    report = build_change_report(svc, diff, old_hash, new_hash)
+    if status == "docs_only":
+        report = build_docs_only_report(svc, old_hash, new_hash)
+        write_text(ep_dir / "last_report.md", report)
+        return EnvCheckResult(
+            service_name=svc.service_name,
+            environment=svc.environment,
+            swagger_url=svc.swagger_url,
+            status="docs_only",
+            summary="File changed, API unchanged",
+            report=report,
+            spec=normalized,
+            spec_hash=new_hash,
+            counts={"added": 0, "removed": 0, "changed": 0},
+            changed_items={"added": [], "removed": [], "changed": []},
+            file_changed=True,
+            api_changed=False,
+            breaking_changed=False,
+        )
+
+    diff = meta["diff"]
+    breaking = meta["breaking"]
+
+    report = build_change_report(svc, diff, old_hash, new_hash, status, breaking)
     write_text(ep_dir / "last_report.md", report)
-    send_slack(summarize_change_for_slack(svc, diff))
+    send_slack(summarize_change_for_slack(svc, diff, status, breaking))
+
     return EnvCheckResult(
         service_name=svc.service_name,
         environment=svc.environment,
         swagger_url=svc.swagger_url,
-        status="changed",
-        summary=f"Changed: +{len(diff['added'])} / -{len(diff['removed'])} / ~{len(diff['changed'])}",
+        status=status,
+        summary=(
+            f"{status.replace('_', ' ').title()}: "
+            f"+{len(diff['added'])} / -{len(diff['removed'])} / ~{len(diff['changed'])}"
+        ),
         report=report,
         spec=normalized,
         spec_hash=new_hash,
@@ -522,6 +749,9 @@ def check_service_change(svc: ResolvedService, state_dir: Path) -> EnvCheckResul
             "changed": len(diff["changed"]),
         },
         changed_items=diff,
+        file_changed=True,
+        api_changed=True,
+        breaking_changed=bool(breaking["removed_operations"] or breaking["breaking_changed_operations"]),
     )
 
 
@@ -650,7 +880,9 @@ def failed_drift_result(service_name: str, left_env: str, right_env: str, left_u
 
 def status_badge_class(status: str) -> str:
     return {
-        "changed": "warn",
+        "breaking": "bad",
+        "non_breaking": "warn",
+        "docs_only": "info",
         "baseline": "info",
         "no_change": "ok",
         "aligned": "ok",
@@ -681,18 +913,18 @@ def render_env_panel(result: Optional[EnvCheckResult], title: str) -> str:
     changed_html = list_to_html(result.changed_items.get("changed", []))
 
     return f"""
-    <section class=\"panel\">
-      <div class=\"panel-head\">
+    <section class="panel">
+      <div class="panel-head">
         <h3>{esc(title)}</h3>
-        <span class=\"badge {status_badge_class(result.status)}\">{esc(result.status.replace('_', ' '))}</span>
+        <span class="badge {status_badge_class(result.status)}">{esc(result.status.replace('_', ' '))}</span>
       </div>
-      <div class=\"kv\"><span>URL</span><a href=\"{esc(result.swagger_url)}\" target=\"_blank\" rel=\"noreferrer\">{esc(result.swagger_url)}</a></div>
-      <div class=\"kv\"><span>Hash</span><code>{esc(result.spec_hash[:12] if result.spec_hash else '')}</code></div>
-      <div class=\"kv\"><span>Summary</span><strong>{esc(result.summary)}</strong></div>
-      <div class=\"stats\">
-        <div class=\"stat\"><span>Added</span><strong>{counts.get('added', 0)}</strong></div>
-        <div class=\"stat\"><span>Removed</span><strong>{counts.get('removed', 0)}</strong></div>
-        <div class=\"stat\"><span>Changed</span><strong>{counts.get('changed', 0)}</strong></div>
+      <div class="kv"><span>URL</span><a href="{esc(result.swagger_url)}" target="_blank" rel="noreferrer">{esc(result.swagger_url)}</a></div>
+      <div class="kv"><span>Hash</span><code>{esc(result.spec_hash[:12] if result.spec_hash else '')}</code></div>
+      <div class="kv"><span>Summary</span><strong>{esc(result.summary)}</strong></div>
+      <div class="stats">
+        <div class="stat"><span>Added</span><strong>{counts.get('added', 0)}</strong></div>
+        <div class="stat"><span>Removed</span><strong>{counts.get('removed', 0)}</strong></div>
+        <div class="stat"><span>Changed</span><strong>{counts.get('changed', 0)}</strong></div>
       </div>
       <details>
         <summary>Details</summary>
@@ -716,17 +948,17 @@ def render_drift_panel(result: DriftCheckResult) -> str:
     different_html = list_to_html(result.changed_items.get("different", []))
 
     return f"""
-    <section class=\"panel drift\">
-      <div class=\"panel-head\">
+    <section class="panel drift">
+      <div class="panel-head">
         <h3>{esc(result.pair_name)}</h3>
-        <span class=\"badge {status_badge_class(result.status)}\">{esc(result.status.replace('_', ' '))}</span>
+        <span class="badge {status_badge_class(result.status)}">{esc(result.status.replace('_', ' '))}</span>
       </div>
-      <div class=\"kv\"><span>{esc(result.left_env)}</span><a href=\"{esc(result.left_url)}\" target=\"_blank\" rel=\"noreferrer\">{esc(result.left_url)}</a></div>
-      <div class=\"kv\"><span>{esc(result.right_env)}</span><a href=\"{esc(result.right_url)}\" target=\"_blank\" rel=\"noreferrer\">{esc(result.right_url)}</a></div>
-      <div class=\"stats\">
-        <div class=\"stat\"><span>Only in {esc(result.left_env)}</span><strong>{result.counts.get(only_left_key, 0)}</strong></div>
-        <div class=\"stat\"><span>Only in {esc(result.right_env)}</span><strong>{result.counts.get(only_right_key, 0)}</strong></div>
-        <div class=\"stat\"><span>Different</span><strong>{result.counts.get('different', 0)}</strong></div>
+      <div class="kv"><span>{esc(result.left_env)}</span><a href="{esc(result.left_url)}" target="_blank" rel="noreferrer">{esc(result.left_url)}</a></div>
+      <div class="kv"><span>{esc(result.right_env)}</span><a href="{esc(result.right_url)}" target="_blank" rel="noreferrer">{esc(result.right_url)}</a></div>
+      <div class="stats">
+        <div class="stat"><span>Only in {esc(result.left_env)}</span><strong>{result.counts.get(only_left_key, 0)}</strong></div>
+        <div class="stat"><span>Only in {esc(result.right_env)}</span><strong>{result.counts.get(only_right_key, 0)}</strong></div>
+        <div class="stat"><span>Different</span><strong>{result.counts.get('different', 0)}</strong></div>
       </div>
       <details>
         <summary>Details</summary>
@@ -751,7 +983,7 @@ def build_dashboard(rows: List[DashboardServiceRow], output_path: Path) -> None:
     for row in rows:
         for env_name in ENV_ORDER:
             env_result = row.env_results.get(env_name)
-            if env_result and env_result.status == "changed":
+            if env_result and env_result.status in {"breaking", "non_breaking", "docs_only"}:
                 changed_count += 1
             if env_result and env_result.status == "error":
                 error_count += 1
@@ -766,22 +998,22 @@ def build_dashboard(rows: List[DashboardServiceRow], output_path: Path) -> None:
 
         service_cards.append(
             f"""
-            <article class=\"service-card\">
-              <div class=\"service-head\">
+            <article class="service-card">
+              <div class="service-head">
                 <h2>{esc(row.service_name)}</h2>
               </div>
-              <div class=\"grid env-grid\">{env_panels}</div>
-              <div class=\"grid drift-grid\">{drift_panels}</div>
+              <div class="grid env-grid">{env_panels}</div>
+              <div class="grid drift-grid">{drift_panels}</div>
             </article>
             """
         )
 
     html_doc = f"""
 <!doctype html>
-<html lang=\"en\">
+<html lang="en">
 <head>
-  <meta charset=\"utf-8\" />
-  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>EG Retail Swagger Dashboard</title>
   <style>
     :root {{
@@ -801,6 +1033,8 @@ def build_dashboard(rows: List[DashboardServiceRow], output_path: Path) -> None:
     a {{ color: var(--accent); text-decoration: none; }}
     a:hover {{ text-decoration: underline; }}
     .wrap {{ max-width: 1600px; margin: 0 auto; padding: 24px; }}
+    .topnav {{ display: flex; gap: 12px; margin-bottom: 18px; }}
+    .topnav a {{ background: rgba(255,255,255,.05); border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; text-decoration: none; }}
     .hero {{ display: flex; justify-content: space-between; gap: 16px; align-items: end; margin-bottom: 24px; }}
     .hero h1 {{ margin: 0 0 6px; font-size: 32px; }}
     .muted {{ color: var(--muted); }}
@@ -836,18 +1070,6 @@ def build_dashboard(rows: List[DashboardServiceRow], output_path: Path) -> None:
     code, pre {{ background: rgba(255,255,255,.04); border: 1px solid var(--border); border-radius: 8px; }}
     code {{ padding: 2px 6px; word-break: break-word; }}
     pre {{ white-space: pre-wrap; overflow-wrap: anywhere; padding: 12px; font-size: 12px; margin-top: 12px; }}
-    .topnav {{
-      display: flex;
-      gap: 12px;
-      margin-bottom: 18px;
-    }}
-    .topnav a {{
-      background: rgba(255,255,255,.05);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 8px 12px;
-      text-decoration: none;
-    }}
     @media (max-width: 1300px) {{ .env-grid, .drift-grid {{ grid-template-columns: 1fr; }} .summary {{ grid-template-columns: repeat(2, minmax(140px, 1fr)); }} }}
     @media (max-width: 640px) {{ .hero {{ display: block; }} .summary {{ grid-template-columns: 1fr; }} }}
   </style>
@@ -862,16 +1084,16 @@ def build_dashboard(rows: List[DashboardServiceRow], output_path: Path) -> None:
     <section class="hero">
       <div>
         <h1>EG Retail Swagger Dashboard</h1>
-        <div class=\"muted\">Generated at {esc(now_iso())}</div>
+        <div class="muted">Generated at {esc(now_iso())}</div>
       </div>
-      <div class=\"muted\">Output: {esc(str(output_path))}</div>
+      <div class="muted">Output: {esc(str(output_path))}</div>
     </section>
 
-    <section class=\"summary\">
-      <div class=\"card\"><span>Services</span><strong>{len(rows)}</strong></div>
-      <div class=\"card\"><span>Env changes</span><strong>{changed_count}</strong></div>
-      <div class=\"card\"><span>Drifts</span><strong>{drift_count}</strong></div>
-      <div class=\"card\"><span>Errors</span><strong>{error_count}</strong></div>
+    <section class="summary">
+      <div class="card"><span>Services</span><strong>{len(rows)}</strong></div>
+      <div class="card"><span>Env updates</span><strong>{changed_count}</strong></div>
+      <div class="card"><span>Drifts</span><strong>{drift_count}</strong></div>
+      <div class="card"><span>Errors</span><strong>{error_count}</strong></div>
     </section>
 
     {''.join(service_cards)}
@@ -881,6 +1103,68 @@ def build_dashboard(rows: List[DashboardServiceRow], output_path: Path) -> None:
     """.strip()
 
     write_text(output_path, html_doc + "\n")
+
+
+def parse_snapshot_timestamp(ts: str) -> Optional[datetime]:
+    for fmt in ("%Y%m%dT%H%M%SZ", "%Y%m%dT%H%M%S", "%Y-%m-%dT%H:%M:%SZ"):
+        try:
+            return datetime.strptime(ts, fmt).replace(tzinfo=timezone.utc)
+        except ValueError:
+            pass
+    return None
+
+
+def retention_days() -> int:
+    return int(os.getenv("RETENTION_DAYS", "180"))
+
+
+def prune_old_snapshots(state_dir: Path) -> List[str]:
+    cutoff = datetime.now(timezone.utc) - timedelta(days=retention_days())
+    removed: List[str] = []
+
+    for child in state_dir.iterdir() if state_dir.exists() else []:
+        if not child.is_dir():
+            continue
+
+        snapshots_dir = child / "snapshots"
+        if not snapshots_dir.exists():
+            continue
+
+        grouped: Dict[str, List[Path]] = {}
+        for p in snapshots_dir.iterdir():
+            name = p.name
+            ts = None
+            for suffix in [".raw.txt", ".normalized.json", ".sha256"]:
+                if name.endswith(suffix):
+                    ts = name[: -len(suffix)]
+                    break
+            if ts:
+                grouped.setdefault(ts, []).append(p)
+
+        for ts, files in grouped.items():
+            dt = parse_snapshot_timestamp(ts)
+            if dt is None:
+                continue
+            if dt < cutoff:
+                for f in files:
+                    if f.exists():
+                        f.unlink()
+                removed.append(f"{child.name}/{ts}")
+
+    history_reports_dir = state_dir / "history_reports"
+    if history_reports_dir.exists():
+        for p in history_reports_dir.iterdir():
+            if not p.is_file():
+                continue
+            m = re.search(r"_(\d{8}T\d{6}Z)_vs_(\d{8}T\d{6}Z)\.", p.name)
+            if not m:
+                continue
+            right_dt = parse_snapshot_timestamp(m.group(2))
+            if right_dt and right_dt < cutoff:
+                p.unlink()
+                removed.append(f"history_reports/{p.name}")
+
+    return removed
 
 
 def run_once() -> int:
@@ -968,6 +1252,10 @@ def run_once() -> int:
                 )
 
         dashboard_rows.append(DashboardServiceRow(service_name=service_name, env_results=env_results, drift_results=drift_results))
+
+    removed_items = prune_old_snapshots(state_dir)
+    if removed_items:
+        print(f"Pruned {len(removed_items)} old snapshot items")
 
     dashboard_path = state_dir / "dashboard.html"
     build_dashboard(dashboard_rows, dashboard_path)
