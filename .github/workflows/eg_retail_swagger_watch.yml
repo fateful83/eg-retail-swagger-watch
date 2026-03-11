@@ -6,7 +6,7 @@ on:
     - cron: '0 */6 * * *'
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -19,8 +19,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout main repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Restore previous snapshot state
+        run: |
+          git fetch origin snapshot-state:snapshot-state || true
+          mkdir -p .swagger_watch_state
+          if git show-ref --verify --quiet refs/heads/snapshot-state; then
+            git checkout snapshot-state -- .swagger_watch_state || true
+          fi
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -40,12 +50,31 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           REQUEST_TIMEOUT_SECONDS: '30'
           POLL_CRON: '0 */6 * * *'
+          RETENTION_DAYS: '180'
         run: |
           python eg_retail_swagger_watch_agent.py
 
       - name: Run history page generator
         run: |
           python eg_retail_swagger_history_page.py
+
+      - name: Save updated snapshot state to branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git switch snapshot-state || git checkout -b snapshot-state
+          mkdir -p .swagger_watch_state
+          git add .swagger_watch_state
+
+          if git diff --cached --quiet; then
+            echo "No snapshot state changes to commit"
+          else
+            git commit -m "Update snapshot state"
+            git push origin snapshot-state
+          fi
+
+          git switch main
 
       - name: Prepare Pages site
         run: |
