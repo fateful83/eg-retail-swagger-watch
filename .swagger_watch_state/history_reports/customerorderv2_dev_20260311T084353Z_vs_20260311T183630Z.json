@@ -1,0 +1,11 @@
+{
+  "service_name": "CustomerOrderV2",
+  "environment": "DEV",
+  "from": "20260311T084353Z",
+  "to": "20260311T183630Z",
+  "diff": {
+    "added": [],
+    "removed": [],
+    "changed": []
+  }
+}

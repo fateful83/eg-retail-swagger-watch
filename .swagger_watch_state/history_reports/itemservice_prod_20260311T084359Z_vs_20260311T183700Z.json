@@ -1,0 +1,19 @@
+{
+  "service_name": "ItemService",
+  "environment": "PROD",
+  "from": "20260311T084359Z",
+  "to": "20260311T183700Z",
+  "diff": {
+    "added": [],
+    "removed": [],
+    "changed": [
+      "POST /api/Colors/upsertByName",
+      "POST /api/Imports/{id}/filteredItemsCount",
+      "POST /api/Imports/{id}/filteredItemsSimpleCount",
+      "POST /api/Imports/{id}/import",
+      "POST /api/Imports/{id}/reject",
+      "PUT /api/Concession/{id}/updateItemGroups",
+      "PUT /api/ConcessionStores/{id}/updateStores"
+    ]
+  }
+}
