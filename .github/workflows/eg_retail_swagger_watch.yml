@@ -79,9 +79,18 @@ jobs:
       - name: Prepare Pages site
         run: |
           mkdir -p site
-          cp .swagger_watch_state/dashboard.html site/index.html
-          cp .swagger_watch_state/history.html site/history.html
-          cp .swagger_watch_state/history_index.json site/history_index.json
+
+          if [ -f .swagger_watch_state/dashboard.html ]; then
+            cp .swagger_watch_state/dashboard.html site/index.html
+          fi
+
+          if [ -f .swagger_watch_state/history.html ]; then
+            cp .swagger_watch_state/history.html site/history.html
+          fi
+
+          if [ -f .swagger_watch_state/history_index.json ]; then
+            cp .swagger_watch_state/history_index.json site/history_index.json
+          fi
 
           if [ -d .swagger_watch_state/history_reports ]; then
             cp -r .swagger_watch_state/history_reports site/history_reports
