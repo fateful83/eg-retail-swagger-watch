@@ -51,12 +51,13 @@ jobs:
           REQUEST_TIMEOUT_SECONDS: '30'
           POLL_CRON: '0 */6 * * *'
           RETENTION_DAYS: '180'
+          STATE_DIR: '.swagger_watch_state'
         run: |
           python eg_retail_swagger_watch_agent.py
 
       - name: Run history page generator
         run: |
-          python eg_retail_swagger_history_page.py
+          python eg_retail_swagger_history_page.py --state-dir .swagger_watch_state
 
       - name: Prepare Pages site
         run: |
@@ -83,6 +84,27 @@ jobs:
               cp -r "$dir" "site/$(basename "$dir")"
             fi
           done
+
+          if [ ! -f site/index.html ]; then
+            cat > site/index.html <<'EOF'
+            <!doctype html>
+            <html lang="en">
+            <head>
+              <meta charset="utf-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
+              <title>EG Retail Swagger Dashboard</title>
+              <style>
+                body { font-family: Arial, sans-serif; padding: 40px; background: #0b1020; color: #eef4ff; }
+                a { color: #7cc4ff; }
+              </style>
+            </head>
+            <body>
+              <h1>EG Retail Swagger Dashboard</h1>
+              <p>No dashboard was generated in this run.</p>
+            </body>
+            </html>
+            EOF
+          fi
 
       - name: Save updated snapshot state to branch
         run: |
