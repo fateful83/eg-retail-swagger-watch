@@ -234,24 +234,13 @@
 
         const fromTs = fromSelect.value;
         const toTs = toSelect.value;
-        const fromSnap = current.snapshots.find(s => s.timestamp === fromTs);
-        const toSnap = current.snapshots.find(s => s.timestamp === toTs);
-
-        if (!fromSnap || !toSnap) {
-          result.innerHTML = '<div class="muted">Invalid snapshot selection.</div>';
-          return;
-        }
 
         if (fromTs === toTs) {
           result.innerHTML = '<div class="muted">Choose two different snapshots.</div>';
           return;
         }
 
-        const dirName = `${current.service_name} [${current.environment}]`
-          .replace(/[^a-zA-Z0-9._-]+/g, '_')
-          .replace(/^_+|_+$/g, '')
-          .toLowerCase();
-
+        const dirName = current.directory_name;
         const fromUrl = `${dirName}/snapshots/${fromTs}.normalized.json`;
         const toUrl = `${dirName}/snapshots/${toTs}.normalized.json`;
 

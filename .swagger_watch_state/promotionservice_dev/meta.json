@@ -1,0 +1,6 @@
+{
+  "service_name": "PromotionService",
+  "environment": "DEV",
+  "swagger_url": "https://promotionservice.egretail-dev.cloud/swagger/v1/swagger.json",
+  "docs_url": "https://promotionservice.egretail-dev.cloud/swagger/v1/swagger.json"
+}

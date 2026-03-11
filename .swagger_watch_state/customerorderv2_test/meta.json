@@ -1,0 +1,6 @@
+{
+  "service_name": "CustomerOrderV2",
+  "environment": "TEST",
+  "swagger_url": "https://customerorderv2service.egretail-test.cloud/swagger/v1/swagger.json",
+  "docs_url": "https://customerorderv2service.egretail-test.cloud/swagger/v1/swagger.json"
+}

@@ -1,0 +1,6 @@
+{
+  "service_name": "POS API",
+  "environment": "DEV",
+  "swagger_url": "https://posapi.egretail-dev.cloud/swagger/v1/swagger.json",
+  "docs_url": "https://posapi.egretail-dev.cloud/swagger/v1/swagger.json"
+}

@@ -1,0 +1,6 @@
+{
+  "service_name": "ItemService",
+  "environment": "PROD",
+  "swagger_url": "https://itemservice.egretail.cloud/swagger/v1/swagger.json",
+  "docs_url": "https://itemservice.egretail.cloud/swagger/v1/swagger.json"
+}

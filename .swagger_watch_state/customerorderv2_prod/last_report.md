@@ -1,20 +1,8 @@
-# Swagger/OpenAPI change detected: CustomerOrderV2 [PROD]
+# Documentation-only change detected: CustomerOrderV2 [PROD]
 
-- Time: 2026-03-11T12:29:11Z
+- Time: 2026-03-11T14:21:09Z
 - Swagger URL: https://customerorderv2service.egretail.cloud/swagger/v1/swagger.json
-- Previous hash: `0b73566f33cfcab19d458d33548b8ad69083edc3f89fe4fcdc5646d0028c56a5`
-- Current hash: `7b9f84c220513837c9cdc245a9595a8bc9ee917f623a76c7897d429539d58314`
+- Previous hash: `7b9f84c220513837c9cdc245a9595a8bc9ee917f623a76c7897d429539d58314`
+- Current hash: `9e6e4319e7fae1e2fdf7feb1ec3d47a746d112ff1d8b32aa0c6ae849f1274a68`
 
-## Summary
-- Added operations: 0
-- Removed operations: 0
-- Changed operations: 0
-
-## Added
-- None
-
-## Removed
-- None
-
-## Changed
-- None
+No operation-level API changes were detected.
