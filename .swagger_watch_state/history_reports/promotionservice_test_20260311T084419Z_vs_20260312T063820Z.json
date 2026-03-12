@@ -1,0 +1,11 @@
+{
+  "service_name": "PromotionService",
+  "environment": "TEST",
+  "from": "20260311T084419Z",
+  "to": "20260312T063820Z",
+  "diff": {
+    "added": [],
+    "removed": [],
+    "changed": []
+  }
+}
