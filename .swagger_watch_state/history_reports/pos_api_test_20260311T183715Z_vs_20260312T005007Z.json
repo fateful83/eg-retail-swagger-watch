@@ -1,0 +1,11 @@
+{
+  "service_name": "POS API",
+  "environment": "TEST",
+  "from": "20260311T183715Z",
+  "to": "20260312T005007Z",
+  "diff": {
+    "added": [],
+    "removed": [],
+    "changed": []
+  }
+}
