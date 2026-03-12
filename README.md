@@ -1,1 +1,1 @@
-# eg-retail-swagger-watch
+Code that generates a simplistic page that show what has changed in EG's API's during scheduled reruns and also keeps a historical data to compare snapshots so that changes can be tracked and possible problems pointed more easily.

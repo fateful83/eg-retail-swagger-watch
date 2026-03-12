@@ -26,7 +26,8 @@ jobs:
 
       - name: Restore previous snapshot state
         run: |
-          git fetch origin snapshot-state:snapshot-state || true
+          git fetch origin snapshot-state:snapshot-state || echo "snapshot-state branch not found yet"
+          rm -rf .swagger_watch_state
           mkdir -p .swagger_watch_state
           if git show-ref --verify --quiet refs/heads/snapshot-state; then
             git checkout snapshot-state -- .swagger_watch_state || true
@@ -55,26 +56,21 @@ jobs:
           FAIL_ON_SERVICE_ERRORS: 'false'
         run: |
           python eg_retail_swagger_watch_agent.py
+          test -f .swagger_watch_state/dashboard.html
 
       - name: Run history page generator
         run: |
           python eg_retail_swagger_history_page.py --state-dir .swagger_watch_state
+          test -f .swagger_watch_state/history.html
+          test -f .swagger_watch_state/history_index.json
 
       - name: Prepare Pages site
         run: |
+          rm -rf site
           mkdir -p site
-
-          if [ -f .swagger_watch_state/dashboard.html ]; then
-            cp .swagger_watch_state/dashboard.html site/index.html
-          fi
-
-          if [ -f .swagger_watch_state/history.html ]; then
-            cp .swagger_watch_state/history.html site/history.html
-          fi
-
-          if [ -f .swagger_watch_state/history_index.json ]; then
-            cp .swagger_watch_state/history_index.json site/history_index.json
-          fi
+          cp .swagger_watch_state/dashboard.html site/index.html
+          cp .swagger_watch_state/history.html site/history.html
+          cp .swagger_watch_state/history_index.json site/history_index.json
 
           if [ -d .swagger_watch_state/history_reports ]; then
             cp -r .swagger_watch_state/history_reports site/history_reports
@@ -86,16 +82,11 @@ jobs:
             fi
           done
 
-          if [ ! -f site/index.html ]; then
-            echo '<!doctype html><html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>EG Retail Swagger Dashboard</title><style>body { font-family: Arial, sans-serif; padding: 40px; background: #0b1020; color: #eef4ff; } a { color: #7cc4ff; }</style></head><body><h1>EG Retail Swagger Dashboard</h1><p>No dashboard was generated in this run.</p></body></html>' > site/index.html
-          fi
-          
       - name: Save updated snapshot state to branch
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git switch snapshot-state || git checkout -b snapshot-state
+          git switch snapshot-state || git checkout --orphan snapshot-state
           mkdir -p .swagger_watch_state
           git add .swagger_watch_state
 

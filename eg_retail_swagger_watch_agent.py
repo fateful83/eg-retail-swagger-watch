@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-EG Retail Swagger Watch Agent V3
+EG Retail Swagger Watch Agent V4
 
 What it does
 - Fetches DEV / TEST / PROD OpenAPI/Swagger specs from DIRECT_SPECS_JSON
@@ -11,6 +11,10 @@ What it does
     - non_breaking
     - breaking
 - Detects DEV-vs-TEST and TEST-vs-PROD drift
+- Distinguishes drift as:
+    - aligned
+    - non_breaking
+    - breaking
 - Persists snapshots and reports under STATE_DIR
 - Writes a browsable HTML dashboard
 - Optionally posts compact Slack notifications
@@ -30,11 +34,13 @@ Environment variables
 - SLACK_WEBHOOK_URL=https://hooks.slack.com/services/...   # optional
 - AUTH_HEADER=Bearer ...                                   # optional
 - EXTRA_HEADERS_JSON={"X-Api-Key":"..."}                   # optional
-- REQUEST_TIMEOUT_SECONDS=30
+- REQUEST_TIMEOUT_SECONDS=60
+- FAIL_ON_SERVICE_ERRORS=false
 """
 
 from __future__ import annotations
 
+import copy
 import hashlib
 import html
 import json
@@ -42,6 +48,7 @@ import os
 import re
 import sys
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -89,6 +96,8 @@ class EnvCheckResult:
     file_changed: bool = False
     api_changed: bool = False
     breaking_changed: bool = False
+    fetched_at: str = ""
+    duration_ms: int = 0
     error: str = ""
 
 
@@ -99,6 +108,7 @@ class DriftCheckResult:
     left_env: str
     right_env: str
     status: str
+    severity: str
     report: str
     counts: Dict[str, int]
     changed_items: Dict[str, List[str]]
@@ -116,8 +126,17 @@ class DashboardServiceRow:
     drift_results: List[DriftCheckResult]
 
 
+def now_utc() -> datetime:
+    return datetime.now(timezone.utc)
+
+
 def now_iso() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    return now_utc().strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def bool_env(name: str, default: bool) -> bool:
+    raw = os.getenv(name, str(default)).strip().lower()
+    return raw in {"1", "true", "yes", "y", "on"}
 
 
 def load_env_json(name: str) -> Dict[str, str]:
@@ -133,7 +152,7 @@ def load_env_json(name: str) -> Dict[str, str]:
 def build_headers() -> Dict[str, str]:
     headers = {
         "Accept": "application/json, application/yaml, text/yaml, */*",
-        "User-Agent": "eg-retail-swagger-watch-agent/6.0",
+        "User-Agent": "eg-retail-swagger-watch-agent/7.0",
     }
     auth = os.getenv("AUTH_HEADER", "").strip()
     if auth:
@@ -143,7 +162,7 @@ def build_headers() -> Dict[str, str]:
 
 
 def request_timeout() -> int:
-    return int(os.getenv("REQUEST_TIMEOUT_SECONDS", "30"))
+    return int(os.getenv("REQUEST_TIMEOUT_SECONDS", "60"))
 
 
 def fetch_spec(url: str) -> Tuple[str, Any]:
@@ -176,8 +195,89 @@ def normalize(obj: Any) -> Any:
     return obj
 
 
+def _drop_non_contract_metadata(node: Any) -> Any:
+    """
+    Deeply removes documentation-only and presentation-oriented fields so that
+    comparisons focus on contract shape instead of text metadata.
+    """
+    if isinstance(node, dict):
+        cleaned: Dict[str, Any] = {}
+        for key, value in node.items():
+            k = str(key)
+
+            if k in {
+                "description",
+                "summary",
+                "externalDocs",
+                "example",
+                "examples",
+                "title",
+                "contact",
+                "license",
+                "termsOfService",
+                "x-generated-at",
+                "x-build-time",
+                "x-generated-by",
+                "x-request-id",
+            }:
+                continue
+
+            # Ignore top-level cosmetic structures later as well
+            cleaned[k] = _drop_non_contract_metadata(value)
+
+        return {k: cleaned[k] for k in sorted(cleaned.keys(), key=str)}
+
+    if isinstance(node, list):
+        return [_drop_non_contract_metadata(x) for x in node]
+
+    return node
+
+
+def normalize_contract_spec(spec: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Produces a metadata-light, contract-focused normalized spec for use in
+    docs_only detection and drift reduction.
+    """
+    if not isinstance(spec, dict):
+        return {}
+
+    spec = copy.deepcopy(spec)
+    spec = normalize(spec)
+    spec = _drop_non_contract_metadata(spec)
+
+    for top_key in ["servers", "externalDocs"]:
+        spec.pop(top_key, None)
+
+    # info.version often changes for docs/build reasons and can inflate noise
+    info = spec.get("info")
+    if isinstance(info, dict):
+        info.pop("version", None)
+        if not info:
+            spec.pop("info", None)
+
+    # Trim tag descriptions to avoid docs-only drift
+    tags = spec.get("tags")
+    if isinstance(tags, list):
+        cleaned_tags = []
+        for tag in tags:
+            if isinstance(tag, dict):
+                t = dict(tag)
+                t.pop("description", None)
+                t.pop("externalDocs", None)
+                cleaned_tags.append({k: t[k] for k in sorted(t.keys(), key=str)})
+            else:
+                cleaned_tags.append(tag)
+        spec["tags"] = cleaned_tags
+
+    return spec
+
+
 def canonical_json(obj: Any) -> str:
     return json.dumps(normalize(obj), ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+
+
+def canonical_contract_json(obj: Any) -> str:
+    return json.dumps(normalize_contract_spec(obj if isinstance(obj, dict) else {}), ensure_ascii=False, sort_keys=True, separators=(",", ":"))
 
 
 def sha256(text: str) -> str:
@@ -200,7 +300,8 @@ def flatten_paths(spec: Dict[str, Any]) -> Dict[str, Dict[str, Any]]:
 def schema_signature(schema: Any) -> str:
     if schema is None:
         return ""
-    return sha256(canonical_json(schema))[:12]
+    normalized_schema = _drop_non_contract_metadata(normalize(schema))
+    return sha256(json.dumps(normalized_schema, ensure_ascii=False, sort_keys=True, separators=(",", ":")))[:12]
 
 
 def operation_signature(op: Dict[str, Any]) -> Dict[str, Any]:
@@ -212,31 +313,34 @@ def operation_signature(op: Dict[str, Any]) -> Dict[str, Any]:
             {
                 "name": p.get("name"),
                 "in": p.get("in"),
-                "required": p.get("required"),
+                "required": bool(p.get("required", False)),
                 "schema": schema_signature(p.get("schema")),
             }
         )
+    parameters.sort(key=lambda x: (str(x.get("in")), str(x.get("name"))))
 
     request_body = op.get("requestBody") or {}
+    request_required = bool(request_body.get("required", False)) if isinstance(request_body, dict) else False
     request_content = {}
     for content_type, body_desc in sorted((request_body.get("content") or {}).items()):
-        request_content[content_type] = schema_signature((body_desc or {}).get("schema"))
+        request_content[str(content_type)] = schema_signature((body_desc or {}).get("schema"))
 
     responses = {}
     for status, resp in sorted((op.get("responses") or {}).items(), key=lambda x: str(x[0])):
         content = {}
         for content_type, body_desc in sorted(((resp or {}).get("content") or {}).items()):
-            content[content_type] = schema_signature((body_desc or {}).get("schema"))
+            content[str(content_type)] = schema_signature((body_desc or {}).get("schema"))
         responses[str(status)] = content
 
+    security = op.get("security") or []
+    security_norm = normalize(security)
+
     return {
-        "summary": op.get("summary"),
-        "operationId": op.get("operationId"),
-        "tags": op.get("tags") or [],
         "parameters": parameters,
+        "requestBodyRequired": request_required,
         "requestBody": request_content,
         "responses": responses,
-        "security": op.get("security") or [],
+        "security": security_norm,
         "deprecated": bool(op.get("deprecated", False)),
     }
 
@@ -302,6 +406,12 @@ def operation_breaking_change(old_op: Dict[str, Any], new_op: Dict[str, Any]) ->
         if not bool(old_p.get("required", False)) and bool(new_p.get("required", False)):
             return True
 
+    # Request body becoming required is breaking
+    old_rb = old_op.get("requestBody") or {}
+    new_rb = new_op.get("requestBody") or {}
+    if not bool(old_rb.get("required", False)) and bool(new_rb.get("required", False)):
+        return True
+
     # Request content removed or request schema changed: conservatively breaking
     old_req = _extract_request_content(old_op)
     new_req = _extract_request_content(new_op)
@@ -332,6 +442,10 @@ def operation_breaking_change(old_op: Dict[str, Any], new_op: Dict[str, Any]) ->
             if old_schema != new_schema:
                 return True
 
+    # Security requirement change is conservatively breaking
+    if normalize(old_op.get("security") or []) != normalize(new_op.get("security") or []):
+        return True
+
     return False
 
 
@@ -355,7 +469,12 @@ def breaking_summary(old_spec: Dict[str, Any], new_spec: Dict[str, Any], diff: D
     return breaking
 
 
-def classify_change(old_spec: Dict[str, Any], new_spec: Dict[str, Any], old_hash: str, new_hash: str) -> Tuple[str, Dict[str, Any]]:
+def classify_change(
+    old_spec: Dict[str, Any],
+    new_spec: Dict[str, Any],
+    old_hash: str,
+    new_hash: str,
+) -> Tuple[str, Dict[str, Any]]:
     if old_hash == new_hash:
         return "no_change", {
             "file_changed": False,
@@ -370,15 +489,18 @@ def classify_change(old_spec: Dict[str, Any], new_spec: Dict[str, Any], old_hash
             },
         }
 
-    diff = diff_specs(old_spec or {}, new_spec or {})
-    api_changed = bool(diff["added"] or diff["removed"] or diff["changed"])
+    old_contract_hash = sha256(canonical_contract_json(old_spec or {}))
+    new_contract_hash = sha256(canonical_contract_json(new_spec or {}))
 
-    if not api_changed:
+    diff = diff_specs(old_spec or {}, new_spec or {})
+    api_changed = old_contract_hash != new_contract_hash and bool(diff["added"] or diff["removed"] or diff["changed"])
+
+    if old_contract_hash == new_contract_hash or not api_changed:
         return "docs_only", {
             "file_changed": True,
             "api_changed": False,
             "breaking_changed": False,
-            "diff": diff,
+            "diff": {"added": [], "removed": [], "changed": []},
             "breaking": {
                 "removed_operations": [],
                 "breaking_changed_operations": [],
@@ -402,6 +524,15 @@ def classify_change(old_spec: Dict[str, Any], new_spec: Dict[str, Any], old_hash
             "breaking": breaking,
         },
     )
+
+
+def classify_drift(left_spec: Dict[str, Any], right_spec: Dict[str, Any], diff: Dict[str, List[str]]) -> str:
+    if not (diff["added"] or diff["removed"] or diff["changed"]):
+        return "aligned"
+
+    breaking = breaking_summary(left_spec or {}, right_spec or {}, diff)
+    is_breaking = bool(breaking["removed_operations"] or breaking["breaking_changed_operations"])
+    return "breaking" if is_breaking else "non_breaking"
 
 
 def ensure_dir(path: Path) -> None:
@@ -445,7 +576,7 @@ def load_previous_spec(ep_dir: Path) -> Optional[Dict[str, Any]]:
 
 
 def save_current_spec(ep_dir: Path, raw_text: str, normalized_obj: Dict[str, Any], digest: str, svc: ResolvedService) -> str:
-    ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    ts = now_utc().strftime("%Y%m%dT%H%M%SZ")
     snapshots = ep_dir / "snapshots"
     ensure_dir(snapshots)
 
@@ -508,11 +639,15 @@ def build_change_report(
     new_hash: str,
     status: str,
     breaking: Dict[str, List[str]],
+    fetched_at: str,
+    duration_ms: int,
 ) -> str:
     lines = [
         f"# Swagger/OpenAPI change detected: {svc.key}",
         "",
         f"- Time: {now_iso()}",
+        f"- Fetch completed at: {fetched_at}",
+        f"- Fetch duration ms: {duration_ms}",
         f"- Swagger URL: {svc.swagger_url}",
         f"- Previous hash: `{old_hash}`",
         f"- Current hash: `{new_hash}`",
@@ -556,14 +691,16 @@ def build_change_report(
     return "\n".join(lines).strip() + "\n"
 
 
-def build_docs_only_report(svc: ResolvedService, old_hash: str, new_hash: str) -> str:
+def build_docs_only_report(svc: ResolvedService, old_hash: str, new_hash: str, fetched_at: str, duration_ms: int) -> str:
     return (
         f"# Documentation-only change detected: {svc.key}\n\n"
         f"- Time: {now_iso()}\n"
+        f"- Fetch completed at: {fetched_at}\n"
+        f"- Fetch duration ms: {duration_ms}\n"
         f"- Swagger URL: {svc.swagger_url}\n"
         f"- Previous hash: `{old_hash}`\n"
         f"- Current hash: `{new_hash}`\n\n"
-        f"No operation-level API changes were detected.\n"
+        f"No contract-level API changes were detected.\n"
     )
 
 
@@ -576,11 +713,13 @@ def build_drift_report(
     diff: Dict[str, List[str]],
     left_hash: str,
     right_hash: str,
+    severity: str,
 ) -> str:
     lines = [
         f"# {left_env} vs {right_env} drift detected: {service_name}",
         "",
         f"- Time: {now_iso()}",
+        f"- Severity: {severity}",
         f"- {left_env} Swagger URL: {left_url}",
         f"- {right_env} Swagger URL: {right_url}",
         f"- {left_env} hash: `{left_hash}`",
@@ -638,9 +777,10 @@ def summarize_change_for_slack(
     return summary + (("\n" + "\n".join(preview)) if preview else "")
 
 
-def summarize_drift_for_slack(service_name: str, left_env: str, right_env: str, diff: Dict[str, List[str]]) -> str:
+def summarize_drift_for_slack(service_name: str, left_env: str, right_env: str, diff: Dict[str, List[str]], severity: str) -> str:
     summary = (
         f"{left_env} vs {right_env} drift in *{service_name}* | "
+        f"severity={severity} | "
         f"only_{left_env.lower()}={len(diff['added'])} | only_{right_env.lower()}={len(diff['removed'])} | different={len(diff['changed'])}"
     )
     preview = []
@@ -650,9 +790,21 @@ def summarize_drift_for_slack(service_name: str, left_env: str, right_env: str, 
     return summary + (("\n" + "\n".join(preview)) if preview else "")
 
 
+def should_alert_change(status: str) -> bool:
+    return status == "breaking"
+
+
+def should_alert_drift(status: str) -> bool:
+    return status in {"drift_changed"}
+
+
 def check_service_change(svc: ResolvedService, state_dir: Path) -> EnvCheckResult:
     ep_dir = endpoint_dir(state_dir, svc.key)
+
+    started = time.perf_counter()
     raw_text, parsed = fetch_spec(svc.swagger_url)
+    fetched_at = now_iso()
+    duration_ms = int((time.perf_counter() - started) * 1000)
 
     if not isinstance(parsed, dict):
         raise RuntimeError(f"Parsed spec for {svc.key} is not an object")
@@ -667,6 +819,8 @@ def check_service_change(svc: ResolvedService, state_dir: Path) -> EnvCheckResul
     if not old_hash:
         report = (
             f"Initialized baseline for {svc.key} at {now_iso()}\n"
+            f"Fetch completed at: {fetched_at}\n"
+            f"Fetch duration ms: {duration_ms}\n"
             f"Swagger URL: {svc.swagger_url}\n"
             f"Hash: {new_hash}\n"
         )
@@ -682,12 +836,14 @@ def check_service_change(svc: ResolvedService, state_dir: Path) -> EnvCheckResul
             spec_hash=new_hash,
             counts={"added": 0, "removed": 0, "changed": 0},
             changed_items={"added": [], "removed": [], "changed": []},
+            fetched_at=fetched_at,
+            duration_ms=duration_ms,
         )
 
     status, meta = classify_change(old_spec or {}, normalized, old_hash, new_hash)
 
     if status == "no_change":
-        report = f"No change for {svc.key} ({new_hash[:12]})"
+        report = f"No change for {svc.key} ({new_hash[:12]})\nFetch completed at: {fetched_at}\nFetch duration ms: {duration_ms}\n"
         write_text(ep_dir / "last_report.md", report)
         return EnvCheckResult(
             service_name=svc.service_name,
@@ -703,10 +859,12 @@ def check_service_change(svc: ResolvedService, state_dir: Path) -> EnvCheckResul
             file_changed=False,
             api_changed=False,
             breaking_changed=False,
+            fetched_at=fetched_at,
+            duration_ms=duration_ms,
         )
 
     if status == "docs_only":
-        report = build_docs_only_report(svc, old_hash, new_hash)
+        report = build_docs_only_report(svc, old_hash, new_hash, fetched_at, duration_ms)
         write_text(ep_dir / "last_report.md", report)
         return EnvCheckResult(
             service_name=svc.service_name,
@@ -722,14 +880,18 @@ def check_service_change(svc: ResolvedService, state_dir: Path) -> EnvCheckResul
             file_changed=True,
             api_changed=False,
             breaking_changed=False,
+            fetched_at=fetched_at,
+            duration_ms=duration_ms,
         )
 
     diff = meta["diff"]
     breaking = meta["breaking"]
 
-    report = build_change_report(svc, diff, old_hash, new_hash, status, breaking)
+    report = build_change_report(svc, diff, old_hash, new_hash, status, breaking, fetched_at, duration_ms)
     write_text(ep_dir / "last_report.md", report)
-    send_slack(summarize_change_for_slack(svc, diff, status, breaking))
+
+    if should_alert_change(status):
+        send_slack(summarize_change_for_slack(svc, diff, status, breaking))
 
     return EnvCheckResult(
         service_name=svc.service_name,
@@ -752,10 +914,12 @@ def check_service_change(svc: ResolvedService, state_dir: Path) -> EnvCheckResul
         file_changed=True,
         api_changed=True,
         breaking_changed=bool(breaking["removed_operations"] or breaking["breaking_changed_operations"]),
+        fetched_at=fetched_at,
+        duration_ms=duration_ms,
     )
 
 
-def failed_env_result(svc: ResolvedService, error: Exception) -> EnvCheckResult:
+def failed_env_result(svc: ResolvedService, error: Exception, duration_ms: int = 0) -> EnvCheckResult:
     return EnvCheckResult(
         service_name=svc.service_name,
         environment=svc.environment,
@@ -767,6 +931,8 @@ def failed_env_result(svc: ResolvedService, error: Exception) -> EnvCheckResult:
         spec_hash="",
         counts={"added": 0, "removed": 0, "changed": 0},
         changed_items={"added": [], "removed": [], "changed": []},
+        fetched_at=now_iso(),
+        duration_ms=duration_ms,
         error=str(error),
     )
 
@@ -787,10 +953,13 @@ def check_env_pair_drift(
     latest_drift_hash_path = svc_dir / "latest_drift.sha256"
 
     diff = diff_specs(right_spec, left_spec)
+    severity = classify_drift(right_spec, left_spec, diff)
+
     drift_payload = {
         f"only_in_{left_env.lower()}": diff["added"],
         f"only_in_{right_env.lower()}": diff["removed"],
         "different": diff["changed"],
+        "severity": severity,
         f"{left_env.lower()}_hash": left_hash,
         f"{right_env.lower()}_hash": right_hash,
     }
@@ -810,6 +979,7 @@ def check_env_pair_drift(
             left_env=left_env,
             right_env=right_env,
             status="aligned",
+            severity="aligned",
             report=report,
             counts={f"only_in_{left_env.lower()}": 0, f"only_in_{right_env.lower()}": 0, "different": 0},
             changed_items={f"only_in_{left_env.lower()}": [], f"only_in_{right_env.lower()}": [], "different": []},
@@ -828,19 +998,23 @@ def check_env_pair_drift(
         diff=diff,
         left_hash=left_hash,
         right_hash=right_hash,
+        severity=severity,
     )
     write_text(svc_dir / "last_drift_report.md", report)
     write_text(latest_drift_hash_path, drift_hash)
 
-    if previous_drift_hash != drift_hash:
-        send_slack(summarize_drift_for_slack(service_name, left_env, right_env, diff))
+    status = "drift" if previous_drift_hash == drift_hash else "drift_changed"
+
+    if should_alert_drift(status):
+        send_slack(summarize_drift_for_slack(service_name, left_env, right_env, diff, severity))
 
     return DriftCheckResult(
         service_name=service_name,
         pair_name=pair_name,
         left_env=left_env,
         right_env=right_env,
-        status="drift" if previous_drift_hash == drift_hash else "drift_changed",
+        status=status,
+        severity=severity,
         report=report,
         counts={
             f"only_in_{left_env.lower()}": len(diff["added"]),
@@ -867,6 +1041,7 @@ def failed_drift_result(service_name: str, left_env: str, right_env: str, left_u
         left_env=left_env,
         right_env=right_env,
         status="error",
+        severity="error",
         report=str(error),
         counts={f"only_in_{left_env.lower()}": 0, f"only_in_{right_env.lower()}": 0, "different": 0},
         changed_items={f"only_in_{left_env.lower()}": [], f"only_in_{right_env.lower()}": [], "different": []},
@@ -892,6 +1067,15 @@ def status_badge_class(status: str) -> str:
     }.get(status, "info")
 
 
+def severity_badge_class(severity: str) -> str:
+    return {
+        "aligned": "ok",
+        "non_breaking": "warn",
+        "breaking": "bad",
+        "error": "bad",
+    }.get(severity, "info")
+
+
 def esc(value: str) -> str:
     return html.escape(value, quote=True)
 
@@ -905,7 +1089,10 @@ def list_to_html(items: List[str], empty_label: str = "None") -> str:
 
 def render_env_panel(result: Optional[EnvCheckResult], title: str) -> str:
     if result is None:
-        return f"<section class=\"panel\"><h3>{esc(title)}</h3><div class=\"muted\">Not configured</div></section>"
+        return (
+            f'<section class="panel env-panel" data-status="not_configured" data-env="{esc(title)}">'
+            f'<h3>{esc(title)}</h3><div class="muted">Not configured</div></section>'
+        )
 
     counts = result.counts
     added_html = list_to_html(result.changed_items.get("added", []))
@@ -913,7 +1100,7 @@ def render_env_panel(result: Optional[EnvCheckResult], title: str) -> str:
     changed_html = list_to_html(result.changed_items.get("changed", []))
 
     return f"""
-    <section class="panel">
+    <section class="panel env-panel" data-status="{esc(result.status)}" data-env="{esc(result.environment)}">
       <div class="panel-head">
         <h3>{esc(title)}</h3>
         <span class="badge {status_badge_class(result.status)}">{esc(result.status.replace('_', ' '))}</span>
@@ -921,6 +1108,8 @@ def render_env_panel(result: Optional[EnvCheckResult], title: str) -> str:
       <div class="kv"><span>URL</span><a href="{esc(result.swagger_url)}" target="_blank" rel="noreferrer">{esc(result.swagger_url)}</a></div>
       <div class="kv"><span>Hash</span><code>{esc(result.spec_hash[:12] if result.spec_hash else '')}</code></div>
       <div class="kv"><span>Summary</span><strong>{esc(result.summary)}</strong></div>
+      <div class="kv"><span>Fetched</span><span>{esc(result.fetched_at or '-')}</span></div>
+      <div class="kv"><span>Duration</span><span>{result.duration_ms} ms</span></div>
       <div class="stats">
         <div class="stat"><span>Added</span><strong>{counts.get('added', 0)}</strong></div>
         <div class="stat"><span>Removed</span><strong>{counts.get('removed', 0)}</strong></div>
@@ -948,10 +1137,13 @@ def render_drift_panel(result: DriftCheckResult) -> str:
     different_html = list_to_html(result.changed_items.get("different", []))
 
     return f"""
-    <section class="panel drift">
+    <section class="panel drift drift-panel" data-status="{esc(result.status)}" data-severity="{esc(result.severity)}">
       <div class="panel-head">
         <h3>{esc(result.pair_name)}</h3>
-        <span class="badge {status_badge_class(result.status)}">{esc(result.status.replace('_', ' '))}</span>
+        <div class="badge-row">
+          <span class="badge {status_badge_class(result.status)}">{esc(result.status.replace('_', ' '))}</span>
+          <span class="badge {severity_badge_class(result.severity)}">{esc(result.severity.replace('_', ' '))}</span>
+        </div>
       </div>
       <div class="kv"><span>{esc(result.left_env)}</span><a href="{esc(result.left_url)}" target="_blank" rel="noreferrer">{esc(result.left_url)}</a></div>
       <div class="kv"><span>{esc(result.right_env)}</span><a href="{esc(result.right_url)}" target="_blank" rel="noreferrer">{esc(result.right_url)}</a></div>
@@ -979,26 +1171,42 @@ def build_dashboard(rows: List[DashboardServiceRow], output_path: Path) -> None:
     changed_count = 0
     drift_count = 0
     error_count = 0
+    partial_failure_count = 0
 
     for row in rows:
+        row_has_error = False
+
         for env_name in ENV_ORDER:
             env_result = row.env_results.get(env_name)
             if env_result and env_result.status in {"breaking", "non_breaking", "docs_only"}:
                 changed_count += 1
             if env_result and env_result.status == "error":
                 error_count += 1
+                row_has_error = True
+
         for drift in row.drift_results:
             if drift.status in {"drift", "drift_changed"}:
                 drift_count += 1
             if drift.status == "error":
                 error_count += 1
+                row_has_error = True
+
+        if row_has_error:
+            partial_failure_count += 1
 
         env_panels = "".join(render_env_panel(row.env_results.get(env_name), env_name) for env_name in ENV_ORDER)
         drift_panels = "".join(render_drift_panel(drift) for drift in row.drift_results)
 
+        statuses = []
+        for env_name in ENV_ORDER:
+            env_result = row.env_results.get(env_name)
+            if env_result:
+                statuses.append(env_result.status)
+        data_statuses = ",".join(statuses)
+
         service_cards.append(
             f"""
-            <article class="service-card">
+            <article class="service-card service-item" data-service="{esc(row.service_name.lower())}" data-statuses="{esc(data_statuses)}">
               <div class="service-head">
                 <h2>{esc(row.service_name)}</h2>
               </div>
@@ -1007,6 +1215,15 @@ def build_dashboard(rows: List[DashboardServiceRow], output_path: Path) -> None:
             </article>
             """
         )
+
+    git_sha = os.getenv("GITHUB_SHA", "").strip()
+    git_repo = os.getenv("GITHUB_REPOSITORY", "").strip()
+    git_run_id = os.getenv("GITHUB_RUN_ID", "").strip()
+    git_server = os.getenv("GITHUB_SERVER_URL", "https://github.com").strip()
+    retention = retention_days()
+    timeout = request_timeout()
+    fail_on_errors = bool_env("FAIL_ON_SERVICE_ERRORS", False)
+    run_url = f"{git_server}/{git_repo}/actions/runs/{git_run_id}" if git_repo and git_run_id else ""
 
     html_doc = f"""
 <!doctype html>
@@ -1033,16 +1250,43 @@ def build_dashboard(rows: List[DashboardServiceRow], output_path: Path) -> None:
     a {{ color: var(--accent); text-decoration: none; }}
     a:hover {{ text-decoration: underline; }}
     .wrap {{ max-width: 1600px; margin: 0 auto; padding: 24px; }}
-    .topnav {{ display: flex; gap: 12px; margin-bottom: 18px; }}
+    .topnav {{ display: flex; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }}
     .topnav a {{ background: rgba(255,255,255,.05); border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; text-decoration: none; }}
     .hero {{ display: flex; justify-content: space-between; gap: 16px; align-items: end; margin-bottom: 24px; }}
     .hero h1 {{ margin: 0 0 6px; font-size: 32px; }}
     .muted {{ color: var(--muted); }}
-    .summary {{ display: grid; grid-template-columns: repeat(4, minmax(140px, 1fr)); gap: 12px; margin: 20px 0 28px; }}
-    .summary .card, .panel, .service-card {{ background: var(--card); border: 1px solid var(--border); border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,.18); }}
+    .summary {{ display: grid; grid-template-columns: repeat(5, minmax(140px, 1fr)); gap: 12px; margin: 20px 0 20px; }}
+    .summary .card, .panel, .service-card, .legend, .filters {{ background: var(--card); border: 1px solid var(--border); border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,.18); }}
     .summary .card {{ padding: 16px; }}
     .summary .card span {{ display: block; color: var(--muted); font-size: 13px; margin-bottom: 6px; }}
     .summary .card strong {{ font-size: 28px; }}
+    .legend, .filters {{ padding: 16px; margin-bottom: 18px; }}
+    .legend h3, .filters h3 {{ margin: 0 0 10px; font-size: 18px; }}
+    .legend-grid {{
+      display: grid;
+      grid-template-columns: repeat(2, minmax(280px, 1fr));
+      gap: 10px 16px;
+    }}
+    .legend-item {{
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+    }}
+    .legend-item p {{ margin: 8px 0 0; color: var(--muted); font-size: 14px; line-height: 1.45; }}
+    .filter-row {{
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 12px;
+    }}
+    .filter-row input, .filter-row select {{
+      width: 100%;
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+    }}
     .service-card {{ padding: 18px; margin-bottom: 18px; }}
     .service-head {{ margin-bottom: 14px; }}
     .service-head h2 {{ margin: 0; font-size: 24px; }}
@@ -1052,6 +1296,7 @@ def build_dashboard(rows: List[DashboardServiceRow], output_path: Path) -> None:
     .panel {{ padding: 16px; min-width: 0; }}
     .panel-head {{ display: flex; justify-content: space-between; gap: 10px; align-items: center; margin-bottom: 12px; }}
     .panel h3 {{ margin: 0; font-size: 18px; }}
+    .badge-row {{ display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }}
     .badge {{ display: inline-block; border-radius: 999px; padding: 6px 10px; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }}
     .badge.ok {{ background: var(--ok); }}
     .badge.warn {{ background: var(--warn); }}
@@ -1070,8 +1315,16 @@ def build_dashboard(rows: List[DashboardServiceRow], output_path: Path) -> None:
     code, pre {{ background: rgba(255,255,255,.04); border: 1px solid var(--border); border-radius: 8px; }}
     code {{ padding: 2px 6px; word-break: break-word; }}
     pre {{ white-space: pre-wrap; overflow-wrap: anywhere; padding: 12px; font-size: 12px; margin-top: 12px; }}
-    @media (max-width: 1300px) {{ .env-grid, .drift-grid {{ grid-template-columns: 1fr; }} .summary {{ grid-template-columns: repeat(2, minmax(140px, 1fr)); }} }}
-    @media (max-width: 640px) {{ .hero {{ display: block; }} .summary {{ grid-template-columns: 1fr; }} }}
+    .hidden {{ display: none !important; }}
+    @media (max-width: 1300px) {{
+      .env-grid, .drift-grid, .filter-row {{ grid-template-columns: 1fr; }}
+      .summary {{ grid-template-columns: repeat(2, minmax(140px, 1fr)); }}
+      .legend-grid {{ grid-template-columns: 1fr; }}
+    }}
+    @media (max-width: 640px) {{
+      .hero {{ display: block; }}
+      .summary {{ grid-template-columns: 1fr; }}
+    }}
   </style>
 </head>
 <body>
@@ -1094,10 +1347,108 @@ def build_dashboard(rows: List[DashboardServiceRow], output_path: Path) -> None:
       <div class="card"><span>Env updates</span><strong>{changed_count}</strong></div>
       <div class="card"><span>Drifts</span><strong>{drift_count}</strong></div>
       <div class="card"><span>Errors</span><strong>{error_count}</strong></div>
+      <div class="card"><span>Partial failures</span><strong>{partial_failure_count}</strong></div>
     </section>
 
-    {''.join(service_cards)}
+    <section class="legend">
+      <h3>Classification guide</h3>
+      <div class="legend-grid">
+        <div class="legend-item">
+          <span class="badge ok">no change</span>
+          <p>The fetched spec matched the previous snapshot exactly after normalization.</p>
+        </div>
+        <div class="legend-item">
+          <span class="badge info">docs only</span>
+          <p>The file changed, but only documentation or metadata changed. No contract-level API change was detected.</p>
+        </div>
+        <div class="legend-item">
+          <span class="badge warn">non breaking</span>
+          <p>The API contract changed, but the change appears additive or otherwise backward compatible.</p>
+        </div>
+        <div class="legend-item">
+          <span class="badge bad">breaking</span>
+          <p>The API contract changed in a way that may break existing consumers, such as removed operations, removed response shapes, stricter input requirements, or incompatible schema changes.</p>
+        </div>
+        <div class="legend-item">
+          <span class="badge ok">aligned</span>
+          <p>Compared environments are contract-aligned after metadata-light normalization.</p>
+        </div>
+        <div class="legend-item">
+          <span class="badge warn">drift severity</span>
+          <p>Cross-environment drift is labeled as non-breaking or breaking using the same contract-focused comparison model.</p>
+        </div>
+      </div>
+      <p class="muted" style="margin-top: 12px;">
+        Metadata such as descriptions, summaries, examples, tag descriptions, external docs, and similar non-contract fields are intentionally de-emphasized to reduce false positives.
+      </p>
+    </section>
+
+    <section class="filters">
+      <h3>Filters</h3>
+      <div class="filter-row">
+        <input id="serviceFilter" type="text" placeholder="Filter by service name..." />
+        <select id="envStatusFilter">
+          <option value="">All env statuses</option>
+          <option value="breaking">breaking</option>
+          <option value="non_breaking">non_breaking</option>
+          <option value="docs_only">docs_only</option>
+          <option value="no_change">no_change</option>
+          <option value="baseline">baseline</option>
+          <option value="error">error</option>
+        </select>
+        <select id="driftSeverityFilter">
+          <option value="">All drift severities</option>
+          <option value="breaking">breaking</option>
+          <option value="non_breaking">non_breaking</option>
+          <option value="aligned">aligned</option>
+          <option value="error">error</option>
+        </select>
+      </div>
+      <p class="muted" style="margin-top: 10px;">
+        Commit: {esc(git_sha[:12] if git_sha else '-')} |
+        Retention: {retention} days |
+        Timeout: {timeout}s |
+        Fail on service errors: {str(fail_on_errors).lower()} |
+        Run: {f'<a href="{esc(run_url)}" target="_blank" rel="noreferrer">{esc(git_run_id)}</a>' if run_url else '-'}
+      </p>
+    </section>
+
+    <div id="services">
+      {''.join(service_cards)}
+    </div>
   </div>
+
+  <script>
+    (function() {{
+      const serviceFilter = document.getElementById('serviceFilter');
+      const envStatusFilter = document.getElementById('envStatusFilter');
+      const driftSeverityFilter = document.getElementById('driftSeverityFilter');
+      const cards = Array.from(document.querySelectorAll('.service-item'));
+
+      function applyFilters() {{
+        const serviceNeedle = (serviceFilter.value || '').trim().toLowerCase();
+        const envNeedle = envStatusFilter.value || '';
+        const driftNeedle = driftSeverityFilter.value || '';
+
+        cards.forEach(card => {{
+          const serviceName = card.dataset.service || '';
+          const envPanels = Array.from(card.querySelectorAll('.env-panel'));
+          const driftPanels = Array.from(card.querySelectorAll('.drift-panel'));
+
+          const matchesService = !serviceNeedle || serviceName.includes(serviceNeedle);
+          const matchesEnv = !envNeedle || envPanels.some(p => (p.dataset.status || '') === envNeedle);
+          const matchesDrift = !driftNeedle || driftPanels.some(p => (p.dataset.severity || '') === driftNeedle);
+
+          card.classList.toggle('hidden', !(matchesService && matchesEnv && matchesDrift));
+        }});
+      }}
+
+      serviceFilter.addEventListener('input', applyFilters);
+      envStatusFilter.addEventListener('change', applyFilters);
+      driftSeverityFilter.addEventListener('change', applyFilters);
+      applyFilters();
+    }})();
+  </script>
 </body>
 </html>
     """.strip()
@@ -1119,7 +1470,7 @@ def retention_days() -> int:
 
 
 def prune_old_snapshots(state_dir: Path) -> List[str]:
-    cutoff = datetime.now(timezone.utc) - timedelta(days=retention_days())
+    cutoff = now_utc() - timedelta(days=retention_days())
     removed: List[str] = []
 
     for child in state_dir.iterdir() if state_dir.exists() else []:
@@ -1186,6 +1537,7 @@ def run_once() -> int:
         grouped.setdefault(svc.service_name, {})[svc.environment] = svc
 
     exit_code = 0
+    fail_on_service_errors = bool_env("FAIL_ON_SERVICE_ERRORS", False)
     dashboard_rows: List[DashboardServiceRow] = []
     print(f"Loaded {len(resolved)} service-environment specs from DIRECT_SPECS_JSON")
 
@@ -1194,19 +1546,33 @@ def run_once() -> int:
         env_results: Dict[str, Optional[EnvCheckResult]] = {env: None for env in ENV_ORDER}
         drift_results: List[DriftCheckResult] = []
 
-        for env_name in ENV_ORDER:
-            svc = envs.get(env_name)
-            if svc is None:
-                continue
-            try:
-                result = check_service_change(svc, state_dir)
-                env_results[env_name] = result
-                print(result.report.strip())
-                print("-" * 80)
-            except Exception as exc:
-                exit_code = 1
-                env_results[env_name] = failed_env_result(svc, exc)
-                print(f"ERROR while checking {svc.key}: {exc}", file=sys.stderr)
+        futures = {}
+        max_workers = max(1, min(3, sum(1 for env in ENV_ORDER if envs.get(env) is not None)))
+
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            for env_name in ENV_ORDER:
+                svc = envs.get(env_name)
+                if svc is None:
+                    continue
+                futures[executor.submit(check_service_change, svc, state_dir)] = (env_name, svc)
+
+            for future in as_completed(futures):
+                env_name, svc = futures[future]
+                try:
+                    result = future.result()
+                    env_results[env_name] = result
+                    print(result.report.strip())
+                    print("-" * 80)
+                except Exception as exc:
+                    if fail_on_service_errors:
+                        exit_code = 1
+                    env_results[env_name] = failed_env_result(svc, exc)
+                    print(f"ERROR while checking {svc.key}: {exc}", file=sys.stderr)
+                    if os.getenv("SLACK_WEBHOOK_URL", "").strip():
+                        try:
+                            send_slack(f"Swagger fetch failed in *{svc.key}*: {exc}")
+                        except Exception as slack_exc:
+                            print(f"ERROR while sending Slack failure notification for {svc.key}: {slack_exc}", file=sys.stderr)
 
         for left_env, right_env in DRIFT_PAIRS:
             left_svc = envs.get(left_env)
@@ -1235,7 +1601,8 @@ def run_once() -> int:
                     print(drift.report.strip())
                     print("=" * 80)
                 except Exception as exc:
-                    exit_code = 1
+                    if fail_on_service_errors:
+                        exit_code = 1
                     drift = failed_drift_result(service_name, left_env, right_env, left_svc.swagger_url, right_svc.swagger_url, exc)
                     drift_results.append(drift)
                     print(f"ERROR while checking {left_env} vs {right_env} drift for {service_name}: {exc}", file=sys.stderr)

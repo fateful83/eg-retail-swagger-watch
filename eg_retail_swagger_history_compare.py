@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any, Dict, List
 
 HTTP_METHODS = {"get", "post", "put", "patch", "delete", "head", "options", "trace"}
+IGNORED_KEYS = {"description", "summary", "externalDocs", "example", "examples", "title", "servers", "operationId", "tags"}
 
 
 @dataclass
@@ -33,7 +34,12 @@ def sha256(text: str) -> str:
 
 def normalize(obj: Any) -> Any:
     if isinstance(obj, dict):
-        return {str(k): normalize(v) for k, v in sorted(obj.items(), key=lambda kv: str(kv[0]))}
+        out = {}
+        for k, v in sorted(obj.items(), key=lambda kv: str(kv[0])):
+            if str(k) in IGNORED_KEYS:
+                continue
+            out[str(k)] = normalize(v)
+        return out
     if isinstance(obj, list):
         return [normalize(v) for v in obj]
     return obj
@@ -44,15 +50,12 @@ def canonical_json(obj: Any) -> str:
 
 
 def schema_signature(schema: Any) -> str:
-    if schema is None:
-        return ""
-    return sha256(canonical_json(schema))[:12]
+    return sha256(canonical_json(schema))[:12] if schema is not None else ""
 
 
 def flatten_paths(spec: Dict[str, Any]) -> Dict[str, Dict[str, Any]]:
-    paths = spec.get("paths", {}) or {}
     out: Dict[str, Dict[str, Any]] = {}
-    for path, methods in paths.items():
+    for path, methods in (spec.get("paths") or {}).items():
         if not isinstance(methods, dict):
             continue
         for method, op in methods.items():
@@ -65,37 +68,31 @@ def flatten_paths(spec: Dict[str, Any]) -> Dict[str, Dict[str, Any]]:
 def operation_signature(op: Dict[str, Any]) -> Dict[str, Any]:
     parameters = []
     for p in op.get("parameters", []) or []:
-        if not isinstance(p, dict):
-            continue
-        parameters.append(
-            {
+        if isinstance(p, dict):
+            parameters.append({
                 "name": p.get("name"),
                 "in": p.get("in"),
                 "required": p.get("required"),
                 "schema": schema_signature(p.get("schema")),
-            }
-        )
+            })
 
-    request_body = op.get("requestBody") or {}
-    request_content = {}
-    for content_type, body_desc in sorted((request_body.get("content") or {}).items()):
-        request_content[content_type] = schema_signature((body_desc or {}).get("schema"))
+    request_content = {
+        ct: schema_signature((desc or {}).get("schema"))
+        for ct, desc in sorted(((op.get("requestBody") or {}).get("content") or {}).items())
+    }
 
     responses = {}
     for status, resp in sorted((op.get("responses") or {}).items(), key=lambda x: str(x[0])):
-        content = {}
-        for content_type, body_desc in sorted(((resp or {}).get("content") or {}).items()):
-            content[content_type] = schema_signature((body_desc or {}).get("schema"))
-        responses[str(status)] = content
+        responses[str(status)] = {
+            ct: schema_signature((desc or {}).get("schema"))
+            for ct, desc in sorted(((resp or {}).get("content") or {}).items())
+        }
 
     return {
-        "summary": op.get("summary"),
-        "operationId": op.get("operationId"),
-        "tags": op.get("tags") or [],
-        "parameters": parameters,
+        "parameters": sorted(parameters, key=lambda x: (str(x.get("in")), str(x.get("name")))),
         "requestBody": request_content,
         "responses": responses,
-        "security": op.get("security") or [],
+        "security": normalize(op.get("security") or []),
         "deprecated": bool(op.get("deprecated", False)),
     }
 
@@ -105,48 +102,48 @@ def diff_specs(old: Dict[str, Any], new: Dict[str, Any]) -> Dict[str, List[str]]
     new_ops = flatten_paths(new)
     old_keys = set(old_ops)
     new_keys = set(new_ops)
+    return {
+        "added": sorted(new_keys - old_keys),
+        "removed": sorted(old_keys - new_keys),
+        "changed": [k for k in sorted(old_keys & new_keys) if operation_signature(old_ops[k]) != operation_signature(new_ops[k])],
+    }
 
-    added = sorted(new_keys - old_keys)
-    removed = sorted(old_keys - new_keys)
-    changed = [k for k in sorted(old_keys & new_keys) if operation_signature(old_ops[k]) != operation_signature(new_ops[k])]
 
-    return {"added": added, "removed": removed, "changed": changed}
+def classify_diff(diff: Dict[str, List[str]]) -> str:
+    if not diff["added"] and not diff["removed"] and not diff["changed"]:
+        return "no_change"
+    if diff["removed"]:
+        return "breaking"
+    return "non_breaking"
 
 
 def load_snapshots(state_dir: Path, service_name: str, environment: str) -> List[SnapshotInfo]:
-    ep_dir = endpoint_dir(state_dir, service_name, environment)
-    snapshots_dir = ep_dir / "snapshots"
+    snapshots_dir = endpoint_dir(state_dir, service_name, environment) / "snapshots"
     if not snapshots_dir.exists():
         raise FileNotFoundError(f"No snapshots directory found: {snapshots_dir}")
 
     found: Dict[str, Dict[str, Path]] = {}
     for p in snapshots_dir.iterdir():
-        name = p.name
-        if name.endswith(".normalized.json"):
-            ts = name[: -len(".normalized.json")]
-            found.setdefault(ts, {})["normalized"] = p
-        elif name.endswith(".sha256"):
-            ts = name[: -len(".sha256")]
-            found.setdefault(ts, {})["hash"] = p
+        if p.name.endswith(".normalized.json"):
+            found.setdefault(p.name[:-16], {})["normalized"] = p
+        elif p.name.endswith(".sha256"):
+            found.setdefault(p.name[:-7], {})["hash"] = p
 
-    snapshots: List[SnapshotInfo] = []
-    for ts in sorted(found):
-        parts = found[ts]
-        if "normalized" in parts and "hash" in parts:
-            snapshots.append(SnapshotInfo(timestamp=ts, normalized_path=parts["normalized"], hash_path=parts["hash"]))
-
+    snapshots = [
+        SnapshotInfo(timestamp=ts, normalized_path=parts["normalized"], hash_path=parts["hash"])
+        for ts, parts in sorted(found.items())
+        if "normalized" in parts and "hash" in parts
+    ]
     if not snapshots:
         raise FileNotFoundError(f"No usable snapshots found in {snapshots_dir}")
     return snapshots
 
 
 def resolve_snapshot(snapshots: List[SnapshotInfo], selector: str) -> SnapshotInfo:
-    selector = selector.strip()
     if selector == "earliest":
         return snapshots[0]
     if selector == "latest":
         return snapshots[-1]
-
     matches = [s for s in snapshots if s.timestamp.startswith(selector)]
     if len(matches) == 1:
         return matches[0]
@@ -155,18 +152,14 @@ def resolve_snapshot(snapshots: List[SnapshotInfo], selector: str) -> SnapshotIn
     raise ValueError(f"Ambiguous selector {selector}; matches: {', '.join(s.timestamp for s in matches)}")
 
 
-def load_spec(path: Path) -> Dict[str, Any]:
-    return json.loads(path.read_text(encoding="utf-8"))
-
-
 def build_report(service: str, env: str, left: SnapshotInfo, right: SnapshotInfo, diff: Dict[str, List[str]]) -> str:
+    classification = classify_diff(diff)
     lines = [
         f"# Historical Swagger compare: {service} [{env}]",
         "",
         f"- From: `{left.timestamp}`",
         f"- To: `{right.timestamp}`",
-        f"- From snapshot: `{left.normalized_path.name}`",
-        f"- To snapshot: `{right.normalized_path.name}`",
+        f"- Classification: `{classification}`",
         "",
         "## Summary",
         f"- Added operations: {len(diff['added'])}",
@@ -183,9 +176,7 @@ def build_report(service: str, env: str, left: SnapshotInfo, right: SnapshotInfo
 
 
 def cmd_list(args: argparse.Namespace) -> int:
-    snapshots = load_snapshots(Path(args.state_dir), args.service, args.env.upper())
-    print(f"Snapshots for {args.service} [{args.env.upper()}]")
-    for s in snapshots:
+    for s in load_snapshots(Path(args.state_dir), args.service, args.env.upper()):
         print(s.timestamp)
     return 0
 
@@ -197,31 +188,25 @@ def cmd_compare(args: argparse.Namespace) -> int:
     left = resolve_snapshot(snapshots, args.from_selector)
     right = resolve_snapshot(snapshots, args.to_selector)
 
-    left_spec = load_spec(left.normalized_path)
-    right_spec = load_spec(right.normalized_path)
+    left_spec = json.loads(left.normalized_path.read_text(encoding="utf-8"))
+    right_spec = json.loads(right.normalized_path.read_text(encoding="utf-8"))
     diff = diff_specs(left_spec, right_spec)
     report = build_report(args.service, env, left, right, diff)
 
     reports_dir = state_dir / "history_reports"
     reports_dir.mkdir(parents=True, exist_ok=True)
     base = f"{safe_name(args.service)}_{env.lower()}_{left.timestamp}_vs_{right.timestamp}"
-    md_path = reports_dir / f"{base}.md"
-    json_path = reports_dir / f"{base}.json"
-
-    payload = {
+    (reports_dir / f"{base}.md").write_text(report, encoding="utf-8")
+    (reports_dir / f"{base}.json").write_text(json.dumps({
         "service_name": args.service,
         "environment": env,
         "from": left.timestamp,
         "to": right.timestamp,
+        "classification": classify_diff(diff),
         "diff": diff,
-    }
-
-    md_path.write_text(report, encoding="utf-8")
-    json_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    }, ensure_ascii=False, indent=2), encoding="utf-8")
 
     print(report)
-    print(f"Markdown report written to: {md_path}")
-    print(f"JSON report written to: {json_path}")
     return 0
 
 
@@ -242,13 +227,11 @@ def build_parser() -> argparse.ArgumentParser:
     p_compare.add_argument("--from", dest="from_selector", required=True)
     p_compare.add_argument("--to", dest="to_selector", required=True)
     p_compare.set_defaults(func=cmd_compare)
-
     return parser
 
 
 def main() -> int:
-    parser = build_parser()
-    args = parser.parse_args()
+    args = build_parser().parse_args()
     return args.func(args)
 
 
