@@ -12,12 +12,16 @@
       --text: #eef4ff;
       --border: #263052;
       --accent: #7cc4ff;
+      --good: #153a2a;
+      --warn: #4a3310;
+      --bad: #4c1720;
+      --info: #17324c;
     }
     * { box-sizing: border-box; }
     body { margin: 0; font-family: Inter, Segoe UI, Arial, sans-serif; background: var(--bg); color: var(--text); }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
-    .wrap { max-width: 1400px; margin: 0 auto; padding: 24px; }
+    .wrap { max-width: 1500px; margin: 0 auto; padding: 24px; }
     .topnav { display: flex; gap: 12px; margin-bottom: 18px; }
     .topnav a { background: rgba(255,255,255,.05); border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; }
     .hero { display: flex; justify-content: space-between; gap: 16px; align-items: end; margin-bottom: 24px; }
@@ -33,7 +37,7 @@
     }
     .selectors {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr auto;
+      grid-template-columns: 2fr 1fr 1fr auto auto;
       gap: 12px;
       align-items: end;
     }
@@ -74,8 +78,108 @@
       padding: 2px 6px;
       word-break: break-word;
     }
-    @media (max-width: 900px) {
-      .selectors, .stats { grid-template-columns: 1fr; }
+    .result-block { margin-top: 16px; }
+    .timeline-day {
+      margin-top: 18px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(255,255,255,.02);
+    }
+    .timeline-day summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 14px 16px;
+      background: rgba(255,255,255,.03);
+      border-bottom: 1px solid var(--border);
+    }
+    .timeline-day summary::-webkit-details-marker { display: none; }
+    .day-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .day-title {
+      font-weight: 700;
+      font-size: 16px;
+    }
+    .day-meta {
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .day-body {
+      padding: 16px;
+    }
+    .timeline-entry {
+      background: rgba(255,255,255,.025);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      margin-top: 14px;
+    }
+    .timeline-entry:first-child {
+      margin-top: 0;
+    }
+    .timeline-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .timeline-title {
+      font-weight: 700;
+    }
+    .badge {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .badge.good { background: var(--good); }
+    .badge.warn { background: var(--warn); }
+    .badge.bad { background: var(--bad); }
+    .badge.info { background: var(--info); }
+    .mini-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin: 10px 0 12px;
+    }
+    .mini-stat {
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px;
+    }
+    .mini-stat span { display: block; color: var(--muted); font-size: 12px; margin-bottom: 4px; }
+    .mini-stat strong { font-size: 18px; }
+    .columns {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .column {
+      background: rgba(255,255,255,.02);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      min-width: 0;
+    }
+    .column h4 { margin: 0 0 10px; font-size: 14px; }
+    .summary-note {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    @media (max-width: 1100px) {
+      .selectors { grid-template-columns: 1fr; }
+      .stats, .mini-stats, .columns { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -89,7 +193,7 @@
     <section class="hero">
       <div>
         <h1>EG Retail Swagger History</h1>
-        <div class="muted">Choose any two saved snapshots and compare them.</div>
+        <div class="muted">Compare two snapshots or view the full change timeline across a selected range.</div>
       </div>
     </section>
 
@@ -109,7 +213,11 @@
         </div>
         <div>
           <label>&nbsp;</label>
-          <button id="compareBtn" type="button">Compare</button>
+          <button id="compareBtn" type="button">Net diff</button>
+        </div>
+        <div>
+          <label>&nbsp;</label>
+          <button id="timelineBtn" type="button">Change timeline</button>
         </div>
       </div>
 
@@ -119,8 +227,8 @@
         <div class="stat"><span>Latest</span><strong id="latestValue">-</strong></div>
       </div>
 
-      <h3 class="section-title">Compare result</h3>
-      <div id="result" class="muted">Pick a service and two snapshots, then click Compare.</div>
+      <h3 class="section-title">Result</h3>
+      <div id="result" class="muted">Pick a service and snapshot range, then choose Net diff or Change timeline.</div>
     </section>
   </div>
 
@@ -141,23 +249,47 @@
       }
     }
 
-    function renderDiff(diff) {
-      const section = (title, items) => {
-        const list = items.length
-          ? `<ul>${items.map(x => `<li><code>${x}</code></li>`).join('')}</ul>`
-          : `<div class="muted">None</div>`;
-        return `<h4>${title}</h4>${list}`;
-      };
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+    }
+
+    function renderList(items) {
+      if (!items.length) return '<div class="muted">None</div>';
+      return `<ul>${items.map(x => `<li><code>${escapeHtml(x)}</code></li>`).join('')}</ul>`;
+    }
+
+    function renderNetDiff(diff, title) {
       return `
-        <div class="stats">
-          <div class="stat"><span>Added</span><strong>${diff.added.length}</strong></div>
-          <div class="stat"><span>Removed</span><strong>${diff.removed.length}</strong></div>
-          <div class="stat"><span>Changed</span><strong>${diff.changed.length}</strong></div>
+        <div class="result-block">
+          <div class="muted">${escapeHtml(title)}</div>
+          <div class="stats">
+            <div class="stat"><span>Added</span><strong>${diff.added.length}</strong></div>
+            <div class="stat"><span>Removed</span><strong>${diff.removed.length}</strong></div>
+            <div class="stat"><span>Changed</span><strong>${diff.changed.length}</strong></div>
+          </div>
+          <h4 class="section-title">Added</h4>
+          ${renderList(diff.added)}
+          <h4 class="section-title">Removed</h4>
+          ${renderList(diff.removed)}
+          <h4 class="section-title">Changed</h4>
+          ${renderList(diff.changed)}
         </div>
-        ${section('Added', diff.added)}
-        ${section('Removed', diff.removed)}
-        ${section('Changed', diff.changed)}
       `;
+    }
+
+    function classifyDiff(diff) {
+      if (!diff.added.length && !diff.removed.length && !diff.changed.length) {
+        return { name: 'no change', cls: 'good' };
+      }
+      if (diff.removed.length > 0) {
+        return { name: 'breaking', cls: 'bad' };
+      }
+      return { name: 'changed', cls: 'warn' };
     }
 
     function compareSpecs(oldSpec, newSpec) {
@@ -188,6 +320,86 @@
       return { added, removed, changed };
     }
 
+    async function loadSnapshot(directoryName, timestamp) {
+      const url = `${directoryName}/snapshots/${timestamp}.normalized.json`;
+      const res = await fetch(url, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`Could not load snapshot ${timestamp}`);
+      return res.json();
+    }
+
+    function makeTimelineEntry(fromTs, toTs, diff) {
+      const klass = classifyDiff(diff);
+      return `
+        <div class="timeline-entry">
+          <div class="timeline-head">
+            <div class="timeline-title">${escapeHtml(fromTs)} → ${escapeHtml(toTs)}</div>
+            <span class="badge ${klass.cls}">${escapeHtml(klass.name)}</span>
+          </div>
+          <div class="mini-stats">
+            <div class="mini-stat"><span>Added</span><strong>${diff.added.length}</strong></div>
+            <div class="mini-stat"><span>Removed</span><strong>${diff.removed.length}</strong></div>
+            <div class="mini-stat"><span>Changed</span><strong>${diff.changed.length}</strong></div>
+          </div>
+          <div class="columns">
+            <div class="column">
+              <h4>Added</h4>
+              ${renderList(diff.added)}
+            </div>
+            <div class="column">
+              <h4>Removed</h4>
+              ${renderList(diff.removed)}
+            </div>
+            <div class="column">
+              <h4>Changed</h4>
+              ${renderList(diff.changed)}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function groupTimelineEntries(entries) {
+      const groups = new Map();
+
+      for (const entry of entries) {
+        const day = entry.from.slice(0, 10);
+        if (!groups.has(day)) {
+          groups.set(day, {
+            day,
+            entries: [],
+            totalAdded: 0,
+            totalRemoved: 0,
+            totalChanged: 0,
+          });
+        }
+        const group = groups.get(day);
+        group.entries.push(entry);
+        group.totalAdded += entry.diff.added.length;
+        group.totalRemoved += entry.diff.removed.length;
+        group.totalChanged += entry.diff.changed.length;
+      }
+
+      return [...groups.values()];
+    }
+
+    function renderGroupedTimeline(groups) {
+      return groups.map(group => `
+        <details class="timeline-day" open>
+          <summary>
+            <div class="day-head">
+              <div class="day-title">${escapeHtml(group.day)}</div>
+              <div class="day-meta">
+                ${group.entries.length} step(s) · +${group.totalAdded} / -${group.totalRemoved} / ~${group.totalChanged}
+              </div>
+            </div>
+          </summary>
+          <div class="day-body">
+            ${group.entries.map(entry => makeTimelineEntry(entry.from, entry.to, entry.diff)).join('')}
+          </div>
+        </details>
+      `).join('');
+    }
+
     async function main() {
       const data = await loadIndex();
       const services = data.services || [];
@@ -196,6 +408,7 @@
       const fromSelect = document.getElementById('fromSelect');
       const toSelect = document.getElementById('toSelect');
       const compareBtn = document.getElementById('compareBtn');
+      const timelineBtn = document.getElementById('timelineBtn');
       const result = document.getElementById('result');
 
       const countValue = document.getElementById('countValue');
@@ -205,9 +418,16 @@
       const map = new Map(services.map(s => [s.id, s]));
       fillSelect(serviceSelect, services.map(s => s.id));
 
+      function currentService() {
+        return map.get(serviceSelect.value);
+      }
+
+      function currentSnapshots() {
+        return currentService()?.snapshots || [];
+      }
+
       function refreshSnapshotSelectors() {
-        const current = map.get(serviceSelect.value);
-        const snaps = (current?.snapshots || []).map(s => s.timestamp);
+        const snaps = currentSnapshots().map(s => s.timestamp);
 
         fillSelect(fromSelect, snaps);
         fillSelect(toSelect, snaps);
@@ -225,51 +445,133 @@
         }
       }
 
-      serviceSelect.addEventListener('change', refreshSnapshotSelectors);
-      refreshSnapshotSelectors();
-
-      compareBtn.addEventListener('click', async () => {
-        const current = map.get(serviceSelect.value);
-        if (!current) return;
-
+      function selectedRangeIndices() {
+        const snaps = currentSnapshots();
         const fromTs = fromSelect.value;
         const toTs = toSelect.value;
+        const fromIdx = snaps.findIndex(s => s.timestamp === fromTs);
+        const toIdx = snaps.findIndex(s => s.timestamp === toTs);
+        return { snaps, fromIdx, toIdx };
+      }
 
-        if (fromTs === toTs) {
+      async function runNetDiff() {
+        const current = currentService();
+        if (!current) return;
+
+        const { snaps, fromIdx, toIdx } = selectedRangeIndices();
+
+        if (fromIdx < 0 || toIdx < 0) {
+          result.innerHTML = '<div class="muted">Invalid snapshot selection.</div>';
+          return;
+        }
+        if (fromIdx === toIdx) {
           result.innerHTML = '<div class="muted">Choose two different snapshots.</div>';
           return;
         }
+        if (fromIdx > toIdx) {
+          result.innerHTML = '<div class="muted">From must be earlier than To.</div>';
+          return;
+        }
 
-        const dirName = current.directory_name;
-        const fromUrl = `${dirName}/snapshots/${fromTs}.normalized.json`;
-        const toUrl = `${dirName}/snapshots/${toTs}.normalized.json`;
+        const fromTs = snaps[fromIdx].timestamp;
+        const toTs = snaps[toIdx].timestamp;
 
         try {
-          const [aRes, bRes] = await Promise.all([
-            fetch(fromUrl, { cache: 'no-store' }),
-            fetch(toUrl, { cache: 'no-store' }),
+          const [aSpec, bSpec] = await Promise.all([
+            loadSnapshot(current.directory_name, fromTs),
+            loadSnapshot(current.directory_name, toTs),
           ]);
+          const diff = compareSpecs(aSpec, bSpec);
+          result.innerHTML = renderNetDiff(diff, `${fromTs} → ${toTs}`);
+        } catch (err) {
+          result.innerHTML = `<div class="muted">Net diff failed: ${escapeHtml(err.message)}</div>`;
+        }
+      }
 
-          if (!aRes.ok || !bRes.ok) {
-            result.innerHTML = '<div class="muted">Could not load one of the selected snapshots.</div>';
+      async function runTimeline() {
+        const current = currentService();
+        if (!current) return;
+
+        const { snaps, fromIdx, toIdx } = selectedRangeIndices();
+
+        if (fromIdx < 0 || toIdx < 0) {
+          result.innerHTML = '<div class="muted">Invalid snapshot selection.</div>';
+          return;
+        }
+        if (fromIdx === toIdx) {
+          result.innerHTML = '<div class="muted">Choose two different snapshots.</div>';
+          return;
+        }
+        if (fromIdx > toIdx) {
+          result.innerHTML = '<div class="muted">From must be earlier than To.</div>';
+          return;
+        }
+
+        const selected = snaps.slice(fromIdx, toIdx + 1);
+
+        try {
+          const specs = await Promise.all(
+            selected.map(s => loadSnapshot(current.directory_name, s.timestamp))
+          );
+
+          const entries = [];
+          let totalAdded = 0;
+          let totalRemoved = 0;
+          let totalChanged = 0;
+
+          for (let i = 0; i < selected.length - 1; i++) {
+            const left = selected[i];
+            const right = selected[i + 1];
+            const diff = compareSpecs(specs[i], specs[i + 1]);
+
+            totalAdded += diff.added.length;
+            totalRemoved += diff.removed.length;
+            totalChanged += diff.changed.length;
+
+            if (diff.added.length || diff.removed.length || diff.changed.length) {
+              entries.push({
+                from: left.timestamp,
+                to: right.timestamp,
+                diff,
+              });
+            }
+          }
+
+          const header = `
+            <div class="result-block">
+              <div class="muted">${escapeHtml(selected[0].timestamp)} → ${escapeHtml(selected[selected.length - 1].timestamp)}</div>
+              <div class="stats">
+                <div class="stat"><span>Total added events</span><strong>${totalAdded}</strong></div>
+                <div class="stat"><span>Total removed events</span><strong>${totalRemoved}</strong></div>
+                <div class="stat"><span>Total changed events</span><strong>${totalChanged}</strong></div>
+              </div>
+              <div class="summary-note">
+                This timeline shows every intermediate snapshot-to-snapshot change in the selected range, grouped by day.
+              </div>
+            </div>
+          `;
+
+          if (!entries.length) {
+            result.innerHTML = header + '<div class="muted">No step-by-step changes were detected across the selected range.</div>';
             return;
           }
 
-          const [aSpec, bSpec] = await Promise.all([aRes.json(), bRes.json()]);
-          const diff = compareSpecs(aSpec, bSpec);
-
-          result.innerHTML = `
-            <div class="muted">${fromTs} → ${toTs}</div>
-            ${renderDiff(diff)}
-          `;
+          const groups = groupTimelineEntries(entries);
+          result.innerHTML = header + renderGroupedTimeline(groups);
         } catch (err) {
-          result.innerHTML = `<div class="muted">Compare failed: ${err.message}</div>`;
+          result.innerHTML = `<div class="muted">Timeline failed: ${escapeHtml(err.message)}</div>`;
         }
-      });
+      }
+
+      serviceSelect.addEventListener('change', refreshSnapshotSelectors);
+      refreshSnapshotSelectors();
+
+      compareBtn.addEventListener('click', runNetDiff);
+      timelineBtn.addEventListener('click', runTimeline);
     }
 
     main().catch(err => {
-      document.getElementById('result').innerHTML = `<div class="muted">Initialization failed: ${err.message}</div>`;
+      document.getElementById('result').innerHTML = `<div class="muted">Initialization failed: ${escapeHtml(err.message)}</div>`;
     });
   </script>
 </body>

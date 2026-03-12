@@ -1,0 +1,11 @@
+{
+  "service_name": "ItemService",
+  "environment": "DEV",
+  "from": "20260312T063749Z",
+  "to": "20260312T065229Z",
+  "diff": {
+    "added": [],
+    "removed": [],
+    "changed": []
+  }
+}
