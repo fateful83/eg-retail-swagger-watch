@@ -1,0 +1,23 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Promotion Service",
+    "description": "# Promotion\r\n\r\nThis documentation describes the contract used in promotion integration.\r\n\r\n# Integration\r\n\r\nSee [general docs](https://docs.egretail.cloud/) for more information how to integrate with EG Cloud solutions.\r\n\r\nImport and export documentation can be found in the drop-down menu in the top right of this page\r\n\r\n## Health check\r\n\r\n[Click](/hc) to see health check status.\r\n",
+    "version": "v1"
+  },
+  "paths": { },
+  "components": {
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Enter the bearer token below",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}
