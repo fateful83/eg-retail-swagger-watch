@@ -256,7 +256,6 @@ def build_history_page(state_dir: Path) -> Path:
     history_index_path = state_dir / "history_index.json"
     write_text(history_index_path, json.dumps(history_index, ensure_ascii=False, indent=2))
 
-    # Pre-generate quick compare reports
     for history in histories:
         snaps = history.snapshots
         if len(snaps) >= 2:
@@ -345,12 +344,48 @@ def build_history_page(state_dir: Path) -> Path:
       word-break: break-word;
     }
     .result-block { margin-top: 16px; }
+    .timeline-day {
+      margin-top: 18px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(255,255,255,.02);
+    }
+    .timeline-day summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 14px 16px;
+      background: rgba(255,255,255,.03);
+      border-bottom: 1px solid var(--border);
+    }
+    .timeline-day summary::-webkit-details-marker { display: none; }
+    .day-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .day-title {
+      font-weight: 700;
+      font-size: 16px;
+    }
+    .day-meta {
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .day-body {
+      padding: 16px;
+    }
     .timeline-entry {
       background: rgba(255,255,255,.025);
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 14px;
       margin-top: 14px;
+    }
+    .timeline-entry:first-child {
+      margin-top: 0;
     }
     .timeline-head {
       display: flex;
@@ -588,6 +623,48 @@ def build_history_page(state_dir: Path) -> Path:
       `;
     }
 
+    function groupTimelineEntries(entries) {
+      const groups = new Map();
+
+      for (const entry of entries) {
+        const day = entry.from.slice(0, 10);
+        if (!groups.has(day)) {
+          groups.set(day, {
+            day,
+            entries: [],
+            totalAdded: 0,
+            totalRemoved: 0,
+            totalChanged: 0,
+          });
+        }
+        const group = groups.get(day);
+        group.entries.push(entry);
+        group.totalAdded += entry.diff.added.length;
+        group.totalRemoved += entry.diff.removed.length;
+        group.totalChanged += entry.diff.changed.length;
+      }
+
+      return [...groups.values()];
+    }
+
+    function renderGroupedTimeline(groups) {
+      return groups.map(group => `
+        <details class="timeline-day" open>
+          <summary>
+            <div class="day-head">
+              <div class="day-title">${escapeHtml(group.day)}</div>
+              <div class="day-meta">
+                ${group.entries.length} step(s) · +${group.totalAdded} / -${group.totalRemoved} / ~${group.totalChanged}
+              </div>
+            </div>
+          </summary>
+          <div class="day-body">
+            ${group.entries.map(entry => makeTimelineEntry(entry.from, entry.to, entry.diff)).join('')}
+          </div>
+        </details>
+      `).join('');
+    }
+
     async function main() {
       const data = await loadIndex();
       const services = data.services || [];
@@ -717,7 +794,11 @@ def build_history_page(state_dir: Path) -> Path:
             totalChanged += diff.changed.length;
 
             if (diff.added.length || diff.removed.length || diff.changed.length) {
-              entries.push(makeTimelineEntry(left.timestamp, right.timestamp, diff));
+              entries.push({
+                from: left.timestamp,
+                to: right.timestamp,
+                diff,
+              });
             }
           }
 
@@ -730,7 +811,7 @@ def build_history_page(state_dir: Path) -> Path:
                 <div class="stat"><span>Total changed events</span><strong>${totalChanged}</strong></div>
               </div>
               <div class="summary-note">
-                This timeline shows every intermediate snapshot-to-snapshot change in the selected range, not just the net diff.
+                This timeline shows every intermediate snapshot-to-snapshot change in the selected range, grouped by day.
               </div>
             </div>
           `;
@@ -740,7 +821,8 @@ def build_history_page(state_dir: Path) -> Path:
             return;
           }
 
-          result.innerHTML = header + entries.join('');
+          const groups = groupTimelineEntries(entries);
+          result.innerHTML = header + renderGroupedTimeline(groups);
         } catch (err) {
           result.innerHTML = `<div class="muted">Timeline failed: ${escapeHtml(err.message)}</div>`;
         }
