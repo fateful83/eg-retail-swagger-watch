@@ -1,10 +1,10 @@
 # DEV vs TEST drift detected: ItemService
 
-- Time: 2026-03-31T18:41:36Z
+- Time: 2026-04-01T01:13:06Z
 - Severity: breaking
 - DEV Swagger URL: https://itemservice.egretail-dev.cloud/swagger/v1/swagger.json
 - TEST Swagger URL: https://itemservice.egretail-test.cloud/swagger/v1/swagger.json
-- DEV hash: `f9c7e9608fc43adbe29e64dee2db20c086e35e6d61a6d3c1b58642916401afda`
+- DEV hash: `50bc90a5bcd1e2238d8b115b09ce00d8a4e249775434ae69c64db30c1316987f`
 - TEST hash: `535f35de4d7e6bbf770d58899926334488040affb37091390f2fc678f814b74f`
 
 ## Summary
