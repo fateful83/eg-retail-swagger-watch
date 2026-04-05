@@ -1,10 +1,10 @@
 # Documentation-only change detected: CustomerOrderV2 [DEV]
 
-- Time: 2026-04-05T06:50:30Z
-- Fetch completed at: 2026-04-05T06:50:30Z
-- Fetch duration ms: 1426
+- Time: 2026-04-05T12:26:54Z
+- Fetch completed at: 2026-04-05T12:26:54Z
+- Fetch duration ms: 1457
 - Swagger URL: https://customerorderv2service.egretail-dev.cloud/swagger/v1/swagger.json
-- Previous hash: `aa93966c472943913ad72d1e636f1cceced0cfc28dbf3a939b40c080562ee2c4`
-- Current hash: `a090db3625139d75142661f3a4a24b2027b4e49edf5faaef6b6de1b21b4b366d`
+- Previous hash: `a090db3625139d75142661f3a4a24b2027b4e49edf5faaef6b6de1b21b4b366d`
+- Current hash: `798c535183656c3d37d0c43c4ead01e523178eb9b517e16fc138d2f3732d9d47`
 
 No contract-level API changes were detected.
