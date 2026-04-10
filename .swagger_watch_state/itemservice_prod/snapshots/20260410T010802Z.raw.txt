@@ -20418,9 +20418,7 @@
           "CannotModifyDefaultIngredientQuantities",
           "FastLaneDoesNotSupportNewItems",
           "DefaultIngredientCannotBeDeleted",
-          "IngredientNumberRequiredForDeletion",
-          "InvalidNutritionValue",
-          "InvalidAllergenValue"
+          "IngredientNumberRequiredForDeletion"
         ],
         "type": "string"
       },
