@@ -1387,6 +1387,25 @@
         },
         "type": "object"
       },
+      "DeletePriceRequest": {
+        "additionalProperties": false,
+        "properties": {
+          "itemIds": {
+            "items": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "validToUtc": {
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "DeliveryDate": {
         "additionalProperties": false,
         "properties": {
@@ -3092,11 +3111,7 @@
           "CannotModifyDefaultIngredientQuantities",
           "FastLaneDoesNotSupportNewItems",
           "DefaultIngredientCannotBeDeleted",
-          "IngredientNumberRequiredForDeletion",
-          "InvalidNutritionValue",
-          "InvalidAllergenValue",
-          "InvalidAgeGroupValue",
-          "AgeGroupRequiresActiveSubstance"
+          "IngredientNumberRequiredForDeletion"
         ],
         "type": "string"
       },
@@ -22411,6 +22426,89 @@
                 }
               }
             },
+            "description": "Success"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorBody"
+                }
+              }
+            },
+            "description": "Validation error"
+          }
+        },
+        "tags": [
+          "StorePrices"
+        ]
+      }
+    },
+    "/api/StorePrices/{id}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Specifies the identifier of the user who triggered the request",
+            "in": "header",
+            "name": "lrs-userid",
+            "required": true,
+            "schema": {
+              "default": "ZGV2ZWxvcGVy",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/*+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/DeletePriceRequest"
+                  }
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/DeletePriceRequest"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/DeletePriceRequest"
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/DeletePriceRequest"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
             "description": "Success"
           },
           "422": {

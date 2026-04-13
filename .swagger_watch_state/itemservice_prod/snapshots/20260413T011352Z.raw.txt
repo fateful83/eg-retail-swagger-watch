@@ -16725,6 +16725,89 @@
         }
       }
     },
+    "/api/StorePrices/{id}": {
+      "delete": {
+        "tags": [
+          "StorePrices"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "lrs-userid",
+            "in": "header",
+            "description": "Specifies the identifier of the user who triggered the request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "ZGV2ZWxvcGVy"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/DeletePriceRequest"
+                  }
+                ]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/DeletePriceRequest"
+                  }
+                ]
+              }
+            },
+            "text/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/DeletePriceRequest"
+                  }
+                ]
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/DeletePriceRequest"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/StorePrices/GetPriceCounts": {
       "post": {
         "tags": [
@@ -18607,6 +18690,25 @@
         },
         "additionalProperties": false
       },
+      "DeletePriceRequest": {
+        "type": "object",
+        "properties": {
+          "itemIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "validToUtc": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "DeliveryDate": {
         "type": "object",
         "properties": {
@@ -20316,11 +20418,7 @@
           "CannotModifyDefaultIngredientQuantities",
           "FastLaneDoesNotSupportNewItems",
           "DefaultIngredientCannotBeDeleted",
-          "IngredientNumberRequiredForDeletion",
-          "InvalidNutritionValue",
-          "InvalidAllergenValue",
-          "InvalidAgeGroupValue",
-          "AgeGroupRequiresActiveSubstance"
+          "IngredientNumberRequiredForDeletion"
         ],
         "type": "string"
       },
