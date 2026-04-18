@@ -697,6 +697,10 @@
             "nullable": true,
             "type": "string"
           },
+          "enableCampaignValidationOnPriceDeletion": {
+            "description": "Parameter representing whether campaign validation should be performed during price deletion",
+            "type": "boolean"
+          },
           "enableEan20Conversion": {
             "description": "Parameter representing whether conversion to EAN20 should be enabled during import",
             "type": "boolean"

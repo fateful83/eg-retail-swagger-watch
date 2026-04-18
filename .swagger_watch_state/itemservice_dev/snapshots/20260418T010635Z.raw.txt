@@ -17982,6 +17982,10 @@
             "type": "boolean",
             "description": "Parameter representing whether managing store assortment should be enabled"
           },
+          "enableCampaignValidationOnPriceDeletion": {
+            "type": "boolean",
+            "description": "Parameter representing whether campaign validation should be performed during price deletion"
+          },
           "createLabelsOnlyForItemsInStockWithinLastNumberOfDays": {
             "type": "integer",
             "description": "Parameter representing whether to create labels only for items in stock within last number of days",
