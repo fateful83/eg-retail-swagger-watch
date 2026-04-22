@@ -1153,11 +1153,6 @@
             "nullable": true,
             "type": "string"
           },
-          "englishTitle": {
-            "description": "Gets or sets the English title for the PLU Board, used when customer selects English language.",
-            "nullable": true,
-            "type": "string"
-          },
           "functionsSetLink": {
             "description": "Gets or sets collection of the PLU Functions setting identifier linked to the current PLU Board.\r\nOne reference should be available by default.",
             "format": "uuid",
@@ -1417,11 +1412,6 @@
             "nullable": true,
             "type": "string"
           },
-          "englishTitle": {
-            "description": "Gets or sets the English title for the PLU Page, used when customer selects English language.",
-            "nullable": true,
-            "type": "string"
-          },
           "id": {
             "description": "Gets or sets PLU Page unique identifier.",
             "format": "uuid",
@@ -1461,11 +1451,6 @@
           },
           "description": {
             "description": "Gets or sets PLU Page description.",
-            "nullable": true,
-            "type": "string"
-          },
-          "englishTitle": {
-            "description": "Gets or sets the English title for the PLU Page, used when customer selects English language.",
             "nullable": true,
             "type": "string"
           },
@@ -24108,7 +24093,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-04-22T18:53:46.2522661Z",
+                    "startTime": "2026-04-22T12:53:14.2599274Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
@@ -24387,7 +24372,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-04-22T18:53:46.2522661Z",
+                    "startTime": "2026-04-22T12:53:14.2599274Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
@@ -24666,7 +24651,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-04-22T18:53:46.2522661Z",
+                    "startTime": "2026-04-22T12:53:14.2599274Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
