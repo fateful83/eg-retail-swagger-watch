@@ -1,36 +1,10 @@
-# Swagger/OpenAPI change detected: POS API [PROD]
+# Documentation-only change detected: POS API [PROD]
 
-- Time: 2026-04-22T18:53:53Z
-- Fetch completed at: 2026-04-22T18:53:52Z
-- Fetch duration ms: 8094
+- Time: 2026-04-23T01:16:41Z
+- Fetch completed at: 2026-04-23T01:16:40Z
+- Fetch duration ms: 7137
 - Swagger URL: https://posapi.egretail.cloud/swagger/v1/swagger.json
-- Previous hash: `7569b7c8a03941acf75476d2ae12ac4056b7c4e545449ac88746082a9979f8e3`
-- Current hash: `cf3679e2bfe6ddec3268f4abcde7ec30c4a84e4be6f70cdec57904a8322e656e`
+- Previous hash: `cf3679e2bfe6ddec3268f4abcde7ec30c4a84e4be6f70cdec57904a8322e656e`
+- Current hash: `254dcc65cc14bf4fdd288b46dc200e0fa4c3e934db094425dddfede323cfdc48`
 
-## Summary
-- Status: breaking
-- Added operations: 0
-- Removed operations: 1
-- Changed operations: 0
-- Breaking removed operations: 1
-- Breaking changed operations: 0
-- Non-breaking changed operations: 0
-
-## Added
-- None
-
-## Removed
-- POST /api/Payment/AddBonusPaymentToCart
-
-## Changed
-- None
-
-## Breaking classification
-- Removed operations: 1
-  - POST /api/Payment/AddBonusPaymentToCart
-
-- Breaking changed operations: 0
-- None
-
-- Non-breaking changed operations: 0
-- None
+No contract-level API changes were detected.
