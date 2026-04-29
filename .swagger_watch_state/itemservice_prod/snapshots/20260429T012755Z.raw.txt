@@ -20390,12 +20390,7 @@
           "SomeAllergensWillNotBeImported",
           "SomeNutritionWillNotBeImported",
           "MultipleIngredientsWithQuantityOne",
-          "IngredientToDeleteDoesNotExist",
-          "RecommendedServiceCodeInvalid",
-          "RecommendedActionCodeRequired",
-          "RecommendedActionCodeNotValidForServiceCode",
-          "RecommendedLocationCodeNotValidForProfile",
-          "RecommendedServiceOnlyAllowedForProfile"
+          "IngredientToDeleteDoesNotExist"
         ],
         "type": "string"
       },
