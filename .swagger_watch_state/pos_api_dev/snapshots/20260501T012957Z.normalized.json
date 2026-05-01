@@ -15,6 +15,21 @@
         ],
         "type": "string"
       },
+      "AddBonusPaymentToCartErrorType": {
+        "description": "Possible error types for AddBonusPaymentToCart",
+        "enum": [
+          "GeneralFault",
+          "CartNotFoundFault",
+          "CartCompletedFault",
+          "InvalidHashBasedMessageAuthenticationCodeFault",
+          "InvalidCartIdentificatorFault",
+          "CartIsCancelledFault",
+          "CartIsSuspendedFault",
+          "NotEnoughBonusFault",
+          "LoyaltyNumberNotFoundFault"
+        ],
+        "type": "string"
+      },
       "AddBundleToCartErrorType": {
         "description": "Possible error types for AddBundleToCart",
         "enum": [
@@ -1138,6 +1153,11 @@
             "nullable": true,
             "type": "string"
           },
+          "englishTitle": {
+            "description": "Gets or sets the English title for the PLU Board, used when customer selects English language.",
+            "nullable": true,
+            "type": "string"
+          },
           "functionsSetLink": {
             "description": "Gets or sets collection of the PLU Functions setting identifier linked to the current PLU Board.\r\nOne reference should be available by default.",
             "format": "uuid",
@@ -1397,6 +1417,11 @@
             "nullable": true,
             "type": "string"
           },
+          "englishTitle": {
+            "description": "Gets or sets the English title for the PLU Page, used when customer selects English language.",
+            "nullable": true,
+            "type": "string"
+          },
           "id": {
             "description": "Gets or sets PLU Page unique identifier.",
             "format": "uuid",
@@ -1436,6 +1461,11 @@
           },
           "description": {
             "description": "Gets or sets PLU Page description.",
+            "nullable": true,
+            "type": "string"
+          },
+          "englishTitle": {
+            "description": "Gets or sets the English title for the PLU Page, used when customer selects English language.",
             "nullable": true,
             "type": "string"
           },
@@ -2735,6 +2765,61 @@
               }
             ],
             "description": "The cart"
+          }
+        },
+        "type": "object"
+      },
+      "ItemSale.AddBonusPaymentToCart_Request": {
+        "additionalProperties": false,
+        "description": "Request to add bonus amount coupon to the cart.",
+        "properties": {
+          "amount": {
+            "description": "Bonus amount to add as tender.",
+            "format": "double",
+            "type": "number"
+          },
+          "bonusId": {
+            "description": "Coupon identifier.",
+            "nullable": true,
+            "type": "string"
+          },
+          "cartId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ItemSale.CartIdentificator"
+              }
+            ],
+            "description": "The unique Cart identifier.",
+            "nullable": true
+          },
+          "cartItemIdentificator": {
+            "description": "Sequence-/line numbers to set as paid.",
+            "items": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "paymentIsAuthorizedOnly": {
+            "description": "The payment is authorized only.",
+            "nullable": true,
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "ItemSale.AddBonusPaymentToCart_Response": {
+        "additionalProperties": false,
+        "description": "AddBonusPaymentToCart operation result.",
+        "properties": {
+          "cart": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ItemSale.Cart"
+              }
+            ],
+            "description": "Cart with added bounus amount payment."
           }
         },
         "type": "object"
@@ -15292,6 +15377,66 @@
         ],
         "type": "object"
       },
+      "PosApiBadRequestResponse_AddBonusPaymentToCartErrorType": {
+        "additionalProperties": false,
+        "description": "Returned with most failed requests for the current version of POS API.",
+        "properties": {
+          "FaultCode": {
+            "description": "ExtraIdentifier for the fault",
+            "nullable": true,
+            "type": "string"
+          },
+          "MaxQuantity": {
+            "description": "Max quantity of item in the receipt",
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "Message": {
+            "description": "The error message.",
+            "minLength": 1,
+            "type": "string"
+          },
+          "MessageForCashier": {
+            "description": "Message for cashier if the fault is ItemRequirementsNotMet.",
+            "nullable": true,
+            "type": "string"
+          },
+          "Reference": {
+            "description": "The error reference. Refer to this id when querying about a specific error.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "RequiredAge": {
+            "description": "Age of the ItemIsAgeRestricted restriction",
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "Requirements": {
+            "description": "The types of requirements if the fault is ItemRequirementsNotMet.",
+            "items": {
+              "$ref": "#/components/schemas/ItemSale.RequirementFaultType"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "Type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AddBonusPaymentToCartErrorType"
+              }
+            ],
+            "description": "The type of error. Maps to the fault type in the on-premise version."
+          }
+        },
+        "required": [
+          "Message",
+          "Reference",
+          "Type"
+        ],
+        "type": "object"
+      },
       "PosApiBadRequestResponse_AddBundleToCartErrorType": {
         "additionalProperties": false,
         "description": "Returned with most failed requests for the current version of POS API.",
@@ -23963,7 +24108,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-05-01T01:29:58.6713639Z",
+                    "startTime": "2026-04-30T19:01:54.4429737Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
@@ -24242,7 +24387,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-05-01T01:29:58.6713639Z",
+                    "startTime": "2026-04-30T19:01:54.4429737Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
@@ -24521,7 +24666,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-05-01T01:29:58.6713639Z",
+                    "startTime": "2026-04-30T19:01:54.4429737Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
@@ -37165,6 +37310,100 @@
         "summary": "Note: This operation will initially be implemented in on-premise service with a similar contract (SOAP).",
         "tags": [
           "Order"
+        ]
+      }
+    },
+    "/api/Payment/AddBonusPaymentToCart": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/*+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemSale.AddBonusPaymentToCart_Request"
+                  }
+                ],
+                "description": "Request to add bonus amount coupon to the cart."
+              }
+            },
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemSale.AddBonusPaymentToCart_Request"
+                  }
+                ],
+                "description": "Request to add bonus amount coupon to the cart."
+              }
+            },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemSale.AddBonusPaymentToCart_Request"
+                  }
+                ],
+                "description": "Request to add bonus amount coupon to the cart."
+              }
+            },
+            "text/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemSale.AddBonusPaymentToCart_Request"
+                  }
+                ],
+                "description": "Request to add bonus amount coupon to the cart."
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemSale.AddBonusPaymentToCart_Response"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemSale.AddBonusPaymentToCart_Response"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemSale.AddBonusPaymentToCart_Response"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApiBadRequestResponse_AddBonusPaymentToCartErrorType"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApiBadRequestResponse_AddBonusPaymentToCartErrorType"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApiBadRequestResponse_AddBonusPaymentToCartErrorType"
+                }
+              }
+            },
+            "description": "Bad Request"
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Payment"
         ]
       }
     },
