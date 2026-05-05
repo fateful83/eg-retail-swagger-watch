@@ -1,33 +1,33 @@
 # Swagger/OpenAPI change detected: POS API [TEST]
 
-- Time: 2026-05-05T01:23:21Z
-- Fetch completed at: 2026-05-05T01:23:21Z
-- Fetch duration ms: 5927
+- Time: 2026-05-05T07:50:11Z
+- Fetch completed at: 2026-05-05T07:50:10Z
+- Fetch duration ms: 6876
 - Swagger URL: https://posapi.egretail-test.cloud/swagger/v1/swagger.json
-- Previous hash: `f9a3e3c08403ebbfc99441cf03c4bbc4d4c7663ee7ae04883e6f5b041f1c551b`
-- Current hash: `1f171d569dba9f961aaeb26cbc6103608bafce05d32d4a8455649d147634eaac`
+- Previous hash: `1f171d569dba9f961aaeb26cbc6103608bafce05d32d4a8455649d147634eaac`
+- Current hash: `30a468bc68e2de4fb3127428cf7249b4a79924bdf509ffa324f5d3882bed77df`
 
 ## Summary
-- Status: breaking
-- Added operations: 0
-- Removed operations: 1
+- Status: non_breaking
+- Added operations: 1
+- Removed operations: 0
 - Changed operations: 0
-- Breaking removed operations: 1
+- Breaking removed operations: 0
 - Breaking changed operations: 0
 - Non-breaking changed operations: 0
 
 ## Added
-- None
+- POST /api/Payment/AddBonusPaymentToCart
 
 ## Removed
-- POST /api/Payment/AddBonusPaymentToCart
+- None
 
 ## Changed
 - None
 
 ## Breaking classification
-- Removed operations: 1
-  - POST /api/Payment/AddBonusPaymentToCart
+- Removed operations: 0
+- None
 
 - Breaking changed operations: 0
 - None
