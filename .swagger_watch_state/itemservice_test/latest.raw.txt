@@ -20324,7 +20324,9 @@
           "InvalidNutritionValue",
           "InvalidAllergenValue",
           "InvalidAgeGroupValue",
-          "AgeGroupRequiresActiveSubstance"
+          "AgeGroupRequiresActiveSubstance",
+          "SubSupplierItemNoAlreadyExistsOnDifferentItem",
+          "SubSupplierItemNoAlreadyFoundOnPreviousItemInFile"
         ],
         "type": "string"
       },
