@@ -5150,6 +5150,23 @@
         ],
         "type": "object"
       },
+      "ItemSale.CartNote": {
+        "additionalProperties": false,
+        "properties": {
+          "isForUser": {
+            "type": "boolean"
+          },
+          "note": {
+            "nullable": true,
+            "type": "string"
+          },
+          "noteKey": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "ItemSale.CartPayment": {
         "additionalProperties": false,
         "description": "Contains payment details.",
@@ -7484,6 +7501,13 @@
             "description": "Clients secret key.\r\nUsed for determining which tenant the client belongs to and to make sure the client is allowed to access the API\r\nThe APIKey is created by us and supplied to the customer.",
             "minLength": 1,
             "type": "string"
+          },
+          "cartNotes": {
+            "items": {
+              "$ref": "#/components/schemas/ItemSale.CartNote"
+            },
+            "nullable": true,
+            "type": "array"
           },
           "cartType": {
             "allOf": [
@@ -24108,7 +24132,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-05-31T18:57:28.9693703Z",
+                    "startTime": "2026-05-31T13:04:44.8104481Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
@@ -24387,7 +24411,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-05-31T18:57:28.9693703Z",
+                    "startTime": "2026-05-31T13:04:44.8104481Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
@@ -24666,7 +24690,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-05-31T18:57:28.9693703Z",
+                    "startTime": "2026-05-31T13:04:44.8104481Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
