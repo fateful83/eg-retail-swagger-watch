@@ -772,6 +772,22 @@
         ],
         "type": "string"
       },
+      "BeginKlarnaPaymentErrorType": {
+        "description": "Possible error types for BeginKlarnaPayment",
+        "enum": [
+          "GeneralFault",
+          "CartNotFoundFault",
+          "CartCompletedFault",
+          "InvalidHashBasedMessageAuthenticationCodeFault",
+          "InvalidCartIdentificatorFault",
+          "CartIsCancelledFault",
+          "CartIsSuspendedFault",
+          "InvalidTransactionTypeFault",
+          "TooManyCartItemsInCartFault",
+          "PaymentFailedFault"
+        ],
+        "type": "string"
+      },
       "BoardingPassAndFlightInfo": {
         "additionalProperties": false,
         "properties": {
@@ -2537,6 +2553,22 @@
         ],
         "type": "string"
       },
+      "EndKlarnaPaymentErrorType": {
+        "description": "Possible error types for EndKlarnaPayment",
+        "enum": [
+          "GeneralFault",
+          "CartNotFoundFault",
+          "CartCompletedFault",
+          "InvalidHashBasedMessageAuthenticationCodeFault",
+          "InvalidCartIdentificatorFault",
+          "CartIsCancelledFault",
+          "CartIsSuspendedFault",
+          "InvalidTransactionTypeFault",
+          "TooManyCartItemsInCartFault",
+          "PaymentFailedFault"
+        ],
+        "type": "string"
+      },
       "GetAvailableBonusErrorType": {
         "description": "Possible error types for GetAvailableBonus",
         "enum": [
@@ -3796,6 +3828,78 @@
           "success": {
             "description": "Return true when the operation was successful",
             "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "ItemSale.BeginKlarnaPayment_Request": {
+        "additionalProperties": false,
+        "description": "Request to begin payment with Klarna.",
+        "properties": {
+          "backToStoreUri": {
+            "description": "Gets or sets URI of your store page.",
+            "nullable": true,
+            "type": "string"
+          },
+          "cartId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ItemSale.CartIdentificator"
+              }
+            ],
+            "description": "The unique Cart identifier.",
+            "nullable": true
+          },
+          "checkoutUri": {
+            "description": "Gets or sets URI of your checkout page.",
+            "nullable": true,
+            "type": "string"
+          },
+          "confirmationUri": {
+            "description": "Gets or sets the URI of your confirmation page.",
+            "nullable": true,
+            "type": "string"
+          },
+          "locale": {
+            "description": "Gets or sets locale indicative for language and other location-specific details (RFC1766)",
+            "nullable": true,
+            "type": "string"
+          },
+          "prefilledCustomerInfo": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ItemSale.KlarnaCustomerInfo"
+              }
+            ],
+            "description": "Customer information that can be prefilled in the Klarna checkout UI.\r\nNone of the information is required. Any fields that are filled out will be sent to Klarna when creating the order.\r\nIf an existing Klarna order exists in cache for the Cart, it is returned from cache as is.",
+            "nullable": true
+          },
+          "pushUri": {
+            "description": "Gets or sets the URI of your push-notification page. Once payment is complete Klarna will perform POST request to this URI.",
+            "nullable": true,
+            "type": "string"
+          },
+          "termsUri": {
+            "description": "Gets or sets the URI of your terms and conditions.",
+            "nullable": true,
+            "type": "string"
+          },
+          "validationUri": {
+            "description": "URI of your order validation page, see <a href=\"https://developers.klarna.com/en/se/kco-v2/checkout/use-cases#validate-checkout-order\">Klarna specification.</a>.",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ItemSale.BeginKlarnaPayment_Response": {
+        "additionalProperties": false,
+        "description": "Response that contains Klarna checkout HTML snippet.",
+        "properties": {
+          "checkoutSnippet": {
+            "description": "Gets or sets the checkout snippet.",
+            "nullable": true,
+            "type": "string"
           }
         },
         "type": "object"
@@ -5150,6 +5254,23 @@
         ],
         "type": "object"
       },
+      "ItemSale.CartNote": {
+        "additionalProperties": false,
+        "properties": {
+          "isForUser": {
+            "type": "boolean"
+          },
+          "note": {
+            "nullable": true,
+            "type": "string"
+          },
+          "noteKey": {
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
       "ItemSale.CartPayment": {
         "additionalProperties": false,
         "description": "Contains payment details.",
@@ -5839,6 +5960,10 @@
             "nullable": true,
             "type": "array"
           },
+          "deliverNonPhysicalItems": {
+            "description": "When true, items with ArticleType Freight are automatically delivered server-side\r\nwithout needing to list them in CartItemDelivery.",
+            "type": "boolean"
+          },
           "payCart": {
             "description": "Set to true if Cart should be paid",
             "type": "boolean"
@@ -6255,6 +6380,80 @@
           "success": {
             "description": "Whether or not ending delivery was a success",
             "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "ItemSale.EndKlarnaPayment_Request": {
+        "additionalProperties": false,
+        "description": "Request to finalize Klarna payment and add payment authorization to the cart.",
+        "properties": {
+          "cartId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ItemSale.CartIdentificator"
+              }
+            ],
+            "description": "The unique Cart identifier.",
+            "nullable": true
+          },
+          "klarnaOrderId": {
+            "description": "Gets or sets the Klarna order identifier.",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ItemSale.EndKlarnaPayment_Response": {
+        "additionalProperties": false,
+        "description": "Klarna payment result.",
+        "properties": {
+          "cart": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ItemSale.Cart"
+              }
+            ],
+            "description": "Cart with payment authorization."
+          },
+          "companyId": {
+            "description": "Gets or sets the company id",
+            "nullable": true,
+            "type": "string"
+          },
+          "companyName": {
+            "description": "Gets or sets the company name",
+            "nullable": true,
+            "type": "string"
+          },
+          "contactInfo": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ItemSale.CartContactInfo"
+              }
+            ],
+            "description": "Gets or sets the customer contact information.",
+            "nullable": true
+          },
+          "deliveryAddress": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ItemSale.CartAddress"
+              }
+            ],
+            "description": "Gets or sets the delivery address.",
+            "nullable": true
+          },
+          "reference": {
+            "description": "Gets or sets the reference",
+            "nullable": true,
+            "type": "string"
+          },
+          "socialId": {
+            "description": "Gets or sets the customer social identifier.",
+            "nullable": true,
+            "type": "string"
           }
         },
         "type": "object"
@@ -7103,6 +7302,118 @@
         ],
         "type": "object"
       },
+      "ItemSale.KlarnaCustomerInfo": {
+        "additionalProperties": false,
+        "description": "Customer information that can be prefilled in the Klarna checkout UI.",
+        "properties": {
+          "birthday": {
+            "description": "The customer’s birthdate",
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "city": {
+            "description": "City",
+            "nullable": true,
+            "type": "string"
+          },
+          "companyId": {
+            "description": "For B2B, this field is used for the organization’s official registration id (Organization number).",
+            "nullable": true,
+            "type": "string"
+          },
+          "companyName": {
+            "description": "Only for B2B orders. The name of the organization placing the order.",
+            "nullable": true,
+            "type": "string"
+          },
+          "country": {
+            "description": "Country (ISO-3166 alpha)",
+            "nullable": true,
+            "type": "string"
+          },
+          "customerType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ItemSale.KlarnaCustomerType"
+              }
+            ],
+            "description": "The type of customer (person or organization/B2B).",
+            "nullable": true
+          },
+          "email": {
+            "description": "E-mail address",
+            "nullable": true,
+            "type": "string"
+          },
+          "firstName": {
+            "description": "First name",
+            "nullable": true,
+            "type": "string"
+          },
+          "gender": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ItemSale.KlarnaGender"
+              }
+            ],
+            "description": "Gender",
+            "nullable": true
+          },
+          "lastName": {
+            "description": "Last name",
+            "nullable": true,
+            "type": "string"
+          },
+          "mobilePhone": {
+            "description": "Phone number",
+            "nullable": true,
+            "type": "string"
+          },
+          "reference": {
+            "description": "Only for B2B orders. Reference information entered by the customer for this B2B order.",
+            "nullable": true,
+            "type": "string"
+          },
+          "socialId": {
+            "description": "National identification number",
+            "nullable": true,
+            "type": "string"
+          },
+          "street1": {
+            "description": "Street address",
+            "nullable": true,
+            "type": "string"
+          },
+          "street2": {
+            "description": "A second address line. Can be used for C/O.",
+            "nullable": true,
+            "type": "string"
+          },
+          "zip": {
+            "description": "Postal code",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ItemSale.KlarnaCustomerType": {
+        "description": "The types of customers that can be used in Klarna payments",
+        "enum": [
+          "Person",
+          "Organization"
+        ],
+        "type": "string"
+      },
+      "ItemSale.KlarnaGender": {
+        "description": "Gender types that can be used for Klarna payments",
+        "enum": [
+          "Male",
+          "Female"
+        ],
+        "type": "string"
+      },
       "ItemSale.LabelType": {
         "additionalProperties": false,
         "description": "Representing a label type.",
@@ -7484,6 +7795,13 @@
             "description": "Clients secret key.\r\nUsed for determining which tenant the client belongs to and to make sure the client is allowed to access the API\r\nThe APIKey is created by us and supplied to the customer.",
             "minLength": 1,
             "type": "string"
+          },
+          "cartNotes": {
+            "items": {
+              "$ref": "#/components/schemas/ItemSale.CartNote"
+            },
+            "nullable": true,
+            "type": "array"
           },
           "cartType": {
             "allOf": [
@@ -10526,7 +10844,8 @@
           "DepositRefund",
           "Service",
           "Orderable",
-          "NonShelf"
+          "NonShelf",
+          "Freight"
         ],
         "type": "string"
       },
@@ -13347,6 +13666,10 @@
         "properties": {
           "captureDeliveredUnPaidItems": {
             "description": "Order lines not delivered should be captured when true",
+            "type": "boolean"
+          },
+          "deliverNonPhysicalItems": {
+            "description": "When true, items with ArticleType Freight are automatically delivered server-side\r\nwithout needing to list them in DeliveredLines.",
             "type": "boolean"
           },
           "deliveredLines": {
@@ -16217,6 +16540,66 @@
         ],
         "type": "object"
       },
+      "PosApiBadRequestResponse_BeginKlarnaPaymentErrorType": {
+        "additionalProperties": false,
+        "description": "Returned with most failed requests for the current version of POS API.",
+        "properties": {
+          "FaultCode": {
+            "description": "ExtraIdentifier for the fault",
+            "nullable": true,
+            "type": "string"
+          },
+          "MaxQuantity": {
+            "description": "Max quantity of item in the receipt",
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "Message": {
+            "description": "The error message.",
+            "minLength": 1,
+            "type": "string"
+          },
+          "MessageForCashier": {
+            "description": "Message for cashier if the fault is ItemRequirementsNotMet.",
+            "nullable": true,
+            "type": "string"
+          },
+          "Reference": {
+            "description": "The error reference. Refer to this id when querying about a specific error.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "RequiredAge": {
+            "description": "Age of the ItemIsAgeRestricted restriction",
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "Requirements": {
+            "description": "The types of requirements if the fault is ItemRequirementsNotMet.",
+            "items": {
+              "$ref": "#/components/schemas/ItemSale.RequirementFaultType"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "Type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BeginKlarnaPaymentErrorType"
+              }
+            ],
+            "description": "The type of error. Maps to the fault type in the on-premise version."
+          }
+        },
+        "required": [
+          "Message",
+          "Reference",
+          "Type"
+        ],
+        "type": "object"
+      },
       "PosApiBadRequestResponse_CalculateErrorType": {
         "additionalProperties": false,
         "description": "Returned with most failed requests for the current version of POS API.",
@@ -17405,6 +17788,66 @@
             "allOf": [
               {
                 "$ref": "#/components/schemas/EndDeliveryErrorType"
+              }
+            ],
+            "description": "The type of error. Maps to the fault type in the on-premise version."
+          }
+        },
+        "required": [
+          "Message",
+          "Reference",
+          "Type"
+        ],
+        "type": "object"
+      },
+      "PosApiBadRequestResponse_EndKlarnaPaymentErrorType": {
+        "additionalProperties": false,
+        "description": "Returned with most failed requests for the current version of POS API.",
+        "properties": {
+          "FaultCode": {
+            "description": "ExtraIdentifier for the fault",
+            "nullable": true,
+            "type": "string"
+          },
+          "MaxQuantity": {
+            "description": "Max quantity of item in the receipt",
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "Message": {
+            "description": "The error message.",
+            "minLength": 1,
+            "type": "string"
+          },
+          "MessageForCashier": {
+            "description": "Message for cashier if the fault is ItemRequirementsNotMet.",
+            "nullable": true,
+            "type": "string"
+          },
+          "Reference": {
+            "description": "The error reference. Refer to this id when querying about a specific error.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "RequiredAge": {
+            "description": "Age of the ItemIsAgeRestricted restriction",
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "Requirements": {
+            "description": "The types of requirements if the fault is ItemRequirementsNotMet.",
+            "items": {
+              "$ref": "#/components/schemas/ItemSale.RequirementFaultType"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "Type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EndKlarnaPaymentErrorType"
               }
             ],
             "description": "The type of error. Maps to the fault type in the on-premise version."
@@ -24108,7 +24551,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-06-06T08:18:57.2689084Z",
+                    "startTime": "2026-06-05T19:25:11.2045219Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
@@ -24387,7 +24830,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-06-06T08:18:57.2689084Z",
+                    "startTime": "2026-06-05T19:25:11.2045219Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
@@ -24666,7 +25109,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-06-06T08:18:57.2689084Z",
+                    "startTime": "2026-06-05T19:25:11.2045219Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
@@ -36671,6 +37114,7 @@
             "application/*+json": {
               "example": {
                 "captureDeliveredUnPaidItems": false,
+                "deliverNonPhysicalItems": true,
                 "deliveredLines": [
                   {
                     "adjustedOrderedQuantity": null,
@@ -36723,6 +37167,7 @@
             "application/json": {
               "example": {
                 "captureDeliveredUnPaidItems": false,
+                "deliverNonPhysicalItems": true,
                 "deliveredLines": [
                   {
                     "adjustedOrderedQuantity": null,
@@ -36775,6 +37220,7 @@
             "application/json-patch+json": {
               "example": {
                 "captureDeliveredUnPaidItems": false,
+                "deliverNonPhysicalItems": true,
                 "deliveredLines": [
                   {
                     "adjustedOrderedQuantity": null,
@@ -36827,6 +37273,7 @@
             "text/json": {
               "example": {
                 "captureDeliveredUnPaidItems": false,
+                "deliverNonPhysicalItems": true,
                 "deliveredLines": [
                   {
                     "adjustedOrderedQuantity": null,
@@ -37501,6 +37948,100 @@
         ]
       }
     },
+    "/api/Payment/BeginKlarnaPayment": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/*+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemSale.BeginKlarnaPayment_Request"
+                  }
+                ],
+                "description": "Request to begin payment with Klarna."
+              }
+            },
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemSale.BeginKlarnaPayment_Request"
+                  }
+                ],
+                "description": "Request to begin payment with Klarna."
+              }
+            },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemSale.BeginKlarnaPayment_Request"
+                  }
+                ],
+                "description": "Request to begin payment with Klarna."
+              }
+            },
+            "text/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemSale.BeginKlarnaPayment_Request"
+                  }
+                ],
+                "description": "Request to begin payment with Klarna."
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemSale.BeginKlarnaPayment_Response"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemSale.BeginKlarnaPayment_Response"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemSale.BeginKlarnaPayment_Response"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApiBadRequestResponse_BeginKlarnaPaymentErrorType"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApiBadRequestResponse_BeginKlarnaPaymentErrorType"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApiBadRequestResponse_BeginKlarnaPaymentErrorType"
+                }
+              }
+            },
+            "description": "Bad Request"
+          }
+        },
+        "summary": "Begins Klarna payment.",
+        "tags": [
+          "Payment"
+        ]
+      }
+    },
     "/api/Payment/CancelBonusPayment": {
       "post": {
         "requestBody": {
@@ -37684,6 +38225,100 @@
           }
         },
         "summary": "Cancels the giftcard payment",
+        "tags": [
+          "Payment"
+        ]
+      }
+    },
+    "/api/Payment/EndKlarnaPayment": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/*+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemSale.EndKlarnaPayment_Request"
+                  }
+                ],
+                "description": "Request to finalize Klarna payment and add payment authorization to the cart."
+              }
+            },
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemSale.EndKlarnaPayment_Request"
+                  }
+                ],
+                "description": "Request to finalize Klarna payment and add payment authorization to the cart."
+              }
+            },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemSale.EndKlarnaPayment_Request"
+                  }
+                ],
+                "description": "Request to finalize Klarna payment and add payment authorization to the cart."
+              }
+            },
+            "text/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemSale.EndKlarnaPayment_Request"
+                  }
+                ],
+                "description": "Request to finalize Klarna payment and add payment authorization to the cart."
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemSale.EndKlarnaPayment_Response"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemSale.EndKlarnaPayment_Response"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemSale.EndKlarnaPayment_Response"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApiBadRequestResponse_EndKlarnaPaymentErrorType"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApiBadRequestResponse_EndKlarnaPaymentErrorType"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApiBadRequestResponse_EndKlarnaPaymentErrorType"
+                }
+              }
+            },
+            "description": "Bad Request"
+          }
+        },
+        "summary": "Ends the Klarna payment. Verifies Klarna order status and adds payment authorization to receipt if Klarna order checkout is complete.",
         "tags": [
           "Payment"
         ]
