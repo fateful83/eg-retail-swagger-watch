@@ -109,14 +109,14 @@
     <section class="hero">
       <div>
         <h1>EG Retail Swagger Dashboard</h1>
-        <div class="muted">Generated at 2026-06-08T10:09:19Z</div>
+        <div class="muted">Generated at 2026-06-08T15:19:43Z</div>
       </div>
       <div class="muted">Output: .swagger_watch_state/dashboard.html</div>
     </section>
 
     <section class="summary">
       <div class="card"><span>Services</span><strong>4</strong></div>
-      <div class="card"><span>Env updates</span><strong>4</strong></div>
+      <div class="card"><span>Env updates</span><strong>6</strong></div>
       <div class="card"><span>Drifts</span><strong>3</strong></div>
       <div class="card"><span>Errors</span><strong>0</strong></div>
       <div class="card"><span>Partial failures</span><strong>0</strong></div>
@@ -181,7 +181,7 @@
         Retention: 180 days |
         Timeout: 60s |
         Fail on service errors: false |
-        Run: <a href="https://github.com/fateful83/eg-retail-swagger-watch/actions/runs/27130558909" target="_blank" rel="noreferrer">27130558909</a>
+        Run: <a href="https://github.com/fateful83/eg-retail-swagger-watch/actions/runs/27147772893" target="_blank" rel="noreferrer">27147772893</a>
       </p>
     </section>
 
@@ -198,56 +198,56 @@
         <span class="badge bad">breaking</span>
       </div>
       <div class="kv"><span>URL</span><a href="https://customerorderv2service.egretail-dev.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://customerorderv2service.egretail-dev.cloud/swagger/v1/swagger.json</a></div>
-      <div class="kv"><span>Hash</span><code>58f9e0ee0cf4</code></div>
-      <div class="kv"><span>Summary</span><strong>Breaking: +1 / -1 / ~0</strong></div>
-      <div class="kv"><span>Fetched</span><span>2026-06-08T10:09:09Z</span></div>
-      <div class="kv"><span>Duration</span><span>1715 ms</span></div>
+      <div class="kv"><span>Hash</span><code>474c7e0fe3a6</code></div>
+      <div class="kv"><span>Summary</span><strong>Breaking: +0 / -0 / ~1</strong></div>
+      <div class="kv"><span>Fetched</span><span>2026-06-08T15:19:22Z</span></div>
+      <div class="kv"><span>Duration</span><span>1382 ms</span></div>
       <div class="stats">
-        <div class="stat"><span>Added</span><strong>1</strong></div>
-        <div class="stat"><span>Removed</span><strong>1</strong></div>
-        <div class="stat"><span>Changed</span><strong>0</strong></div>
+        <div class="stat"><span>Added</span><strong>0</strong></div>
+        <div class="stat"><span>Removed</span><strong>0</strong></div>
+        <div class="stat"><span>Changed</span><strong>1</strong></div>
       </div>
       <details>
         <summary>Details</summary>
         <h4>Added</h4>
-        <ul><li><code>PATCH /api/gateway/ServiceOrders/{orderNumber}/orderStatus</code></li></ul>
-        <h4>Removed</h4>
-        <ul><li><code>PATCH /api/gateway/ServiceOrders/{orderNumber}/order-status</code></li></ul>
-        <h4>Changed</h4>
         <div class="muted">None</div>
+        <h4>Removed</h4>
+        <div class="muted">None</div>
+        <h4>Changed</h4>
+        <ul><li><code>POST /api/gateway/ServiceOrders/{storeNumber}/{orderNumber}/payment</code></li></ul>
         <pre># Swagger/OpenAPI change detected: CustomerOrderV2 [DEV]
 
-- Time: 2026-06-08T10:09:10Z
-- Fetch completed at: 2026-06-08T10:09:09Z
-- Fetch duration ms: 1715
+- Time: 2026-06-08T15:19:22Z
+- Fetch completed at: 2026-06-08T15:19:22Z
+- Fetch duration ms: 1382
 - Swagger URL: https://customerorderv2service.egretail-dev.cloud/swagger/v1/swagger.json
-- Previous hash: `dec0a2fc6c7e7d40ca46278c1c519f38e0fca4d75b4b9c79483a9e0eba3621d6`
-- Current hash: `58f9e0ee0cf47b843ec4c9fb4165d916728df152884a2df70d0379a998a01e8f`
+- Previous hash: `58f9e0ee0cf47b843ec4c9fb4165d916728df152884a2df70d0379a998a01e8f`
+- Current hash: `474c7e0fe3a6a7cffab12ade18f1c97f1068796cb8c5a4d7e26f42a1c91aef47`
 
 ## Summary
 - Status: breaking
-- Added operations: 1
-- Removed operations: 1
-- Changed operations: 0
-- Breaking removed operations: 1
-- Breaking changed operations: 0
+- Added operations: 0
+- Removed operations: 0
+- Changed operations: 1
+- Breaking removed operations: 0
+- Breaking changed operations: 1
 - Non-breaking changed operations: 0
 
 ## Added
-- PATCH /api/gateway/ServiceOrders/{orderNumber}/orderStatus
+- None
 
 ## Removed
-- PATCH /api/gateway/ServiceOrders/{orderNumber}/order-status
+- None
 
 ## Changed
-- None
+- POST /api/gateway/ServiceOrders/{storeNumber}/{orderNumber}/payment
 
 ## Breaking classification
-- Removed operations: 1
-  - PATCH /api/gateway/ServiceOrders/{orderNumber}/order-status
-
-- Breaking changed operations: 0
+- Removed operations: 0
 - None
+
+- Breaking changed operations: 1
+  - POST /api/gateway/ServiceOrders/{storeNumber}/{orderNumber}/payment
 
 - Non-breaking changed operations: 0
 - None
@@ -261,10 +261,10 @@
         <span class="badge info">docs only</span>
       </div>
       <div class="kv"><span>URL</span><a href="https://customerorderv2service.egretail-test.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://customerorderv2service.egretail-test.cloud/swagger/v1/swagger.json</a></div>
-      <div class="kv"><span>Hash</span><code>6a696a7b33d6</code></div>
+      <div class="kv"><span>Hash</span><code>923d68bf04db</code></div>
       <div class="kv"><span>Summary</span><strong>File changed, API unchanged</strong></div>
-      <div class="kv"><span>Fetched</span><span>2026-06-08T10:09:09Z</span></div>
-      <div class="kv"><span>Duration</span><span>1203 ms</span></div>
+      <div class="kv"><span>Fetched</span><span>2026-06-08T15:19:22Z</span></div>
+      <div class="kv"><span>Duration</span><span>1175 ms</span></div>
       <div class="stats">
         <div class="stat"><span>Added</span><strong>0</strong></div>
         <div class="stat"><span>Removed</span><strong>0</strong></div>
@@ -280,12 +280,12 @@
         <div class="muted">None</div>
         <pre># Documentation-only change detected: CustomerOrderV2 [TEST]
 
-- Time: 2026-06-08T10:09:09Z
-- Fetch completed at: 2026-06-08T10:09:09Z
-- Fetch duration ms: 1203
+- Time: 2026-06-08T15:19:22Z
+- Fetch completed at: 2026-06-08T15:19:22Z
+- Fetch duration ms: 1175
 - Swagger URL: https://customerorderv2service.egretail-test.cloud/swagger/v1/swagger.json
-- Previous hash: `1cfb5f8debfb44923e2e62d0821e3c43c3c389dcbcc789f27a2261021b236acc`
-- Current hash: `6a696a7b33d63f8b567f0c9f3f0c980c768c5b549662580f1a87eb5e89f004b7`
+- Previous hash: `6a696a7b33d63f8b567f0c9f3f0c980c768c5b549662580f1a87eb5e89f004b7`
+- Current hash: `923d68bf04dbb5687878d310565bf543fa38703072c2fcf9eb1ea3155bb31c19`
 
 No contract-level API changes were detected.
 </pre>
@@ -298,10 +298,10 @@ No contract-level API changes were detected.
         <span class="badge info">docs only</span>
       </div>
       <div class="kv"><span>URL</span><a href="https://customerorderv2service.egretail.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://customerorderv2service.egretail.cloud/swagger/v1/swagger.json</a></div>
-      <div class="kv"><span>Hash</span><code>12b5b64e3fb9</code></div>
+      <div class="kv"><span>Hash</span><code>d86517a0c038</code></div>
       <div class="kv"><span>Summary</span><strong>File changed, API unchanged</strong></div>
-      <div class="kv"><span>Fetched</span><span>2026-06-08T10:09:09Z</span></div>
-      <div class="kv"><span>Duration</span><span>859 ms</span></div>
+      <div class="kv"><span>Fetched</span><span>2026-06-08T15:19:21Z</span></div>
+      <div class="kv"><span>Duration</span><span>796 ms</span></div>
       <div class="stats">
         <div class="stat"><span>Added</span><strong>0</strong></div>
         <div class="stat"><span>Removed</span><strong>0</strong></div>
@@ -317,12 +317,12 @@ No contract-level API changes were detected.
         <div class="muted">None</div>
         <pre># Documentation-only change detected: CustomerOrderV2 [PROD]
 
-- Time: 2026-06-08T10:09:09Z
-- Fetch completed at: 2026-06-08T10:09:09Z
-- Fetch duration ms: 859
+- Time: 2026-06-08T15:19:21Z
+- Fetch completed at: 2026-06-08T15:19:21Z
+- Fetch duration ms: 796
 - Swagger URL: https://customerorderv2service.egretail.cloud/swagger/v1/swagger.json
-- Previous hash: `0bb656ec5e84a80a21261c77af0e5484338a12ad5efb86ee1684b886f3b53c92`
-- Current hash: `12b5b64e3fb965d44cd46d6f1a7efc3d7deb74f3d49d8c6dd8423b1873cabfb7`
+- Previous hash: `12b5b64e3fb965d44cd46d6f1a7efc3d7deb74f3d49d8c6dd8423b1873cabfb7`
+- Current hash: `d86517a0c038a69ceb46ae2560a819b21dcbcaf92f6e7f6675abeede2deaad24`
 
 No contract-level API changes were detected.
 </pre>
@@ -330,12 +330,12 @@ No contract-level API changes were detected.
     </section>
     </div>
               <div class="grid drift-grid">
-    <section class="panel drift drift-panel" data-status="drift_changed" data-severity="non_breaking">
+    <section class="panel drift drift-panel" data-status="drift_changed" data-severity="breaking">
       <div class="panel-head">
         <h3>DEV vs TEST</h3>
         <div class="badge-row">
           <span class="badge warn">drift changed</span>
-          <span class="badge warn">non breaking</span>
+          <span class="badge bad">breaking</span>
         </div>
       </div>
       <div class="kv"><span>DEV</span><a href="https://customerorderv2service.egretail-dev.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://customerorderv2service.egretail-dev.cloud/swagger/v1/swagger.json</a></div>
@@ -343,7 +343,7 @@ No contract-level API changes were detected.
       <div class="stats">
         <div class="stat"><span>Only in DEV</span><strong>1</strong></div>
         <div class="stat"><span>Only in TEST</span><strong>0</strong></div>
-        <div class="stat"><span>Different</span><strong>0</strong></div>
+        <div class="stat"><span>Different</span><strong>1</strong></div>
       </div>
       <details>
         <summary>Details</summary>
@@ -352,20 +352,20 @@ No contract-level API changes were detected.
         <h4>Only in TEST</h4>
         <div class="muted">None</div>
         <h4>Different</h4>
-        <div class="muted">None</div>
+        <ul><li><code>POST /api/gateway/ServiceOrders/{storeNumber}/{orderNumber}/payment</code></li></ul>
         <pre># DEV vs TEST drift detected: CustomerOrderV2
 
-- Time: 2026-06-08T10:09:10Z
-- Severity: non_breaking
+- Time: 2026-06-08T15:19:22Z
+- Severity: breaking
 - DEV Swagger URL: https://customerorderv2service.egretail-dev.cloud/swagger/v1/swagger.json
 - TEST Swagger URL: https://customerorderv2service.egretail-test.cloud/swagger/v1/swagger.json
-- DEV hash: `58f9e0ee0cf47b843ec4c9fb4165d916728df152884a2df70d0379a998a01e8f`
-- TEST hash: `6a696a7b33d63f8b567f0c9f3f0c980c768c5b549662580f1a87eb5e89f004b7`
+- DEV hash: `474c7e0fe3a6a7cffab12ade18f1c97f1068796cb8c5a4d7e26f42a1c91aef47`
+- TEST hash: `923d68bf04dbb5687878d310565bf543fa38703072c2fcf9eb1ea3155bb31c19`
 
 ## Summary
 - Only in DEV: 1
 - Only in TEST: 0
-- Present in both but different: 0
+- Present in both but different: 1
 
 ## Only in DEV
 - PATCH /api/gateway/ServiceOrders/{orderNumber}/orderStatus
@@ -374,7 +374,7 @@ No contract-level API changes were detected.
 - None
 
 ## Different in DEV and TEST
-- None
+- POST /api/gateway/ServiceOrders/{storeNumber}/{orderNumber}/payment
 </pre>
       </details>
     </section>
@@ -421,8 +421,8 @@ No contract-level API changes were detected.
       <div class="kv"><span>URL</span><a href="https://itemservice.egretail-dev.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://itemservice.egretail-dev.cloud/swagger/v1/swagger.json</a></div>
       <div class="kv"><span>Hash</span><code>995ece27122a</code></div>
       <div class="kv"><span>Summary</span><strong>No change (995ece27122a)</strong></div>
-      <div class="kv"><span>Fetched</span><span>2026-06-08T10:09:11Z</span></div>
-      <div class="kv"><span>Duration</span><span>1447 ms</span></div>
+      <div class="kv"><span>Fetched</span><span>2026-06-08T15:19:23Z</span></div>
+      <div class="kv"><span>Duration</span><span>1155 ms</span></div>
       <div class="stats">
         <div class="stat"><span>Added</span><strong>0</strong></div>
         <div class="stat"><span>Removed</span><strong>0</strong></div>
@@ -437,8 +437,8 @@ No contract-level API changes were detected.
         <h4>Changed</h4>
         <div class="muted">None</div>
         <pre>No change for ItemService [DEV] (995ece27122a)
-Fetch completed at: 2026-06-08T10:09:11Z
-Fetch duration ms: 1447
+Fetch completed at: 2026-06-08T15:19:23Z
+Fetch duration ms: 1155
 </pre>
       </details>
     </section>
@@ -451,8 +451,8 @@ Fetch duration ms: 1447
       <div class="kv"><span>URL</span><a href="https://itemservice.egretail-test.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://itemservice.egretail-test.cloud/swagger/v1/swagger.json</a></div>
       <div class="kv"><span>Hash</span><code>995ece27122a</code></div>
       <div class="kv"><span>Summary</span><strong>No change (995ece27122a)</strong></div>
-      <div class="kv"><span>Fetched</span><span>2026-06-08T10:09:11Z</span></div>
-      <div class="kv"><span>Duration</span><span>965 ms</span></div>
+      <div class="kv"><span>Fetched</span><span>2026-06-08T15:19:35Z</span></div>
+      <div class="kv"><span>Duration</span><span>13025 ms</span></div>
       <div class="stats">
         <div class="stat"><span>Added</span><strong>0</strong></div>
         <div class="stat"><span>Removed</span><strong>0</strong></div>
@@ -467,8 +467,8 @@ Fetch duration ms: 1447
         <h4>Changed</h4>
         <div class="muted">None</div>
         <pre>No change for ItemService [TEST] (995ece27122a)
-Fetch completed at: 2026-06-08T10:09:11Z
-Fetch duration ms: 965
+Fetch completed at: 2026-06-08T15:19:35Z
+Fetch duration ms: 13025
 </pre>
       </details>
     </section>
@@ -481,8 +481,8 @@ Fetch duration ms: 965
       <div class="kv"><span>URL</span><a href="https://itemservice.egretail.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://itemservice.egretail.cloud/swagger/v1/swagger.json</a></div>
       <div class="kv"><span>Hash</span><code>0101ea464a56</code></div>
       <div class="kv"><span>Summary</span><strong>No change (0101ea464a56)</strong></div>
-      <div class="kv"><span>Fetched</span><span>2026-06-08T10:09:11Z</span></div>
-      <div class="kv"><span>Duration</span><span>843 ms</span></div>
+      <div class="kv"><span>Fetched</span><span>2026-06-08T15:19:23Z</span></div>
+      <div class="kv"><span>Duration</span><span>779 ms</span></div>
       <div class="stats">
         <div class="stat"><span>Added</span><strong>0</strong></div>
         <div class="stat"><span>Removed</span><strong>0</strong></div>
@@ -497,8 +497,8 @@ Fetch duration ms: 965
         <h4>Changed</h4>
         <div class="muted">None</div>
         <pre>No change for ItemService [PROD] (0101ea464a56)
-Fetch completed at: 2026-06-08T10:09:11Z
-Fetch duration ms: 843
+Fetch completed at: 2026-06-08T15:19:23Z
+Fetch duration ms: 779
 </pre>
       </details>
     </section>
@@ -556,7 +556,7 @@ Fetch duration ms: 843
         <div class="muted">None</div>
         <pre># TEST vs PROD drift detected: ItemService
 
-- Time: 2026-06-08T10:09:11Z
+- Time: 2026-06-08T15:19:35Z
 - Severity: breaking
 - TEST Swagger URL: https://itemservice.egretail-test.cloud/swagger/v1/swagger.json
 - PROD Swagger URL: https://itemservice.egretail.cloud/swagger/v1/swagger.json
@@ -591,21 +591,21 @@ Fetch duration ms: 843
     </div>
             </article>
             
-            <article class="service-card service-item" data-service="pos api" data-statuses="no_change,no_change,docs_only">
+            <article class="service-card service-item" data-service="pos api" data-statuses="docs_only,docs_only,docs_only">
               <div class="service-head">
                 <h2>POS API</h2>
               </div>
               <div class="grid env-grid">
-    <section class="panel env-panel" data-status="no_change" data-env="DEV">
+    <section class="panel env-panel" data-status="docs_only" data-env="DEV">
       <div class="panel-head">
         <h3>DEV</h3>
-        <span class="badge ok">no change</span>
+        <span class="badge info">docs only</span>
       </div>
       <div class="kv"><span>URL</span><a href="https://posapi.egretail-dev.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://posapi.egretail-dev.cloud/swagger/v1/swagger.json</a></div>
-      <div class="kv"><span>Hash</span><code>f033b82107f8</code></div>
-      <div class="kv"><span>Summary</span><strong>No change (f033b82107f8)</strong></div>
-      <div class="kv"><span>Fetched</span><span>2026-06-08T10:09:11Z</span></div>
-      <div class="kv"><span>Duration</span><span>75 ms</span></div>
+      <div class="kv"><span>Hash</span><code>88ef9ab184f6</code></div>
+      <div class="kv"><span>Summary</span><strong>File changed, API unchanged</strong></div>
+      <div class="kv"><span>Fetched</span><span>2026-06-08T15:19:42Z</span></div>
+      <div class="kv"><span>Duration</span><span>6671 ms</span></div>
       <div class="stats">
         <div class="stat"><span>Added</span><strong>0</strong></div>
         <div class="stat"><span>Removed</span><strong>0</strong></div>
@@ -619,23 +619,30 @@ Fetch duration ms: 843
         <div class="muted">None</div>
         <h4>Changed</h4>
         <div class="muted">None</div>
-        <pre>No change for POS API [DEV] (f033b82107f8)
-Fetch completed at: 2026-06-08T10:09:11Z
-Fetch duration ms: 75
+        <pre># Documentation-only change detected: POS API [DEV]
+
+- Time: 2026-06-08T15:19:42Z
+- Fetch completed at: 2026-06-08T15:19:42Z
+- Fetch duration ms: 6671
+- Swagger URL: https://posapi.egretail-dev.cloud/swagger/v1/swagger.json
+- Previous hash: `f033b82107f8a9ed156b9c63fcc4cd6a789478c7bc5141d4e7186b5649a39c21`
+- Current hash: `88ef9ab184f6e435f4f2a4cf292d48b6e54c98dca7357faeda4998b893478a42`
+
+No contract-level API changes were detected.
 </pre>
       </details>
     </section>
     
-    <section class="panel env-panel" data-status="no_change" data-env="TEST">
+    <section class="panel env-panel" data-status="docs_only" data-env="TEST">
       <div class="panel-head">
         <h3>TEST</h3>
-        <span class="badge ok">no change</span>
+        <span class="badge info">docs only</span>
       </div>
       <div class="kv"><span>URL</span><a href="https://posapi.egretail-test.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://posapi.egretail-test.cloud/swagger/v1/swagger.json</a></div>
-      <div class="kv"><span>Hash</span><code>dab002b54a91</code></div>
-      <div class="kv"><span>Summary</span><strong>No change (dab002b54a91)</strong></div>
-      <div class="kv"><span>Fetched</span><span>2026-06-08T10:09:11Z</span></div>
-      <div class="kv"><span>Duration</span><span>124 ms</span></div>
+      <div class="kv"><span>Hash</span><code>ca3fa3d38e3d</code></div>
+      <div class="kv"><span>Summary</span><strong>File changed, API unchanged</strong></div>
+      <div class="kv"><span>Fetched</span><span>2026-06-08T15:19:42Z</span></div>
+      <div class="kv"><span>Duration</span><span>6620 ms</span></div>
       <div class="stats">
         <div class="stat"><span>Added</span><strong>0</strong></div>
         <div class="stat"><span>Removed</span><strong>0</strong></div>
@@ -649,9 +656,16 @@ Fetch duration ms: 75
         <div class="muted">None</div>
         <h4>Changed</h4>
         <div class="muted">None</div>
-        <pre>No change for POS API [TEST] (dab002b54a91)
-Fetch completed at: 2026-06-08T10:09:11Z
-Fetch duration ms: 124
+        <pre># Documentation-only change detected: POS API [TEST]
+
+- Time: 2026-06-08T15:19:42Z
+- Fetch completed at: 2026-06-08T15:19:42Z
+- Fetch duration ms: 6620
+- Swagger URL: https://posapi.egretail-test.cloud/swagger/v1/swagger.json
+- Previous hash: `dab002b54a915a065f612688be2cd607e284f3844568dd67b34f7de0cacd676d`
+- Current hash: `ca3fa3d38e3d4fad036aef15ec35366ad548307342cacea5f0965063f7a2546b`
+
+No contract-level API changes were detected.
 </pre>
       </details>
     </section>
@@ -662,10 +676,10 @@ Fetch duration ms: 124
         <span class="badge info">docs only</span>
       </div>
       <div class="kv"><span>URL</span><a href="https://posapi.egretail.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://posapi.egretail.cloud/swagger/v1/swagger.json</a></div>
-      <div class="kv"><span>Hash</span><code>b0e014d36840</code></div>
+      <div class="kv"><span>Hash</span><code>12d08c69b085</code></div>
       <div class="kv"><span>Summary</span><strong>File changed, API unchanged</strong></div>
-      <div class="kv"><span>Fetched</span><span>2026-06-08T10:09:18Z</span></div>
-      <div class="kv"><span>Duration</span><span>6565 ms</span></div>
+      <div class="kv"><span>Fetched</span><span>2026-06-08T15:19:41Z</span></div>
+      <div class="kv"><span>Duration</span><span>5573 ms</span></div>
       <div class="stats">
         <div class="stat"><span>Added</span><strong>0</strong></div>
         <div class="stat"><span>Removed</span><strong>0</strong></div>
@@ -681,12 +695,12 @@ Fetch duration ms: 124
         <div class="muted">None</div>
         <pre># Documentation-only change detected: POS API [PROD]
 
-- Time: 2026-06-08T10:09:18Z
-- Fetch completed at: 2026-06-08T10:09:18Z
-- Fetch duration ms: 6565
+- Time: 2026-06-08T15:19:41Z
+- Fetch completed at: 2026-06-08T15:19:41Z
+- Fetch duration ms: 5573
 - Swagger URL: https://posapi.egretail.cloud/swagger/v1/swagger.json
-- Previous hash: `e8e55e206fe73377c363f0eddf8faa94e06bc04394ee4eb75ca620668f46ac2e`
-- Current hash: `b0e014d368404e2bfa506c0456569618563d365ce511edc1dfcd27aa6eb79454`
+- Previous hash: `b0e014d368404e2bfa506c0456569618563d365ce511edc1dfcd27aa6eb79454`
+- Current hash: `12d08c69b085b4c7df8284a3e258892738a69f6806fbe57281a12359e45cf087`
 
 No contract-level API changes were detected.
 </pre>
@@ -746,12 +760,12 @@ No contract-level API changes were detected.
         <div class="muted">None</div>
         <pre># TEST vs PROD drift detected: POS API
 
-- Time: 2026-06-08T10:09:18Z
+- Time: 2026-06-08T15:19:42Z
 - Severity: non_breaking
 - TEST Swagger URL: https://posapi.egretail-test.cloud/swagger/v1/swagger.json
 - PROD Swagger URL: https://posapi.egretail.cloud/swagger/v1/swagger.json
-- TEST hash: `dab002b54a915a065f612688be2cd607e284f3844568dd67b34f7de0cacd676d`
-- PROD hash: `b0e014d368404e2bfa506c0456569618563d365ce511edc1dfcd27aa6eb79454`
+- TEST hash: `ca3fa3d38e3d4fad036aef15ec35366ad548307342cacea5f0965063f7a2546b`
+- PROD hash: `12d08c69b085b4c7df8284a3e258892738a69f6806fbe57281a12359e45cf087`
 
 ## Summary
 - Only in TEST: 2
@@ -786,8 +800,8 @@ No contract-level API changes were detected.
       <div class="kv"><span>URL</span><a href="https://promotionservice.egretail-dev.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://promotionservice.egretail-dev.cloud/swagger/v1/swagger.json</a></div>
       <div class="kv"><span>Hash</span><code>7d6b4cf376d5</code></div>
       <div class="kv"><span>Summary</span><strong>No change (7d6b4cf376d5)</strong></div>
-      <div class="kv"><span>Fetched</span><span>2026-06-08T10:09:19Z</span></div>
-      <div class="kv"><span>Duration</span><span>756 ms</span></div>
+      <div class="kv"><span>Fetched</span><span>2026-06-08T15:19:43Z</span></div>
+      <div class="kv"><span>Duration</span><span>882 ms</span></div>
       <div class="stats">
         <div class="stat"><span>Added</span><strong>0</strong></div>
         <div class="stat"><span>Removed</span><strong>0</strong></div>
@@ -802,8 +816,8 @@ No contract-level API changes were detected.
         <h4>Changed</h4>
         <div class="muted">None</div>
         <pre>No change for PromotionService [DEV] (7d6b4cf376d5)
-Fetch completed at: 2026-06-08T10:09:19Z
-Fetch duration ms: 756
+Fetch completed at: 2026-06-08T15:19:43Z
+Fetch duration ms: 882
 </pre>
       </details>
     </section>
@@ -816,8 +830,8 @@ Fetch duration ms: 756
       <div class="kv"><span>URL</span><a href="https://promotionservice.egretail-test.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://promotionservice.egretail-test.cloud/swagger/v1/swagger.json</a></div>
       <div class="kv"><span>Hash</span><code>7d6b4cf376d5</code></div>
       <div class="kv"><span>Summary</span><strong>No change (7d6b4cf376d5)</strong></div>
-      <div class="kv"><span>Fetched</span><span>2026-06-08T10:09:19Z</span></div>
-      <div class="kv"><span>Duration</span><span>948 ms</span></div>
+      <div class="kv"><span>Fetched</span><span>2026-06-08T15:19:43Z</span></div>
+      <div class="kv"><span>Duration</span><span>703 ms</span></div>
       <div class="stats">
         <div class="stat"><span>Added</span><strong>0</strong></div>
         <div class="stat"><span>Removed</span><strong>0</strong></div>
@@ -832,8 +846,8 @@ Fetch duration ms: 756
         <h4>Changed</h4>
         <div class="muted">None</div>
         <pre>No change for PromotionService [TEST] (7d6b4cf376d5)
-Fetch completed at: 2026-06-08T10:09:19Z
-Fetch duration ms: 948
+Fetch completed at: 2026-06-08T15:19:43Z
+Fetch duration ms: 703
 </pre>
       </details>
     </section>
@@ -846,8 +860,8 @@ Fetch duration ms: 948
       <div class="kv"><span>URL</span><a href="https://promotionservice.egretail.cloud/swagger/v1/swagger.json" target="_blank" rel="noreferrer">https://promotionservice.egretail.cloud/swagger/v1/swagger.json</a></div>
       <div class="kv"><span>Hash</span><code>7d6b4cf376d5</code></div>
       <div class="kv"><span>Summary</span><strong>No change (7d6b4cf376d5)</strong></div>
-      <div class="kv"><span>Fetched</span><span>2026-06-08T10:09:19Z</span></div>
-      <div class="kv"><span>Duration</span><span>674 ms</span></div>
+      <div class="kv"><span>Fetched</span><span>2026-06-08T15:19:43Z</span></div>
+      <div class="kv"><span>Duration</span><span>646 ms</span></div>
       <div class="stats">
         <div class="stat"><span>Added</span><strong>0</strong></div>
         <div class="stat"><span>Removed</span><strong>0</strong></div>
@@ -862,8 +876,8 @@ Fetch duration ms: 948
         <h4>Changed</h4>
         <div class="muted">None</div>
         <pre>No change for PromotionService [PROD] (7d6b4cf376d5)
-Fetch completed at: 2026-06-08T10:09:19Z
-Fetch duration ms: 674
+Fetch completed at: 2026-06-08T15:19:43Z
+Fetch duration ms: 646
 </pre>
       </details>
     </section>
