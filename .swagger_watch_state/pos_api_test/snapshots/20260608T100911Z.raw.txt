@@ -1698,19 +1698,19 @@
                 "schema": {
                   "$ref": "#/components/schemas/ItemSale.AddBundleToCart_Response"
                 },
-                "example": {"cart":{"startTime":"2026-06-08T10:09:13.7975331Z","sequenceNumber":122,"items":[{"article":{"ean":"2324","text":"Mountain skis GTX","normalPrice":700.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":0,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":1,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":650.0,"discountDetails":[{"discountType":"ArticleBundle","quantity":1.0,"discountAmountPerQuantity":50.0,"totalDiscountAmount":50.0,"description":"Ski bundle","id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":"9092813","offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"9032","text":"Mountain bindings GTR 900","normalPrice":1200.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":1,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":1050.0,"discountDetails":[{"discountType":"CampaignPrice","quantity":1.0,"discountAmountPerQuantity":150.0,"totalDiscountAmount":150.0,"description":null,"id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":null,"offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"3123","text":"Service item: ski preparation","normalPrice":0.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":2,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":0.0,"discountDetails":[],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":[{"text":"87.4","key":"weight","showToCashier":false},{"text":"2324","key":"appliesTo","showToCashier":false}],"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null}],"currency":"NOK","totals":null,"cartId":{"id":"324234-232-122","revision":5,"hashBasedMessageAuthenticationCode":""},"barCodeData":null,"vaTs":null,"customerOrderNumber":null,"tracingId":null,"externalOrderNumber":null,"orderVersion":null,"payments":null,"delivery":null,"customer":null,"note":null,"operationPending":false,"cartState":"InProgress","loyaltyNumber":null,"notes":null,"loyalty":null,"coupons":null,"externalOrderNumber2":null,"netCostDiscountPercentage":0.0,"customerOrderVariant":null,"mixTimeout":false,"tickets":null,"operator":null,"boardingPassAndFlightInfo":null,"isSealingRequired":null}}
+                "example": {"cart":{"startTime":"2026-06-08T02:08:25.3819815Z","sequenceNumber":122,"items":[{"article":{"ean":"2324","text":"Mountain skis GTX","normalPrice":700.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":0,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":1,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":650.0,"discountDetails":[{"discountType":"ArticleBundle","quantity":1.0,"discountAmountPerQuantity":50.0,"totalDiscountAmount":50.0,"description":"Ski bundle","id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":"9092813","offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"9032","text":"Mountain bindings GTR 900","normalPrice":1200.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":1,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":1050.0,"discountDetails":[{"discountType":"CampaignPrice","quantity":1.0,"discountAmountPerQuantity":150.0,"totalDiscountAmount":150.0,"description":null,"id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":null,"offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"3123","text":"Service item: ski preparation","normalPrice":0.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":2,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":0.0,"discountDetails":[],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":[{"text":"87.4","key":"weight","showToCashier":false},{"text":"2324","key":"appliesTo","showToCashier":false}],"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null}],"currency":"NOK","totals":null,"cartId":{"id":"324234-232-122","revision":5,"hashBasedMessageAuthenticationCode":""},"barCodeData":null,"vaTs":null,"customerOrderNumber":null,"tracingId":null,"externalOrderNumber":null,"orderVersion":null,"payments":null,"delivery":null,"customer":null,"note":null,"operationPending":false,"cartState":"InProgress","loyaltyNumber":null,"notes":null,"loyalty":null,"coupons":null,"externalOrderNumber2":null,"netCostDiscountPercentage":0.0,"customerOrderVariant":null,"mixTimeout":false,"tickets":null,"operator":null,"boardingPassAndFlightInfo":null,"isSealingRequired":null}}
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ItemSale.AddBundleToCart_Response"
                 },
-                "example": {"cart":{"startTime":"2026-06-08T10:09:13.7975331Z","sequenceNumber":122,"items":[{"article":{"ean":"2324","text":"Mountain skis GTX","normalPrice":700.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":0,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":1,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":650.0,"discountDetails":[{"discountType":"ArticleBundle","quantity":1.0,"discountAmountPerQuantity":50.0,"totalDiscountAmount":50.0,"description":"Ski bundle","id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":"9092813","offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"9032","text":"Mountain bindings GTR 900","normalPrice":1200.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":1,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":1050.0,"discountDetails":[{"discountType":"CampaignPrice","quantity":1.0,"discountAmountPerQuantity":150.0,"totalDiscountAmount":150.0,"description":null,"id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":null,"offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"3123","text":"Service item: ski preparation","normalPrice":0.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":2,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":0.0,"discountDetails":[],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":[{"text":"87.4","key":"weight","showToCashier":false},{"text":"2324","key":"appliesTo","showToCashier":false}],"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null}],"currency":"NOK","totals":null,"cartId":{"id":"324234-232-122","revision":5,"hashBasedMessageAuthenticationCode":""},"barCodeData":null,"vaTs":null,"customerOrderNumber":null,"tracingId":null,"externalOrderNumber":null,"orderVersion":null,"payments":null,"delivery":null,"customer":null,"note":null,"operationPending":false,"cartState":"InProgress","loyaltyNumber":null,"notes":null,"loyalty":null,"coupons":null,"externalOrderNumber2":null,"netCostDiscountPercentage":0.0,"customerOrderVariant":null,"mixTimeout":false,"tickets":null,"operator":null,"boardingPassAndFlightInfo":null,"isSealingRequired":null}}
+                "example": {"cart":{"startTime":"2026-06-08T02:08:25.3819815Z","sequenceNumber":122,"items":[{"article":{"ean":"2324","text":"Mountain skis GTX","normalPrice":700.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":0,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":1,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":650.0,"discountDetails":[{"discountType":"ArticleBundle","quantity":1.0,"discountAmountPerQuantity":50.0,"totalDiscountAmount":50.0,"description":"Ski bundle","id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":"9092813","offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"9032","text":"Mountain bindings GTR 900","normalPrice":1200.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":1,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":1050.0,"discountDetails":[{"discountType":"CampaignPrice","quantity":1.0,"discountAmountPerQuantity":150.0,"totalDiscountAmount":150.0,"description":null,"id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":null,"offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"3123","text":"Service item: ski preparation","normalPrice":0.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":2,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":0.0,"discountDetails":[],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":[{"text":"87.4","key":"weight","showToCashier":false},{"text":"2324","key":"appliesTo","showToCashier":false}],"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null}],"currency":"NOK","totals":null,"cartId":{"id":"324234-232-122","revision":5,"hashBasedMessageAuthenticationCode":""},"barCodeData":null,"vaTs":null,"customerOrderNumber":null,"tracingId":null,"externalOrderNumber":null,"orderVersion":null,"payments":null,"delivery":null,"customer":null,"note":null,"operationPending":false,"cartState":"InProgress","loyaltyNumber":null,"notes":null,"loyalty":null,"coupons":null,"externalOrderNumber2":null,"netCostDiscountPercentage":0.0,"customerOrderVariant":null,"mixTimeout":false,"tickets":null,"operator":null,"boardingPassAndFlightInfo":null,"isSealingRequired":null}}
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ItemSale.AddBundleToCart_Response"
                 },
-                "example": {"cart":{"startTime":"2026-06-08T10:09:13.7975331Z","sequenceNumber":122,"items":[{"article":{"ean":"2324","text":"Mountain skis GTX","normalPrice":700.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":0,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":1,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":650.0,"discountDetails":[{"discountType":"ArticleBundle","quantity":1.0,"discountAmountPerQuantity":50.0,"totalDiscountAmount":50.0,"description":"Ski bundle","id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":"9092813","offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"9032","text":"Mountain bindings GTR 900","normalPrice":1200.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":1,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":1050.0,"discountDetails":[{"discountType":"CampaignPrice","quantity":1.0,"discountAmountPerQuantity":150.0,"totalDiscountAmount":150.0,"description":null,"id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":null,"offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"3123","text":"Service item: ski preparation","normalPrice":0.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":2,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":0.0,"discountDetails":[],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":[{"text":"87.4","key":"weight","showToCashier":false},{"text":"2324","key":"appliesTo","showToCashier":false}],"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null}],"currency":"NOK","totals":null,"cartId":{"id":"324234-232-122","revision":5,"hashBasedMessageAuthenticationCode":""},"barCodeData":null,"vaTs":null,"customerOrderNumber":null,"tracingId":null,"externalOrderNumber":null,"orderVersion":null,"payments":null,"delivery":null,"customer":null,"note":null,"operationPending":false,"cartState":"InProgress","loyaltyNumber":null,"notes":null,"loyalty":null,"coupons":null,"externalOrderNumber2":null,"netCostDiscountPercentage":0.0,"customerOrderVariant":null,"mixTimeout":false,"tickets":null,"operator":null,"boardingPassAndFlightInfo":null,"isSealingRequired":null}}
+                "example": {"cart":{"startTime":"2026-06-08T02:08:25.3819815Z","sequenceNumber":122,"items":[{"article":{"ean":"2324","text":"Mountain skis GTX","normalPrice":700.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":0,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":1,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":650.0,"discountDetails":[{"discountType":"ArticleBundle","quantity":1.0,"discountAmountPerQuantity":50.0,"totalDiscountAmount":50.0,"description":"Ski bundle","id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":"9092813","offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"9032","text":"Mountain bindings GTR 900","normalPrice":1200.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":1,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":1050.0,"discountDetails":[{"discountType":"CampaignPrice","quantity":1.0,"discountAmountPerQuantity":150.0,"totalDiscountAmount":150.0,"description":null,"id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":null,"offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"3123","text":"Service item: ski preparation","normalPrice":0.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":2,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":0.0,"discountDetails":[],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":[{"text":"87.4","key":"weight","showToCashier":false},{"text":"2324","key":"appliesTo","showToCashier":false}],"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null}],"currency":"NOK","totals":null,"cartId":{"id":"324234-232-122","revision":5,"hashBasedMessageAuthenticationCode":""},"barCodeData":null,"vaTs":null,"customerOrderNumber":null,"tracingId":null,"externalOrderNumber":null,"orderVersion":null,"payments":null,"delivery":null,"customer":null,"note":null,"operationPending":false,"cartState":"InProgress","loyaltyNumber":null,"notes":null,"loyalty":null,"coupons":null,"externalOrderNumber2":null,"netCostDiscountPercentage":0.0,"customerOrderVariant":null,"mixTimeout":false,"tickets":null,"operator":null,"boardingPassAndFlightInfo":null,"isSealingRequired":null}}
               }
             }
           },
@@ -11939,7 +11939,7 @@
                 ],
                 "description": "Represent an order delivery"
               },
-              "example": {"externalOrderNo":"123456","internalOrderNo":null,"store":{"no":318,"storeNoType":null},"deliveredLines":[{"lineNo":1,"deliveredQuantity":1.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"8745982347562346","shippingProgress":null,"deliveryFinished":null}},{"lineNo":2,"deliveredQuantity":3.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"8745982347562346","shippingProgress":null,"deliveryFinished":null}},{"lineNo":3,"deliveredQuantity":1.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"3453457676577788","shippingProgress":null,"deliveryFinished":null}}],"captureDeliveredUnPaidItems":false,"shippingProgress":null}
+              "example": {"externalOrderNo":"123456","internalOrderNo":null,"store":{"no":318,"storeNoType":null},"deliveredLines":[{"lineNo":1,"deliveredQuantity":1.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"8745982347562346","shippingProgress":null,"deliveryFinished":null}},{"lineNo":2,"deliveredQuantity":3.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"8745982347562346","shippingProgress":null,"deliveryFinished":null}},{"lineNo":3,"deliveredQuantity":1.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"3453457676577788","shippingProgress":null,"deliveryFinished":null}}],"captureDeliveredUnPaidItems":false,"shippingProgress":null,"deliverNonPhysicalItems":true}
             },
             "application/json": {
               "schema": {
@@ -11950,7 +11950,7 @@
                 ],
                 "description": "Represent an order delivery"
               },
-              "example": {"externalOrderNo":"123456","internalOrderNo":null,"store":{"no":318,"storeNoType":null},"deliveredLines":[{"lineNo":1,"deliveredQuantity":1.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"8745982347562346","shippingProgress":null,"deliveryFinished":null}},{"lineNo":2,"deliveredQuantity":3.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"8745982347562346","shippingProgress":null,"deliveryFinished":null}},{"lineNo":3,"deliveredQuantity":1.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"3453457676577788","shippingProgress":null,"deliveryFinished":null}}],"captureDeliveredUnPaidItems":false,"shippingProgress":null}
+              "example": {"externalOrderNo":"123456","internalOrderNo":null,"store":{"no":318,"storeNoType":null},"deliveredLines":[{"lineNo":1,"deliveredQuantity":1.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"8745982347562346","shippingProgress":null,"deliveryFinished":null}},{"lineNo":2,"deliveredQuantity":3.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"8745982347562346","shippingProgress":null,"deliveryFinished":null}},{"lineNo":3,"deliveredQuantity":1.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"3453457676577788","shippingProgress":null,"deliveryFinished":null}}],"captureDeliveredUnPaidItems":false,"shippingProgress":null,"deliverNonPhysicalItems":true}
             },
             "text/json": {
               "schema": {
@@ -11961,7 +11961,7 @@
                 ],
                 "description": "Represent an order delivery"
               },
-              "example": {"externalOrderNo":"123456","internalOrderNo":null,"store":{"no":318,"storeNoType":null},"deliveredLines":[{"lineNo":1,"deliveredQuantity":1.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"8745982347562346","shippingProgress":null,"deliveryFinished":null}},{"lineNo":2,"deliveredQuantity":3.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"8745982347562346","shippingProgress":null,"deliveryFinished":null}},{"lineNo":3,"deliveredQuantity":1.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"3453457676577788","shippingProgress":null,"deliveryFinished":null}}],"captureDeliveredUnPaidItems":false,"shippingProgress":null}
+              "example": {"externalOrderNo":"123456","internalOrderNo":null,"store":{"no":318,"storeNoType":null},"deliveredLines":[{"lineNo":1,"deliveredQuantity":1.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"8745982347562346","shippingProgress":null,"deliveryFinished":null}},{"lineNo":2,"deliveredQuantity":3.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"8745982347562346","shippingProgress":null,"deliveryFinished":null}},{"lineNo":3,"deliveredQuantity":1.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"3453457676577788","shippingProgress":null,"deliveryFinished":null}}],"captureDeliveredUnPaidItems":false,"shippingProgress":null,"deliverNonPhysicalItems":true}
             },
             "application/*+json": {
               "schema": {
@@ -11972,7 +11972,7 @@
                 ],
                 "description": "Represent an order delivery"
               },
-              "example": {"externalOrderNo":"123456","internalOrderNo":null,"store":{"no":318,"storeNoType":null},"deliveredLines":[{"lineNo":1,"deliveredQuantity":1.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"8745982347562346","shippingProgress":null,"deliveryFinished":null}},{"lineNo":2,"deliveredQuantity":3.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"8745982347562346","shippingProgress":null,"deliveryFinished":null}},{"lineNo":3,"deliveredQuantity":1.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"3453457676577788","shippingProgress":null,"deliveryFinished":null}}],"captureDeliveredUnPaidItems":false,"shippingProgress":null}
+              "example": {"externalOrderNo":"123456","internalOrderNo":null,"store":{"no":318,"storeNoType":null},"deliveredLines":[{"lineNo":1,"deliveredQuantity":1.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"8745982347562346","shippingProgress":null,"deliveryFinished":null}},{"lineNo":2,"deliveredQuantity":3.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"8745982347562346","shippingProgress":null,"deliveryFinished":null}},{"lineNo":3,"deliveredQuantity":1.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"3453457676577788","shippingProgress":null,"deliveryFinished":null}}],"captureDeliveredUnPaidItems":false,"shippingProgress":null,"deliverNonPhysicalItems":true}
             }
           }
         },
@@ -12391,6 +12391,100 @@
         }
       }
     },
+    "/api/Payment/BeginKlarnaPayment": {
+      "post": {
+        "tags": [
+          "Payment"
+        ],
+        "summary": "Begins Klarna payment.",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemSale.BeginKlarnaPayment_Request"
+                  }
+                ],
+                "description": "Request to begin payment with Klarna."
+              }
+            },
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemSale.BeginKlarnaPayment_Request"
+                  }
+                ],
+                "description": "Request to begin payment with Klarna."
+              }
+            },
+            "text/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemSale.BeginKlarnaPayment_Request"
+                  }
+                ],
+                "description": "Request to begin payment with Klarna."
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemSale.BeginKlarnaPayment_Request"
+                  }
+                ],
+                "description": "Request to begin payment with Klarna."
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemSale.BeginKlarnaPayment_Response"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemSale.BeginKlarnaPayment_Response"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemSale.BeginKlarnaPayment_Response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApiBadRequestResponse_BeginKlarnaPaymentErrorType"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApiBadRequestResponse_BeginKlarnaPaymentErrorType"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApiBadRequestResponse_BeginKlarnaPaymentErrorType"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Payment/CancelBonusPayment": {
       "post": {
         "tags": [
@@ -12572,6 +12666,100 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PosApiBadRequestResponse_CancelGiftCardPaymentErrorType"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Payment/EndKlarnaPayment": {
+      "post": {
+        "tags": [
+          "Payment"
+        ],
+        "summary": "Ends the Klarna payment. Verifies Klarna order status and adds payment authorization to receipt if Klarna order checkout is complete.",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemSale.EndKlarnaPayment_Request"
+                  }
+                ],
+                "description": "Request to finalize Klarna payment and add payment authorization to the cart."
+              }
+            },
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemSale.EndKlarnaPayment_Request"
+                  }
+                ],
+                "description": "Request to finalize Klarna payment and add payment authorization to the cart."
+              }
+            },
+            "text/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemSale.EndKlarnaPayment_Request"
+                  }
+                ],
+                "description": "Request to finalize Klarna payment and add payment authorization to the cart."
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemSale.EndKlarnaPayment_Request"
+                  }
+                ],
+                "description": "Request to finalize Klarna payment and add payment authorization to the cart."
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemSale.EndKlarnaPayment_Response"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemSale.EndKlarnaPayment_Response"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemSale.EndKlarnaPayment_Response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApiBadRequestResponse_EndKlarnaPaymentErrorType"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApiBadRequestResponse_EndKlarnaPaymentErrorType"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApiBadRequestResponse_EndKlarnaPaymentErrorType"
                 }
               }
             }
@@ -14349,6 +14537,22 @@
         "type": "string",
         "description": "Possible error types for BeginCartEditing"
       },
+      "BeginKlarnaPaymentErrorType": {
+        "enum": [
+          "GeneralFault",
+          "CartNotFoundFault",
+          "CartCompletedFault",
+          "InvalidHashBasedMessageAuthenticationCodeFault",
+          "InvalidCartIdentificatorFault",
+          "CartIsCancelledFault",
+          "CartIsSuspendedFault",
+          "InvalidTransactionTypeFault",
+          "TooManyCartItemsInCartFault",
+          "PaymentFailedFault"
+        ],
+        "type": "string",
+        "description": "Possible error types for BeginKlarnaPayment"
+      },
       "BoardingPassAndFlightInfo": {
         "type": "object",
         "properties": {
@@ -16114,6 +16318,22 @@
         "type": "string",
         "description": "Possible error types for EndDelivery"
       },
+      "EndKlarnaPaymentErrorType": {
+        "enum": [
+          "GeneralFault",
+          "CartNotFoundFault",
+          "CartCompletedFault",
+          "InvalidHashBasedMessageAuthenticationCodeFault",
+          "InvalidCartIdentificatorFault",
+          "CartIsCancelledFault",
+          "CartIsSuspendedFault",
+          "InvalidTransactionTypeFault",
+          "TooManyCartItemsInCartFault",
+          "PaymentFailedFault"
+        ],
+        "type": "string",
+        "description": "Possible error types for EndKlarnaPayment"
+      },
       "GetAvailableBonusErrorType": {
         "enum": [
           "GeneralFault",
@@ -17376,6 +17596,78 @@
         },
         "additionalProperties": false,
         "description": "Response when starting editing mode"
+      },
+      "ItemSale.BeginKlarnaPayment_Request": {
+        "type": "object",
+        "properties": {
+          "cartId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ItemSale.CartIdentificator"
+              }
+            ],
+            "description": "The unique Cart identifier.",
+            "nullable": true
+          },
+          "backToStoreUri": {
+            "type": "string",
+            "description": "Gets or sets URI of your store page.",
+            "nullable": true
+          },
+          "checkoutUri": {
+            "type": "string",
+            "description": "Gets or sets URI of your checkout page.",
+            "nullable": true
+          },
+          "confirmationUri": {
+            "type": "string",
+            "description": "Gets or sets the URI of your confirmation page.",
+            "nullable": true
+          },
+          "pushUri": {
+            "type": "string",
+            "description": "Gets or sets the URI of your push-notification page. Once payment is complete Klarna will perform POST request to this URI.",
+            "nullable": true
+          },
+          "termsUri": {
+            "type": "string",
+            "description": "Gets or sets the URI of your terms and conditions.",
+            "nullable": true
+          },
+          "locale": {
+            "type": "string",
+            "description": "Gets or sets locale indicative for language and other location-specific details (RFC1766)",
+            "nullable": true
+          },
+          "validationUri": {
+            "type": "string",
+            "description": "URI of your order validation page, see <a href=\"https://developers.klarna.com/en/se/kco-v2/checkout/use-cases#validate-checkout-order\">Klarna specification.</a>.",
+            "nullable": true
+          },
+          "prefilledCustomerInfo": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ItemSale.KlarnaCustomerInfo"
+              }
+            ],
+            "description": "Customer information that can be prefilled in the Klarna checkout UI.\r\nNone of the information is required. Any fields that are filled out will be sent to Klarna when creating the order.\r\nIf an existing Klarna order exists in cache for the Cart, it is returned from cache as is.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Request to begin payment with Klarna."
+      },
+      "ItemSale.BeginKlarnaPayment_Response": {
+        "type": "object",
+        "properties": {
+          "checkoutSnippet": {
+            "type": "string",
+            "description": "Gets or sets the checkout snippet.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Response that contains Klarna checkout HTML snippet."
       },
       "ItemSale.BundleInfo": {
         "required": [
@@ -18727,6 +19019,23 @@
         "additionalProperties": false,
         "description": "Contains customer information"
       },
+      "ItemSale.CartNote": {
+        "type": "object",
+        "properties": {
+          "note": {
+            "type": "string",
+            "nullable": true
+          },
+          "noteKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "isForUser": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
       "ItemSale.CartPayment": {
         "required": [
           "amount",
@@ -19423,6 +19732,10 @@
             "type": "string",
             "description": "The payment reference number to use in the payment capture",
             "nullable": true
+          },
+          "deliverNonPhysicalItems": {
+            "type": "boolean",
+            "description": "When true, items with ArticleType Freight are automatically delivered server-side\r\nwithout needing to list them in CartItemDelivery."
           }
         },
         "additionalProperties": false,
@@ -19835,6 +20148,80 @@
         },
         "additionalProperties": false,
         "description": "Response object for service method EndDelivery"
+      },
+      "ItemSale.EndKlarnaPayment_Request": {
+        "type": "object",
+        "properties": {
+          "cartId": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ItemSale.CartIdentificator"
+              }
+            ],
+            "description": "The unique Cart identifier.",
+            "nullable": true
+          },
+          "klarnaOrderId": {
+            "type": "string",
+            "description": "Gets or sets the Klarna order identifier.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Request to finalize Klarna payment and add payment authorization to the cart."
+      },
+      "ItemSale.EndKlarnaPayment_Response": {
+        "type": "object",
+        "properties": {
+          "contactInfo": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ItemSale.CartContactInfo"
+              }
+            ],
+            "description": "Gets or sets the customer contact information.",
+            "nullable": true
+          },
+          "cart": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ItemSale.Cart"
+              }
+            ],
+            "description": "Cart with payment authorization."
+          },
+          "deliveryAddress": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ItemSale.CartAddress"
+              }
+            ],
+            "description": "Gets or sets the delivery address.",
+            "nullable": true
+          },
+          "socialId": {
+            "type": "string",
+            "description": "Gets or sets the customer social identifier.",
+            "nullable": true
+          },
+          "companyId": {
+            "type": "string",
+            "description": "Gets or sets the company id",
+            "nullable": true
+          },
+          "companyName": {
+            "type": "string",
+            "description": "Gets or sets the company name",
+            "nullable": true
+          },
+          "reference": {
+            "type": "string",
+            "description": "Gets or sets the reference",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Klarna payment result."
       },
       "ItemSale.ExchangeRateInformation": {
         "type": "object",
@@ -20680,6 +21067,118 @@
         "additionalProperties": false,
         "description": "Represents an object with item information to be sold."
       },
+      "ItemSale.KlarnaCustomerInfo": {
+        "type": "object",
+        "properties": {
+          "customerType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ItemSale.KlarnaCustomerType"
+              }
+            ],
+            "description": "The type of customer (person or organization/B2B).",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "description": "First name",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Last name",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "description": "E-mail address",
+            "nullable": true
+          },
+          "mobilePhone": {
+            "type": "string",
+            "description": "Phone number",
+            "nullable": true
+          },
+          "companyId": {
+            "type": "string",
+            "description": "For B2B, this field is used for the organization’s official registration id (Organization number).",
+            "nullable": true
+          },
+          "reference": {
+            "type": "string",
+            "description": "Only for B2B orders. Reference information entered by the customer for this B2B order.",
+            "nullable": true
+          },
+          "companyName": {
+            "type": "string",
+            "description": "Only for B2B orders. The name of the organization placing the order.",
+            "nullable": true
+          },
+          "socialId": {
+            "type": "string",
+            "description": "National identification number",
+            "nullable": true
+          },
+          "gender": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ItemSale.KlarnaGender"
+              }
+            ],
+            "description": "Gender",
+            "nullable": true
+          },
+          "birthday": {
+            "type": "string",
+            "description": "The customer’s birthdate",
+            "format": "date-time",
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "description": "Country (ISO-3166 alpha)",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "description": "City",
+            "nullable": true
+          },
+          "street1": {
+            "type": "string",
+            "description": "Street address",
+            "nullable": true
+          },
+          "street2": {
+            "type": "string",
+            "description": "A second address line. Can be used for C/O.",
+            "nullable": true
+          },
+          "zip": {
+            "type": "string",
+            "description": "Postal code",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Customer information that can be prefilled in the Klarna checkout UI."
+      },
+      "ItemSale.KlarnaCustomerType": {
+        "enum": [
+          "Person",
+          "Organization"
+        ],
+        "type": "string",
+        "description": "The types of customers that can be used in Klarna payments"
+      },
+      "ItemSale.KlarnaGender": {
+        "enum": [
+          "Male",
+          "Female"
+        ],
+        "type": "string",
+        "description": "Gender types that can be used for Klarna payments"
+      },
       "ItemSale.LabelType": {
         "required": [
           "id"
@@ -21165,6 +21664,13 @@
           "useAlternativeVat": {
             "type": "boolean",
             "description": "Set this for the transaction to use alternative VAT. It will be applied only if the items can use alternative VAT",
+            "nullable": true
+          },
+          "cartNotes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemSale.CartNote"
+            },
             "nullable": true
           }
         },
@@ -24102,7 +24608,8 @@
           "DepositRefund",
           "Service",
           "Orderable",
-          "NonShelf"
+          "NonShelf",
+          "Freight"
         ],
         "type": "string",
         "description": "Article types on Cart items"
@@ -26960,6 +27467,10 @@
             ],
             "description": "Gets or sets the shipping progress for the order line\r\nShippingProgress can be set for the whole order or individual order lines\r\nWhen ShippingProgress is set both for the whole order and individual order lines, the individual order line ShippingProgress will be used",
             "nullable": true
+          },
+          "deliverNonPhysicalItems": {
+            "type": "boolean",
+            "description": "When true, items with ArticleType Freight are automatically delivered server-side\r\nwithout needing to list them in DeliveredLines."
           }
         },
         "additionalProperties": false,
@@ -29794,6 +30305,66 @@
         "additionalProperties": false,
         "description": "Returned with most failed requests for the current version of POS API."
       },
+      "PosApiBadRequestResponse_BeginKlarnaPaymentErrorType": {
+        "required": [
+          "Message",
+          "Reference",
+          "Type"
+        ],
+        "type": "object",
+        "properties": {
+          "Type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BeginKlarnaPaymentErrorType"
+              }
+            ],
+            "description": "The type of error. Maps to the fault type in the on-premise version."
+          },
+          "Message": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The error message."
+          },
+          "Reference": {
+            "type": "string",
+            "description": "The error reference. Refer to this id when querying about a specific error.",
+            "format": "uuid"
+          },
+          "Requirements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemSale.RequirementFaultType"
+            },
+            "description": "The types of requirements if the fault is ItemRequirementsNotMet.",
+            "nullable": true
+          },
+          "RequiredAge": {
+            "type": "integer",
+            "description": "Age of the ItemIsAgeRestricted restriction",
+            "format": "int32",
+            "nullable": true
+          },
+          "MaxQuantity": {
+            "type": "integer",
+            "description": "Max quantity of item in the receipt",
+            "format": "int32",
+            "nullable": true
+          },
+          "MessageForCashier": {
+            "type": "string",
+            "description": "Message for cashier if the fault is ItemRequirementsNotMet.",
+            "nullable": true
+          },
+          "FaultCode": {
+            "type": "string",
+            "description": "ExtraIdentifier for the fault",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Returned with most failed requests for the current version of POS API."
+      },
       "PosApiBadRequestResponse_CalculateErrorType": {
         "required": [
           "Message",
@@ -30946,6 +31517,66 @@
             "allOf": [
               {
                 "$ref": "#/components/schemas/EndDeliveryErrorType"
+              }
+            ],
+            "description": "The type of error. Maps to the fault type in the on-premise version."
+          },
+          "Message": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The error message."
+          },
+          "Reference": {
+            "type": "string",
+            "description": "The error reference. Refer to this id when querying about a specific error.",
+            "format": "uuid"
+          },
+          "Requirements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemSale.RequirementFaultType"
+            },
+            "description": "The types of requirements if the fault is ItemRequirementsNotMet.",
+            "nullable": true
+          },
+          "RequiredAge": {
+            "type": "integer",
+            "description": "Age of the ItemIsAgeRestricted restriction",
+            "format": "int32",
+            "nullable": true
+          },
+          "MaxQuantity": {
+            "type": "integer",
+            "description": "Max quantity of item in the receipt",
+            "format": "int32",
+            "nullable": true
+          },
+          "MessageForCashier": {
+            "type": "string",
+            "description": "Message for cashier if the fault is ItemRequirementsNotMet.",
+            "nullable": true
+          },
+          "FaultCode": {
+            "type": "string",
+            "description": "ExtraIdentifier for the fault",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Returned with most failed requests for the current version of POS API."
+      },
+      "PosApiBadRequestResponse_EndKlarnaPaymentErrorType": {
+        "required": [
+          "Message",
+          "Reference",
+          "Type"
+        ],
+        "type": "object",
+        "properties": {
+          "Type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EndKlarnaPaymentErrorType"
               }
             ],
             "description": "The type of error. Maps to the fault type in the on-premise version."
