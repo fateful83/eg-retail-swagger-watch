@@ -16932,6 +16932,10 @@
             "type": "boolean",
             "description": "Parameter representing whether conversion to EAN20 should be enabled during import"
           },
+          "enableEan7388Conversion": {
+            "type": "boolean",
+            "description": "Parameter representing whether conversion of EAN7388 variable-price codes should be enabled"
+          },
           "manageStoreAssortment": {
             "type": "boolean",
             "description": "Parameter representing whether managing store assortment should be enabled"

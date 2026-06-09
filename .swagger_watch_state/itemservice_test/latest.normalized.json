@@ -425,6 +425,10 @@
             "description": "Parameter representing whether conversion to EAN20 should be enabled during import",
             "type": "boolean"
           },
+          "enableEan7388Conversion": {
+            "description": "Parameter representing whether conversion of EAN7388 variable-price codes should be enabled",
+            "type": "boolean"
+          },
           "generateExternalItemNo": {
             "description": "Based on this flag external item number is generated or not (editible in UI).",
             "type": "boolean"
