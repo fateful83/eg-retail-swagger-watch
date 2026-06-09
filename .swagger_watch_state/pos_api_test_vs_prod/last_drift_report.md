@@ -1,11 +1,11 @@
 # TEST vs PROD drift detected: POS API
 
-- Time: 2026-06-09T01:46:30Z
+- Time: 2026-06-09T08:53:38Z
 - Severity: non_breaking
 - TEST Swagger URL: https://posapi.egretail-test.cloud/swagger/v1/swagger.json
 - PROD Swagger URL: https://posapi.egretail.cloud/swagger/v1/swagger.json
-- TEST hash: `f881f2ca854c1be82ce23b3f1969fbb0f82a5be61127bdd9c51e681ab6a36746`
-- PROD hash: `4e1bfa2d02b3efd5a122db48b93df2a83dad2080d7916ef5e2eb6c4e21c78608`
+- TEST hash: `14b13f80fc33db093c552944d2cb909175216e788655bacb79a27a92d52d606f`
+- PROD hash: `bb6003eb378f8849ddac87872af8105375156c4108ded5df2bb2462187df607c`
 
 ## Summary
 - Only in TEST: 2
