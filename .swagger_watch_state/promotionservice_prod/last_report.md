@@ -1,3 +1,3 @@
 No change for PromotionService [PROD] (7d6b4cf376d5)
-Fetch completed at: 2026-06-11T02:08:40Z
-Fetch duration ms: 723
+Fetch completed at: 2026-06-11T09:57:13Z
+Fetch duration ms: 610
