@@ -8967,11 +8967,6 @@
         "additionalProperties": false,
         "description": "Request for resuming a cart",
         "properties": {
-          "apiKey": {
-            "description": "Optional API key",
-            "nullable": true,
-            "type": "string"
-          },
           "cartId": {
             "allOf": [
               {
@@ -24556,7 +24551,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-06-19T14:33:46.9621508Z",
+                    "startTime": "2026-06-19T10:06:29.1831296Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
@@ -24835,7 +24830,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-06-19T14:33:46.9621508Z",
+                    "startTime": "2026-06-19T10:06:29.1831296Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
@@ -25114,7 +25109,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-06-19T14:33:46.9621508Z",
+                    "startTime": "2026-06-19T10:06:29.1831296Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
