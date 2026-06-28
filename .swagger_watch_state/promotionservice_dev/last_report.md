@@ -1,3 +1,3 @@
 No change for PromotionService [DEV] (7d6b4cf376d5)
-Fetch completed at: 2026-06-28T13:06:18Z
-Fetch duration ms: 477
+Fetch completed at: 2026-06-28T18:57:40Z
+Fetch duration ms: 601
