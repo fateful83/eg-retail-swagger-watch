@@ -1304,6 +1304,11 @@
             "readOnly": true,
             "type": "string"
           },
+          "calculationRulesetId": {
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
           "costCarrier": {
             "nullable": true,
             "type": "string"
