@@ -18012,6 +18012,11 @@
             "format": "date-time",
             "nullable": true
           },
+          "scheduledImportDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
           "approvalRuleset": {
             "enum": [
               "DefaultItem",

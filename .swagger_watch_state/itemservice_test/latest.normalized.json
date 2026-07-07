@@ -1568,6 +1568,11 @@
             ],
             "nullable": true
           },
+          "scheduledImportDate": {
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
           "seasonId": {
             "nullable": true,
             "type": "string"
