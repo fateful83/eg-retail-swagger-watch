@@ -16918,6 +16918,30 @@
             "description": "Parameter representing what GTIN prefix would you like to have for new items.",
             "nullable": true
           },
+          "gtinSeriesMode": {
+            "enum": [
+              "Prefix",
+              "Range"
+            ],
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GtinSeriesMode"
+              }
+            ],
+            "description": "Parameter representing whether GTIN generation uses a prefix or a from-to range."
+          },
+          "gtinRangeFrom": {
+            "type": "integer",
+            "description": "Lower bound of the GTIN/EAN number series range. Only relevant when GtinSeriesMode is Range.",
+            "format": "int64",
+            "nullable": true
+          },
+          "gtinRangeTo": {
+            "type": "integer",
+            "description": "Upper bound of the GTIN/EAN number series range. Only relevant when GtinSeriesMode is Range.",
+            "format": "int64",
+            "nullable": true
+          },
           "itemImageUrlTemplate": {
             "type": "string",
             "description": "Parameter representing what is the source of images for items.",
@@ -17881,6 +17905,13 @@
           "Area",
           "Group",
           "Subgroup"
+        ],
+        "type": "string"
+      },
+      "GtinSeriesMode": {
+        "enum": [
+          "Prefix",
+          "Range"
         ],
         "type": "string"
       },

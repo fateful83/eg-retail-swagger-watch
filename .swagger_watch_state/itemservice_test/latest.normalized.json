@@ -438,6 +438,30 @@
             "nullable": true,
             "type": "string"
           },
+          "gtinRangeFrom": {
+            "description": "Lower bound of the GTIN/EAN number series range. Only relevant when GtinSeriesMode is Range.",
+            "format": "int64",
+            "nullable": true,
+            "type": "integer"
+          },
+          "gtinRangeTo": {
+            "description": "Upper bound of the GTIN/EAN number series range. Only relevant when GtinSeriesMode is Range.",
+            "format": "int64",
+            "nullable": true,
+            "type": "integer"
+          },
+          "gtinSeriesMode": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GtinSeriesMode"
+              }
+            ],
+            "description": "Parameter representing whether GTIN generation uses a prefix or a from-to range.",
+            "enum": [
+              "Prefix",
+              "Range"
+            ]
+          },
           "hiddenAttributes": {
             "allOf": [
               {
@@ -1427,6 +1451,13 @@
           "Area",
           "Group",
           "Subgroup"
+        ],
+        "type": "string"
+      },
+      "GtinSeriesMode": {
+        "enum": [
+          "Prefix",
+          "Range"
         ],
         "type": "string"
       },
