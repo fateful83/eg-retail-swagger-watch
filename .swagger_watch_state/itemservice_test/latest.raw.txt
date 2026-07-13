@@ -21219,5 +21219,121 @@
     {
       "Bearer": [ ]
     }
+  ],
+  "tags": [
+    {
+      "name": "Activity"
+    },
+    {
+      "name": "AlternativeGroups"
+    },
+    {
+      "name": "BrandCategories"
+    },
+    {
+      "name": "Brands"
+    },
+    {
+      "name": "Classifications"
+    },
+    {
+      "name": "Collections"
+    },
+    {
+      "name": "Colors"
+    },
+    {
+      "name": "Concession"
+    },
+    {
+      "name": "ConcessionStores"
+    },
+    {
+      "name": "Configuration"
+    },
+    {
+      "name": "Countries"
+    },
+    {
+      "name": "DeliveryDateList"
+    },
+    {
+      "name": "ExcelExportTemplates"
+    },
+    {
+      "name": "FileExport"
+    },
+    {
+      "name": "Imports"
+    },
+    {
+      "name": "ItemCategories"
+    },
+    {
+      "name": "ItemLists"
+    },
+    {
+      "name": "ItemSegmentation"
+    },
+    {
+      "name": "ItemTypes"
+    },
+    {
+      "name": "MarketingCodes"
+    },
+    {
+      "name": "MarketingExclusivities"
+    },
+    {
+      "name": "NonsaleType"
+    },
+    {
+      "name": "Nutritions"
+    },
+    {
+      "name": "PlanningCodes"
+    },
+    {
+      "name": "ProcurementRules"
+    },
+    {
+      "name": "ReplenishmentCodes"
+    },
+    {
+      "name": "ReportCategories"
+    },
+    {
+      "name": "RoundingRecoveryRetailPrices"
+    },
+    {
+      "name": "SearchableColors"
+    },
+    {
+      "name": "SeasonCodes"
+    },
+    {
+      "name": "Seasons"
+    },
+    {
+      "name": "SerialNumberAttributes"
+    },
+    {
+      "name": "SerialNumberTypes"
+    },
+    {
+      "name": "ServiceLevels"
+    },
+    {
+      "name": "Sizes"
+    },
+    {
+      "name": "SizeTemplates"
+    },
+    {
+      "name": "StoreGroups"
+    },
+    {
+      "name": "TradingUnits"
+    }
   ]
 }
