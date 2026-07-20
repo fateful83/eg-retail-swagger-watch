@@ -186,7 +186,7 @@
         ],
         "type": "string"
       },
-      "Brand.1": {
+      "Brand": {
         "additionalProperties": false,
         "properties": {
           "brandCategoryCode": {
@@ -438,30 +438,6 @@
             "nullable": true,
             "type": "string"
           },
-          "gtinRangeFrom": {
-            "description": "Lower bound of the GTIN/EAN number series range. Only relevant when GtinSeriesMode is Range.",
-            "format": "int64",
-            "nullable": true,
-            "type": "integer"
-          },
-          "gtinRangeTo": {
-            "description": "Upper bound of the GTIN/EAN number series range. Only relevant when GtinSeriesMode is Range.",
-            "format": "int64",
-            "nullable": true,
-            "type": "integer"
-          },
-          "gtinSeriesMode": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/GtinSeriesMode"
-              }
-            ],
-            "description": "Parameter representing whether GTIN generation uses a prefix or a from-to range.",
-            "enum": [
-              "Prefix",
-              "Range"
-            ]
-          },
           "hiddenAttributes": {
             "allOf": [
               {
@@ -503,18 +479,6 @@
           "manageStoreAssortment": {
             "description": "Parameter representing whether managing store assortment should be enabled",
             "type": "boolean"
-          },
-          "priceCalculationMaxMarginPercent": {
-            "description": "Maximum margin percent for store price calculation warning. Null means no limit configured.",
-            "format": "double",
-            "nullable": true,
-            "type": "number"
-          },
-          "priceCalculationMinMarginPercent": {
-            "description": "Minimum margin percent for store price calculation warning. Null means no limit configured.",
-            "format": "double",
-            "nullable": true,
-            "type": "number"
           },
           "priceCalculatorFallbackPercentDecimal": {
             "description": "Parameter representing what value should be used in price calculation when the calculation gets an out of range value, or a denominator is zero.",
@@ -578,7 +542,7 @@
         },
         "type": "object"
       },
-      "Collection.1": {
+      "Collection": {
         "additionalProperties": false,
         "properties": {
           "code": {
@@ -637,7 +601,7 @@
         ],
         "type": "object"
       },
-      "Color.1": {
+      "Color": {
         "additionalProperties": false,
         "properties": {
           "colorGroup": {
@@ -723,7 +687,7 @@
           "brand": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/Brand.1"
+                "$ref": "#/components/schemas/Brand"
               }
             ],
             "nullable": true,
@@ -1059,7 +1023,7 @@
           "deliveryDate": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/DeliveryDate.1"
+                "$ref": "#/components/schemas/DeliveryDate"
               }
             ],
             "nullable": true
@@ -1075,7 +1039,7 @@
         },
         "type": "object"
       },
-      "CreateItemList.1": {
+      "CreateItemList": {
         "additionalProperties": false,
         "properties": {
           "description": {
@@ -1110,7 +1074,7 @@
         },
         "type": "object"
       },
-      "DeliveryDate.1": {
+      "DeliveryDate": {
         "additionalProperties": false,
         "properties": {
           "customDeliveryDate": {
@@ -1340,6 +1304,11 @@
             "readOnly": true,
             "type": "string"
           },
+          "calculationRulesetId": {
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
           "costCarrier": {
             "nullable": true,
             "type": "string"
@@ -1463,13 +1432,6 @@
           "Area",
           "Group",
           "Subgroup"
-        ],
-        "type": "string"
-      },
-      "GtinSeriesMode": {
-        "enum": [
-          "Prefix",
-          "Range"
         ],
         "type": "string"
       },
@@ -1611,11 +1573,6 @@
             ],
             "nullable": true
           },
-          "scheduledImportDate": {
-            "format": "date-time",
-            "nullable": true,
-            "type": "string"
-          },
           "seasonId": {
             "nullable": true,
             "type": "string"
@@ -1653,7 +1610,7 @@
           "storeGroupType": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/StoreGroupType.1"
+                "$ref": "#/components/schemas/StoreGroupType"
               }
             ],
             "nullable": true
@@ -1798,7 +1755,7 @@
           "storeGroupType": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/StoreGroupType.1"
+                "$ref": "#/components/schemas/StoreGroupType"
               }
             ],
             "nullable": true
@@ -2249,7 +2206,7 @@
           "storeGroupType": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/StoreGroupType.1"
+                "$ref": "#/components/schemas/StoreGroupType"
               }
             ],
             "nullable": true
@@ -2415,7 +2372,7 @@
         "additionalProperties": false,
         "type": "object"
       },
-      "ItemCategory.1": {
+      "ItemCategory": {
         "additionalProperties": false,
         "properties": {
           "code": {
@@ -2472,7 +2429,7 @@
         ],
         "type": "object"
       },
-      "ItemList.1": {
+      "ItemList": {
         "additionalProperties": false,
         "properties": {
           "count": {
@@ -2827,8 +2784,7 @@
           "RecommendedActionCodeRequired",
           "RecommendedActionCodeNotValidForServiceCode",
           "RecommendedLocationCodeNotValidForProfile",
-          "RecommendedServiceOnlyAllowedForProfile",
-          "PriceValidToExtendedDueToPromotion"
+          "RecommendedServiceOnlyAllowedForProfile"
         ],
         "type": "string"
       },
@@ -2856,7 +2812,7 @@
         },
         "type": "object"
       },
-      "MarketingCode.1": {
+      "MarketingCode": {
         "additionalProperties": false,
         "properties": {
           "code": {
@@ -2914,7 +2870,7 @@
         ],
         "type": "object"
       },
-      "MarketingExclusivity.1": {
+      "MarketingExclusivity": {
         "additionalProperties": false,
         "properties": {
           "code": {
@@ -2973,7 +2929,7 @@
         ],
         "type": "object"
       },
-      "NonsaleType.1": {
+      "NonsaleType": {
         "additionalProperties": false,
         "properties": {
           "code": {
@@ -3027,7 +2983,7 @@
         ],
         "type": "object"
       },
-      "Nutrition.1": {
+      "Nutrition": {
         "additionalProperties": false,
         "properties": {
           "code": {
@@ -3200,7 +3156,7 @@
         ],
         "type": "object"
       },
-      "ProcurementRule.1": {
+      "ProcurementRule": {
         "additionalProperties": false,
         "properties": {
           "code": {
@@ -3278,7 +3234,7 @@
         },
         "type": "object"
       },
-      "ReplenishmentCode.1": {
+      "ReplenishmentCode": {
         "additionalProperties": false,
         "properties": {
           "code": {
@@ -4048,7 +4004,7 @@
         ],
         "type": "object"
       },
-      "Size.1": {
+      "Size": {
         "additionalProperties": false,
         "properties": {
           "createdBy": {
@@ -4327,7 +4283,7 @@
           "storeGroupType": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/StoreGroupType.1"
+                "$ref": "#/components/schemas/StoreGroupType"
               }
             ],
             "enum": [
@@ -4342,7 +4298,7 @@
         },
         "type": "object"
       },
-      "StoreGroupType.1": {
+      "StoreGroupType": {
         "enum": [
           "Team",
           "Profile",
@@ -4353,7 +4309,7 @@
         ],
         "type": "string"
       },
-      "TradingUnit.1": {
+      "TradingUnit": {
         "additionalProperties": false,
         "properties": {
           "createdBy": {
@@ -4621,7 +4577,7 @@
         },
         "type": "object"
       },
-      "UpdateItemList.1": {
+      "UpdateItemList": {
         "additionalProperties": false,
         "properties": {
           "description": {
@@ -4775,7 +4731,7 @@
     "title": "Item API",
     "version": "v1"
   },
-  "openapi": "3.0.4",
+  "openapi": "3.0.1",
   "paths": {
     "/api/Activity": {
       "get": {
@@ -4836,7 +4792,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -4920,7 +4876,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -5002,7 +4958,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -5062,7 +5018,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -5133,7 +5089,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -5176,7 +5132,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -5270,7 +5226,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -5352,7 +5308,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -5412,7 +5368,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -5483,7 +5439,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -5526,7 +5482,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -5598,7 +5554,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   },
                   "type": "array"
                 }
@@ -5606,7 +5562,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   },
                   "type": "array"
                 }
@@ -5614,13 +5570,13 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   },
                   "type": "array"
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -5646,7 +5602,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   }
                 ]
               }
@@ -5655,7 +5611,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   }
                 ]
               }
@@ -5664,7 +5620,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   }
                 ]
               }
@@ -5673,7 +5629,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   }
                 ]
               }
@@ -5702,7 +5658,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -5748,21 +5704,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Brand.1"
+                  "$ref": "#/components/schemas/Brand"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Brand.1"
+                  "$ref": "#/components/schemas/Brand"
                 }
               },
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Brand.1"
+                  "$ref": "#/components/schemas/Brand"
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -5797,7 +5753,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   }
                 ]
               }
@@ -5806,7 +5762,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   }
                 ]
               }
@@ -5815,7 +5771,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   }
                 ]
               }
@@ -5824,7 +5780,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   }
                 ]
               }
@@ -5833,7 +5789,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -5876,7 +5832,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -5919,7 +5875,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -6013,7 +5969,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -6095,7 +6051,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -6138,7 +6094,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -6196,7 +6152,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -6287,7 +6243,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -6330,7 +6286,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -6373,7 +6329,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -6445,7 +6401,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Collection.1"
+                    "$ref": "#/components/schemas/Collection"
                   },
                   "type": "array"
                 }
@@ -6453,7 +6409,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Collection.1"
+                    "$ref": "#/components/schemas/Collection"
                   },
                   "type": "array"
                 }
@@ -6461,13 +6417,13 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Collection.1"
+                    "$ref": "#/components/schemas/Collection"
                   },
                   "type": "array"
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -6493,7 +6449,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Collection.1"
+                    "$ref": "#/components/schemas/Collection"
                   }
                 ]
               }
@@ -6502,7 +6458,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Collection.1"
+                    "$ref": "#/components/schemas/Collection"
                   }
                 ]
               }
@@ -6511,7 +6467,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Collection.1"
+                    "$ref": "#/components/schemas/Collection"
                   }
                 ]
               }
@@ -6520,7 +6476,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Collection.1"
+                    "$ref": "#/components/schemas/Collection"
                   }
                 ]
               }
@@ -6549,7 +6505,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -6592,7 +6548,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -6636,21 +6592,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Collection.1"
+                  "$ref": "#/components/schemas/Collection"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Collection.1"
+                  "$ref": "#/components/schemas/Collection"
                 }
               },
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Collection.1"
+                  "$ref": "#/components/schemas/Collection"
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -6685,7 +6641,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Collection.1"
+                    "$ref": "#/components/schemas/Collection"
                   }
                 ]
               }
@@ -6694,7 +6650,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Collection.1"
+                    "$ref": "#/components/schemas/Collection"
                   }
                 ]
               }
@@ -6703,7 +6659,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Collection.1"
+                    "$ref": "#/components/schemas/Collection"
                   }
                 ]
               }
@@ -6712,7 +6668,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Collection.1"
+                    "$ref": "#/components/schemas/Collection"
                   }
                 ]
               }
@@ -6721,7 +6677,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -6764,7 +6720,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -6807,7 +6763,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -6889,7 +6845,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Color.1"
+                    "$ref": "#/components/schemas/Color"
                   },
                   "type": "array"
                 }
@@ -6897,7 +6853,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Color.1"
+                    "$ref": "#/components/schemas/Color"
                   },
                   "type": "array"
                 }
@@ -6905,13 +6861,13 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Color.1"
+                    "$ref": "#/components/schemas/Color"
                   },
                   "type": "array"
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -7005,7 +6961,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -7087,7 +7043,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -7129,7 +7085,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -7189,7 +7145,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -7260,7 +7216,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -7303,7 +7259,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -7355,7 +7311,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -7405,7 +7361,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -7508,7 +7464,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -7560,7 +7516,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -7650,7 +7606,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -7742,7 +7698,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -7836,7 +7792,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -7918,7 +7874,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -7978,7 +7934,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -8049,7 +8005,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -8092,7 +8048,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -8184,7 +8140,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -8236,7 +8192,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -8320,7 +8276,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -8399,7 +8355,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -8458,7 +8414,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -8528,7 +8484,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -8570,7 +8526,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -8612,7 +8568,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -8695,7 +8651,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -8776,7 +8732,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -8845,7 +8801,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -8938,7 +8894,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -9032,7 +8988,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -9114,7 +9070,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -9197,7 +9153,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -9240,7 +9196,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -9283,7 +9239,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           }
         },
         "summary": "Gets a file for a specified export.",
@@ -9368,7 +9324,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -9461,7 +9417,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -9511,7 +9467,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -9561,7 +9517,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -9663,7 +9619,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -9706,7 +9662,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -9764,7 +9720,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -9806,7 +9762,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -10003,7 +9959,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -10203,7 +10159,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -10390,7 +10346,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -10570,7 +10526,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -10768,7 +10724,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -10811,7 +10767,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -10914,7 +10870,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -10947,7 +10903,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -11135,7 +11091,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -11196,7 +11152,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -11258,7 +11214,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   },
                   "type": "array"
                 }
@@ -11266,7 +11222,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   },
                   "type": "array"
                 }
@@ -11274,13 +11230,13 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   },
                   "type": "array"
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -11306,7 +11262,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   }
                 ]
               }
@@ -11315,7 +11271,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   }
                 ]
               }
@@ -11324,7 +11280,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   }
                 ]
               }
@@ -11333,7 +11289,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   }
                 ]
               }
@@ -11362,7 +11318,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -11405,7 +11361,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -11449,21 +11405,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemCategory.1"
+                  "$ref": "#/components/schemas/ItemCategory"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemCategory.1"
+                  "$ref": "#/components/schemas/ItemCategory"
                 }
               },
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemCategory.1"
+                  "$ref": "#/components/schemas/ItemCategory"
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -11498,7 +11454,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   }
                 ]
               }
@@ -11507,7 +11463,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   }
                 ]
               }
@@ -11516,7 +11472,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   }
                 ]
               }
@@ -11525,7 +11481,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   }
                 ]
               }
@@ -11534,7 +11490,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -11577,7 +11533,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -11620,7 +11576,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -11692,7 +11648,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ItemList.1"
+                    "$ref": "#/components/schemas/ItemList"
                   },
                   "type": "array"
                 }
@@ -11700,7 +11656,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ItemList.1"
+                    "$ref": "#/components/schemas/ItemList"
                   },
                   "type": "array"
                 }
@@ -11708,13 +11664,13 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ItemList.1"
+                    "$ref": "#/components/schemas/ItemList"
                   },
                   "type": "array"
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -11740,7 +11696,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/CreateItemList.1"
+                    "$ref": "#/components/schemas/CreateItemList"
                   }
                 ]
               }
@@ -11749,7 +11705,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/CreateItemList.1"
+                    "$ref": "#/components/schemas/CreateItemList"
                   }
                 ]
               }
@@ -11758,7 +11714,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/CreateItemList.1"
+                    "$ref": "#/components/schemas/CreateItemList"
                   }
                 ]
               }
@@ -11767,7 +11723,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/CreateItemList.1"
+                    "$ref": "#/components/schemas/CreateItemList"
                   }
                 ]
               }
@@ -11796,7 +11752,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -11839,7 +11795,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -11884,7 +11840,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/UpdateItemList.1"
+                    "$ref": "#/components/schemas/UpdateItemList"
                   }
                 ]
               }
@@ -11893,7 +11849,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/UpdateItemList.1"
+                    "$ref": "#/components/schemas/UpdateItemList"
                   }
                 ]
               }
@@ -11902,7 +11858,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/UpdateItemList.1"
+                    "$ref": "#/components/schemas/UpdateItemList"
                   }
                 ]
               }
@@ -11911,7 +11867,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/UpdateItemList.1"
+                    "$ref": "#/components/schemas/UpdateItemList"
                   }
                 ]
               }
@@ -11920,7 +11876,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -11992,7 +11948,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -12096,7 +12052,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -12195,7 +12151,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -12254,7 +12210,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -12311,7 +12267,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -12418,7 +12374,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -12515,7 +12471,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -12608,7 +12564,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -12692,7 +12648,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -12774,7 +12730,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -12817,7 +12773,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -12875,7 +12831,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -12946,7 +12902,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -12989,7 +12945,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -13032,7 +12988,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -13104,7 +13060,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/MarketingCode.1"
+                    "$ref": "#/components/schemas/MarketingCode"
                   },
                   "type": "array"
                 }
@@ -13112,7 +13068,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/MarketingCode.1"
+                    "$ref": "#/components/schemas/MarketingCode"
                   },
                   "type": "array"
                 }
@@ -13120,13 +13076,13 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/MarketingCode.1"
+                    "$ref": "#/components/schemas/MarketingCode"
                   },
                   "type": "array"
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -13152,7 +13108,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingCode.1"
+                    "$ref": "#/components/schemas/MarketingCode"
                   }
                 ]
               }
@@ -13161,7 +13117,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingCode.1"
+                    "$ref": "#/components/schemas/MarketingCode"
                   }
                 ]
               }
@@ -13170,7 +13126,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingCode.1"
+                    "$ref": "#/components/schemas/MarketingCode"
                   }
                 ]
               }
@@ -13179,7 +13135,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingCode.1"
+                    "$ref": "#/components/schemas/MarketingCode"
                   }
                 ]
               }
@@ -13208,7 +13164,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -13254,21 +13210,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MarketingCode.1"
+                  "$ref": "#/components/schemas/MarketingCode"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MarketingCode.1"
+                  "$ref": "#/components/schemas/MarketingCode"
                 }
               },
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/MarketingCode.1"
+                  "$ref": "#/components/schemas/MarketingCode"
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -13303,7 +13259,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingCode.1"
+                    "$ref": "#/components/schemas/MarketingCode"
                   }
                 ]
               }
@@ -13312,7 +13268,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingCode.1"
+                    "$ref": "#/components/schemas/MarketingCode"
                   }
                 ]
               }
@@ -13321,7 +13277,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingCode.1"
+                    "$ref": "#/components/schemas/MarketingCode"
                   }
                 ]
               }
@@ -13330,7 +13286,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingCode.1"
+                    "$ref": "#/components/schemas/MarketingCode"
                   }
                 ]
               }
@@ -13339,7 +13295,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -13382,7 +13338,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -13425,7 +13381,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -13497,7 +13453,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
+                    "$ref": "#/components/schemas/MarketingExclusivity"
                   },
                   "type": "array"
                 }
@@ -13505,7 +13461,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
+                    "$ref": "#/components/schemas/MarketingExclusivity"
                   },
                   "type": "array"
                 }
@@ -13513,13 +13469,13 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
+                    "$ref": "#/components/schemas/MarketingExclusivity"
                   },
                   "type": "array"
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -13545,7 +13501,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
+                    "$ref": "#/components/schemas/MarketingExclusivity"
                   }
                 ]
               }
@@ -13554,7 +13510,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
+                    "$ref": "#/components/schemas/MarketingExclusivity"
                   }
                 ]
               }
@@ -13563,7 +13519,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
+                    "$ref": "#/components/schemas/MarketingExclusivity"
                   }
                 ]
               }
@@ -13572,7 +13528,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
+                    "$ref": "#/components/schemas/MarketingExclusivity"
                   }
                 ]
               }
@@ -13601,7 +13557,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -13647,21 +13603,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MarketingExclusivity.1"
+                  "$ref": "#/components/schemas/MarketingExclusivity"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MarketingExclusivity.1"
+                  "$ref": "#/components/schemas/MarketingExclusivity"
                 }
               },
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/MarketingExclusivity.1"
+                  "$ref": "#/components/schemas/MarketingExclusivity"
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -13696,7 +13652,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
+                    "$ref": "#/components/schemas/MarketingExclusivity"
                   }
                 ]
               }
@@ -13705,7 +13661,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
+                    "$ref": "#/components/schemas/MarketingExclusivity"
                   }
                 ]
               }
@@ -13714,7 +13670,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
+                    "$ref": "#/components/schemas/MarketingExclusivity"
                   }
                 ]
               }
@@ -13723,7 +13679,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
+                    "$ref": "#/components/schemas/MarketingExclusivity"
                   }
                 ]
               }
@@ -13732,7 +13688,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -13775,7 +13731,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -13818,7 +13774,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -13890,7 +13846,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   },
                   "type": "array"
                 }
@@ -13898,7 +13854,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   },
                   "type": "array"
                 }
@@ -13906,13 +13862,13 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   },
                   "type": "array"
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -13938,7 +13894,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   }
                 ]
               }
@@ -13947,7 +13903,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   }
                 ]
               }
@@ -13956,7 +13912,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   }
                 ]
               }
@@ -13965,7 +13921,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   }
                 ]
               }
@@ -13994,7 +13950,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -14041,7 +13997,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   }
                 ]
               }
@@ -14050,7 +14006,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   }
                 ]
               }
@@ -14059,7 +14015,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   }
                 ]
               }
@@ -14068,7 +14024,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   }
                 ]
               }
@@ -14077,7 +14033,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -14120,7 +14076,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -14192,7 +14148,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Nutrition.1"
+                    "$ref": "#/components/schemas/Nutrition"
                   },
                   "type": "array"
                 }
@@ -14200,7 +14156,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Nutrition.1"
+                    "$ref": "#/components/schemas/Nutrition"
                   },
                   "type": "array"
                 }
@@ -14208,13 +14164,13 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Nutrition.1"
+                    "$ref": "#/components/schemas/Nutrition"
                   },
                   "type": "array"
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -14296,7 +14252,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -14356,7 +14312,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -14427,7 +14383,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -14470,7 +14426,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -14564,7 +14520,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -14646,7 +14602,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -14706,7 +14662,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -14777,7 +14733,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -14820,7 +14776,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -14863,7 +14819,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -14935,7 +14891,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   },
                   "type": "array"
                 }
@@ -14943,7 +14899,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   },
                   "type": "array"
                 }
@@ -14951,13 +14907,13 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   },
                   "type": "array"
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -14983,7 +14939,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   }
                 ]
               }
@@ -14992,7 +14948,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   }
                 ]
               }
@@ -15001,7 +14957,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   }
                 ]
               }
@@ -15010,7 +14966,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   }
                 ]
               }
@@ -15039,7 +14995,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -15082,7 +15038,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -15126,21 +15082,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProcurementRule.1"
+                  "$ref": "#/components/schemas/ProcurementRule"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProcurementRule.1"
+                  "$ref": "#/components/schemas/ProcurementRule"
                 }
               },
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProcurementRule.1"
+                  "$ref": "#/components/schemas/ProcurementRule"
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -15175,7 +15131,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   }
                 ]
               }
@@ -15184,7 +15140,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   }
                 ]
               }
@@ -15193,7 +15149,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   }
                 ]
               }
@@ -15202,7 +15158,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   }
                 ]
               }
@@ -15211,7 +15167,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -15254,7 +15210,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -15297,7 +15253,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -15369,7 +15325,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   },
                   "type": "array"
                 }
@@ -15377,7 +15333,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   },
                   "type": "array"
                 }
@@ -15385,13 +15341,13 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   },
                   "type": "array"
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -15417,7 +15373,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   }
                 ]
               }
@@ -15426,7 +15382,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   }
                 ]
               }
@@ -15435,7 +15391,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   }
                 ]
               }
@@ -15444,7 +15400,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   }
                 ]
               }
@@ -15473,7 +15429,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -15516,7 +15472,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -15560,21 +15516,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReplenishmentCode.1"
+                  "$ref": "#/components/schemas/ReplenishmentCode"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReplenishmentCode.1"
+                  "$ref": "#/components/schemas/ReplenishmentCode"
                 }
               },
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReplenishmentCode.1"
+                  "$ref": "#/components/schemas/ReplenishmentCode"
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -15609,7 +15565,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   }
                 ]
               }
@@ -15618,7 +15574,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   }
                 ]
               }
@@ -15627,7 +15583,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   }
                 ]
               }
@@ -15636,7 +15592,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   }
                 ]
               }
@@ -15645,7 +15601,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -15688,7 +15644,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -15731,7 +15687,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -15825,7 +15781,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -15907,7 +15863,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -15950,7 +15906,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -16008,7 +15964,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -16079,7 +16035,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -16122,7 +16078,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -16165,7 +16121,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -16259,7 +16215,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -16341,7 +16297,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -16401,7 +16357,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -16472,7 +16428,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -16515,7 +16471,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -16558,7 +16514,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -16652,7 +16608,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -16734,7 +16690,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -16794,7 +16750,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -16865,7 +16821,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -16908,7 +16864,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -17002,7 +16958,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -17084,7 +17040,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -17144,7 +17100,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -17215,7 +17171,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -17258,7 +17214,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -17301,7 +17257,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -17395,7 +17351,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -17477,7 +17433,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -17520,7 +17476,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -17578,7 +17534,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -17649,7 +17605,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -17692,7 +17648,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -17786,7 +17742,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -17868,7 +17824,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -17928,7 +17884,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -17999,7 +17955,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -18042,7 +17998,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -18145,7 +18101,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -18236,7 +18192,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -18288,7 +18244,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -18378,7 +18334,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -18430,7 +18386,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -18524,7 +18480,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -18606,7 +18562,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -18649,7 +18605,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -18707,7 +18663,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -18778,7 +18734,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -18821,7 +18777,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -18864,7 +18820,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -18967,7 +18923,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -19058,7 +19014,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -19130,7 +19086,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -19240,7 +19196,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -19292,7 +19248,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -19361,7 +19317,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -19445,7 +19401,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -19527,7 +19483,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -19570,7 +19526,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -19628,7 +19584,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -19699,7 +19655,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -19742,7 +19698,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -19785,7 +19741,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -19879,7 +19835,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -19961,7 +19917,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -20021,7 +19977,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -20092,7 +20048,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -20195,7 +20151,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -20237,7 +20193,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -20327,7 +20283,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -20417,7 +20373,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -20460,7 +20416,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -20532,7 +20488,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   },
                   "type": "array"
                 }
@@ -20540,7 +20496,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   },
                   "type": "array"
                 }
@@ -20548,13 +20504,13 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   },
                   "type": "array"
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -20580,7 +20536,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   }
                 ]
               }
@@ -20589,7 +20545,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   }
                 ]
               }
@@ -20598,7 +20554,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   }
                 ]
               }
@@ -20607,7 +20563,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   }
                 ]
               }
@@ -20636,7 +20592,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -20682,21 +20638,21 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Size.1"
+                  "$ref": "#/components/schemas/Size"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Size.1"
+                  "$ref": "#/components/schemas/Size"
                 }
               },
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Size.1"
+                  "$ref": "#/components/schemas/Size"
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -20731,7 +20687,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   }
                 ]
               }
@@ -20740,7 +20696,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   }
                 ]
               }
@@ -20749,7 +20705,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   }
                 ]
               }
@@ -20758,7 +20714,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   }
                 ]
               }
@@ -20767,7 +20723,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -20810,7 +20766,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -20904,7 +20860,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -20954,7 +20910,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -20980,7 +20936,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit.1"
+                    "$ref": "#/components/schemas/TradingUnit"
                   }
                 ]
               }
@@ -20989,7 +20945,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit.1"
+                    "$ref": "#/components/schemas/TradingUnit"
                   }
                 ]
               }
@@ -20998,7 +20954,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit.1"
+                    "$ref": "#/components/schemas/TradingUnit"
                   }
                 ]
               }
@@ -21007,7 +20963,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit.1"
+                    "$ref": "#/components/schemas/TradingUnit"
                   }
                 ]
               }
@@ -21036,7 +20992,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -21083,7 +21039,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit.1"
+                    "$ref": "#/components/schemas/TradingUnit"
                   }
                 ]
               }
@@ -21092,7 +21048,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit.1"
+                    "$ref": "#/components/schemas/TradingUnit"
                   }
                 ]
               }
@@ -21101,7 +21057,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit.1"
+                    "$ref": "#/components/schemas/TradingUnit"
                   }
                 ]
               }
@@ -21110,7 +21066,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit.1"
+                    "$ref": "#/components/schemas/TradingUnit"
                   }
                 ]
               }
@@ -21119,7 +21075,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -21162,7 +21118,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -21205,7 +21161,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -21227,122 +21183,6 @@
   "security": [
     {
       "Bearer": []
-    }
-  ],
-  "tags": [
-    {
-      "name": "Activity"
-    },
-    {
-      "name": "AlternativeGroups"
-    },
-    {
-      "name": "BrandCategories"
-    },
-    {
-      "name": "Brands"
-    },
-    {
-      "name": "Classifications"
-    },
-    {
-      "name": "Collections"
-    },
-    {
-      "name": "Colors"
-    },
-    {
-      "name": "Concession"
-    },
-    {
-      "name": "ConcessionStores"
-    },
-    {
-      "name": "Configuration"
-    },
-    {
-      "name": "Countries"
-    },
-    {
-      "name": "DeliveryDateList"
-    },
-    {
-      "name": "ExcelExportTemplates"
-    },
-    {
-      "name": "FileExport"
-    },
-    {
-      "name": "Imports"
-    },
-    {
-      "name": "ItemCategories"
-    },
-    {
-      "name": "ItemLists"
-    },
-    {
-      "name": "ItemSegmentation"
-    },
-    {
-      "name": "ItemTypes"
-    },
-    {
-      "name": "MarketingCodes"
-    },
-    {
-      "name": "MarketingExclusivities"
-    },
-    {
-      "name": "NonsaleType"
-    },
-    {
-      "name": "Nutritions"
-    },
-    {
-      "name": "PlanningCodes"
-    },
-    {
-      "name": "ProcurementRules"
-    },
-    {
-      "name": "ReplenishmentCodes"
-    },
-    {
-      "name": "ReportCategories"
-    },
-    {
-      "name": "RoundingRecoveryRetailPrices"
-    },
-    {
-      "name": "SearchableColors"
-    },
-    {
-      "name": "SeasonCodes"
-    },
-    {
-      "name": "Seasons"
-    },
-    {
-      "name": "SerialNumberAttributes"
-    },
-    {
-      "name": "SerialNumberTypes"
-    },
-    {
-      "name": "ServiceLevels"
-    },
-    {
-      "name": "Sizes"
-    },
-    {
-      "name": "SizeTemplates"
-    },
-    {
-      "name": "StoreGroups"
-    },
-    {
-      "name": "TradingUnits"
     }
   ]
 }
