@@ -19273,7 +19273,8 @@
           "RecommendedActionCodeRequired",
           "RecommendedActionCodeNotValidForServiceCode",
           "RecommendedLocationCodeNotValidForProfile",
-          "RecommendedServiceOnlyAllowedForProfile"
+          "RecommendedServiceOnlyAllowedForProfile",
+          "PriceValidToExtendedDueToPromotion"
         ],
         "type": "string"
       },
