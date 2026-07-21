@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "POS API",
-    "description": "Cloud POS API offers services for virtual POS (point-of-sale) and data sync for front-end apps.\r\n\r\nThe API endpoints and methods are similar to those available in POS API on-premise. For 3rd party applications/integrations it will only be a technical change migrating from SOAP requests (on-premise) to authenticated REST requests. All business logic offered by methods in the REST API are identical with existing methods, and communication flow/sequence documentation will in many cases not require any changes.\r\n\r\nThe figure below shows the basic dataflow between our cloud components and on-premise servers.\r\n\r\n[Architecture overview diagram](../image/overview.png)\r\n\r\nFrontend creates carts/receipts in POS API. Receipts (POSLog.XML) are sent from the cloud to POS Server on-premise, and all existing subscribers to receipts will use existing integration as-is. Chain is master for items and prices, and all required data for Cloud POS API will be exported/synchronized from on-premise to the cloud, or requested online using relay communication with on-premises. All communication/jobs both on premises and in the cloud are handled by Integration Platform. \r\n\r\n**Provided endpoints:**\r\n-  **Audit**: Operations related to audit of shopping carts\r\n-  **CartCalculator**: Endpoint for calculating a Cart\r\n-  **Customer**: Basic CRUD of customers\r\n-  **ItemExt**: Functionality for lookup and search of items in POS\r\n-  **ItemSale**: Handles all operations related to the shopping cart\r\n-  **ItemSaleExtended**: Extended functionality for ItemSale\r\n-  **Order**: Defines contract for import of orders and related operations\r\n-  **ReasonCode**: Lookup of reason codes known by POS\r\n-  **ReceiptOnHold**: Handling of suspended carts in EG internal format. Only used internally by EG.\r\n\r\n[Authentication documentation](https://docs.egretail.cloud/ad-auth.html)\r\n\r\n<details>\r\n<summary>Cart operations</summary>\r\n## Cart operations\r\n\r\nThe following example shows the basic requests needed to create a cart for online orders, and can be used as a starting point for testing the API.\r\n\r\nThe APIKey set in NewCartWithItems, together with the store number if specified, determines which store and virtual POS the Cart is created for.\r\nEach virtual POS can have its own configuration to toggle features and behaviors and can be allocated to different countries for localization.\r\nWe currently support these languages for localized texts: Danish, German, English, Estonian, Finnish, Norwegian, Swedish.\r\n\r\nPlease note that our API enforces sequential operations on a single cart. If a request for modifying a cart is initiated while a previous modification is still in progress, the new request will be blocked until the previous one is completed. To ensure optimal performance, we strongly recommend including the 'Revision' value from the response of the previous cart modification in every subsequent request.\r\n\r\n#### Create cart\r\n1. [api/ItemSale/NewCartWithItems](/examples/NewCartWithItems.json)\r\n2. [api/ItemSale/AddItemToCart](/examples/AddItemToCart.json)\r\n3. [api/ItemSale/CheckoutCart](/examples/CheckoutCart.json)  \r\n\r\n#### Delivery and payment\r\n1. [api/ItemSale/BeginCartEditing](/examples/BeginCartEditing.json)\r\n2. [api/ItemSale/DeliverCartItem](/examples/DeliverCartItem.json), once per line to deliver\r\n3. [api/ItemSale/AddPaymentToCart2](/examples/AddPaymentToCart2.json)\r\n4. [api/ItemSale/AddGiftcardToCart](/examples/AddGiftcardToCart.json)\r\n5. [api/ItemSale/AddPaymentToCart](/examples/AddPaymentToCart.json) Multiple payment (Klarna) Note that paid amount must match delivered items or endCartEditing will fail.\r\n6. [api/ItemSale/EndCartEditing](/examples/EndCartEditing.json)\r\n\r\n#### Return\r\n1. [api/ItemSale/NewCartWithItemReturn](/examples/NewCartWithItemReturn.json)\r\n2. [api/ItemSale/AddPaymentToCart2](/examples/AddPaymentToCart2-Return.json)\r\n3. [api/ItemSale/CheckoutCart](/examples/CheckoutCart-Return.json)\r\n\r\n#### Breakage Transaction\r\n1. [api/ItemSale/NewCartForTransaction](/examples/NewCartForTransaction.json)\r\n2. [api/ItemSale/AddItemToCart](/examples/AddItemToCart.json)\r\n\r\n#### Click and collect order\r\n1. [api/ItemSale/NewCart](/examples/NewCart.json)\r\n2. [api/ItemSale/AddItemToCart](/examples/AddItemToCart.json)\r\n3. [api/ItemSale/ReserveCartInStore](/examples/ReserveCartInStore.json)\r\n\r\n#### Sales receipt\r\n1. [api/ItemSale/NewCartWithItems](/examples/NewCartWithItems-Customer.json)\r\n2. [api/ItemSale/SetSelectableCouponStatusInCart](/examples/SetSelectableCouponStatusInCart.json)\r\n3. [api/ItemSale/SetDigitalReceiptOptions](/examples/SetDigitalReceiptOptions.json)\r\n4. Payment processing should be handled via [PaymentService](https://paymentservice.egretail.cloud/index.html).\r\n5. [api/ItemSale/AddPaymentToCart2](/examples/AddPaymentToCart2-Vipps.json)\r\n</details>\r\n\r\n<details>\r\n<summary>Pub/Sub</summary>\r\n## Pub/Sub\r\n\r\nPOS API offers synchronization of data from the POS database. Choose the POS API Data Export spec in the top right to view documentation of the export format.\r\nImport into POS (currently orders) is documented here, under the Order section.\r\nFollow this [Pub/sub documentation](https://docs.egretail.cloud/Home/Doc/integration/integration) to learn how to publish data to POS API.\r\n\r\n#### Use the following blobTypes\r\nWhen exporting data to POS API, post the following blobtypes to [FileService](https://fileservice.egretail.cloud/)\r\n\r\n* __Order/Basic__: Use _BasicPosApiOrder_ as blob type. [Example of gzipped file](/examples/BasicOrder.jsonl.gz) with one order in jsonlines format. Additional orders would be added as separate lines.\r\n* __Order/Complete__: Use _CompletePosApiOrder_\r\n* __Order/Payment__: Use _OrderPayment_\r\n* __Order/Delivery__: Use _OrderDelivery_\r\n* __Order/ItemTransaction__: Use _PosApi.ItemTransaction.Import_ as blob type. [Example of gzipped file](/examples/Itemtransaction.jsonl.gz) with one order in jsonlines format. Additional transactions would be added as separate lines.\r\n\r\n\r\nRemember to use [JsonLines](http://jsonlines.org/) and [Gzip](https://www.gzip.org/)\r\n</details>\r\n\r\n<details>\r\n<summary>Migration from on-premise POS API</summary>\r\n## Migration from on-premise POS API\r\n\r\nReview this if you have an existing on-premise Soap-based POS API integration and want to migrate to the REST based POS API v1 in cloud:\r\n\r\n- When using the REST based POS API hosted in cloud, all requests must be authenticated. The type of authentication is the same for all our services and is documented here: https://docs.egretail.cloud/Home/AdAuth\r\n- Each Soap endpoint on-premise have a corresponding route in the REST API. http://posserver:8000/PosApi/ItemSale/1.0 on-premise is https://posapi.egretail-test.cloud/api/ItemSale in cloud (test environment).\r\n- Each Soap operation on-premise have the same name in the REST API and is added as the last part of the endpoint URL. The URL for NewCart in cloud (test env.) is https://posapi.egretail-test.cloud/api/ItemSale/NewCart.\r\n- The request and response bodies in the REST API are the same as in Soap, except that it is formatted as JSON instead of XML. The Swagger documentation contains examples and description of each property in both the request and response objects.\r\n- All operations in v1 of REST POS API use the http verb POST.\r\n- Successful operations return http status 200 OK and contains the same content in JSON as the Soap service returned as XML. \r\n- Failed operations that returns faults (like ArticleNotFoundFault) from the Soap service return 400 Bad Request in the REST API. The response body in this case is documented together with the response for each method in Swagger. The Type property contains the same name as the fault type in Soap. Example response body:\r\n```json\r\n{\r\n    \"Type\": \"ArticleNotFoundFault\",\r\n    \"Message\": \"The item with EAN #7024163320273 was not found.\",\r\n    \"Reference\": \"f7e0688f-b5a5-4eae-bf98-572fb2b38040\"\r\n}\r\n```\r\n</details>\r\n\r\n<details>\r\n<summary>Service instance affinity</summary>\r\n## Service instance affinity\r\n\r\nPOS API runs as multiple instances using a Load Balancer. To achieve maximum performance on your requests, it is recommended to use the same instance for operations on a given Cart.\r\n\r\nTo use the same instance for a Cart, keep the returned cookie called ARRAffinitySameSite (in a Set-Cookie header) together with your CartId, and use this cookie for every request for that specific Cart.\r\n\r\n> Note: The cookie might change for every response.\r\n> Note: If you are unable/unwilling to correlate cookie with CartId for your requests, its better to not send any cookies at all.\r\n> Note: Most HTTP SDKs will by default round-trip cookies, which is not the behavior you want for the most performance and resiliency.\r\n</details>\r\n\r\n**FAQ:**\r\n[FAQ for POS API](../posapifaq.html)",
+    "description": "Cloud POS API offers services for virtual POS (point-of-sale) and data sync for front-end apps.\r\n\r\nThe API endpoints and methods are similar to those available in POS API on-premise. For 3rd party applications/integrations it will only be a technical change migrating from SOAP requests (on-premise) to authenticated REST requests. All business logic offered by methods in the REST API are identical with existing methods, and communication flow/sequence documentation will in many cases not require any changes.\r\n\r\nThe figure below shows the basic dataflow between our cloud components and on-premise servers.\r\n\r\n[Architecture overview diagram](../image/overview.png)\r\n\r\nFrontend creates carts/receipts in POS API. Receipts (POSLog.XML) are sent from the cloud to POS Server on-premise, and all existing subscribers to receipts will use existing integration as-is. Chain is master for items and prices, and all required data for Cloud POS API will be exported/synchronized from on-premise to the cloud, or requested online using relay communication with on-premises. All communication/jobs both on premises and in the cloud are handled by Integration Platform. \r\n\r\n**Provided endpoints:**\r\n-  **Audit**: Operations related to audit of shopping carts\r\n-  **CartCalculator**: Endpoint for calculating a Cart\r\n-  **Customer**: Basic CRUD of customers\r\n-  **ItemExt**: Functionality for lookup and search of items in POS\r\n-  **ItemSale**: Handles all operations related to the shopping cart\r\n-  **ItemSaleExtended**: Extended functionality for ItemSale\r\n-  **Order**: Defines contract for import of orders and related operations\r\n-  **ReasonCode**: Lookup of reason codes known by POS\r\n-  **ReceiptOnHold**: Handling of suspended carts in EG internal format. Only used internally by EG.\r\n\r\n[Authentication documentation](https://docs.egretail.cloud/ad-auth.html)\r\n\r\n<details>\r\n<summary>Cart operations</summary>\r\n## Cart operations\r\n\r\nThe following example shows the basic requests needed to create a cart for online orders, and can be used as a starting point for testing the API.\r\n\r\nThe APIKey set in NewCartWithItems, together with the store number if specified, determines which store and virtual POS the Cart is created for.\r\nEach virtual POS can have its own configuration to toggle features and behaviors and can be allocated to different countries for localization.\r\nWe currently support these languages for localized texts: Danish, German, English, Estonian, Finnish, Norwegian, Swedish.\r\n\r\nPlease note that our API enforces sequential operations on a single cart. If a request for modifying a cart is initiated while a previous modification is still in progress, the new request will be blocked until the previous one is completed. To ensure optimal performance, we strongly recommend including the 'Revision' value from the response of the previous cart modification in every subsequent request.\r\n\r\n#### Create cart\r\n1. [api/ItemSale/NewCartWithItems](/examples/NewCartWithItems.json)\r\n2. [api/ItemSale/AddItemToCart](/examples/AddItemToCart.json)\r\n3. [api/ItemSale/CheckoutCart](/examples/CheckoutCart.json)  \r\n\r\n#### Delivery and payment\r\n1. [api/ItemSale/BeginCartEditing](/examples/BeginCartEditing.json)\r\n2. [api/ItemSale/DeliverCartItem](/examples/DeliverCartItem.json), once per line to deliver\r\n3. [api/ItemSale/AddPaymentToCart2](/examples/AddPaymentToCart2.json)\r\n4. [api/ItemSale/AddGiftcardToCart](/examples/AddGiftcardToCart.json)\r\n5. [api/ItemSale/AddPaymentToCart](/examples/AddPaymentToCart.json) Multiple payment (Klarna) Note that paid amount must match delivered items or endCartEditing will fail.\r\n6. [api/ItemSale/EndCartEditing](/examples/EndCartEditing.json)\r\n\r\n#### Return\r\n1. [api/ItemSale/NewCartWithItemReturn](/examples/NewCartWithItemReturn.json)\r\n2. [api/ItemSale/AddPaymentToCart2](/examples/AddPaymentToCart2-Return.json)\r\n3. [api/ItemSale/CheckoutCart](/examples/CheckoutCart-Return.json)\r\n\r\n#### Breakage Transaction\r\n1. [api/ItemSale/NewCartForTransaction](/examples/NewCartForTransaction.json)\r\n2. [api/ItemSale/AddItemToCart](/examples/AddItemToCart.json)\r\n\r\n#### Click and collect order\r\n1. [api/ItemSale/NewCart](/examples/NewCart.json)\r\n2. [api/ItemSale/AddItemToCart](/examples/AddItemToCart.json)\r\n3. [api/ItemSale/ReserveCartInStore](/examples/ReserveCartInStore.json)\r\n\r\n#### Sales receipt\r\n1. [api/ItemSale/NewCartWithItems](/examples/NewCartWithItems-Customer.json)\r\n2. [api/ItemSale/SetSelectableCouponStatusInCart](/examples/SetSelectableCouponStatusInCart.json)\r\n3. [api/ItemSale/SetDigitalReceiptOptions](/examples/SetDigitalReceiptOptions.json)\r\n4. Payment processing should be handled via [PaymentService](https://paymentservice.egretail.cloud/index.html).\r\n5. [api/ItemSale/AddPaymentToCart2](/examples/AddPaymentToCart2-Vipps.json)\r\n</details>\r\n\r\n<details>\r\n<summary>Pub/Sub</summary>\r\n## Pub/Sub\r\n\r\nPOS API offers synchronization of data from the POS database. Choose the POS API Data Export spec in the top right to view documentation of the export format.\r\n\r\nFile-based integration with POS API is documented in the dedicated __BatchToPosApi__ spec - choose it in the dropdown at the top right. It covers both the data you import into POS API (currently orders - the blob types and file format) and the __FileProcessInfo__ notifications POS API publishes describing the outcome of each import (state, message and row metrics).\r\n\r\nFollow this [Pub/sub documentation](https://docs.egretail.cloud/Home/Doc/integration/integration) to learn how to publish data to POS API.\r\n</details>\r\n\r\n<details>\r\n<summary>Migration from on-premise POS API</summary>\r\n## Migration from on-premise POS API\r\n\r\nReview this if you have an existing on-premise Soap-based POS API integration and want to migrate to the REST based POS API v1 in cloud:\r\n\r\n- When using the REST based POS API hosted in cloud, all requests must be authenticated. The type of authentication is the same for all our services and is documented here: https://docs.egretail.cloud/Home/AdAuth\r\n- Each Soap endpoint on-premise have a corresponding route in the REST API. http://posserver:8000/PosApi/ItemSale/1.0 on-premise is https://posapi.egretail-test.cloud/api/ItemSale in cloud (test environment).\r\n- Each Soap operation on-premise have the same name in the REST API and is added as the last part of the endpoint URL. The URL for NewCart in cloud (test env.) is https://posapi.egretail-test.cloud/api/ItemSale/NewCart.\r\n- The request and response bodies in the REST API are the same as in Soap, except that it is formatted as JSON instead of XML. The Swagger documentation contains examples and description of each property in both the request and response objects.\r\n- All operations in v1 of REST POS API use the http verb POST.\r\n- Successful operations return http status 200 OK and contains the same content in JSON as the Soap service returned as XML. \r\n- Failed operations that returns faults (like ArticleNotFoundFault) from the Soap service return 400 Bad Request in the REST API. The response body in this case is documented together with the response for each method in Swagger. The Type property contains the same name as the fault type in Soap. Example response body:\r\n```json\r\n{\r\n    \"Type\": \"ArticleNotFoundFault\",\r\n    \"Message\": \"The item with EAN #7024163320273 was not found.\",\r\n    \"Reference\": \"f7e0688f-b5a5-4eae-bf98-572fb2b38040\"\r\n}\r\n```\r\n</details>\r\n\r\n<details>\r\n<summary>Service instance affinity</summary>\r\n## Service instance affinity\r\n\r\nPOS API runs as multiple instances using a Load Balancer. To achieve maximum performance on your requests, it is recommended to use the same instance for operations on a given Cart.\r\n\r\nTo use the same instance for a Cart, keep the returned cookie called ARRAffinitySameSite (in a Set-Cookie header) together with your CartId, and use this cookie for every request for that specific Cart.\r\n\r\n> Note: The cookie might change for every response.\r\n> Note: If you are unable/unwilling to correlate cookie with CartId for your requests, its better to not send any cookies at all.\r\n> Note: Most HTTP SDKs will by default round-trip cookies, which is not the behavior you want for the most performance and resiliency.\r\n</details>\r\n\r\n**FAQ:**\r\n[FAQ for POS API](../posapifaq.html)",
     "version": "1.0.0.0"
   },
   "paths": {
@@ -1698,19 +1698,19 @@
                 "schema": {
                   "$ref": "#/components/schemas/ItemSale.AddBundleToCart_Response"
                 },
-                "example": {"cart":{"startTime":"2026-07-21T08:01:26.7919082Z","sequenceNumber":122,"items":[{"article":{"ean":"2324","text":"Mountain skis GTX","normalPrice":700.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":0,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":1,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":650.0,"discountDetails":[{"discountType":"ArticleBundle","quantity":1.0,"discountAmountPerQuantity":50.0,"totalDiscountAmount":50.0,"description":"Ski bundle","id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":"9092813","offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"9032","text":"Mountain bindings GTR 900","normalPrice":1200.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":1,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":1050.0,"discountDetails":[{"discountType":"CampaignPrice","quantity":1.0,"discountAmountPerQuantity":150.0,"totalDiscountAmount":150.0,"description":null,"id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":null,"offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"3123","text":"Service item: ski preparation","normalPrice":0.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":2,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":0.0,"discountDetails":[],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":[{"text":"87.4","key":"weight","showToCashier":false},{"text":"2324","key":"appliesTo","showToCashier":false}],"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null}],"currency":"NOK","totals":null,"cartId":{"id":"324234-232-122","revision":5,"hashBasedMessageAuthenticationCode":""},"barCodeData":null,"vaTs":null,"customerOrderNumber":null,"tracingId":null,"externalOrderNumber":null,"orderVersion":null,"payments":null,"delivery":null,"customer":null,"note":null,"operationPending":false,"cartState":"InProgress","loyaltyNumber":null,"notes":null,"loyalty":null,"coupons":null,"externalOrderNumber2":null,"netCostDiscountPercentage":0.0,"customerOrderVariant":null,"mixTimeout":false,"tickets":null,"operator":null,"boardingPassAndFlightInfo":null,"isSealingRequired":null}}
+                "example": {"cart":{"startTime":"2026-07-20T19:19:03.9779423Z","sequenceNumber":122,"items":[{"article":{"ean":"2324","text":"Mountain skis GTX","normalPrice":700.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":0,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":1,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":650.0,"discountDetails":[{"discountType":"ArticleBundle","quantity":1.0,"discountAmountPerQuantity":50.0,"totalDiscountAmount":50.0,"description":"Ski bundle","id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":"9092813","offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"9032","text":"Mountain bindings GTR 900","normalPrice":1200.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":1,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":1050.0,"discountDetails":[{"discountType":"CampaignPrice","quantity":1.0,"discountAmountPerQuantity":150.0,"totalDiscountAmount":150.0,"description":null,"id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":null,"offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"3123","text":"Service item: ski preparation","normalPrice":0.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":2,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":0.0,"discountDetails":[],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":[{"text":"87.4","key":"weight","showToCashier":false},{"text":"2324","key":"appliesTo","showToCashier":false}],"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null}],"currency":"NOK","totals":null,"cartId":{"id":"324234-232-122","revision":5,"hashBasedMessageAuthenticationCode":""},"barCodeData":null,"vaTs":null,"customerOrderNumber":null,"tracingId":null,"externalOrderNumber":null,"orderVersion":null,"payments":null,"delivery":null,"customer":null,"note":null,"operationPending":false,"cartState":"InProgress","loyaltyNumber":null,"notes":null,"loyalty":null,"coupons":null,"externalOrderNumber2":null,"netCostDiscountPercentage":0.0,"customerOrderVariant":null,"mixTimeout":false,"tickets":null,"operator":null,"boardingPassAndFlightInfo":null,"isSealingRequired":null}}
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ItemSale.AddBundleToCart_Response"
                 },
-                "example": {"cart":{"startTime":"2026-07-21T08:01:26.7919082Z","sequenceNumber":122,"items":[{"article":{"ean":"2324","text":"Mountain skis GTX","normalPrice":700.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":0,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":1,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":650.0,"discountDetails":[{"discountType":"ArticleBundle","quantity":1.0,"discountAmountPerQuantity":50.0,"totalDiscountAmount":50.0,"description":"Ski bundle","id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":"9092813","offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"9032","text":"Mountain bindings GTR 900","normalPrice":1200.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":1,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":1050.0,"discountDetails":[{"discountType":"CampaignPrice","quantity":1.0,"discountAmountPerQuantity":150.0,"totalDiscountAmount":150.0,"description":null,"id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":null,"offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"3123","text":"Service item: ski preparation","normalPrice":0.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":2,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":0.0,"discountDetails":[],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":[{"text":"87.4","key":"weight","showToCashier":false},{"text":"2324","key":"appliesTo","showToCashier":false}],"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null}],"currency":"NOK","totals":null,"cartId":{"id":"324234-232-122","revision":5,"hashBasedMessageAuthenticationCode":""},"barCodeData":null,"vaTs":null,"customerOrderNumber":null,"tracingId":null,"externalOrderNumber":null,"orderVersion":null,"payments":null,"delivery":null,"customer":null,"note":null,"operationPending":false,"cartState":"InProgress","loyaltyNumber":null,"notes":null,"loyalty":null,"coupons":null,"externalOrderNumber2":null,"netCostDiscountPercentage":0.0,"customerOrderVariant":null,"mixTimeout":false,"tickets":null,"operator":null,"boardingPassAndFlightInfo":null,"isSealingRequired":null}}
+                "example": {"cart":{"startTime":"2026-07-20T19:19:03.9779423Z","sequenceNumber":122,"items":[{"article":{"ean":"2324","text":"Mountain skis GTX","normalPrice":700.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":0,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":1,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":650.0,"discountDetails":[{"discountType":"ArticleBundle","quantity":1.0,"discountAmountPerQuantity":50.0,"totalDiscountAmount":50.0,"description":"Ski bundle","id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":"9092813","offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"9032","text":"Mountain bindings GTR 900","normalPrice":1200.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":1,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":1050.0,"discountDetails":[{"discountType":"CampaignPrice","quantity":1.0,"discountAmountPerQuantity":150.0,"totalDiscountAmount":150.0,"description":null,"id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":null,"offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"3123","text":"Service item: ski preparation","normalPrice":0.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":2,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":0.0,"discountDetails":[],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":[{"text":"87.4","key":"weight","showToCashier":false},{"text":"2324","key":"appliesTo","showToCashier":false}],"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null}],"currency":"NOK","totals":null,"cartId":{"id":"324234-232-122","revision":5,"hashBasedMessageAuthenticationCode":""},"barCodeData":null,"vaTs":null,"customerOrderNumber":null,"tracingId":null,"externalOrderNumber":null,"orderVersion":null,"payments":null,"delivery":null,"customer":null,"note":null,"operationPending":false,"cartState":"InProgress","loyaltyNumber":null,"notes":null,"loyalty":null,"coupons":null,"externalOrderNumber2":null,"netCostDiscountPercentage":0.0,"customerOrderVariant":null,"mixTimeout":false,"tickets":null,"operator":null,"boardingPassAndFlightInfo":null,"isSealingRequired":null}}
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ItemSale.AddBundleToCart_Response"
                 },
-                "example": {"cart":{"startTime":"2026-07-21T08:01:26.7919082Z","sequenceNumber":122,"items":[{"article":{"ean":"2324","text":"Mountain skis GTX","normalPrice":700.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":0,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":1,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":650.0,"discountDetails":[{"discountType":"ArticleBundle","quantity":1.0,"discountAmountPerQuantity":50.0,"totalDiscountAmount":50.0,"description":"Ski bundle","id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":"9092813","offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"9032","text":"Mountain bindings GTR 900","normalPrice":1200.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":1,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":1050.0,"discountDetails":[{"discountType":"CampaignPrice","quantity":1.0,"discountAmountPerQuantity":150.0,"totalDiscountAmount":150.0,"description":null,"id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":null,"offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"3123","text":"Service item: ski preparation","normalPrice":0.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":2,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":0.0,"discountDetails":[],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":[{"text":"87.4","key":"weight","showToCashier":false},{"text":"2324","key":"appliesTo","showToCashier":false}],"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null}],"currency":"NOK","totals":null,"cartId":{"id":"324234-232-122","revision":5,"hashBasedMessageAuthenticationCode":""},"barCodeData":null,"vaTs":null,"customerOrderNumber":null,"tracingId":null,"externalOrderNumber":null,"orderVersion":null,"payments":null,"delivery":null,"customer":null,"note":null,"operationPending":false,"cartState":"InProgress","loyaltyNumber":null,"notes":null,"loyalty":null,"coupons":null,"externalOrderNumber2":null,"netCostDiscountPercentage":0.0,"customerOrderVariant":null,"mixTimeout":false,"tickets":null,"operator":null,"boardingPassAndFlightInfo":null,"isSealingRequired":null}}
+                "example": {"cart":{"startTime":"2026-07-20T19:19:03.9779423Z","sequenceNumber":122,"items":[{"article":{"ean":"2324","text":"Mountain skis GTX","normalPrice":700.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":0,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":1,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":650.0,"discountDetails":[{"discountType":"ArticleBundle","quantity":1.0,"discountAmountPerQuantity":50.0,"totalDiscountAmount":50.0,"description":"Ski bundle","id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":"9092813","offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"9032","text":"Mountain bindings GTR 900","normalPrice":1200.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":1,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":1050.0,"discountDetails":[{"discountType":"CampaignPrice","quantity":1.0,"discountAmountPerQuantity":150.0,"totalDiscountAmount":150.0,"description":null,"id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":null,"offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"3123","text":"Service item: ski preparation","normalPrice":0.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":2,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":0.0,"discountDetails":[],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":[{"text":"87.4","key":"weight","showToCashier":false},{"text":"2324","key":"appliesTo","showToCashier":false}],"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null}],"currency":"NOK","totals":null,"cartId":{"id":"324234-232-122","revision":5,"hashBasedMessageAuthenticationCode":""},"barCodeData":null,"vaTs":null,"customerOrderNumber":null,"tracingId":null,"externalOrderNumber":null,"orderVersion":null,"payments":null,"delivery":null,"customer":null,"note":null,"operationPending":false,"cartState":"InProgress","loyaltyNumber":null,"notes":null,"loyalty":null,"coupons":null,"externalOrderNumber2":null,"netCostDiscountPercentage":0.0,"customerOrderVariant":null,"mixTimeout":false,"tickets":null,"operator":null,"boardingPassAndFlightInfo":null,"isSealingRequired":null}}
               }
             }
           },
@@ -11804,405 +11804,6 @@
         }
       }
     },
-    "/api/Order/queue/Basic": {
-      "post": {
-        "tags": [
-          "Order"
-        ],
-        "summary": "Only used for documentation of format for import of orders with basic information. Use FileService to post data to the queue.",
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Basic.Order"
-                  }
-                ]
-              },
-              "example": {"externalOrderNo":"123456","store":{"no":318,"storeNoType":null},"loyaltyNumber":null,"externalLoyaltyNumber":null,"orderTimestampUtc":null,"customer":{"no":"7110086","fullName":"Charlotte Bø","email":"CharlotteB@jourrapide.com","cellPhoneNumber":"912 69 517","externalContactInfoId":null},"customerAddress":null,"deliveryAddress":{"name":"Charlotte Bø","street1":"Jens Tvedts veg 106","street2":"","zip":"7024","city":"TRONDHEIM","country":null},"deliveryDetails":{"method":"19","deliveryPointId":"3936168","deliveryPointHours":null,"carrierReference":null,"timeSlotToken":null,"preferredDateTime":null,"dispatchRuleId":null},"paid":false,"delivered":false,"coupons":[{"couponNo":"9982019140087","externalCouponNo":"336"}],"priceStore":null,"structuredNotes":null,"orderLines":[{"ean":"8722700213031","quantity":1.0,"lineSum":199.50,"vatAmount":39.9,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"bundleSequenceNumber":null},{"ean":"7056726283091","quantity":3.0,"lineSum":100.0,"vatAmount":20.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"bundleSequenceNumber":null},{"ean":"4000140935015","quantity":1.0,"lineSum":149.99,"vatAmount":30.0,"lineDiscount":20.0,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"bundleSequenceNumber":null},{"ean":"4000140935015","quantity":1.0,"lineSum":149.99,"vatAmount":30.0,"lineDiscount":null,"normalPriceSum":169.99,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"bundleSequenceNumber":null},{"ean":"400","quantity":1.0,"lineSum":100.0,"vatAmount":20.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"bundleSequenceNumber":0},{"ean":"411","quantity":1.0,"lineSum":300.0,"vatAmount":60.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"bundleSequenceNumber":0}],"payments":[{"amount":999.48,"paymentReferenceNumber":"5639256351","providerId":null,"providerOrderId":null,"instrumentType":"Undefined","instrumentId":null,"providerMerchantId":null,"cardIssuerIdentifier":null}],"communicationChannels":null,"bundles":[{"sequenceNumber":0,"ean":"6013","name":"Skipakke Junior","price":400.0}]}
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Basic.Order"
-                  }
-                ]
-              },
-              "example": {"externalOrderNo":"123456","store":{"no":318,"storeNoType":null},"loyaltyNumber":null,"externalLoyaltyNumber":null,"orderTimestampUtc":null,"customer":{"no":"7110086","fullName":"Charlotte Bø","email":"CharlotteB@jourrapide.com","cellPhoneNumber":"912 69 517","externalContactInfoId":null},"customerAddress":null,"deliveryAddress":{"name":"Charlotte Bø","street1":"Jens Tvedts veg 106","street2":"","zip":"7024","city":"TRONDHEIM","country":null},"deliveryDetails":{"method":"19","deliveryPointId":"3936168","deliveryPointHours":null,"carrierReference":null,"timeSlotToken":null,"preferredDateTime":null,"dispatchRuleId":null},"paid":false,"delivered":false,"coupons":[{"couponNo":"9982019140087","externalCouponNo":"336"}],"priceStore":null,"structuredNotes":null,"orderLines":[{"ean":"8722700213031","quantity":1.0,"lineSum":199.50,"vatAmount":39.9,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"bundleSequenceNumber":null},{"ean":"7056726283091","quantity":3.0,"lineSum":100.0,"vatAmount":20.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"bundleSequenceNumber":null},{"ean":"4000140935015","quantity":1.0,"lineSum":149.99,"vatAmount":30.0,"lineDiscount":20.0,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"bundleSequenceNumber":null},{"ean":"4000140935015","quantity":1.0,"lineSum":149.99,"vatAmount":30.0,"lineDiscount":null,"normalPriceSum":169.99,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"bundleSequenceNumber":null},{"ean":"400","quantity":1.0,"lineSum":100.0,"vatAmount":20.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"bundleSequenceNumber":0},{"ean":"411","quantity":1.0,"lineSum":300.0,"vatAmount":60.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"bundleSequenceNumber":0}],"payments":[{"amount":999.48,"paymentReferenceNumber":"5639256351","providerId":null,"providerOrderId":null,"instrumentType":"Undefined","instrumentId":null,"providerMerchantId":null,"cardIssuerIdentifier":null}],"communicationChannels":null,"bundles":[{"sequenceNumber":0,"ean":"6013","name":"Skipakke Junior","price":400.0}]}
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Basic.Order"
-                  }
-                ]
-              },
-              "example": {"externalOrderNo":"123456","store":{"no":318,"storeNoType":null},"loyaltyNumber":null,"externalLoyaltyNumber":null,"orderTimestampUtc":null,"customer":{"no":"7110086","fullName":"Charlotte Bø","email":"CharlotteB@jourrapide.com","cellPhoneNumber":"912 69 517","externalContactInfoId":null},"customerAddress":null,"deliveryAddress":{"name":"Charlotte Bø","street1":"Jens Tvedts veg 106","street2":"","zip":"7024","city":"TRONDHEIM","country":null},"deliveryDetails":{"method":"19","deliveryPointId":"3936168","deliveryPointHours":null,"carrierReference":null,"timeSlotToken":null,"preferredDateTime":null,"dispatchRuleId":null},"paid":false,"delivered":false,"coupons":[{"couponNo":"9982019140087","externalCouponNo":"336"}],"priceStore":null,"structuredNotes":null,"orderLines":[{"ean":"8722700213031","quantity":1.0,"lineSum":199.50,"vatAmount":39.9,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"bundleSequenceNumber":null},{"ean":"7056726283091","quantity":3.0,"lineSum":100.0,"vatAmount":20.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"bundleSequenceNumber":null},{"ean":"4000140935015","quantity":1.0,"lineSum":149.99,"vatAmount":30.0,"lineDiscount":20.0,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"bundleSequenceNumber":null},{"ean":"4000140935015","quantity":1.0,"lineSum":149.99,"vatAmount":30.0,"lineDiscount":null,"normalPriceSum":169.99,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"bundleSequenceNumber":null},{"ean":"400","quantity":1.0,"lineSum":100.0,"vatAmount":20.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"bundleSequenceNumber":0},{"ean":"411","quantity":1.0,"lineSum":300.0,"vatAmount":60.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"bundleSequenceNumber":0}],"payments":[{"amount":999.48,"paymentReferenceNumber":"5639256351","providerId":null,"providerOrderId":null,"instrumentType":"Undefined","instrumentId":null,"providerMerchantId":null,"cardIssuerIdentifier":null}],"communicationChannels":null,"bundles":[{"sequenceNumber":0,"ean":"6013","name":"Skipakke Junior","price":400.0}]}
-            },
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Basic.Order"
-                  }
-                ]
-              },
-              "example": {"externalOrderNo":"123456","store":{"no":318,"storeNoType":null},"loyaltyNumber":null,"externalLoyaltyNumber":null,"orderTimestampUtc":null,"customer":{"no":"7110086","fullName":"Charlotte Bø","email":"CharlotteB@jourrapide.com","cellPhoneNumber":"912 69 517","externalContactInfoId":null},"customerAddress":null,"deliveryAddress":{"name":"Charlotte Bø","street1":"Jens Tvedts veg 106","street2":"","zip":"7024","city":"TRONDHEIM","country":null},"deliveryDetails":{"method":"19","deliveryPointId":"3936168","deliveryPointHours":null,"carrierReference":null,"timeSlotToken":null,"preferredDateTime":null,"dispatchRuleId":null},"paid":false,"delivered":false,"coupons":[{"couponNo":"9982019140087","externalCouponNo":"336"}],"priceStore":null,"structuredNotes":null,"orderLines":[{"ean":"8722700213031","quantity":1.0,"lineSum":199.50,"vatAmount":39.9,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"bundleSequenceNumber":null},{"ean":"7056726283091","quantity":3.0,"lineSum":100.0,"vatAmount":20.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"bundleSequenceNumber":null},{"ean":"4000140935015","quantity":1.0,"lineSum":149.99,"vatAmount":30.0,"lineDiscount":20.0,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"bundleSequenceNumber":null},{"ean":"4000140935015","quantity":1.0,"lineSum":149.99,"vatAmount":30.0,"lineDiscount":null,"normalPriceSum":169.99,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"bundleSequenceNumber":null},{"ean":"400","quantity":1.0,"lineSum":100.0,"vatAmount":20.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"bundleSequenceNumber":0},{"ean":"411","quantity":1.0,"lineSum":300.0,"vatAmount":60.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"bundleSequenceNumber":0}],"payments":[{"amount":999.48,"paymentReferenceNumber":"5639256351","providerId":null,"providerOrderId":null,"instrumentType":"Undefined","instrumentId":null,"providerMerchantId":null,"cardIssuerIdentifier":null}],"communicationChannels":null,"bundles":[{"sequenceNumber":0,"ean":"6013","name":"Skipakke Junior","price":400.0}]}
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/api/Order/queue/Complete": {
-      "post": {
-        "tags": [
-          "Order"
-        ],
-        "summary": "Only used for documentation of format for import of orders with complete information not needing price calculation. Use FileService to post data to the queue.",
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Complete.Order"
-                  }
-                ],
-                "description": "An order that will contain more details about the order, like discounts and delivery."
-              },
-              "example": {"externalOrderNo":"123456","store":{"no":318,"storeNoType":null},"loyaltyNumber":"184581","externalLoyaltyNumber":"1234567890","orderTimestampUtc":null,"customer":{"no":"7110086","fullName":"Charlotte Bø","email":"CharlotteB@jourrapide.com","cellPhoneNumber":"912 69 517","externalContactInfoId":"567783"},"customerAddress":{"name":"Charlotte Bø","street1":"Jens Tvedts veg 106","street2":"","zip":"7024","city":"TRONDHEIM","country":null},"deliveryAddress":{"name":"Charlotte Bø","street1":"Jens Tvedts veg 106","street2":"","zip":"7024","city":"TRONDHEIM","country":null},"deliveryDetails":{"method":"19","deliveryPointId":"3936168","deliveryPointHours":null,"carrierReference":null,"timeSlotToken":null,"preferredDateTime":null,"dispatchRuleId":null},"paid":false,"delivered":false,"coupons":[{"couponNo":"9982019140087","externalCouponNo":"336"}],"priceStore":{"no":500,"storeNoType":null},"structuredNotes":[{"key":"key1","value":"value1"}],"orderLines":[{"normalUnitCostPrice":159.0,"ean":"8722700213031","quantity":1.0,"lineSum":199.50,"vatAmount":39.9,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":149.0,"kickbackAmount":9.50,"structuredLineNotes":[{"key":"COL_NCS","value":"1435-Y07R"},{"key":"COL_CODE","value":"1337"}],"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"discounts":[{"amount":20.0,"quantity":1.0,"type":"MemberPrice","discountNo":"MemberPrice-8722700213031-Piece","name":null,"campaignGroupId":null,"couponNo":null,"externalReference":null,"kickBackAmount":null,"netCost":null}],"discountContributions":null,"bundleSequenceNumber":null},{"normalUnitCostPrice":null,"ean":"7056726283091","quantity":3.0,"lineSum":100.0,"vatAmount":20.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"discounts":[{"amount":6.6666666666666666666666666667,"quantity":3.0,"type":"Mix","discountNo":"1263","name":"3 for 100 kr","campaignGroupId":"325","couponNo":"9982019140087","externalReference":"5465757","kickBackAmount":2.5,"netCost":null}],"discountContributions":[{"discountNo":"1263","quantity":3.0}],"bundleSequenceNumber":null},{"normalUnitCostPrice":69.0,"ean":"4000140935015","quantity":1.0,"lineSum":149.99,"vatAmount":30.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":59.0,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"discounts":[{"amount":20.0,"quantity":1.0,"type":"CampaignPrice","discountNo":null,"name":null,"campaignGroupId":"6481","couponNo":null,"externalReference":null,"kickBackAmount":null,"netCost":null}],"discountContributions":null,"bundleSequenceNumber":null},{"normalUnitCostPrice":null,"ean":"400","quantity":1.0,"lineSum":100.0,"vatAmount":20.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"discounts":[{"amount":20.0,"quantity":1.0,"type":"Bundle","discountNo":null,"name":null,"campaignGroupId":null,"couponNo":null,"externalReference":null,"kickBackAmount":null,"netCost":null}],"discountContributions":null,"bundleSequenceNumber":0},{"normalUnitCostPrice":null,"ean":"411","quantity":1.0,"lineSum":300.0,"vatAmount":60.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"discounts":[{"amount":100.0,"quantity":1.0,"type":"Bundle","discountNo":null,"name":null,"campaignGroupId":null,"couponNo":null,"externalReference":null,"kickBackAmount":null,"netCost":null}],"discountContributions":null,"bundleSequenceNumber":0}],"payments":[{"amount":897.50,"paymentReferenceNumber":"5639256351","providerId":null,"providerOrderId":null,"instrumentType":"Undefined","instrumentId":null,"providerMerchantId":null,"cardIssuerIdentifier":null}],"communicationChannels":null,"campaignGroups":[{"campaignGroupNo":"6481","campaignTag":"DM","typeNo":"0"}],"bundles":[{"sequenceNumber":0,"ean":"6013","name":"Skipakke Junior","price":400.0}]}
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Complete.Order"
-                  }
-                ],
-                "description": "An order that will contain more details about the order, like discounts and delivery."
-              },
-              "example": {"externalOrderNo":"123456","store":{"no":318,"storeNoType":null},"loyaltyNumber":"184581","externalLoyaltyNumber":"1234567890","orderTimestampUtc":null,"customer":{"no":"7110086","fullName":"Charlotte Bø","email":"CharlotteB@jourrapide.com","cellPhoneNumber":"912 69 517","externalContactInfoId":"567783"},"customerAddress":{"name":"Charlotte Bø","street1":"Jens Tvedts veg 106","street2":"","zip":"7024","city":"TRONDHEIM","country":null},"deliveryAddress":{"name":"Charlotte Bø","street1":"Jens Tvedts veg 106","street2":"","zip":"7024","city":"TRONDHEIM","country":null},"deliveryDetails":{"method":"19","deliveryPointId":"3936168","deliveryPointHours":null,"carrierReference":null,"timeSlotToken":null,"preferredDateTime":null,"dispatchRuleId":null},"paid":false,"delivered":false,"coupons":[{"couponNo":"9982019140087","externalCouponNo":"336"}],"priceStore":{"no":500,"storeNoType":null},"structuredNotes":[{"key":"key1","value":"value1"}],"orderLines":[{"normalUnitCostPrice":159.0,"ean":"8722700213031","quantity":1.0,"lineSum":199.50,"vatAmount":39.9,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":149.0,"kickbackAmount":9.50,"structuredLineNotes":[{"key":"COL_NCS","value":"1435-Y07R"},{"key":"COL_CODE","value":"1337"}],"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"discounts":[{"amount":20.0,"quantity":1.0,"type":"MemberPrice","discountNo":"MemberPrice-8722700213031-Piece","name":null,"campaignGroupId":null,"couponNo":null,"externalReference":null,"kickBackAmount":null,"netCost":null}],"discountContributions":null,"bundleSequenceNumber":null},{"normalUnitCostPrice":null,"ean":"7056726283091","quantity":3.0,"lineSum":100.0,"vatAmount":20.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"discounts":[{"amount":6.6666666666666666666666666667,"quantity":3.0,"type":"Mix","discountNo":"1263","name":"3 for 100 kr","campaignGroupId":"325","couponNo":"9982019140087","externalReference":"5465757","kickBackAmount":2.5,"netCost":null}],"discountContributions":[{"discountNo":"1263","quantity":3.0}],"bundleSequenceNumber":null},{"normalUnitCostPrice":69.0,"ean":"4000140935015","quantity":1.0,"lineSum":149.99,"vatAmount":30.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":59.0,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"discounts":[{"amount":20.0,"quantity":1.0,"type":"CampaignPrice","discountNo":null,"name":null,"campaignGroupId":"6481","couponNo":null,"externalReference":null,"kickBackAmount":null,"netCost":null}],"discountContributions":null,"bundleSequenceNumber":null},{"normalUnitCostPrice":null,"ean":"400","quantity":1.0,"lineSum":100.0,"vatAmount":20.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"discounts":[{"amount":20.0,"quantity":1.0,"type":"Bundle","discountNo":null,"name":null,"campaignGroupId":null,"couponNo":null,"externalReference":null,"kickBackAmount":null,"netCost":null}],"discountContributions":null,"bundleSequenceNumber":0},{"normalUnitCostPrice":null,"ean":"411","quantity":1.0,"lineSum":300.0,"vatAmount":60.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"discounts":[{"amount":100.0,"quantity":1.0,"type":"Bundle","discountNo":null,"name":null,"campaignGroupId":null,"couponNo":null,"externalReference":null,"kickBackAmount":null,"netCost":null}],"discountContributions":null,"bundleSequenceNumber":0}],"payments":[{"amount":897.50,"paymentReferenceNumber":"5639256351","providerId":null,"providerOrderId":null,"instrumentType":"Undefined","instrumentId":null,"providerMerchantId":null,"cardIssuerIdentifier":null}],"communicationChannels":null,"campaignGroups":[{"campaignGroupNo":"6481","campaignTag":"DM","typeNo":"0"}],"bundles":[{"sequenceNumber":0,"ean":"6013","name":"Skipakke Junior","price":400.0}]}
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Complete.Order"
-                  }
-                ],
-                "description": "An order that will contain more details about the order, like discounts and delivery."
-              },
-              "example": {"externalOrderNo":"123456","store":{"no":318,"storeNoType":null},"loyaltyNumber":"184581","externalLoyaltyNumber":"1234567890","orderTimestampUtc":null,"customer":{"no":"7110086","fullName":"Charlotte Bø","email":"CharlotteB@jourrapide.com","cellPhoneNumber":"912 69 517","externalContactInfoId":"567783"},"customerAddress":{"name":"Charlotte Bø","street1":"Jens Tvedts veg 106","street2":"","zip":"7024","city":"TRONDHEIM","country":null},"deliveryAddress":{"name":"Charlotte Bø","street1":"Jens Tvedts veg 106","street2":"","zip":"7024","city":"TRONDHEIM","country":null},"deliveryDetails":{"method":"19","deliveryPointId":"3936168","deliveryPointHours":null,"carrierReference":null,"timeSlotToken":null,"preferredDateTime":null,"dispatchRuleId":null},"paid":false,"delivered":false,"coupons":[{"couponNo":"9982019140087","externalCouponNo":"336"}],"priceStore":{"no":500,"storeNoType":null},"structuredNotes":[{"key":"key1","value":"value1"}],"orderLines":[{"normalUnitCostPrice":159.0,"ean":"8722700213031","quantity":1.0,"lineSum":199.50,"vatAmount":39.9,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":149.0,"kickbackAmount":9.50,"structuredLineNotes":[{"key":"COL_NCS","value":"1435-Y07R"},{"key":"COL_CODE","value":"1337"}],"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"discounts":[{"amount":20.0,"quantity":1.0,"type":"MemberPrice","discountNo":"MemberPrice-8722700213031-Piece","name":null,"campaignGroupId":null,"couponNo":null,"externalReference":null,"kickBackAmount":null,"netCost":null}],"discountContributions":null,"bundleSequenceNumber":null},{"normalUnitCostPrice":null,"ean":"7056726283091","quantity":3.0,"lineSum":100.0,"vatAmount":20.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"discounts":[{"amount":6.6666666666666666666666666667,"quantity":3.0,"type":"Mix","discountNo":"1263","name":"3 for 100 kr","campaignGroupId":"325","couponNo":"9982019140087","externalReference":"5465757","kickBackAmount":2.5,"netCost":null}],"discountContributions":[{"discountNo":"1263","quantity":3.0}],"bundleSequenceNumber":null},{"normalUnitCostPrice":69.0,"ean":"4000140935015","quantity":1.0,"lineSum":149.99,"vatAmount":30.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":59.0,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"discounts":[{"amount":20.0,"quantity":1.0,"type":"CampaignPrice","discountNo":null,"name":null,"campaignGroupId":"6481","couponNo":null,"externalReference":null,"kickBackAmount":null,"netCost":null}],"discountContributions":null,"bundleSequenceNumber":null},{"normalUnitCostPrice":null,"ean":"400","quantity":1.0,"lineSum":100.0,"vatAmount":20.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"discounts":[{"amount":20.0,"quantity":1.0,"type":"Bundle","discountNo":null,"name":null,"campaignGroupId":null,"couponNo":null,"externalReference":null,"kickBackAmount":null,"netCost":null}],"discountContributions":null,"bundleSequenceNumber":0},{"normalUnitCostPrice":null,"ean":"411","quantity":1.0,"lineSum":300.0,"vatAmount":60.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"discounts":[{"amount":100.0,"quantity":1.0,"type":"Bundle","discountNo":null,"name":null,"campaignGroupId":null,"couponNo":null,"externalReference":null,"kickBackAmount":null,"netCost":null}],"discountContributions":null,"bundleSequenceNumber":0}],"payments":[{"amount":897.50,"paymentReferenceNumber":"5639256351","providerId":null,"providerOrderId":null,"instrumentType":"Undefined","instrumentId":null,"providerMerchantId":null,"cardIssuerIdentifier":null}],"communicationChannels":null,"campaignGroups":[{"campaignGroupNo":"6481","campaignTag":"DM","typeNo":"0"}],"bundles":[{"sequenceNumber":0,"ean":"6013","name":"Skipakke Junior","price":400.0}]}
-            },
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Complete.Order"
-                  }
-                ],
-                "description": "An order that will contain more details about the order, like discounts and delivery."
-              },
-              "example": {"externalOrderNo":"123456","store":{"no":318,"storeNoType":null},"loyaltyNumber":"184581","externalLoyaltyNumber":"1234567890","orderTimestampUtc":null,"customer":{"no":"7110086","fullName":"Charlotte Bø","email":"CharlotteB@jourrapide.com","cellPhoneNumber":"912 69 517","externalContactInfoId":"567783"},"customerAddress":{"name":"Charlotte Bø","street1":"Jens Tvedts veg 106","street2":"","zip":"7024","city":"TRONDHEIM","country":null},"deliveryAddress":{"name":"Charlotte Bø","street1":"Jens Tvedts veg 106","street2":"","zip":"7024","city":"TRONDHEIM","country":null},"deliveryDetails":{"method":"19","deliveryPointId":"3936168","deliveryPointHours":null,"carrierReference":null,"timeSlotToken":null,"preferredDateTime":null,"dispatchRuleId":null},"paid":false,"delivered":false,"coupons":[{"couponNo":"9982019140087","externalCouponNo":"336"}],"priceStore":{"no":500,"storeNoType":null},"structuredNotes":[{"key":"key1","value":"value1"}],"orderLines":[{"normalUnitCostPrice":159.0,"ean":"8722700213031","quantity":1.0,"lineSum":199.50,"vatAmount":39.9,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":149.0,"kickbackAmount":9.50,"structuredLineNotes":[{"key":"COL_NCS","value":"1435-Y07R"},{"key":"COL_CODE","value":"1337"}],"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"discounts":[{"amount":20.0,"quantity":1.0,"type":"MemberPrice","discountNo":"MemberPrice-8722700213031-Piece","name":null,"campaignGroupId":null,"couponNo":null,"externalReference":null,"kickBackAmount":null,"netCost":null}],"discountContributions":null,"bundleSequenceNumber":null},{"normalUnitCostPrice":null,"ean":"7056726283091","quantity":3.0,"lineSum":100.0,"vatAmount":20.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"discounts":[{"amount":6.6666666666666666666666666667,"quantity":3.0,"type":"Mix","discountNo":"1263","name":"3 for 100 kr","campaignGroupId":"325","couponNo":"9982019140087","externalReference":"5465757","kickBackAmount":2.5,"netCost":null}],"discountContributions":[{"discountNo":"1263","quantity":3.0}],"bundleSequenceNumber":null},{"normalUnitCostPrice":69.0,"ean":"4000140935015","quantity":1.0,"lineSum":149.99,"vatAmount":30.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":59.0,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"discounts":[{"amount":20.0,"quantity":1.0,"type":"CampaignPrice","discountNo":null,"name":null,"campaignGroupId":"6481","couponNo":null,"externalReference":null,"kickBackAmount":null,"netCost":null}],"discountContributions":null,"bundleSequenceNumber":null},{"normalUnitCostPrice":null,"ean":"400","quantity":1.0,"lineSum":100.0,"vatAmount":20.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"discounts":[{"amount":20.0,"quantity":1.0,"type":"Bundle","discountNo":null,"name":null,"campaignGroupId":null,"couponNo":null,"externalReference":null,"kickBackAmount":null,"netCost":null}],"discountContributions":null,"bundleSequenceNumber":0},{"normalUnitCostPrice":null,"ean":"411","quantity":1.0,"lineSum":300.0,"vatAmount":60.0,"lineDiscount":null,"normalPriceSum":null,"lineNote":null,"displayItemText":null,"displayColorText":null,"displaySizeText":null,"unitCostPrice":null,"kickbackAmount":null,"structuredLineNotes":null,"fuelInfo":null,"returnFromExternalOrderNumber":null,"reasonCode":null,"pickingStoreDetails":null,"discounts":[{"amount":100.0,"quantity":1.0,"type":"Bundle","discountNo":null,"name":null,"campaignGroupId":null,"couponNo":null,"externalReference":null,"kickBackAmount":null,"netCost":null}],"discountContributions":null,"bundleSequenceNumber":0}],"payments":[{"amount":897.50,"paymentReferenceNumber":"5639256351","providerId":null,"providerOrderId":null,"instrumentType":"Undefined","instrumentId":null,"providerMerchantId":null,"cardIssuerIdentifier":null}],"communicationChannels":null,"campaignGroups":[{"campaignGroupNo":"6481","campaignTag":"DM","typeNo":"0"}],"bundles":[{"sequenceNumber":0,"ean":"6013","name":"Skipakke Junior","price":400.0}]}
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/api/Order/queue/Delivery": {
-      "post": {
-        "tags": [
-          "Order"
-        ],
-        "summary": "Only used for documentation. Use FileService to post data to the queue.",
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/OrderDelivery"
-                  }
-                ],
-                "description": "Represent an order delivery"
-              },
-              "example": {"externalOrderNo":"123456","internalOrderNo":null,"store":{"no":318,"storeNoType":null},"deliveredLines":[{"lineNo":1,"deliveredQuantity":1.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"8745982347562346","shippingProgress":null,"deliveryFinished":null}},{"lineNo":2,"deliveredQuantity":3.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"8745982347562346","shippingProgress":null,"deliveryFinished":null}},{"lineNo":3,"deliveredQuantity":1.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"3453457676577788","shippingProgress":null,"deliveryFinished":null}}],"captureDeliveredUnPaidItems":false,"shippingProgress":null,"deliverNonPhysicalItems":true}
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/OrderDelivery"
-                  }
-                ],
-                "description": "Represent an order delivery"
-              },
-              "example": {"externalOrderNo":"123456","internalOrderNo":null,"store":{"no":318,"storeNoType":null},"deliveredLines":[{"lineNo":1,"deliveredQuantity":1.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"8745982347562346","shippingProgress":null,"deliveryFinished":null}},{"lineNo":2,"deliveredQuantity":3.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"8745982347562346","shippingProgress":null,"deliveryFinished":null}},{"lineNo":3,"deliveredQuantity":1.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"3453457676577788","shippingProgress":null,"deliveryFinished":null}}],"captureDeliveredUnPaidItems":false,"shippingProgress":null,"deliverNonPhysicalItems":true}
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/OrderDelivery"
-                  }
-                ],
-                "description": "Represent an order delivery"
-              },
-              "example": {"externalOrderNo":"123456","internalOrderNo":null,"store":{"no":318,"storeNoType":null},"deliveredLines":[{"lineNo":1,"deliveredQuantity":1.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"8745982347562346","shippingProgress":null,"deliveryFinished":null}},{"lineNo":2,"deliveredQuantity":3.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"8745982347562346","shippingProgress":null,"deliveryFinished":null}},{"lineNo":3,"deliveredQuantity":1.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"3453457676577788","shippingProgress":null,"deliveryFinished":null}}],"captureDeliveredUnPaidItems":false,"shippingProgress":null,"deliverNonPhysicalItems":true}
-            },
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/OrderDelivery"
-                  }
-                ],
-                "description": "Represent an order delivery"
-              },
-              "example": {"externalOrderNo":"123456","internalOrderNo":null,"store":{"no":318,"storeNoType":null},"deliveredLines":[{"lineNo":1,"deliveredQuantity":1.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"8745982347562346","shippingProgress":null,"deliveryFinished":null}},{"lineNo":2,"deliveredQuantity":3.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"8745982347562346","shippingProgress":null,"deliveryFinished":null}},{"lineNo":3,"deliveredQuantity":1.0,"adjustedOrderedQuantity":null,"deliveryInformation":{"externalShipmentTrackingNumber":"3453457676577788","shippingProgress":null,"deliveryFinished":null}}],"captureDeliveredUnPaidItems":false,"shippingProgress":null,"deliverNonPhysicalItems":true}
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/api/Order/queue/ItemTransaction": {
-      "post": {
-        "tags": [
-          "Order"
-        ],
-        "summary": "Only used for documentation. Use FileService to post data to the queue.",
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ItemTransaction"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ItemTransaction"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ItemTransaction"
-                  }
-                ]
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ItemTransaction"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/api/Order/queue/OrderPayments": {
-      "post": {
-        "tags": [
-          "Order"
-        ],
-        "summary": "Only used for documentation. Use FileService to post data to the queue.",
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/OrderPayments"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/OrderPayments"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/OrderPayments"
-                  }
-                ]
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/OrderPayments"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/api/Order/queue/Payment": {
-      "post": {
-        "tags": [
-          "Order"
-        ],
-        "summary": "Only used for documentation. Use FileService to post data to the queue.",
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/OrderPayment"
-                  }
-                ],
-                "description": "An order payment that will contain external order number and storenumber in addition to payment details"
-              },
-              "example": {"externalOrderNo":"123456","internalOrderNo":null,"store":{"no":318,"storeNoType":null},"orderLines":[1,2],"amount":199.0,"paymentReferenceNumber":"5639256351","paymentTerminalType":"Vipps","cardIssuerIdentifier":"3"}
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/OrderPayment"
-                  }
-                ],
-                "description": "An order payment that will contain external order number and storenumber in addition to payment details"
-              },
-              "example": {"externalOrderNo":"123456","internalOrderNo":null,"store":{"no":318,"storeNoType":null},"orderLines":[1,2],"amount":199.0,"paymentReferenceNumber":"5639256351","paymentTerminalType":"Vipps","cardIssuerIdentifier":"3"}
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/OrderPayment"
-                  }
-                ],
-                "description": "An order payment that will contain external order number and storenumber in addition to payment details"
-              },
-              "example": {"externalOrderNo":"123456","internalOrderNo":null,"store":{"no":318,"storeNoType":null},"orderLines":[1,2],"amount":199.0,"paymentReferenceNumber":"5639256351","paymentTerminalType":"Vipps","cardIssuerIdentifier":"3"}
-            },
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/OrderPayment"
-                  }
-                ],
-                "description": "An order payment that will contain external order number and storenumber in addition to payment details"
-              },
-              "example": {"externalOrderNo":"123456","internalOrderNo":null,"store":{"no":318,"storeNoType":null},"orderLines":[1,2],"amount":199.0,"paymentReferenceNumber":"5639256351","paymentTerminalType":"Vipps","cardIssuerIdentifier":"3"}
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/api/Order/queue/Sale": {
-      "post": {
-        "tags": [
-          "Order"
-        ],
-        "summary": "Only used for documentation. Use FileService to post data to the queue.",
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Sale"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Sale"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Sale"
-                  }
-                ]
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Sale"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
     "/api/Payment/AddBonusPaymentToCart": {
       "post": {
         "tags": [
@@ -14180,255 +13781,6 @@
         ],
         "type": "string"
       },
-      "Basic.Order": {
-        "type": "object",
-        "properties": {
-          "externalOrderNo": {
-            "type": "string",
-            "nullable": true
-          },
-          "store": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StoreMeta"
-              }
-            ],
-            "nullable": true
-          },
-          "loyaltyNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "externalLoyaltyNumber": {
-            "type": "string",
-            "description": "Loyalty number from external system",
-            "nullable": true
-          },
-          "orderTimestampUtc": {
-            "type": "string",
-            "description": "The utc time and date the order was placed by the customer. If not set, the time of import will be used.",
-            "format": "date-time",
-            "nullable": true
-          },
-          "customer": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Basic.Customer"
-              }
-            ],
-            "description": "The customer registered on the order, also used for customer communication.",
-            "nullable": true
-          },
-          "customerAddress": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Basic.Address"
-              }
-            ],
-            "description": "The customer address that can be used for billing etc.",
-            "nullable": true
-          },
-          "deliveryAddress": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Basic.Address"
-              }
-            ],
-            "description": "Address of where to ship the ordered items",
-            "nullable": true
-          },
-          "deliveryDetails": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Basic.DeliveryDetails"
-              }
-            ],
-            "description": "Detailed information about the delivery",
-            "nullable": true
-          },
-          "paid": {
-            "type": "boolean",
-            "description": "Set to true if the Order is paid, else false"
-          },
-          "delivered": {
-            "type": "boolean",
-            "description": "Set to true if the Order is delivered, else false"
-          },
-          "coupons": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Basic.Coupon"
-            },
-            "description": "Coupons used in the order",
-            "nullable": true
-          },
-          "priceStore": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StoreMeta"
-              }
-            ],
-            "description": "The store for which to read price data from. If not set, the data will be read from the Store field.\r\nThis will be used to set values in the fields that are not part of the order import.",
-            "nullable": true
-          },
-          "structuredNotes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Basic.StructuredNote"
-            },
-            "description": "A list of key-value notes to store on the order.",
-            "nullable": true
-          },
-          "orderLines": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Basic.OrderLine"
-            },
-            "nullable": true
-          },
-          "payments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Basic.Payment"
-            },
-            "description": "A list of payments.",
-            "nullable": true
-          },
-          "communicationChannels": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CommunicationChannel"
-            },
-            "description": "A list of communication channels",
-            "nullable": true
-          },
-          "bundles": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Basic.Bundle"
-            },
-            "description": "Bundles included in the order.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "Basic.OrderLine": {
-        "type": "object",
-        "properties": {
-          "ean": {
-            "type": "string",
-            "nullable": true
-          },
-          "quantity": {
-            "type": "number",
-            "description": "Negative quantity indicates item return",
-            "format": "double"
-          },
-          "lineSum": {
-            "type": "number",
-            "description": "Normal unit price * quantity - any discounts on the line\r\n            \r\nIf this line is part of a bundle and the value is set to 0,\r\nthe price will be calculated (based on the bundle price, the normal price in the database and other items in the bundle)\r\nIt is required when quantity is negative.",
-            "format": "double"
-          },
-          "vatAmount": {
-            "type": "number",
-            "description": "Sum of vat on the line",
-            "format": "double",
-            "nullable": true
-          },
-          "lineDiscount": {
-            "type": "number",
-            "description": "Sum of line discount on the line",
-            "format": "double",
-            "nullable": true
-          },
-          "normalPriceSum": {
-            "type": "number",
-            "description": "Normal unit price * quantity. \r\nIf this is set without specifying any discounts, line discount is added based on the difference between this and the lineSum.",
-            "format": "double",
-            "nullable": true
-          },
-          "lineNote": {
-            "type": "string",
-            "description": "Line note",
-            "nullable": true
-          },
-          "displayItemText": {
-            "type": "string",
-            "description": "Display Item Text",
-            "nullable": true
-          },
-          "displayColorText": {
-            "type": "string",
-            "description": "Information about the color of the item",
-            "nullable": true
-          },
-          "displaySizeText": {
-            "type": "string",
-            "description": "Information about the size of the item",
-            "nullable": true
-          },
-          "unitCostPrice": {
-            "type": "number",
-            "description": "The net cost per unit. If not set, will be fetched from the current price in POS.",
-            "format": "double",
-            "nullable": true
-          },
-          "kickbackAmount": {
-            "type": "number",
-            "description": "Kickback amount for the article",
-            "format": "double",
-            "nullable": true
-          },
-          "structuredLineNotes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Basic.StructuredNote"
-            },
-            "description": "A list of key-value notes to store per line.",
-            "nullable": true
-          },
-          "fuelInfo": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Basic.FuelInfo"
-              }
-            ],
-            "description": "Contains fuelling information when the line represents a fuel item.",
-            "nullable": true
-          },
-          "returnFromExternalOrderNumber": {
-            "type": "string",
-            "description": "Specifies external number of the order from which the item was returned. It is required when quantity is negative.",
-            "nullable": true
-          },
-          "reasonCode": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Basic.ReasonCode"
-              }
-            ],
-            "description": "Specifies a reason code that you can use to indicate why a product was returned by the customer. It is required when quantity is negative.",
-            "nullable": true
-          },
-          "pickingStoreDetails": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StoreMeta"
-              }
-            ],
-            "description": "Contains picking store information for each item in the line",
-            "nullable": true
-          },
-          "bundleSequenceNumber": {
-            "type": "integer",
-            "description": "If this line is part of a bundle, this is the sequence number of the bundle",
-            "format": "int32",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "Basic.Payment": {
         "type": "object",
         "properties": {
@@ -14728,23 +14080,6 @@
         ],
         "type": "string",
         "description": "Possible error types for CheckoutCart"
-      },
-      "Code": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "description": "ID",
-            "format": "int32"
-          },
-          "description": {
-            "type": "string",
-            "description": "Description",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Class representing an action or reason code"
       },
       "Common.ColumnSearchType": {
         "enum": [
@@ -15436,147 +14771,6 @@
         ],
         "type": "string"
       },
-      "Complete.Order": {
-        "type": "object",
-        "properties": {
-          "externalOrderNo": {
-            "type": "string",
-            "nullable": true
-          },
-          "store": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StoreMeta"
-              }
-            ],
-            "nullable": true
-          },
-          "loyaltyNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "externalLoyaltyNumber": {
-            "type": "string",
-            "description": "Loyalty number from external system",
-            "nullable": true
-          },
-          "orderTimestampUtc": {
-            "type": "string",
-            "description": "The utc time and date the order was placed by the customer. If not set, the time of import will be used.",
-            "format": "date-time",
-            "nullable": true
-          },
-          "customer": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Basic.Customer"
-              }
-            ],
-            "description": "The customer registered on the order, also used for customer communication.",
-            "nullable": true
-          },
-          "customerAddress": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Basic.Address"
-              }
-            ],
-            "description": "The customer address that can be used for billing etc.",
-            "nullable": true
-          },
-          "deliveryAddress": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Basic.Address"
-              }
-            ],
-            "description": "Address of where to ship the ordered items",
-            "nullable": true
-          },
-          "deliveryDetails": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Basic.DeliveryDetails"
-              }
-            ],
-            "description": "Detailed information about the delivery",
-            "nullable": true
-          },
-          "paid": {
-            "type": "boolean",
-            "description": "Set to true if the Order is paid, else false"
-          },
-          "delivered": {
-            "type": "boolean",
-            "description": "Set to true if the Order is delivered, else false"
-          },
-          "coupons": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Basic.Coupon"
-            },
-            "description": "Coupons used in the order",
-            "nullable": true
-          },
-          "priceStore": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StoreMeta"
-              }
-            ],
-            "description": "The store for which to read price data from. If not set, the data will be read from the Store field.\r\nThis will be used to set values in the fields that are not part of the order import.",
-            "nullable": true
-          },
-          "structuredNotes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Basic.StructuredNote"
-            },
-            "description": "A list of key-value notes to store on the order.",
-            "nullable": true
-          },
-          "orderLines": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Complete.OrderLine"
-            },
-            "nullable": true
-          },
-          "payments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Basic.Payment"
-            },
-            "description": "A list of payments.",
-            "nullable": true
-          },
-          "communicationChannels": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CommunicationChannel"
-            },
-            "description": "A list of communication channels",
-            "nullable": true
-          },
-          "campaignGroups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Complete.CampaignGroup"
-            },
-            "nullable": true
-          },
-          "bundles": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Basic.Bundle"
-            },
-            "description": "Bundles included in the order.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "An order that will contain more details about the order, like discounts and delivery."
-      },
       "Complete.OrderLine": {
         "type": "object",
         "properties": {
@@ -16166,101 +15360,6 @@
         "type": "string",
         "description": "Possible error types for DeliverCartItem"
       },
-      "DeliveredLine": {
-        "type": "object",
-        "properties": {
-          "lineNo": {
-            "type": "integer",
-            "description": "The line number in the Order",
-            "format": "int32"
-          },
-          "deliveredQuantity": {
-            "type": "number",
-            "description": "The quantity delivered\r\nCan be omitted or set to null when there is no change in the delivered quantity, but there is an update in the delivery information or ordered quantity adjustment",
-            "format": "double",
-            "nullable": true
-          },
-          "adjustedOrderedQuantity": {
-            "type": "number",
-            "description": "Updated ordered quantity, can be set to value less than the original ordered quantity when delivering originally ordered amount is not possible\r\nIf the value is not set, the original ordered quantity will not be updated",
-            "format": "double",
-            "nullable": true
-          },
-          "deliveryInformation": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DeliveryInformation"
-              }
-            ],
-            "description": "Additional delivery information",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Information about the order line delivered"
-      },
-      "DeliveryInformation": {
-        "type": "object",
-        "properties": {
-          "externalShipmentTrackingNumber": {
-            "type": "string",
-            "description": "The external shipment tracking number (from the carrier)",
-            "nullable": true
-          },
-          "shippingProgress": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ShippingProgress"
-              }
-            ],
-            "description": "Order line shipping progress",
-            "nullable": true
-          },
-          "deliveryFinished": {
-            "type": "boolean",
-            "description": "Gets or sets the delivery state for the order",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "Order delivery information"
-      },
-      "Discount": {
-        "type": "object",
-        "properties": {
-          "amount": {
-            "type": "number",
-            "description": "Discount per unit",
-            "format": "double"
-          },
-          "quantity": {
-            "type": "number",
-            "description": "Number of units with this discount",
-            "format": "double"
-          },
-          "type": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DiscountType"
-              }
-            ]
-          },
-          "netCost": {
-            "type": "number",
-            "description": "Adjusted net cost per unit for the discounted item(s)",
-            "format": "double",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "DiscountType": {
-        "enum": [
-          "Line",
-          "Subtotal"
-        ],
-        "type": "string"
-      },
       "EditArticleBundleInCartErrorType": {
         "enum": [
           "GeneralFault",
@@ -16458,58 +15557,6 @@
         ],
         "type": "string",
         "description": "Possible error types for GetVensafeProducts"
-      },
-      "ItemFuelInfo": {
-        "type": "object",
-        "properties": {
-          "fuellingPointId": {
-            "type": "string",
-            "description": "The Fuelling Point contains one or more Logical Nozzles.\r\nThe customer identifies this Fuelling Point normally with \"Pump Number\".\r\n(International Forecourt Standards Forum)",
-            "nullable": true
-          },
-          "nozzleId": {
-            "type": "string",
-            "description": "That part of the Fuelling Point that blends and measures the volume of fuel dispensed during a fuelling transaction",
-            "nullable": true
-          },
-          "fuelGradeId": {
-            "type": "string",
-            "description": "Identifier of the fuel grade dispensed during a fuelling transaction",
-            "nullable": true
-          },
-          "fuellingId": {
-            "type": "string",
-            "description": "Identifier of the fuelling transaction at the dispenser (e.g. FDC)",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ItemIdentifier": {
-        "type": "object",
-        "properties": {
-          "identifier": {
-            "type": "string",
-            "nullable": true
-          },
-          "identifierType": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ItemIdentifierType"
-              }
-            ]
-          }
-        },
-        "additionalProperties": false
-      },
-      "ItemIdentifierType": {
-        "enum": [
-          "Unknown",
-          "SKU",
-          "GTIN",
-          "ItemNumber"
-        ],
-        "type": "string"
       },
       "ItemSale..ItemDetails": {
         "type": "object",
@@ -22121,7 +21168,8 @@
           "None",
           "Capture",
           "Credit",
-          "Cancel"
+          "Cancel",
+          "ReAuthorize"
         ],
         "type": "string",
         "description": "Possible actions that can be performed with the payment."
@@ -23623,7 +22671,7 @@
                 "$ref": "#/components/schemas/ItemSale.PaymentAction"
               }
             ],
-            "description": "Specifies what kind of payment action to perform: Capture, refund or cancel."
+            "description": "Specifies what kind of payment action to perform: Capture, Credit, Cancel, or ReAuthorize.\r\nNote: ReAuthorize is only supported for providers that support re-authorization (currently Walley).\r\nSending ReAuthorize for a cart that has no supported authorization will result in a no-op."
           },
           "originalCartIdForRefund": {
             "allOf": [
@@ -25865,6 +24913,14 @@
             "type": "string",
             "description": "String with printable receipt format.",
             "nullable": true
+          },
+          "printableGiftReceipts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemSaleExtended.PrintableGiftReceipt"
+            },
+            "description": "Printable gift receipts, one entry per gift item, each tagged with its CartItemIdentificator. Empty when no gift receipts exist.",
+            "nullable": true
           }
         },
         "additionalProperties": false,
@@ -26157,6 +25213,23 @@
         ],
         "type": "string",
         "description": "Defines different options available for the endpoint to get the printable receipt formart."
+      },
+      "ItemSaleExtended.PrintableGiftReceipt": {
+        "type": "object",
+        "properties": {
+          "cartItemIdentificator": {
+            "type": "integer",
+            "description": "The CartItemIdentificator (line item sequence number) of the gift item this receipt belongs to.",
+            "format": "int32"
+          },
+          "printableReceipt": {
+            "type": "string",
+            "description": "String with printable gift receipt format.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A printable gift receipt together with the cart item it belongs to."
       },
       "ItemSaleExtended.QuantityTypeExt": {
         "enum": [
@@ -27053,132 +26126,6 @@
         "additionalProperties": false,
         "description": "Response when undoing Cart"
       },
-      "ItemTransaction": {
-        "type": "object",
-        "properties": {
-          "storeIdentificator": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StoreIdentifier"
-              }
-            ],
-            "description": "The store's identificator",
-            "nullable": true
-          },
-          "transactionType": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TransactionType"
-              }
-            ],
-            "description": "Sets the transaction type for this cart, only type \"Item\" allowed for ItemTransaction"
-          },
-          "operator": {
-            "type": "string",
-            "description": "The operator who starts the cart",
-            "nullable": true
-          },
-          "targetStoreIdentificator": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StoreIdentifier"
-              }
-            ],
-            "description": "The collection of items in the transaction.",
-            "nullable": true
-          },
-          "referenceCode": {
-            "type": "string",
-            "description": "A reference code for the item transaction. This field is required and must be unique for each transaction.",
-            "nullable": true
-          },
-          "transactionMode": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ItemTransactionMode"
-              }
-            ],
-            "description": "Sets the transaction mode for this cart"
-          },
-          "suppliers": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Supplier references",
-            "nullable": true
-          },
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ItemTransactionLine"
-            },
-            "description": "The collection of items in the transaction.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ItemTransactionLine": {
-        "type": "object",
-        "properties": {
-          "itemIdentifier": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ItemIdentifier"
-              }
-            ],
-            "nullable": true
-          },
-          "quantity": {
-            "type": "number",
-            "description": "Number of items in item transaction. Only items sold by Kg, Liters etc can have decimals.",
-            "format": "double"
-          },
-          "notes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StructuredNote"
-            },
-            "description": "All notes added to the cart item.",
-            "nullable": true
-          },
-          "reasonCode": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Code"
-              }
-            ],
-            "description": "Specifies a reason code that you can use to indicate why a product was returned by the customer",
-            "nullable": true
-          },
-          "actionCode": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Code"
-              }
-            ],
-            "description": "Specifies an action code that you can use to indicate what should happen to the returned product",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ItemTransactionMode": {
-        "enum": [
-          "Breakage",
-          "InternalUse",
-          "Inventory",
-          "DockingArea",
-          "StockAdjustment",
-          "ArticleOrder",
-          "InternalTransfer",
-          "PutAwayItems",
-          "ReturnDefectItem",
-          "InventoryStockAdjustment"
-        ],
-        "type": "string"
-      },
       "NewCartErrorType": {
         "enum": [
           "GeneralFault",
@@ -27265,30 +26212,6 @@
         ],
         "type": "string",
         "description": "Possible error types for NewCartWithItems"
-      },
-      "Note": {
-        "type": "object",
-        "properties": {
-          "key": {
-            "type": "string",
-            "description": "If set, the note is saved in a separate field for this key.",
-            "nullable": true
-          },
-          "text": {
-            "type": "string",
-            "description": "Gets or sets the cart item note.",
-            "nullable": true
-          },
-          "clearNote": {
-            "type": "boolean",
-            "description": "If true, the specified note will be cleared."
-          },
-          "isForUser": {
-            "type": "boolean",
-            "description": "Whether or not the note is intended to be shown to the user."
-          }
-        },
-        "additionalProperties": false
       },
       "Order": {
         "type": "object",
@@ -27430,123 +26353,12 @@
         },
         "additionalProperties": false
       },
-      "OrderDelivery": {
-        "type": "object",
-        "properties": {
-          "externalOrderNo": {
-            "type": "string",
-            "description": "External order number",
-            "nullable": true
-          },
-          "internalOrderNo": {
-            "type": "string",
-            "description": "Internal order number. Will be used to find the order when external order number is not provided",
-            "nullable": true
-          },
-          "store": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StoreMeta"
-              }
-            ],
-            "description": "Store information",
-            "nullable": true
-          },
-          "deliveredLines": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DeliveredLine"
-            },
-            "description": "Order lines delivered",
-            "nullable": true
-          },
-          "captureDeliveredUnPaidItems": {
-            "type": "boolean",
-            "description": "Order lines not delivered should be captured when true"
-          },
-          "shippingProgress": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ShippingProgress"
-              }
-            ],
-            "description": "Gets or sets the shipping progress for the order line\r\nShippingProgress can be set for the whole order or individual order lines\r\nWhen ShippingProgress is set both for the whole order and individual order lines, the individual order line ShippingProgress will be used",
-            "nullable": true
-          },
-          "deliverNonPhysicalItems": {
-            "type": "boolean",
-            "description": "When true, items with ArticleType Freight are automatically delivered server-side\r\nwithout needing to list them in DeliveredLines."
-          }
-        },
-        "additionalProperties": false,
-        "description": "Represent an order delivery"
-      },
       "OrderHasChangedErrorType": {
         "enum": [
           "GeneralFault"
         ],
         "type": "string",
         "description": "Possible error types for OrderHasChanged"
-      },
-      "OrderPayment": {
-        "type": "object",
-        "properties": {
-          "externalOrderNo": {
-            "type": "string",
-            "description": "External order number",
-            "nullable": true
-          },
-          "internalOrderNo": {
-            "type": "string",
-            "description": "Internal order number. Will be used to find the order when external order number is not provided",
-            "nullable": true
-          },
-          "store": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StoreMeta"
-              }
-            ],
-            "description": "Store information",
-            "nullable": true
-          },
-          "orderLines": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "description": "The order lines to pay. If not set, all non-paid lines in the order will be marked as paid.",
-            "nullable": true
-          },
-          "amount": {
-            "type": "number",
-            "description": "Payment amount must match the sum of the paid order lines.",
-            "format": "double",
-            "nullable": true
-          },
-          "paymentReferenceNumber": {
-            "type": "string",
-            "description": "The payment transaction reference.",
-            "nullable": true
-          },
-          "paymentTerminalType": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PaymentTerminalType"
-              }
-            ],
-            "description": "The type of payment terminal used.",
-            "nullable": true
-          },
-          "cardIssuerIdentifier": {
-            "type": "string",
-            "description": "Identifier for the card issuer used for payment.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "An order payment that will contain external order number and storenumber in addition to payment details"
       },
       "OrderPaymentRequest": {
         "type": "object",
@@ -27588,39 +26400,6 @@
         },
         "additionalProperties": false
       },
-      "OrderPayments": {
-        "type": "object",
-        "properties": {
-          "externalOrderNo": {
-            "type": "string",
-            "description": "External order number",
-            "nullable": true
-          },
-          "internalOrderNo": {
-            "type": "string",
-            "description": "Internal order number. Will be used to find the order when external order number is not provided",
-            "nullable": true
-          },
-          "store": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StoreMeta"
-              }
-            ],
-            "description": "Store information",
-            "nullable": true
-          },
-          "payments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OrderPaymentRequest"
-            },
-            "description": "Payments to be applied to the order lines.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "ParseScanCodeErrorType": {
         "enum": [
           "GeneralFault",
@@ -27628,103 +26407,6 @@
         ],
         "type": "string",
         "description": "Possible error types for ParseScanCode"
-      },
-      "Payment": {
-        "type": "object",
-        "properties": {
-          "paymentReferenceNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "paymentIsAuthorizedOnly": {
-            "type": "boolean",
-            "description": "Gets or sets a value indicating whether or not the payment is not Captured, only authorized."
-          },
-          "cardIssuerIdentifier": {
-            "type": "string",
-            "description": "Gets or sets identifier of the card issuer.",
-            "nullable": true
-          },
-          "cardName": {
-            "type": "string",
-            "description": "Gets or sets card name. Only required if the CardIssuerIdentifier is not set.\r\nIf CardIssuerIdentifier is not set, and a card mapping configuration exist, CardName will be\r\nused to map to the correct CardIssuerIdentifier. If CardName is not found in the mapping or mapping does not exists,\r\nthe configured default CardIssuerIdentifier is used (can be set to nothing).",
-            "nullable": true
-          },
-          "uniqueCardHolderIdentifier": {
-            "type": "string",
-            "description": "Gets or sets unique card holder identifier.",
-            "nullable": true
-          },
-          "amount": {
-            "type": "number",
-            "description": "Optional field to specify amount of the payment.\r\nIf not set, current subtotal of Cart will be used.",
-            "format": "double",
-            "nullable": true
-          },
-          "type": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PaymentType"
-              }
-            ],
-            "description": "Optional field to specify type of the payment.\r\nIf not set, CreditDebit will be used.",
-            "nullable": true
-          },
-          "reference": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PaymentReference"
-              }
-            ],
-            "description": "Optional field to specify a reference to the payment.\r\nThis can be anything the clients wants to specify to track the payment.\r\nNote: Currently, only Credit supports supplying a reference.",
-            "nullable": true
-          },
-          "paymentAction": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PaymentAction"
-              }
-            ],
-            "description": "Gets or sets an action to be performed on the payment."
-          },
-          "printText": {
-            "type": "string",
-            "description": "Gets or sets the printtext for the payment.",
-            "nullable": true
-          },
-          "paymentTerminalType": {
-            "type": "string",
-            "description": "Gets or sets the PaymentTenderType",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "PaymentAction": {
-        "enum": [
-          "None",
-          "Capture",
-          "Credit",
-          "Cancel"
-        ],
-        "type": "string"
-      },
-      "PaymentReference": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Id of the reference.",
-            "nullable": true
-          },
-          "text": {
-            "type": "string",
-            "description": "Text of the reference",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false,
-        "description": "External reference of a payment"
       },
       "PaymentTerminalType": {
         "enum": [
@@ -27759,20 +26441,6 @@
           "Adyen",
           "Walley",
           "EPay"
-        ],
-        "type": "string"
-      },
-      "PaymentType": {
-        "enum": [
-          "Unknown",
-          "CreditDebit",
-          "Credit",
-          "Cash",
-          "GiftCard",
-          "Coupon",
-          "Check",
-          "Finance",
-          "CreditNote"
         ],
         "type": "string"
       },
@@ -35484,140 +34152,6 @@
         "type": "string",
         "description": "Possible error types for ResumeCart"
       },
-      "Sale": {
-        "type": "object",
-        "properties": {
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SaleItem"
-            },
-            "description": "The collection of items in the transaction.",
-            "nullable": true
-          },
-          "priceChannel": {
-            "type": "string",
-            "description": "Used price channel, if set will overwrite default value",
-            "nullable": true
-          },
-          "payments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Payment"
-            },
-            "description": "Contains sale payments",
-            "nullable": true
-          },
-          "transactionType": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TransactionType"
-              }
-            ],
-            "description": "The type of the transaction to create"
-          },
-          "transactionIdentifier": {
-            "type": "string",
-            "description": "Identifier of the transaction",
-            "nullable": true
-          },
-          "transactionTimeStamp": {
-            "type": "string",
-            "description": "If set, begin and end date of the Transaction will be overridden with this timestamp.",
-            "format": "date-time",
-            "nullable": true
-          },
-          "operator": {
-            "type": "string",
-            "description": "The operator that starts the transaction",
-            "nullable": true
-          },
-          "storeIdentifier": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StoreIdentifier"
-              }
-            ],
-            "description": "The store identifier",
-            "nullable": true
-          },
-          "notes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Note"
-            },
-            "description": "Transaction notes",
-            "nullable": true
-          },
-          "shiftId": {
-            "type": "integer",
-            "description": "Identifier of the shift the transaction was created in",
-            "format": "int32",
-            "nullable": true
-          },
-          "useAlternativeVat": {
-            "type": "boolean",
-            "description": "Set this for the transaction to use alternative VAT. It will be applied only if the items can use alternative VAT",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "SaleItem": {
-        "type": "object",
-        "properties": {
-          "itemIdentifier": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ItemIdentifier"
-              }
-            ],
-            "nullable": true
-          },
-          "overridePrice": {
-            "type": "number",
-            "description": "Override price a article with given price - will only succeed if price is overridable.",
-            "format": "double",
-            "nullable": true
-          },
-          "quantity": {
-            "type": "number",
-            "description": "Number of items to sell. Only items sold by Kg, Liters etc can have decimals.\r\nIf Quantity is set to less than 0, the request will be treated as a return of the item.",
-            "format": "double"
-          },
-          "shoppingChannel": {
-            "type": "string",
-            "description": "Shopping channel the item is sold through.",
-            "nullable": true
-          },
-          "notes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Note"
-            },
-            "description": "All notes added to the cart item.",
-            "nullable": true
-          },
-          "fuelInfo": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ItemFuelInfo"
-              }
-            ],
-            "description": "Contains information about the fuel item.",
-            "nullable": true
-          },
-          "discounts": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Discount"
-            },
-            "description": "Discounts on the line.",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "SearchCustomerErrorType": {
         "enum": [
           "GeneralFault",
@@ -36033,16 +34567,6 @@
         "type": "string",
         "description": "Possible error types for ShipCartItem"
       },
-      "ShippingProgress": {
-        "enum": [
-          "SentToStore",
-          "SentToCustomer",
-          "ReceivedAtStore",
-          "ReceivedAtCustomer",
-          "PickingStarted"
-        ],
-        "type": "string"
-      },
       "StartDeliveryErrorType": {
         "enum": [
           "GeneralFault",
@@ -36064,31 +34588,6 @@
         "type": "integer",
         "description": "Possible error types for StartMaintainance",
         "format": "int32"
-      },
-      "StoreIdentifier": {
-        "type": "object",
-        "properties": {
-          "identifier": {
-            "type": "string",
-            "nullable": true
-          },
-          "identifierType": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StoreIdentifierType"
-              }
-            ]
-          }
-        },
-        "additionalProperties": false
-      },
-      "StoreIdentifierType": {
-        "enum": [
-          "StoreNumber",
-          "ExternalStoreNumber",
-          "GlobalLocationNumber"
-        ],
-        "type": "string"
       },
       "StoreMeta": {
         "type": "object",
@@ -36118,22 +34617,6 @@
         ],
         "type": "string"
       },
-      "StructuredNote": {
-        "type": "object",
-        "properties": {
-          "key": {
-            "type": "string",
-            "description": "A key for the note that is unique for the array of notes",
-            "nullable": true
-          },
-          "value": {
-            "type": "string",
-            "description": "The value",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "SuspendCartErrorType": {
         "enum": [
           "GeneralFault",
@@ -36147,15 +34630,6 @@
         ],
         "type": "string",
         "description": "Possible error types for SuspendCart"
-      },
-      "TransactionType": {
-        "enum": [
-          "Unknown",
-          "Sale",
-          "Order",
-          "Item"
-        ],
-        "type": "string"
       },
       "TransformationResponse": {
         "type": "object",
