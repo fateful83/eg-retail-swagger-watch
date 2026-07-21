@@ -16913,6 +16913,18 @@
             "format": "double",
             "nullable": true
           },
+          "priceCalculationMinMarginPercent": {
+            "type": "number",
+            "description": "Minimum margin percent for store price calculation warning. Null means no limit configured.",
+            "format": "double",
+            "nullable": true
+          },
+          "priceCalculationMaxMarginPercent": {
+            "type": "number",
+            "description": "Maximum margin percent for store price calculation warning. Null means no limit configured.",
+            "format": "double",
+            "nullable": true
+          },
           "gtinPrefix": {
             "type": "string",
             "description": "Parameter representing what GTIN prefix would you like to have for new items.",

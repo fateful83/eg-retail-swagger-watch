@@ -504,6 +504,18 @@
             "description": "Parameter representing whether managing store assortment should be enabled",
             "type": "boolean"
           },
+          "priceCalculationMaxMarginPercent": {
+            "description": "Maximum margin percent for store price calculation warning. Null means no limit configured.",
+            "format": "double",
+            "nullable": true,
+            "type": "number"
+          },
+          "priceCalculationMinMarginPercent": {
+            "description": "Minimum margin percent for store price calculation warning. Null means no limit configured.",
+            "format": "double",
+            "nullable": true,
+            "type": "number"
+          },
           "priceCalculatorFallbackPercentDecimal": {
             "description": "Parameter representing what value should be used in price calculation when the calculation gets an out of range value, or a denominator is zero.",
             "format": "double",
