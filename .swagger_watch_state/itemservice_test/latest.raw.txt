@@ -174,15 +174,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/AlternativeGroupUpdate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -325,15 +316,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/AlternativeGroupUpdate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -524,15 +506,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/BrandCategory"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -675,15 +648,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/BrandCategory"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -874,15 +838,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Brand"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -1025,15 +980,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Brand"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -1267,15 +1213,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Classification"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -1418,15 +1355,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Classification"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -1721,15 +1649,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -1872,15 +1791,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -2081,14 +1991,6 @@
                 }
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            },
             "application/json": {
               "schema": {
                 "type": "array",
@@ -2259,15 +2161,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ConcessionCreate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -2410,15 +2303,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ConcessionUpdate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -2535,15 +2419,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CommissionPercentage"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -2647,15 +2522,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CommissionPercentage"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -2891,15 +2757,6 @@
                 }
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            },
             "application/json": {
               "schema": {
                 "type": "array",
@@ -3090,15 +2947,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ConcessionStoresCreateUpdate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -3241,15 +3089,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ConcessionStoresCreateUpdate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -3325,15 +3164,6 @@
         "requestBody": {
           "content": {
             "application/x-jsonlines": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -3574,15 +3404,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Country"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -3720,15 +3541,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Country"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -3946,15 +3758,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CreateDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -4049,15 +3852,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/UpdateDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -4130,15 +3924,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/DeleteDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -4286,15 +4071,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ExcelExportTemplateCreate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -4389,15 +4165,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ExcelExportTemplateUpdate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -4822,15 +4589,6 @@
                 }
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            },
             "application/json": {
               "schema": {
                 "type": "array",
@@ -5239,15 +4997,6 @@
                 }
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            },
             "application/json": {
               "schema": {
                 "type": "array",
@@ -5428,15 +5177,6 @@
         "requestBody": {
           "content": {
             "application/x-jsonlines": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "type": "array",
                 "items": {
@@ -5636,15 +5376,6 @@
                 }
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            },
             "application/json": {
               "schema": {
                 "type": "array",
@@ -5824,15 +5555,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ValidationOptionsWithSelectedItems"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -6064,19 +5786,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "enum": [
-                  "UpdateExistingItems",
-                  "CreateNewItems"
-                ],
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/FixItemIdentifierErrorsType"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "enum": [
@@ -6534,15 +6243,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ItemCategory"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -6685,15 +6385,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ItemCategory"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -6968,15 +6659,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CreateItemList"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -7071,15 +6753,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/UpdateItemList"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -7593,15 +7266,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/UseItemList"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -7946,15 +7610,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ItemType"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -8097,15 +7752,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ItemType"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -8298,15 +7944,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingCode"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -8531,15 +8168,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingCode"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -8773,15 +8401,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -8924,15 +8543,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -9166,15 +8776,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/NonsaleType"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -9269,15 +8870,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/NonsaleType"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -9468,15 +9060,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/NutritionDetails"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -9619,15 +9202,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/NutritionDetails"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -9736,15 +9310,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -9969,15 +9534,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -10211,15 +9767,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ProcurementRule"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -10362,15 +9909,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ProcurementRule"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -10645,15 +10183,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ReplenishmentCode"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -10796,15 +10325,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ReplenishmentCode"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -11079,15 +10599,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ReportCategory"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -11230,15 +10741,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ReportCategory"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -11513,15 +11015,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/RoundingRule"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -11664,15 +11157,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/RoundingRule"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -11824,15 +11308,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SearchableColor"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -12100,15 +11575,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SearchableColor"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -12174,15 +11640,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SeasonCode"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -12493,15 +11950,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SeasonCode"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -12567,15 +12015,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SeasonDetails"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -12752,15 +12191,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SeasonDetails"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -13040,15 +12470,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberAttribute"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -13191,15 +12612,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberAttribute"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -13408,15 +12820,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberAttributeValue"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -13520,15 +12923,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberAttributeValue"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -13778,15 +13172,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberType"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -13929,15 +13314,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberType"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -14230,15 +13606,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberTypeAttribute"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -14342,15 +13709,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberTypeAttribute"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -14699,15 +14057,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -14850,15 +14199,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -15133,15 +14473,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Size"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -15284,15 +14615,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Size"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -15483,15 +14805,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SizeTemplate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -15634,15 +14947,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SizeTemplate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -15862,15 +15166,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SizeTemplateSize"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -15952,15 +15247,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SizeTemplateSize"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -16208,15 +15494,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/TradingUnit"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -16311,15 +15588,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/TradingUnit"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -18394,23 +17662,11 @@
               }
             ]
           },
-          "errors": {
-            "type": "array",
-            "items": { },
-            "description": "This field is not serialized to JSON.\r\nMapping methods use it to create a query which can be translated to SQL.\r\nUse ItemService.Api.Contracts.PricatImport.ImportItem.ErrorList  property to obtain errors.",
-            "nullable": true
-          },
           "errorList": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ItemValidationError"
             },
-            "nullable": true
-          },
-          "warnings": {
-            "type": "array",
-            "items": { },
-            "description": "This field is not serialized to JSON.\r\nMapping methods use it to create a query which can be translated to SQL.\r\nUse ItemService.Api.Contracts.PricatImport.ImportItem.WarningList  property to obtain errors.",
             "nullable": true
           },
           "warningList": {

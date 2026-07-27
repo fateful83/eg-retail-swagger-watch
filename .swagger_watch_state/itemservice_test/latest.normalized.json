@@ -1975,12 +1975,6 @@
             "nullable": true,
             "type": "array"
           },
-          "errors": {
-            "description": "This field is not serialized to JSON.\r\nMapping methods use it to create a query which can be translated to SQL.\r\nUse ItemService.Api.Contracts.PricatImport.ImportItem.ErrorList  property to obtain errors.",
-            "items": {},
-            "nullable": true,
-            "type": "array"
-          },
           "externalItemNo": {
             "nullable": true,
             "type": "string"
@@ -2288,12 +2282,6 @@
             "items": {
               "$ref": "#/components/schemas/ItemValidationWarning"
             },
-            "nullable": true,
-            "type": "array"
-          },
-          "warnings": {
-            "description": "This field is not serialized to JSON.\r\nMapping methods use it to create a query which can be translated to SQL.\r\nUse ItemService.Api.Contracts.PricatImport.ImportItem.WarningList  property to obtain errors.",
-            "items": {},
             "nullable": true,
             "type": "array"
           },
@@ -4960,15 +4948,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/AlternativeGroupUpdate"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -5103,15 +5082,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/AlternativeGroupUpdate"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -5310,15 +5280,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/BrandCategory"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -5453,15 +5414,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/BrandCategory"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -5660,15 +5612,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Brand"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -5803,15 +5746,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Brand"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -6053,15 +5987,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Classification"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -6237,15 +6162,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Classification"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -6507,15 +6423,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -6699,15 +6606,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -6850,14 +6748,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "items": {
                   "type": "string"
@@ -7045,15 +6935,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ConcessionCreate"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -7230,15 +7111,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ConcessionUpdate"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -7466,15 +7338,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CommissionPercentage"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -7628,15 +7491,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CommissionPercentage"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -7703,15 +7557,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "items": {
-                  "format": "int32",
-                  "type": "integer"
-                },
-                "type": "array"
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "items": {
                   "format": "int32",
@@ -7876,15 +7721,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ConcessionStoresCreateUpdate"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -8027,15 +7863,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ConcessionStoresCreateUpdate"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -8145,15 +7972,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "items": {
-                  "format": "int32",
-                  "type": "integer"
-                },
-                "type": "array"
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "items": {
                   "format": "int32",
@@ -8360,15 +8178,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Country"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -8498,15 +8307,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Country"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -8673,15 +8473,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/DeleteDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -8746,15 +8537,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/UpdateDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -8888,15 +8670,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CreateDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -9072,15 +8845,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ExcelExportTemplateCreate"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -9167,15 +8931,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ExcelExportTemplateUpdate"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -9955,15 +9710,6 @@
                 "type": "array"
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "items": {
-                  "format": "int32",
-                  "type": "integer"
-                },
-                "type": "array"
-              }
-            },
             "application/x-jsonlines": {
               "schema": {
                 "items": {
@@ -10144,15 +9890,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "items": {
-                  "format": "int32",
-                  "type": "integer"
-                },
-                "type": "array"
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "items": {
                   "format": "int32",
@@ -10360,19 +10097,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/FixItemIdentifierErrorsType"
-                  }
-                ],
-                "enum": [
-                  "UpdateExistingItems",
-                  "CreateNewItems"
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -10531,15 +10255,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "items": {
-                  "format": "int32",
-                  "type": "integer"
-                },
-                "type": "array"
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "items": {
                   "format": "int32",
@@ -10712,15 +10427,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "items": {
-                  "format": "int32",
-                  "type": "integer"
-                },
-                "type": "array"
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "items": {
                   "format": "int32",
@@ -11096,15 +10802,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ValidationOptionsWithSelectedItems"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -11320,15 +11017,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ItemCategory"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -11504,15 +11192,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ItemCategory"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -11754,15 +11433,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CreateItemList"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -11890,15 +11560,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/UpdateItemList"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -12379,15 +12040,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/UseItemList"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -12732,15 +12384,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ItemType"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -12916,15 +12559,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ItemType"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -13166,15 +12800,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingCode"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -13309,15 +12934,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingCode"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -13559,15 +13175,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -13702,15 +13309,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -13952,15 +13550,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/NonsaleType"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -14047,15 +13636,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/NonsaleType"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -14254,15 +13834,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/NutritionDetails"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -14397,15 +13968,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/NutritionDetails"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -14604,15 +14166,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -14747,15 +14300,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -14997,15 +14541,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ProcurementRule"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -15181,15 +14716,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ProcurementRule"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -15431,15 +14957,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ReplenishmentCode"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -15615,15 +15132,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ReplenishmentCode"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -15865,15 +15373,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ReportCategory"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -16049,15 +15548,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ReportCategory"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -16299,15 +15789,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/RoundingRule"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -16442,15 +15923,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/RoundingRule"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -16692,15 +16164,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SearchableColor"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -16835,15 +16298,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SearchableColor"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -17042,15 +16496,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SeasonCode"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -17185,15 +16630,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SeasonCode"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -17435,15 +16871,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SeasonDetails"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -17619,15 +17046,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SeasonDetails"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -17826,15 +17244,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberAttribute"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -17969,15 +17378,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberAttribute"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -18194,15 +17594,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberAttributeValue"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -18348,15 +17739,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberAttributeValue"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -18564,15 +17946,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberType"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -18748,15 +18121,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberType"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -19016,15 +18380,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberTypeAttribute"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -19190,15 +18545,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberTypeAttribute"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -19485,15 +18831,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -19669,15 +19006,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -19919,15 +19247,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SizeTemplate"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -20062,15 +19381,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SizeTemplate"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -20305,15 +19615,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SizeTemplateSize"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -20387,15 +19688,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SizeTemplateSize"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -20594,15 +19886,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Size"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -20737,15 +20020,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Size"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -20994,15 +20268,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/TradingUnit"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -21089,15 +20354,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/TradingUnit"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
