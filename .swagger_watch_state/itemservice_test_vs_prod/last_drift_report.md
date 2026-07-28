@@ -1,16 +1,16 @@
 # TEST vs PROD drift detected: ItemService
 
-- Time: 2026-07-28T01:12:07Z
+- Time: 2026-07-28T08:08:00Z
 - Severity: breaking
 - TEST Swagger URL: https://itemservice.egretail-test.cloud/swagger/v1/swagger.json
 - PROD Swagger URL: https://itemservice.egretail.cloud/swagger/v1/swagger.json
-- TEST hash: `d97d673aeb86989df254ca9d836398a50e6c820e2295350538eefadc8eb899f6`
+- TEST hash: `96948b5fe56c814ec666e5fd460ce60c36810a0a538c1d8859b4ad74bb8cd43c`
 - PROD hash: `a21d1a5e8ae40385c9a7def022a37c00eda3b239767cd2f31eb0204e216d1e0d`
 
 ## Summary
 - Only in TEST: 0
 - Only in PROD: 0
-- Present in both but different: 81
+- Present in both but different: 100
 
 ## Only in TEST
 - None
@@ -20,6 +20,25 @@
 
 ## Different in TEST and PROD
 - DELETE /api/DeliveryDateList/DeliveryDates/{id}
+- GET /api/Brands
+- GET /api/Brands/{id}
+- GET /api/Collections
+- GET /api/Collections/{id}
+- GET /api/ItemCategories
+- GET /api/ItemCategories/{id}
+- GET /api/ItemLists
+- GET /api/MarketingCodes
+- GET /api/MarketingCodes/{id}
+- GET /api/MarketingExclusivities
+- GET /api/MarketingExclusivities/{id}
+- GET /api/NonsaleType
+- GET /api/Nutritions
+- GET /api/ProcurementRules
+- GET /api/ProcurementRules/{id}
+- GET /api/ReplenishmentCodes
+- GET /api/ReplenishmentCodes/{id}
+- GET /api/Sizes
+- GET /api/Sizes/{id}
 - POST /api/AlternativeGroups
 - POST /api/BrandCategories
 - POST /api/Brands
