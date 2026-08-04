@@ -2744,9 +2744,7 @@
           "InvalidAgeGroupValue",
           "AgeGroupRequiresActiveSubstance",
           "SubSupplierItemNoAlreadyExistsOnDifferentItem",
-          "SubSupplierItemNoAlreadyFoundOnPreviousItemInFile",
-          "HighlightedTextNotFound",
-          "IngredientQuantityMustBeGreaterThanZero"
+          "SubSupplierItemNoAlreadyFoundOnPreviousItemInFile"
         ],
         "type": "string"
       },
