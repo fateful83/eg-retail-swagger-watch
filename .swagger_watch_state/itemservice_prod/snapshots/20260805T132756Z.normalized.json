@@ -438,30 +438,6 @@
             "nullable": true,
             "type": "string"
           },
-          "gtinRangeFrom": {
-            "description": "Lower bound of the GTIN/EAN number series range. Only relevant when GtinSeriesMode is Range.",
-            "format": "int64",
-            "nullable": true,
-            "type": "integer"
-          },
-          "gtinRangeTo": {
-            "description": "Upper bound of the GTIN/EAN number series range. Only relevant when GtinSeriesMode is Range.",
-            "format": "int64",
-            "nullable": true,
-            "type": "integer"
-          },
-          "gtinSeriesMode": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/GtinSeriesMode"
-              }
-            ],
-            "description": "Parameter representing whether GTIN generation uses a prefix or a from-to range.",
-            "enum": [
-              "Prefix",
-              "Range"
-            ]
-          },
           "hiddenAttributes": {
             "allOf": [
               {
@@ -503,18 +479,6 @@
           "manageStoreAssortment": {
             "description": "Parameter representing whether managing store assortment should be enabled",
             "type": "boolean"
-          },
-          "priceCalculationMaxMarginPercent": {
-            "description": "Maximum margin percent for store price calculation warning. Null means no limit configured.",
-            "format": "double",
-            "nullable": true,
-            "type": "number"
-          },
-          "priceCalculationMinMarginPercent": {
-            "description": "Minimum margin percent for store price calculation warning. Null means no limit configured.",
-            "format": "double",
-            "nullable": true,
-            "type": "number"
           },
           "priceCalculatorFallbackPercentDecimal": {
             "description": "Parameter representing what value should be used in price calculation when the calculation gets an out of range value, or a denominator is zero.",
@@ -1340,6 +1304,11 @@
             "readOnly": true,
             "type": "string"
           },
+          "calculationRulesetId": {
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
           "costCarrier": {
             "nullable": true,
             "type": "string"
@@ -1463,13 +1432,6 @@
           "Area",
           "Group",
           "Subgroup"
-        ],
-        "type": "string"
-      },
-      "GtinSeriesMode": {
-        "enum": [
-          "Prefix",
-          "Range"
         ],
         "type": "string"
       },
@@ -1610,11 +1572,6 @@
               }
             ],
             "nullable": true
-          },
-          "scheduledImportDate": {
-            "format": "date-time",
-            "nullable": true,
-            "type": "string"
           },
           "seasonId": {
             "nullable": true,
@@ -1975,6 +1932,12 @@
             "nullable": true,
             "type": "array"
           },
+          "errors": {
+            "description": "This field is not serialized to JSON.\r\nMapping methods use it to create a query which can be translated to SQL.\r\nUse ItemService.Api.Contracts.PricatImport.ImportItem.ErrorList  property to obtain errors.",
+            "items": {},
+            "nullable": true,
+            "type": "array"
+          },
           "externalItemNo": {
             "nullable": true,
             "type": "string"
@@ -2282,6 +2245,12 @@
             "items": {
               "$ref": "#/components/schemas/ItemValidationWarning"
             },
+            "nullable": true,
+            "type": "array"
+          },
+          "warnings": {
+            "description": "This field is not serialized to JSON.\r\nMapping methods use it to create a query which can be translated to SQL.\r\nUse ItemService.Api.Contracts.PricatImport.ImportItem.WarningList  property to obtain errors.",
+            "items": {},
             "nullable": true,
             "type": "array"
           },
@@ -2744,9 +2713,7 @@
           "InvalidAgeGroupValue",
           "AgeGroupRequiresActiveSubstance",
           "SubSupplierItemNoAlreadyExistsOnDifferentItem",
-          "SubSupplierItemNoAlreadyFoundOnPreviousItemInFile",
-          "HighlightedTextNotFound",
-          "IngredientQuantityMustBeGreaterThanZero"
+          "SubSupplierItemNoAlreadyFoundOnPreviousItemInFile"
         ],
         "type": "string"
       },
@@ -2817,8 +2784,7 @@
           "RecommendedActionCodeRequired",
           "RecommendedActionCodeNotValidForServiceCode",
           "RecommendedLocationCodeNotValidForProfile",
-          "RecommendedServiceOnlyAllowedForProfile",
-          "PriceValidToExtendedDueToPromotion"
+          "RecommendedServiceOnlyAllowedForProfile"
         ],
         "type": "string"
       },
@@ -4765,7 +4731,7 @@
     "title": "Item API",
     "version": "v1"
   },
-  "openapi": "3.0.4",
+  "openapi": "3.0.1",
   "paths": {
     "/api/Activity": {
       "get": {
@@ -4826,7 +4792,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -4910,7 +4876,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -4942,6 +4908,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/AlternativeGroupUpdate"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -4983,7 +4958,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -5043,7 +5018,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -5092,6 +5067,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/AlternativeGroupUpdate"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -5105,7 +5089,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -5148,7 +5132,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -5242,7 +5226,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -5274,6 +5258,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/BrandCategory"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -5315,7 +5308,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -5375,7 +5368,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -5424,6 +5417,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/BrandCategory"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -5437,7 +5439,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -5480,7 +5482,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -5574,7 +5576,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -5606,6 +5608,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Brand"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -5647,7 +5658,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -5707,7 +5718,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -5756,6 +5767,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Brand"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -5769,7 +5789,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -5812,7 +5832,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -5855,7 +5875,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -5949,7 +5969,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -5981,6 +6001,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Classification"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -6022,7 +6051,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -6065,7 +6094,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -6123,7 +6152,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -6172,6 +6201,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Classification"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -6205,7 +6243,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -6248,7 +6286,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -6291,7 +6329,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -6385,7 +6423,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -6417,6 +6455,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Collection"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -6458,7 +6505,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -6501,7 +6548,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -6559,7 +6606,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -6608,6 +6655,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Collection"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -6621,7 +6677,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -6664,7 +6720,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -6707,7 +6763,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -6750,6 +6806,14 @@
               }
             },
             "application/json": {
+              "schema": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "items": {
                   "type": "string"
@@ -6803,7 +6867,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -6897,7 +6961,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -6929,6 +6993,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ConcessionCreate"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -6970,7 +7043,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -7012,7 +7085,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -7072,7 +7145,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -7121,6 +7194,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ConcessionUpdate"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -7134,7 +7216,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -7177,7 +7259,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -7229,7 +7311,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -7279,7 +7361,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -7340,6 +7422,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/CommissionPercentage"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -7373,7 +7464,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -7425,7 +7516,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -7493,6 +7584,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/CommissionPercentage"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -7506,7 +7606,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -7567,6 +7667,15 @@
                 "type": "array"
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "items": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "type": "array"
+              }
+            },
             "application/x-jsonlines": {
               "schema": {
                 "items": {
@@ -7589,7 +7698,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -7683,7 +7792,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -7715,6 +7824,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ConcessionStoresCreateUpdate"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -7756,7 +7874,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -7816,7 +7934,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -7865,6 +7983,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ConcessionStoresCreateUpdate"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -7878,7 +8005,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -7921,7 +8048,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -7982,6 +8109,15 @@
                 "type": "array"
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "items": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "type": "array"
+              }
+            },
             "application/x-jsonlines": {
               "schema": {
                 "items": {
@@ -8004,7 +8140,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -8056,7 +8192,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -8140,7 +8276,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -8180,6 +8316,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Country"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -8210,7 +8355,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -8269,7 +8414,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -8317,6 +8462,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Country"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -8330,7 +8484,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -8372,7 +8526,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -8414,7 +8568,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -8475,6 +8629,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/DeleteDeliveryDatesRequest"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -8488,7 +8651,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -8547,6 +8710,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/UpdateDeliveryDatesRequest"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -8560,7 +8732,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -8629,7 +8801,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -8680,6 +8852,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/CreateDeliveryDatesRequest"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -8713,7 +8894,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -8807,7 +8988,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -8839,6 +9020,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ExcelExportTemplateCreate"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -8880,7 +9070,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -8941,6 +9131,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ExcelExportTemplateUpdate"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -8954,7 +9153,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -8997,7 +9196,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -9040,7 +9239,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           }
         },
         "summary": "Gets a file for a specified export.",
@@ -9125,7 +9324,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -9218,7 +9417,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -9268,7 +9467,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -9318,7 +9517,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -9420,7 +9619,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -9463,7 +9662,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -9521,7 +9720,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -9563,7 +9762,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -9712,6 +9911,15 @@
                 "type": "array"
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "items": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "type": "array"
+              }
+            },
             "application/x-jsonlines": {
               "schema": {
                 "items": {
@@ -9751,7 +9959,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -9900,6 +10108,15 @@
                 "type": "array"
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "items": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "type": "array"
+              }
+            },
             "application/x-jsonlines": {
               "schema": {
                 "items": {
@@ -9942,7 +10159,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -10099,6 +10316,19 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/FixItemIdentifierErrorsType"
+                  }
+                ],
+                "enum": [
+                  "UpdateExistingItems",
+                  "CreateNewItems"
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -10116,7 +10346,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -10265,6 +10495,15 @@
                 "type": "array"
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "items": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "type": "array"
+              }
+            },
             "application/x-jsonlines": {
               "schema": {
                 "items": {
@@ -10287,7 +10526,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -10437,6 +10676,15 @@
                 "type": "array"
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "items": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "type": "array"
+              }
+            },
             "application/x-jsonlines": {
               "schema": {
                 "items": {
@@ -10476,7 +10724,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -10519,7 +10767,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -10622,7 +10870,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -10655,7 +10903,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -10804,6 +11052,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ValidationOptionsWithSelectedItems"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -10834,7 +11091,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -10895,7 +11152,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -10979,7 +11236,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -11011,6 +11268,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemCategory"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -11052,7 +11318,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -11095,7 +11361,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -11153,7 +11419,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -11202,6 +11468,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemCategory"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -11215,7 +11490,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -11258,7 +11533,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -11301,7 +11576,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -11395,7 +11670,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -11427,6 +11702,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/CreateItemList"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -11468,7 +11752,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -11511,7 +11795,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -11570,6 +11854,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/UpdateItemList"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -11583,7 +11876,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -11655,7 +11948,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -11759,7 +12052,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -11858,7 +12151,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -11917,7 +12210,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -11974,7 +12267,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -12042,6 +12335,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/UseItemList"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -12072,7 +12374,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -12169,7 +12471,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -12262,7 +12564,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -12346,7 +12648,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -12378,6 +12680,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemType"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -12419,7 +12730,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -12462,7 +12773,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -12520,7 +12831,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -12569,6 +12880,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ItemType"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -12582,7 +12902,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -12625,7 +12945,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -12668,7 +12988,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -12762,7 +13082,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -12794,6 +13114,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/MarketingCode"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -12835,7 +13164,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -12895,7 +13224,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -12944,6 +13273,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/MarketingCode"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -12957,7 +13295,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -13000,7 +13338,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -13043,7 +13381,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -13137,7 +13475,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -13169,6 +13507,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/MarketingExclusivity"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -13210,7 +13557,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -13270,7 +13617,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -13319,6 +13666,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/MarketingExclusivity"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -13332,7 +13688,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -13375,7 +13731,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -13418,7 +13774,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -13512,7 +13868,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -13544,6 +13900,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/NonsaleType"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -13585,7 +13950,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -13646,6 +14011,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/NonsaleType"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -13659,7 +14033,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -13702,7 +14076,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -13796,7 +14170,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -13828,6 +14202,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/NutritionDetails"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -13869,7 +14252,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -13929,7 +14312,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -13978,6 +14361,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/NutritionDetails"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -13991,7 +14383,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -14034,7 +14426,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -14128,7 +14520,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -14160,6 +14552,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/PlanningCode"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -14201,7 +14602,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -14261,7 +14662,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -14310,6 +14711,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/PlanningCode"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -14323,7 +14733,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -14366,7 +14776,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -14409,7 +14819,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -14503,7 +14913,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -14535,6 +14945,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ProcurementRule"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -14576,7 +14995,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -14619,7 +15038,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -14677,7 +15096,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -14726,6 +15145,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ProcurementRule"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -14739,7 +15167,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -14782,7 +15210,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -14825,7 +15253,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -14919,7 +15347,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -14951,6 +15379,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ReplenishmentCode"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -14992,7 +15429,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -15035,7 +15472,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -15093,7 +15530,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -15142,6 +15579,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ReplenishmentCode"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -15155,7 +15601,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -15198,7 +15644,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -15241,7 +15687,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -15335,7 +15781,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -15367,6 +15813,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ReportCategory"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -15408,7 +15863,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -15451,7 +15906,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -15509,7 +15964,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -15558,6 +16013,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ReportCategory"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -15571,7 +16035,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -15614,7 +16078,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -15657,7 +16121,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -15751,7 +16215,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -15783,6 +16247,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/RoundingRule"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -15824,7 +16297,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -15884,7 +16357,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -15933,6 +16406,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/RoundingRule"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -15946,7 +16428,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -15989,7 +16471,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -16032,7 +16514,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -16126,7 +16608,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -16158,6 +16640,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SearchableColor"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -16199,7 +16690,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -16259,7 +16750,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -16308,6 +16799,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SearchableColor"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -16321,7 +16821,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -16364,7 +16864,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -16458,7 +16958,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -16490,6 +16990,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SeasonCode"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -16531,7 +17040,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -16591,7 +17100,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -16640,6 +17149,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SeasonCode"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -16653,7 +17171,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -16696,7 +17214,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -16739,7 +17257,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -16833,7 +17351,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -16865,6 +17383,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SeasonDetails"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -16906,7 +17433,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -16949,7 +17476,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -17007,7 +17534,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -17056,6 +17583,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SeasonDetails"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -17069,7 +17605,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -17112,7 +17648,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -17206,7 +17742,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -17238,6 +17774,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SerialNumberAttribute"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -17279,7 +17824,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -17339,7 +17884,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -17388,6 +17933,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SerialNumberAttribute"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -17401,7 +17955,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -17444,7 +17998,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -17547,7 +18101,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -17596,6 +18150,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SerialNumberAttributeValue"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -17629,7 +18192,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -17681,7 +18244,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -17749,6 +18312,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SerialNumberAttributeValue"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -17762,7 +18334,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -17814,7 +18386,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -17908,7 +18480,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -17940,6 +18512,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SerialNumberType"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -17981,7 +18562,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -18024,7 +18605,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -18082,7 +18663,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -18131,6 +18712,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SerialNumberType"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -18144,7 +18734,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -18187,7 +18777,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -18230,7 +18820,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -18333,7 +18923,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -18382,6 +18972,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SerialNumberTypeAttribute"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -18415,7 +19014,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -18487,7 +19086,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -18555,6 +19154,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SerialNumberTypeAttribute"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -18588,7 +19196,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -18640,7 +19248,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -18709,7 +19317,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -18793,7 +19401,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -18825,6 +19433,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ServiceLevel"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -18866,7 +19483,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -18909,7 +19526,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -18967,7 +19584,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -19016,6 +19633,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/ServiceLevel"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -19029,7 +19655,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -19072,7 +19698,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -19115,7 +19741,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -19209,7 +19835,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -19241,6 +19867,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SizeTemplate"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -19282,7 +19917,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -19342,7 +19977,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -19391,6 +20026,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SizeTemplate"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -19404,7 +20048,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -19507,7 +20151,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -19549,7 +20193,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -19617,6 +20261,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SizeTemplateSize"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -19630,7 +20283,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -19698,6 +20351,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/SizeTemplateSize"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -19711,7 +20373,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -19754,7 +20416,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -19848,7 +20510,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -19880,6 +20542,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Size"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -19921,7 +20592,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -19981,7 +20652,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -20030,6 +20701,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/Size"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -20043,7 +20723,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -20086,7 +20766,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -20180,7 +20860,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -20230,7 +20910,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           }
         },
         "tags": [
@@ -20262,6 +20942,15 @@
               }
             },
             "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/TradingUnit"
+                  }
+                ]
+              }
+            },
+            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -20303,7 +20992,7 @@
                 }
               }
             },
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -20364,6 +21053,15 @@
                 ]
               }
             },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/TradingUnit"
+                  }
+                ]
+              }
+            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -20377,7 +21075,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -20420,7 +21118,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -20463,7 +21161,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success"
           },
           "422": {
             "content": {
@@ -20485,122 +21183,6 @@
   "security": [
     {
       "Bearer": []
-    }
-  ],
-  "tags": [
-    {
-      "name": "Activity"
-    },
-    {
-      "name": "AlternativeGroups"
-    },
-    {
-      "name": "BrandCategories"
-    },
-    {
-      "name": "Brands"
-    },
-    {
-      "name": "Classifications"
-    },
-    {
-      "name": "Collections"
-    },
-    {
-      "name": "Colors"
-    },
-    {
-      "name": "Concession"
-    },
-    {
-      "name": "ConcessionStores"
-    },
-    {
-      "name": "Configuration"
-    },
-    {
-      "name": "Countries"
-    },
-    {
-      "name": "DeliveryDateList"
-    },
-    {
-      "name": "ExcelExportTemplates"
-    },
-    {
-      "name": "FileExport"
-    },
-    {
-      "name": "Imports"
-    },
-    {
-      "name": "ItemCategories"
-    },
-    {
-      "name": "ItemLists"
-    },
-    {
-      "name": "ItemSegmentation"
-    },
-    {
-      "name": "ItemTypes"
-    },
-    {
-      "name": "MarketingCodes"
-    },
-    {
-      "name": "MarketingExclusivities"
-    },
-    {
-      "name": "NonsaleType"
-    },
-    {
-      "name": "Nutritions"
-    },
-    {
-      "name": "PlanningCodes"
-    },
-    {
-      "name": "ProcurementRules"
-    },
-    {
-      "name": "ReplenishmentCodes"
-    },
-    {
-      "name": "ReportCategories"
-    },
-    {
-      "name": "RoundingRecoveryRetailPrices"
-    },
-    {
-      "name": "SearchableColors"
-    },
-    {
-      "name": "SeasonCodes"
-    },
-    {
-      "name": "Seasons"
-    },
-    {
-      "name": "SerialNumberAttributes"
-    },
-    {
-      "name": "SerialNumberTypes"
-    },
-    {
-      "name": "ServiceLevels"
-    },
-    {
-      "name": "Sizes"
-    },
-    {
-      "name": "SizeTemplates"
-    },
-    {
-      "name": "StoreGroups"
-    },
-    {
-      "name": "TradingUnits"
     }
   ]
 }
