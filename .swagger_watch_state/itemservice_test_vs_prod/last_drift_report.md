@@ -1,6 +1,6 @@
 # TEST vs PROD drift detected: ItemService
 
-- Time: 2026-08-10T00:41:28Z
+- Time: 2026-08-10T07:01:06Z
 - Severity: breaking
 - TEST Swagger URL: https://itemservice.egretail-test.cloud/swagger/v1/swagger.json
 - PROD Swagger URL: https://itemservice.egretail.cloud/swagger/v1/swagger.json
