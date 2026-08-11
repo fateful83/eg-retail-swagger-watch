@@ -1,3 +1,234 @@
-No change for ItemService [PROD] (a21d1a5e8ae4)
-Fetch completed at: 2026-08-11T06:40:52Z
-Fetch duration ms: 768
+# Swagger/OpenAPI change detected: ItemService [PROD]
+
+- Time: 2026-08-11T12:33:37Z
+- Fetch completed at: 2026-08-11T12:33:37Z
+- Fetch duration ms: 1141
+- Swagger URL: https://itemservice.egretail.cloud/swagger/v1/swagger.json
+- Previous hash: `a21d1a5e8ae40385c9a7def022a37c00eda3b239767cd2f31eb0204e216d1e0d`
+- Current hash: `b0f9b9fad985b56fcde425ca4cad79e09956f9c2cc53730c1215b4c1ffd8654c`
+
+## Summary
+- Status: breaking
+- Added operations: 0
+- Removed operations: 0
+- Changed operations: 100
+- Breaking removed operations: 0
+- Breaking changed operations: 100
+- Non-breaking changed operations: 0
+
+## Added
+- None
+
+## Removed
+- None
+
+## Changed
+- DELETE /api/DeliveryDateList/DeliveryDates/{id}
+- GET /api/Brands
+- GET /api/Brands/{id}
+- GET /api/Collections
+- GET /api/Collections/{id}
+- GET /api/ItemCategories
+- GET /api/ItemCategories/{id}
+- GET /api/ItemLists
+- GET /api/MarketingCodes
+- GET /api/MarketingCodes/{id}
+- GET /api/MarketingExclusivities
+- GET /api/MarketingExclusivities/{id}
+- GET /api/NonsaleType
+- GET /api/Nutritions
+- GET /api/ProcurementRules
+- GET /api/ProcurementRules/{id}
+- GET /api/ReplenishmentCodes
+- GET /api/ReplenishmentCodes/{id}
+- GET /api/Sizes
+- GET /api/Sizes/{id}
+- POST /api/AlternativeGroups
+- POST /api/BrandCategories
+- POST /api/Brands
+- POST /api/Classifications
+- POST /api/Collections
+- POST /api/Colors/upsertByName
+- POST /api/Concession
+- POST /api/Concession/{id}/percentage
+- POST /api/ConcessionStores
+- POST /api/Countries
+- POST /api/DeliveryDateList/{listId}/DeliveryDates
+- POST /api/ExcelExportTemplates
+- POST /api/Imports/{id}/filteredItemsCount
+- POST /api/Imports/{id}/filteredItemsSimpleCount
+- POST /api/Imports/{id}/fixItemIdentifierErrors
+- POST /api/Imports/{id}/import
+- POST /api/Imports/{id}/reject
+- POST /api/Imports/{id}/validate
+- POST /api/ItemCategories
+- POST /api/ItemLists
+- POST /api/ItemTypes
+- POST /api/MarketingCodes
+- POST /api/MarketingExclusivities
+- POST /api/NonsaleType
+- POST /api/Nutritions
+- POST /api/PlanningCodes
+- POST /api/ProcurementRules
+- POST /api/ReplenishmentCodes
+- POST /api/ReportCategories
+- POST /api/RoundingRecoveryRetailPrices
+- POST /api/SearchableColors
+- POST /api/SeasonCodes
+- POST /api/Seasons
+- POST /api/SerialNumberAttributes
+- POST /api/SerialNumberAttributes/{id}/values
+- POST /api/SerialNumberTypes
+- POST /api/SerialNumberTypes/{id}/attributes
+- POST /api/ServiceLevels
+- POST /api/SizeTemplates
+- POST /api/SizeTemplates/{id}/Size/{sizeId}
+- POST /api/Sizes
+- POST /api/TradingUnits
+- PUT /api/AlternativeGroups/{id}
+- PUT /api/BrandCategories/{id}
+- PUT /api/Brands/{id}
+- PUT /api/Classifications/{id}
+- PUT /api/Collections/{id}
+- PUT /api/Concession/{id}
+- PUT /api/Concession/{id}/percentage/{percentageId}
+- PUT /api/Concession/{id}/updateItemGroups
+- PUT /api/ConcessionStores/{id}
+- PUT /api/ConcessionStores/{id}/updateStores
+- PUT /api/Countries/{code}
+- PUT /api/DeliveryDateList/DeliveryDates/{id}
+- PUT /api/ExcelExportTemplates/{id}
+- PUT /api/ItemCategories/{id}
+- PUT /api/ItemLists/{id}
+- PUT /api/ItemLists/{id}/useItemList
+- PUT /api/ItemTypes/{id}
+- PUT /api/MarketingCodes/{id}
+- PUT /api/MarketingExclusivities/{id}
+- PUT /api/NonsaleType/{id}
+- PUT /api/Nutritions/{id}
+- PUT /api/PlanningCodes/{id}
+- PUT /api/ProcurementRules/{id}
+- PUT /api/ReplenishmentCodes/{id}
+- PUT /api/ReportCategories/{id}
+- PUT /api/RoundingRecoveryRetailPrices/{id}
+- PUT /api/SearchableColors/{id}
+- PUT /api/SeasonCodes/{id}
+- PUT /api/Seasons/{id}
+- PUT /api/SerialNumberAttributes/{id}
+- PUT /api/SerialNumberAttributes/{id}/values/{valueId}
+- PUT /api/SerialNumberTypes/{id}
+- PUT /api/SerialNumberTypes/{id}/attributes/{attributeId}
+- PUT /api/ServiceLevels/{id}
+- PUT /api/SizeTemplates/{id}
+- PUT /api/SizeTemplates/{id}/Size/{sizeId}
+- PUT /api/Sizes/{id}
+- PUT /api/TradingUnits/{id}
+
+## Breaking classification
+- Removed operations: 0
+- None
+
+- Breaking changed operations: 100
+  - DELETE /api/DeliveryDateList/DeliveryDates/{id}
+  - GET /api/Brands
+  - GET /api/Brands/{id}
+  - GET /api/Collections
+  - GET /api/Collections/{id}
+  - GET /api/ItemCategories
+  - GET /api/ItemCategories/{id}
+  - GET /api/ItemLists
+  - GET /api/MarketingCodes
+  - GET /api/MarketingCodes/{id}
+  - GET /api/MarketingExclusivities
+  - GET /api/MarketingExclusivities/{id}
+  - GET /api/NonsaleType
+  - GET /api/Nutritions
+  - GET /api/ProcurementRules
+  - GET /api/ProcurementRules/{id}
+  - GET /api/ReplenishmentCodes
+  - GET /api/ReplenishmentCodes/{id}
+  - GET /api/Sizes
+  - GET /api/Sizes/{id}
+  - POST /api/AlternativeGroups
+  - POST /api/BrandCategories
+  - POST /api/Brands
+  - POST /api/Classifications
+  - POST /api/Collections
+  - POST /api/Colors/upsertByName
+  - POST /api/Concession
+  - POST /api/Concession/{id}/percentage
+  - POST /api/ConcessionStores
+  - POST /api/Countries
+  - POST /api/DeliveryDateList/{listId}/DeliveryDates
+  - POST /api/ExcelExportTemplates
+  - POST /api/Imports/{id}/filteredItemsCount
+  - POST /api/Imports/{id}/filteredItemsSimpleCount
+  - POST /api/Imports/{id}/fixItemIdentifierErrors
+  - POST /api/Imports/{id}/import
+  - POST /api/Imports/{id}/reject
+  - POST /api/Imports/{id}/validate
+  - POST /api/ItemCategories
+  - POST /api/ItemLists
+  - POST /api/ItemTypes
+  - POST /api/MarketingCodes
+  - POST /api/MarketingExclusivities
+  - POST /api/NonsaleType
+  - POST /api/Nutritions
+  - POST /api/PlanningCodes
+  - POST /api/ProcurementRules
+  - POST /api/ReplenishmentCodes
+  - POST /api/ReportCategories
+  - POST /api/RoundingRecoveryRetailPrices
+  - POST /api/SearchableColors
+  - POST /api/SeasonCodes
+  - POST /api/Seasons
+  - POST /api/SerialNumberAttributes
+  - POST /api/SerialNumberAttributes/{id}/values
+  - POST /api/SerialNumberTypes
+  - POST /api/SerialNumberTypes/{id}/attributes
+  - POST /api/ServiceLevels
+  - POST /api/SizeTemplates
+  - POST /api/SizeTemplates/{id}/Size/{sizeId}
+  - POST /api/Sizes
+  - POST /api/TradingUnits
+  - PUT /api/AlternativeGroups/{id}
+  - PUT /api/BrandCategories/{id}
+  - PUT /api/Brands/{id}
+  - PUT /api/Classifications/{id}
+  - PUT /api/Collections/{id}
+  - PUT /api/Concession/{id}
+  - PUT /api/Concession/{id}/percentage/{percentageId}
+  - PUT /api/Concession/{id}/updateItemGroups
+  - PUT /api/ConcessionStores/{id}
+  - PUT /api/ConcessionStores/{id}/updateStores
+  - PUT /api/Countries/{code}
+  - PUT /api/DeliveryDateList/DeliveryDates/{id}
+  - PUT /api/ExcelExportTemplates/{id}
+  - PUT /api/ItemCategories/{id}
+  - PUT /api/ItemLists/{id}
+  - PUT /api/ItemLists/{id}/useItemList
+  - PUT /api/ItemTypes/{id}
+  - PUT /api/MarketingCodes/{id}
+  - PUT /api/MarketingExclusivities/{id}
+  - PUT /api/NonsaleType/{id}
+  - PUT /api/Nutritions/{id}
+  - PUT /api/PlanningCodes/{id}
+  - PUT /api/ProcurementRules/{id}
+  - PUT /api/ReplenishmentCodes/{id}
+  - PUT /api/ReportCategories/{id}
+  - PUT /api/RoundingRecoveryRetailPrices/{id}
+  - PUT /api/SearchableColors/{id}
+  - PUT /api/SeasonCodes/{id}
+  - PUT /api/Seasons/{id}
+  - PUT /api/SerialNumberAttributes/{id}
+  - PUT /api/SerialNumberAttributes/{id}/values/{valueId}
+  - PUT /api/SerialNumberTypes/{id}
+  - PUT /api/SerialNumberTypes/{id}/attributes/{attributeId}
+  - PUT /api/ServiceLevels/{id}
+  - PUT /api/SizeTemplates/{id}
+  - PUT /api/SizeTemplates/{id}/Size/{sizeId}
+  - PUT /api/Sizes/{id}
+  - PUT /api/TradingUnits/{id}
+
+- Non-breaking changed operations: 0
+- None
