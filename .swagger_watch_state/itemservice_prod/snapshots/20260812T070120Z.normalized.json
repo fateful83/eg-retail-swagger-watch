@@ -186,7 +186,7 @@
         ],
         "type": "string"
       },
-      "Brand": {
+      "Brand.1": {
         "additionalProperties": false,
         "properties": {
           "brandCategoryCode": {
@@ -522,15 +522,6 @@
             "nullable": true,
             "type": "number"
           },
-          "priceControl": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PriceControl"
-              }
-            ],
-            "description": "On/off settings for the three price-control mechanisms",
-            "nullable": true
-          },
           "priceLocalTimeZoneIana": {
             "description": "A iana time zone, e.g. 'Europe/Oslo'.\r\nhttps://www.iana.org/time-zones",
             "nullable": true,
@@ -587,7 +578,7 @@
         },
         "type": "object"
       },
-      "Collection": {
+      "Collection.1": {
         "additionalProperties": false,
         "properties": {
           "code": {
@@ -646,7 +637,7 @@
         ],
         "type": "object"
       },
-      "Color": {
+      "Color.1": {
         "additionalProperties": false,
         "properties": {
           "colorGroup": {
@@ -732,7 +723,7 @@
           "brand": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/Brand"
+                "$ref": "#/components/schemas/Brand.1"
               }
             ],
             "nullable": true,
@@ -1068,7 +1059,7 @@
           "deliveryDate": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/DeliveryDate"
+                "$ref": "#/components/schemas/DeliveryDate.1"
               }
             ],
             "nullable": true
@@ -1084,7 +1075,7 @@
         },
         "type": "object"
       },
-      "CreateItemList": {
+      "CreateItemList.1": {
         "additionalProperties": false,
         "properties": {
           "description": {
@@ -1119,7 +1110,7 @@
         },
         "type": "object"
       },
-      "DeliveryDate": {
+      "DeliveryDate.1": {
         "additionalProperties": false,
         "properties": {
           "customDeliveryDate": {
@@ -1662,7 +1653,7 @@
           "storeGroupType": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/StoreGroupType"
+                "$ref": "#/components/schemas/StoreGroupType.1"
               }
             ],
             "nullable": true
@@ -1807,7 +1798,7 @@
           "storeGroupType": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/StoreGroupType"
+                "$ref": "#/components/schemas/StoreGroupType.1"
               }
             ],
             "nullable": true
@@ -2252,7 +2243,7 @@
           "storeGroupType": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/StoreGroupType"
+                "$ref": "#/components/schemas/StoreGroupType.1"
               }
             ],
             "nullable": true
@@ -2412,7 +2403,7 @@
         "additionalProperties": false,
         "type": "object"
       },
-      "ItemCategory": {
+      "ItemCategory.1": {
         "additionalProperties": false,
         "properties": {
           "code": {
@@ -2469,7 +2460,7 @@
         ],
         "type": "object"
       },
-      "ItemList": {
+      "ItemList.1": {
         "additionalProperties": false,
         "properties": {
           "count": {
@@ -2855,7 +2846,7 @@
         },
         "type": "object"
       },
-      "MarketingCode": {
+      "MarketingCode.1": {
         "additionalProperties": false,
         "properties": {
           "code": {
@@ -2913,7 +2904,7 @@
         ],
         "type": "object"
       },
-      "MarketingExclusivity": {
+      "MarketingExclusivity.1": {
         "additionalProperties": false,
         "properties": {
           "code": {
@@ -2972,7 +2963,7 @@
         ],
         "type": "object"
       },
-      "NonsaleType": {
+      "NonsaleType.1": {
         "additionalProperties": false,
         "properties": {
           "code": {
@@ -3026,7 +3017,7 @@
         ],
         "type": "object"
       },
-      "Nutrition": {
+      "Nutrition.1": {
         "additionalProperties": false,
         "properties": {
           "code": {
@@ -3199,26 +3190,7 @@
         ],
         "type": "object"
       },
-      "PriceControl": {
-        "additionalProperties": false,
-        "description": "On/off settings for the three price-control mechanisms of the price-suggestion job.",
-        "properties": {
-          "franchisePriceControl": {
-            "description": "Franchise stores approve central changes before they take effect. A central retail-price or assortment\r\nchange creates an approval item per franchise store; it takes effect at that store only after approval.",
-            "type": "boolean"
-          },
-          "keepMarginSuggestions": {
-            "description": "When a profile's wholesale (cost) price changes without a retail change, creates a suggested retail\r\nprice that keeps the previous margin, for review. Removed if the retail price is changed.",
-            "type": "boolean"
-          },
-          "wholesalePriceCascade": {
-            "description": "Automatically pushes cost-side changes (wholesale/net price, supplier discount, freight and the\r\nrecalculated margin) from a profile or price zone down to its store prices. Retail prices are not\r\nchanged and no approval is created.",
-            "type": "boolean"
-          }
-        },
-        "type": "object"
-      },
-      "ProcurementRule": {
+      "ProcurementRule.1": {
         "additionalProperties": false,
         "properties": {
           "code": {
@@ -3296,7 +3268,7 @@
         },
         "type": "object"
       },
-      "ReplenishmentCode": {
+      "ReplenishmentCode.1": {
         "additionalProperties": false,
         "properties": {
           "code": {
@@ -4066,7 +4038,7 @@
         ],
         "type": "object"
       },
-      "Size": {
+      "Size.1": {
         "additionalProperties": false,
         "properties": {
           "createdBy": {
@@ -4345,7 +4317,7 @@
           "storeGroupType": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/StoreGroupType"
+                "$ref": "#/components/schemas/StoreGroupType.1"
               }
             ],
             "enum": [
@@ -4360,7 +4332,7 @@
         },
         "type": "object"
       },
-      "StoreGroupType": {
+      "StoreGroupType.1": {
         "enum": [
           "Team",
           "Profile",
@@ -4371,7 +4343,7 @@
         ],
         "type": "string"
       },
-      "TradingUnit": {
+      "TradingUnit.1": {
         "additionalProperties": false,
         "properties": {
           "createdBy": {
@@ -4639,7 +4611,7 @@
         },
         "type": "object"
       },
-      "UpdateItemList": {
+      "UpdateItemList.1": {
         "additionalProperties": false,
         "properties": {
           "description": {
@@ -5580,7 +5552,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Brand"
+                    "$ref": "#/components/schemas/Brand.1"
                   },
                   "type": "array"
                 }
@@ -5588,7 +5560,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Brand"
+                    "$ref": "#/components/schemas/Brand.1"
                   },
                   "type": "array"
                 }
@@ -5596,7 +5568,7 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Brand"
+                    "$ref": "#/components/schemas/Brand.1"
                   },
                   "type": "array"
                 }
@@ -5628,7 +5600,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand"
+                    "$ref": "#/components/schemas/Brand.1"
                   }
                 ]
               }
@@ -5637,7 +5609,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand"
+                    "$ref": "#/components/schemas/Brand.1"
                   }
                 ]
               }
@@ -5646,7 +5618,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand"
+                    "$ref": "#/components/schemas/Brand.1"
                   }
                 ]
               }
@@ -5721,17 +5693,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Brand"
+                  "$ref": "#/components/schemas/Brand.1"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Brand"
+                  "$ref": "#/components/schemas/Brand.1"
                 }
               },
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Brand"
+                  "$ref": "#/components/schemas/Brand.1"
                 }
               }
             },
@@ -5770,7 +5742,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand"
+                    "$ref": "#/components/schemas/Brand.1"
                   }
                 ]
               }
@@ -5779,7 +5751,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand"
+                    "$ref": "#/components/schemas/Brand.1"
                   }
                 ]
               }
@@ -5788,7 +5760,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand"
+                    "$ref": "#/components/schemas/Brand.1"
                   }
                 ]
               }
@@ -6391,7 +6363,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Collection"
+                    "$ref": "#/components/schemas/Collection.1"
                   },
                   "type": "array"
                 }
@@ -6399,7 +6371,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Collection"
+                    "$ref": "#/components/schemas/Collection.1"
                   },
                   "type": "array"
                 }
@@ -6407,7 +6379,7 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Collection"
+                    "$ref": "#/components/schemas/Collection.1"
                   },
                   "type": "array"
                 }
@@ -6439,7 +6411,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Collection"
+                    "$ref": "#/components/schemas/Collection.1"
                   }
                 ]
               }
@@ -6448,7 +6420,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Collection"
+                    "$ref": "#/components/schemas/Collection.1"
                   }
                 ]
               }
@@ -6457,7 +6429,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Collection"
+                    "$ref": "#/components/schemas/Collection.1"
                   }
                 ]
               }
@@ -6573,17 +6545,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Collection"
+                  "$ref": "#/components/schemas/Collection.1"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Collection"
+                  "$ref": "#/components/schemas/Collection.1"
                 }
               },
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Collection"
+                  "$ref": "#/components/schemas/Collection.1"
                 }
               }
             },
@@ -6622,7 +6594,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Collection"
+                    "$ref": "#/components/schemas/Collection.1"
                   }
                 ]
               }
@@ -6631,7 +6603,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Collection"
+                    "$ref": "#/components/schemas/Collection.1"
                   }
                 ]
               }
@@ -6640,7 +6612,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Collection"
+                    "$ref": "#/components/schemas/Collection.1"
                   }
                 ]
               }
@@ -6809,7 +6781,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Color"
+                    "$ref": "#/components/schemas/Color.1"
                   },
                   "type": "array"
                 }
@@ -6817,7 +6789,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Color"
+                    "$ref": "#/components/schemas/Color.1"
                   },
                   "type": "array"
                 }
@@ -6825,7 +6797,7 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Color"
+                    "$ref": "#/components/schemas/Color.1"
                   },
                   "type": "array"
                 }
@@ -10985,7 +10957,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ItemCategory"
+                    "$ref": "#/components/schemas/ItemCategory.1"
                   },
                   "type": "array"
                 }
@@ -10993,7 +10965,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ItemCategory"
+                    "$ref": "#/components/schemas/ItemCategory.1"
                   },
                   "type": "array"
                 }
@@ -11001,7 +10973,7 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ItemCategory"
+                    "$ref": "#/components/schemas/ItemCategory.1"
                   },
                   "type": "array"
                 }
@@ -11033,7 +11005,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory"
+                    "$ref": "#/components/schemas/ItemCategory.1"
                   }
                 ]
               }
@@ -11042,7 +11014,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory"
+                    "$ref": "#/components/schemas/ItemCategory.1"
                   }
                 ]
               }
@@ -11051,7 +11023,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory"
+                    "$ref": "#/components/schemas/ItemCategory.1"
                   }
                 ]
               }
@@ -11167,17 +11139,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemCategory"
+                  "$ref": "#/components/schemas/ItemCategory.1"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemCategory"
+                  "$ref": "#/components/schemas/ItemCategory.1"
                 }
               },
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemCategory"
+                  "$ref": "#/components/schemas/ItemCategory.1"
                 }
               }
             },
@@ -11216,7 +11188,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory"
+                    "$ref": "#/components/schemas/ItemCategory.1"
                   }
                 ]
               }
@@ -11225,7 +11197,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory"
+                    "$ref": "#/components/schemas/ItemCategory.1"
                   }
                 ]
               }
@@ -11234,7 +11206,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory"
+                    "$ref": "#/components/schemas/ItemCategory.1"
                   }
                 ]
               }
@@ -11401,7 +11373,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ItemList"
+                    "$ref": "#/components/schemas/ItemList.1"
                   },
                   "type": "array"
                 }
@@ -11409,7 +11381,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ItemList"
+                    "$ref": "#/components/schemas/ItemList.1"
                   },
                   "type": "array"
                 }
@@ -11417,7 +11389,7 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ItemList"
+                    "$ref": "#/components/schemas/ItemList.1"
                   },
                   "type": "array"
                 }
@@ -11449,7 +11421,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/CreateItemList"
+                    "$ref": "#/components/schemas/CreateItemList.1"
                   }
                 ]
               }
@@ -11458,7 +11430,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/CreateItemList"
+                    "$ref": "#/components/schemas/CreateItemList.1"
                   }
                 ]
               }
@@ -11467,7 +11439,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/CreateItemList"
+                    "$ref": "#/components/schemas/CreateItemList.1"
                   }
                 ]
               }
@@ -11584,7 +11556,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/UpdateItemList"
+                    "$ref": "#/components/schemas/UpdateItemList.1"
                   }
                 ]
               }
@@ -11593,7 +11565,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/UpdateItemList"
+                    "$ref": "#/components/schemas/UpdateItemList.1"
                   }
                 ]
               }
@@ -11602,7 +11574,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/UpdateItemList"
+                    "$ref": "#/components/schemas/UpdateItemList.1"
                   }
                 ]
               }
@@ -12768,7 +12740,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/MarketingCode"
+                    "$ref": "#/components/schemas/MarketingCode.1"
                   },
                   "type": "array"
                 }
@@ -12776,7 +12748,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/MarketingCode"
+                    "$ref": "#/components/schemas/MarketingCode.1"
                   },
                   "type": "array"
                 }
@@ -12784,7 +12756,7 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/MarketingCode"
+                    "$ref": "#/components/schemas/MarketingCode.1"
                   },
                   "type": "array"
                 }
@@ -12816,7 +12788,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingCode"
+                    "$ref": "#/components/schemas/MarketingCode.1"
                   }
                 ]
               }
@@ -12825,7 +12797,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingCode"
+                    "$ref": "#/components/schemas/MarketingCode.1"
                   }
                 ]
               }
@@ -12834,7 +12806,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingCode"
+                    "$ref": "#/components/schemas/MarketingCode.1"
                   }
                 ]
               }
@@ -12909,17 +12881,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MarketingCode"
+                  "$ref": "#/components/schemas/MarketingCode.1"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MarketingCode"
+                  "$ref": "#/components/schemas/MarketingCode.1"
                 }
               },
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/MarketingCode"
+                  "$ref": "#/components/schemas/MarketingCode.1"
                 }
               }
             },
@@ -12958,7 +12930,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingCode"
+                    "$ref": "#/components/schemas/MarketingCode.1"
                   }
                 ]
               }
@@ -12967,7 +12939,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingCode"
+                    "$ref": "#/components/schemas/MarketingCode.1"
                   }
                 ]
               }
@@ -12976,7 +12948,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingCode"
+                    "$ref": "#/components/schemas/MarketingCode.1"
                   }
                 ]
               }
@@ -13143,7 +13115,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
+                    "$ref": "#/components/schemas/MarketingExclusivity.1"
                   },
                   "type": "array"
                 }
@@ -13151,7 +13123,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
+                    "$ref": "#/components/schemas/MarketingExclusivity.1"
                   },
                   "type": "array"
                 }
@@ -13159,7 +13131,7 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
+                    "$ref": "#/components/schemas/MarketingExclusivity.1"
                   },
                   "type": "array"
                 }
@@ -13191,7 +13163,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
+                    "$ref": "#/components/schemas/MarketingExclusivity.1"
                   }
                 ]
               }
@@ -13200,7 +13172,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
+                    "$ref": "#/components/schemas/MarketingExclusivity.1"
                   }
                 ]
               }
@@ -13209,7 +13181,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
+                    "$ref": "#/components/schemas/MarketingExclusivity.1"
                   }
                 ]
               }
@@ -13284,17 +13256,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MarketingExclusivity"
+                  "$ref": "#/components/schemas/MarketingExclusivity.1"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MarketingExclusivity"
+                  "$ref": "#/components/schemas/MarketingExclusivity.1"
                 }
               },
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/MarketingExclusivity"
+                  "$ref": "#/components/schemas/MarketingExclusivity.1"
                 }
               }
             },
@@ -13333,7 +13305,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
+                    "$ref": "#/components/schemas/MarketingExclusivity.1"
                   }
                 ]
               }
@@ -13342,7 +13314,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
+                    "$ref": "#/components/schemas/MarketingExclusivity.1"
                   }
                 ]
               }
@@ -13351,7 +13323,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
+                    "$ref": "#/components/schemas/MarketingExclusivity.1"
                   }
                 ]
               }
@@ -13518,7 +13490,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/NonsaleType"
+                    "$ref": "#/components/schemas/NonsaleType.1"
                   },
                   "type": "array"
                 }
@@ -13526,7 +13498,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/NonsaleType"
+                    "$ref": "#/components/schemas/NonsaleType.1"
                   },
                   "type": "array"
                 }
@@ -13534,7 +13506,7 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/NonsaleType"
+                    "$ref": "#/components/schemas/NonsaleType.1"
                   },
                   "type": "array"
                 }
@@ -13566,7 +13538,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType"
+                    "$ref": "#/components/schemas/NonsaleType.1"
                   }
                 ]
               }
@@ -13575,7 +13547,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType"
+                    "$ref": "#/components/schemas/NonsaleType.1"
                   }
                 ]
               }
@@ -13584,7 +13556,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType"
+                    "$ref": "#/components/schemas/NonsaleType.1"
                   }
                 ]
               }
@@ -13660,7 +13632,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType"
+                    "$ref": "#/components/schemas/NonsaleType.1"
                   }
                 ]
               }
@@ -13669,7 +13641,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType"
+                    "$ref": "#/components/schemas/NonsaleType.1"
                   }
                 ]
               }
@@ -13678,7 +13650,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType"
+                    "$ref": "#/components/schemas/NonsaleType.1"
                   }
                 ]
               }
@@ -13802,7 +13774,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Nutrition"
+                    "$ref": "#/components/schemas/Nutrition.1"
                   },
                   "type": "array"
                 }
@@ -13810,7 +13782,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Nutrition"
+                    "$ref": "#/components/schemas/Nutrition.1"
                   },
                   "type": "array"
                 }
@@ -13818,7 +13790,7 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Nutrition"
+                    "$ref": "#/components/schemas/Nutrition.1"
                   },
                   "type": "array"
                 }
@@ -14509,7 +14481,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ProcurementRule"
+                    "$ref": "#/components/schemas/ProcurementRule.1"
                   },
                   "type": "array"
                 }
@@ -14517,7 +14489,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ProcurementRule"
+                    "$ref": "#/components/schemas/ProcurementRule.1"
                   },
                   "type": "array"
                 }
@@ -14525,7 +14497,7 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ProcurementRule"
+                    "$ref": "#/components/schemas/ProcurementRule.1"
                   },
                   "type": "array"
                 }
@@ -14557,7 +14529,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule"
+                    "$ref": "#/components/schemas/ProcurementRule.1"
                   }
                 ]
               }
@@ -14566,7 +14538,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule"
+                    "$ref": "#/components/schemas/ProcurementRule.1"
                   }
                 ]
               }
@@ -14575,7 +14547,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule"
+                    "$ref": "#/components/schemas/ProcurementRule.1"
                   }
                 ]
               }
@@ -14691,17 +14663,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProcurementRule"
+                  "$ref": "#/components/schemas/ProcurementRule.1"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProcurementRule"
+                  "$ref": "#/components/schemas/ProcurementRule.1"
                 }
               },
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProcurementRule"
+                  "$ref": "#/components/schemas/ProcurementRule.1"
                 }
               }
             },
@@ -14740,7 +14712,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule"
+                    "$ref": "#/components/schemas/ProcurementRule.1"
                   }
                 ]
               }
@@ -14749,7 +14721,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule"
+                    "$ref": "#/components/schemas/ProcurementRule.1"
                   }
                 ]
               }
@@ -14758,7 +14730,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule"
+                    "$ref": "#/components/schemas/ProcurementRule.1"
                   }
                 ]
               }
@@ -14925,7 +14897,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ReplenishmentCode"
+                    "$ref": "#/components/schemas/ReplenishmentCode.1"
                   },
                   "type": "array"
                 }
@@ -14933,7 +14905,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ReplenishmentCode"
+                    "$ref": "#/components/schemas/ReplenishmentCode.1"
                   },
                   "type": "array"
                 }
@@ -14941,7 +14913,7 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ReplenishmentCode"
+                    "$ref": "#/components/schemas/ReplenishmentCode.1"
                   },
                   "type": "array"
                 }
@@ -14973,7 +14945,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode"
+                    "$ref": "#/components/schemas/ReplenishmentCode.1"
                   }
                 ]
               }
@@ -14982,7 +14954,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode"
+                    "$ref": "#/components/schemas/ReplenishmentCode.1"
                   }
                 ]
               }
@@ -14991,7 +14963,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode"
+                    "$ref": "#/components/schemas/ReplenishmentCode.1"
                   }
                 ]
               }
@@ -15107,17 +15079,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReplenishmentCode"
+                  "$ref": "#/components/schemas/ReplenishmentCode.1"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReplenishmentCode"
+                  "$ref": "#/components/schemas/ReplenishmentCode.1"
                 }
               },
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReplenishmentCode"
+                  "$ref": "#/components/schemas/ReplenishmentCode.1"
                 }
               }
             },
@@ -15156,7 +15128,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode"
+                    "$ref": "#/components/schemas/ReplenishmentCode.1"
                   }
                 ]
               }
@@ -15165,7 +15137,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode"
+                    "$ref": "#/components/schemas/ReplenishmentCode.1"
                   }
                 ]
               }
@@ -15174,7 +15146,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode"
+                    "$ref": "#/components/schemas/ReplenishmentCode.1"
                   }
                 ]
               }
@@ -19854,7 +19826,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Size"
+                    "$ref": "#/components/schemas/Size.1"
                   },
                   "type": "array"
                 }
@@ -19862,7 +19834,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Size"
+                    "$ref": "#/components/schemas/Size.1"
                   },
                   "type": "array"
                 }
@@ -19870,7 +19842,7 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Size"
+                    "$ref": "#/components/schemas/Size.1"
                   },
                   "type": "array"
                 }
@@ -19902,7 +19874,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size"
+                    "$ref": "#/components/schemas/Size.1"
                   }
                 ]
               }
@@ -19911,7 +19883,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size"
+                    "$ref": "#/components/schemas/Size.1"
                   }
                 ]
               }
@@ -19920,7 +19892,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size"
+                    "$ref": "#/components/schemas/Size.1"
                   }
                 ]
               }
@@ -19995,17 +19967,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Size"
+                  "$ref": "#/components/schemas/Size.1"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Size"
+                  "$ref": "#/components/schemas/Size.1"
                 }
               },
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Size"
+                  "$ref": "#/components/schemas/Size.1"
                 }
               }
             },
@@ -20044,7 +20016,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size"
+                    "$ref": "#/components/schemas/Size.1"
                   }
                 ]
               }
@@ -20053,7 +20025,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size"
+                    "$ref": "#/components/schemas/Size.1"
                   }
                 ]
               }
@@ -20062,7 +20034,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size"
+                    "$ref": "#/components/schemas/Size.1"
                   }
                 ]
               }
@@ -20284,7 +20256,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit"
+                    "$ref": "#/components/schemas/TradingUnit.1"
                   }
                 ]
               }
@@ -20293,7 +20265,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit"
+                    "$ref": "#/components/schemas/TradingUnit.1"
                   }
                 ]
               }
@@ -20302,7 +20274,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit"
+                    "$ref": "#/components/schemas/TradingUnit.1"
                   }
                 ]
               }
@@ -20378,7 +20350,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit"
+                    "$ref": "#/components/schemas/TradingUnit.1"
                   }
                 ]
               }
@@ -20387,7 +20359,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit"
+                    "$ref": "#/components/schemas/TradingUnit.1"
                   }
                 ]
               }
@@ -20396,7 +20368,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit"
+                    "$ref": "#/components/schemas/TradingUnit.1"
                   }
                 ]
               }
