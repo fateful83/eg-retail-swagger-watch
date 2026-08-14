@@ -522,15 +522,6 @@
             "nullable": true,
             "type": "number"
           },
-          "priceControl": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PriceControl"
-              }
-            ],
-            "description": "On/off settings for the three price-control mechanisms",
-            "nullable": true
-          },
           "priceLocalTimeZoneIana": {
             "description": "A iana time zone, e.g. 'Europe/Oslo'.\r\nhttps://www.iana.org/time-zones",
             "nullable": true,
@@ -3197,25 +3188,6 @@
         "required": [
           "name"
         ],
-        "type": "object"
-      },
-      "PriceControl": {
-        "additionalProperties": false,
-        "description": "On/off settings for the three price-control mechanisms of the price-suggestion job.",
-        "properties": {
-          "franchisePriceControl": {
-            "description": "Franchise stores approve central changes before they take effect. A central retail-price or assortment\r\nchange creates an approval item per franchise store; it takes effect at that store only after approval.",
-            "type": "boolean"
-          },
-          "keepMarginSuggestions": {
-            "description": "When a profile's wholesale (cost) price changes without a retail change, creates a suggested retail\r\nprice that keeps the previous margin, for review. Removed if the retail price is changed.",
-            "type": "boolean"
-          },
-          "wholesalePriceCascade": {
-            "description": "Automatically pushes cost-side changes (wholesale/net price, supplier discount, freight and the\r\nrecalculated margin) from a profile or price zone down to its store prices. Retail prices are not\r\nchanged and no approval is created.",
-            "type": "boolean"
-          }
-        },
         "type": "object"
       },
       "ProcurementRule.1": {
