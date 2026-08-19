@@ -556,14 +556,6 @@
             "nullable": true,
             "type": "string"
           },
-          "reservedPluRanges": {
-            "description": "Numeric ranges reserved for central PLU values. An empty list means no PLU restriction applies.",
-            "items": {
-              "$ref": "#/components/schemas/ReservedPluRange"
-            },
-            "nullable": true,
-            "type": "array"
-          },
           "supportedLanguages": {
             "items": {
               "$ref": "#/components/schemas/Language"
@@ -3420,23 +3412,6 @@
           "description",
           "name"
         ],
-        "type": "object"
-      },
-      "ReservedPluRange": {
-        "additionalProperties": false,
-        "description": "A numeric range reserved for central PLU values. PLU values entered on items must fall outside every reserved range.",
-        "properties": {
-          "from": {
-            "description": "Inclusive lower bound.",
-            "format": "int64",
-            "type": "integer"
-          },
-          "to": {
-            "description": "Inclusive upper bound.",
-            "format": "int64",
-            "type": "integer"
-          }
-        },
         "type": "object"
       },
       "RoundingAmountOperator": {

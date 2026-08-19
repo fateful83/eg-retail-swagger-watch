@@ -16305,14 +16305,6 @@
             ],
             "description": "On/off settings for the three price-control mechanisms",
             "nullable": true
-          },
-          "reservedPluRanges": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ReservedPluRange"
-            },
-            "description": "Numeric ranges reserved for central PLU values. An empty list means no PLU restriction applies.",
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -19147,23 +19139,6 @@
           }
         },
         "additionalProperties": false
-      },
-      "ReservedPluRange": {
-        "type": "object",
-        "properties": {
-          "from": {
-            "type": "integer",
-            "description": "Inclusive lower bound.",
-            "format": "int64"
-          },
-          "to": {
-            "type": "integer",
-            "description": "Inclusive upper bound.",
-            "format": "int64"
-          }
-        },
-        "additionalProperties": false,
-        "description": "A numeric range reserved for central PLU values. PLU values entered on items must fall outside every reserved range."
       },
       "RoundingAmountOperator": {
         "enum": [
