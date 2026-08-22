@@ -1,11 +1,11 @@
 # DEV vs TEST drift detected: CustomerOrderV2
 
-- Time: 2026-08-21T18:17:26Z
+- Time: 2026-08-22T00:27:05Z
 - Severity: breaking
 - DEV Swagger URL: https://customerorderv2service.egretail-dev.cloud/swagger/v1/swagger.json
 - TEST Swagger URL: https://customerorderv2service.egretail-test.cloud/swagger/v1/swagger.json
-- DEV hash: `a9168048739f452d587e65283431994c43d2507addf8fb97e010062d8efd1e1a`
-- TEST hash: `972511c77a2d2d3eb303b89c5468dc91271907b46929d198a034f6b2329f9cc9`
+- DEV hash: `95933bdc52a0e1abf27a95d1fae9b2f5361335def2e4d41ffaa235d224a81d32`
+- TEST hash: `61e7d43a3029dfd1c61f13d6a48ac26e8aec239dff10c64fb2bd40dea6fbc871`
 
 ## Summary
 - Only in DEV: 9
