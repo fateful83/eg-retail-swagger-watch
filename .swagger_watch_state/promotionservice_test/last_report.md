@@ -1,3 +1,3 @@
 No change for PromotionService [TEST] (7d6b4cf376d5)
-Fetch completed at: 2026-08-22T18:10:37Z
-Fetch duration ms: 658
+Fetch completed at: 2026-08-23T00:28:28Z
+Fetch duration ms: 705
