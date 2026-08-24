@@ -1,32 +1,36 @@
 # DEV vs TEST drift detected: CustomerOrderV2
 
-- Time: 2026-08-24T06:29:35Z
-- Severity: breaking
+- Time: 2026-08-24T12:19:21Z
+- Severity: non_breaking
 - DEV Swagger URL: https://customerorderv2service.egretail-dev.cloud/swagger/v1/swagger.json
 - TEST Swagger URL: https://customerorderv2service.egretail-test.cloud/swagger/v1/swagger.json
-- DEV hash: `8ece2c13b00704b4e233c24bb8c42fc7bfab33b854436e63b9efc313fc3ff43c`
-- TEST hash: `3838332030213cdc3c6925cb8673e06c899fcf10e7043449cb866d7760826eb6`
+- DEV hash: `15db6c0010a3ee3c829c807a364b517da2d8f3e17e99a31f7fa54378e4489936`
+- TEST hash: `a8ca9ce4918fd73a3fb91676b4acbf93ea3fe7974bbce0ecc9b24005b87e81d4`
 
 ## Summary
-- Only in DEV: 9
-- Only in TEST: 2
-- Present in both but different: 2
+- Only in DEV: 12
+- Only in TEST: 0
+- Present in both but different: 4
 
 ## Only in DEV
 - DELETE /api/gateway/Orders/drafts/{orderNumber}
 - GET /api/gateway/Orders/store/{storeNumber}
 - GET /api/gateway/Orders/{orderNumber}
+- GET /api/gateway/PickLists/store/{storeNumber}
 - PATCH /api/gateway/Orders/drafts/{orderNumber}/submit
 - PATCH /api/gateway/Orders/drafts/{orderNumber}/undoDelete
 - PATCH /api/gateway/Orders/{orderNumber}/delivery/properties
 - PATCH /api/gateway/Orders/{orderNumber}/lines/{lineNo}/properties
 - PATCH /api/gateway/Orders/{orderNumber}/properties
+- POST /api/gateway/PickLists/{pickListId}/lines/{pickListLineId}/pick
+- POST /api/gateway/PickLists/{pickListId}/start
 - PUT /api/gateway/Orders/drafts
 
 ## Only in TEST
-- GET /api/gateway/ServiceOrders/{storeNumber}
-- PATCH /api/gateway/ServiceOrders/{orderNumber}/orderStatus
+- None
 
 ## Different in DEV and TEST
-- POST /api/gateway/ServiceOrders/{storeNumber}/{orderNumber}/payment
+- DELETE /api/gateway/Orders/{orderNumber}/lines/{lineNo}
+- PATCH /api/gateway/Orders/{orderNumber}/lines/{lineNo}
 - PUT /api/gateway/Orders
+- PUT /api/gateway/Orders/{orderNumber}/lines
