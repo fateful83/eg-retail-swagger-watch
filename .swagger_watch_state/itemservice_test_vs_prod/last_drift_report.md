@@ -1,11 +1,11 @@
 # TEST vs PROD drift detected: ItemService
 
-- Time: 2026-08-25T06:21:19Z
+- Time: 2026-08-25T12:19:43Z
 - Severity: breaking
 - TEST Swagger URL: https://itemservice.egretail-test.cloud/swagger/v1/swagger.json
 - PROD Swagger URL: https://itemservice.egretail.cloud/swagger/v1/swagger.json
 - TEST hash: `279cca2a756fe7c948b9f887b2ae3f6cfc0e2a93d415cad4b368c09a7cd836d1`
-- PROD hash: `21d1ebca50081ebb3772801fb5f98781fe5d8dc075f182dc8d44f023e1ae7004`
+- PROD hash: `26c0a2e2c3ea6aa323fdff72f1adfc0cdc34fb80350c5d6bb01cee5390d327e5`
 
 ## Summary
 - Only in TEST: 0
