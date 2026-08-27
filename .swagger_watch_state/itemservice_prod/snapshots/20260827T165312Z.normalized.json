@@ -409,7 +409,7 @@
         "additionalProperties": false,
         "properties": {
           "createLabelsOnlyForItemsInStockWithinLastNumberOfDays": {
-            "description": "Number of days an item may be out of stock before label generation stops for it. Labels stop only once\r\nthe item is out of stock and its stock has been unchanged for this many days, so an item with stock on\r\nhand always keeps its labels. An item with no stock record counts as out of stock. 0 disables the check.",
+            "description": "Parameter representing whether to create labels only for items in stock within last number of days",
             "format": "int32",
             "type": "integer"
           },
