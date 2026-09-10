@@ -2835,7 +2835,8 @@
           "RecommendedActionCodeNotValidForServiceCode",
           "RecommendedLocationCodeNotValidForProfile",
           "RecommendedServiceOnlyAllowedForProfile",
-          "PriceValidToExtendedDueToPromotion"
+          "PriceValidToExtendedDueToPromotion",
+          "FuturePriceWillSupersedeImportedPrice"
         ],
         "type": "string"
       },
