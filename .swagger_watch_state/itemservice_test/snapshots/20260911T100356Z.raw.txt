@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.0.4",
   "info": {
     "title": "Item API",
     "description": "# Internal usage only\r\n\r\nItemService is an API for item maintenance.\r\nAside from managing items, it can be used for maintenance of all kinds of registers that are connected to items (e.g. colors, sizes, seasons etc.).\r\n\r\n## Health check\r\n\r\n[Click](/hc) to see health check status.\r\n",
@@ -42,7 +42,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -126,7 +126,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -174,15 +174,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/AlternativeGroupUpdate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -214,7 +205,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -277,7 +268,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -325,15 +316,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/AlternativeGroupUpdate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -365,7 +347,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -408,7 +390,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -476,7 +458,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -524,15 +506,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/BrandCategory"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -564,7 +537,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -627,7 +600,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -675,15 +648,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/BrandCategory"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -715,7 +679,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -758,7 +722,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -826,13 +790,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   }
                 }
               },
@@ -840,7 +804,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   }
                 }
               },
@@ -848,7 +812,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   }
                 }
               }
@@ -874,20 +838,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Brand.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   }
                 ]
               }
@@ -896,7 +851,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   }
                 ]
               }
@@ -905,7 +860,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   }
                 ]
               }
@@ -914,7 +869,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -977,21 +932,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Brand.1"
+                  "$ref": "#/components/schemas/Brand"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Brand.1"
+                  "$ref": "#/components/schemas/Brand"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Brand.1"
+                  "$ref": "#/components/schemas/Brand"
                 }
               }
             }
@@ -1025,20 +980,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Brand.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   }
                 ]
               }
@@ -1047,7 +993,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   }
                 ]
               }
@@ -1056,7 +1002,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   }
                 ]
               }
@@ -1065,7 +1011,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -1108,7 +1054,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -1151,7 +1097,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -1159,181 +1105,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/CalculationRulesets/{id}": {
-      "get": {
-        "tags": [
-          "CalculationRulesets"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/CalculationRuleset"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CalculationRuleset"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CalculationRuleset"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/CalculationRulesets": {
-      "get": {
-        "tags": [
-          "CalculationRulesets"
-        ],
-        "parameters": [
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          },
-          {
-            "name": "$skip",
-            "in": "query",
-            "description": "Skips the first n results",
-            "schema": {
-              "type": "number",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "Returns the first n results",
-            "schema": {
-              "type": "number",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Filters the results using oData Notation",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "description": "Orders the results by the fields listed",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/CalculationRuleset"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/CalculationRuleset"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/CalculationRuleset"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/CalculationRulesets/DefaultRuleset": {
-      "get": {
-        "tags": [
-          "CalculationRulesets"
-        ],
-        "parameters": [
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/CalculationRuleset"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CalculationRuleset"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CalculationRuleset"
                 }
               }
             }
@@ -1394,7 +1165,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1442,15 +1213,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Classification"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -1482,7 +1244,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1545,7 +1307,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1593,15 +1355,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Classification"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -1633,7 +1386,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1694,7 +1447,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -1737,7 +1490,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -1780,7 +1533,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -1848,13 +1601,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Collection.1"
+                    "$ref": "#/components/schemas/Collection"
                   }
                 }
               },
@@ -1862,7 +1615,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Collection.1"
+                    "$ref": "#/components/schemas/Collection"
                   }
                 }
               },
@@ -1870,7 +1623,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Collection.1"
+                    "$ref": "#/components/schemas/Collection"
                   }
                 }
               }
@@ -1896,20 +1649,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Collection.1"
+                    "$ref": "#/components/schemas/Collection"
                   }
                 ]
               }
@@ -1918,7 +1662,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Collection.1"
+                    "$ref": "#/components/schemas/Collection"
                   }
                 ]
               }
@@ -1927,7 +1671,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Collection.1"
+                    "$ref": "#/components/schemas/Collection"
                   }
                 ]
               }
@@ -1936,7 +1680,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1999,21 +1743,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Collection.1"
+                  "$ref": "#/components/schemas/Collection"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Collection.1"
+                  "$ref": "#/components/schemas/Collection"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Collection.1"
+                  "$ref": "#/components/schemas/Collection"
                 }
               }
             }
@@ -2047,20 +1791,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Collection.1"
+                    "$ref": "#/components/schemas/Collection"
                   }
                 ]
               }
@@ -2069,7 +1804,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Collection.1"
+                    "$ref": "#/components/schemas/Collection"
                   }
                 ]
               }
@@ -2078,7 +1813,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Collection.1"
+                    "$ref": "#/components/schemas/Collection"
                   }
                 ]
               }
@@ -2087,7 +1822,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -2128,7 +1863,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -2171,7 +1906,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -2214,7 +1949,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -2256,14 +1991,6 @@
                 }
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            },
             "application/json": {
               "schema": {
                 "type": "array",
@@ -2292,13 +2019,13 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Color.1"
+                    "$ref": "#/components/schemas/Color"
                   }
                 }
               },
@@ -2306,7 +2033,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Color.1"
+                    "$ref": "#/components/schemas/Color"
                   }
                 }
               },
@@ -2314,7 +2041,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Color.1"
+                    "$ref": "#/components/schemas/Color"
                   }
                 }
               }
@@ -2386,7 +2113,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -2434,15 +2161,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ConcessionCreate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -2474,7 +2192,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -2537,7 +2255,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -2585,15 +2303,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ConcessionUpdate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -2625,7 +2334,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -2667,7 +2376,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -2710,15 +2419,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CommissionPercentage"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -2750,7 +2450,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -2822,15 +2522,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CommissionPercentage"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -2862,7 +2553,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -2912,7 +2603,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -2964,7 +2655,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -3014,7 +2705,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -3066,15 +2757,6 @@
                 }
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            },
             "application/json": {
               "schema": {
                 "type": "array",
@@ -3106,7 +2788,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -3149,7 +2831,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -3217,7 +2899,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3265,15 +2947,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ConcessionStoresCreateUpdate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -3305,7 +2978,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3368,7 +3041,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3416,15 +3089,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ConcessionStoresCreateUpdate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -3456,7 +3120,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -3508,15 +3172,6 @@
                 }
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            },
             "application/json": {
               "schema": {
                 "type": "array",
@@ -3548,7 +3203,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -3591,7 +3246,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -3625,7 +3280,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3701,7 +3356,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3749,15 +3404,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Country"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -3789,7 +3435,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3848,7 +3494,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3895,15 +3541,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Country"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -3935,7 +3572,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -3977,7 +3614,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -4019,7 +3656,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -4062,7 +3699,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4121,15 +3758,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CreateDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -4161,7 +3789,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4224,15 +3852,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/UpdateDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -4264,7 +3883,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -4305,15 +3924,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/DeleteDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -4345,7 +3955,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -4413,7 +4023,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4461,15 +4071,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ExcelExportTemplateCreate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -4501,7 +4102,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4564,15 +4165,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ExcelExportTemplateUpdate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -4604,7 +4196,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -4647,7 +4239,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -4691,7 +4283,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           }
         }
       }
@@ -4749,7 +4341,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4808,7 +4400,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4856,7 +4448,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -4997,15 +4589,6 @@
                 }
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            },
             "application/json": {
               "schema": {
                 "type": "array",
@@ -5037,7 +4620,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -5080,7 +4663,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -5123,7 +4706,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -5208,7 +4791,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -5267,7 +4850,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -5414,15 +4997,6 @@
                 }
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            },
             "application/json": {
               "schema": {
                 "type": "array",
@@ -5454,7 +5028,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -5611,15 +5185,6 @@
                 }
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            },
             "application/json": {
               "schema": {
                 "type": "array",
@@ -5651,7 +5216,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -5811,15 +5376,6 @@
                 }
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            },
             "application/json": {
               "schema": {
                 "type": "array",
@@ -5851,7 +5407,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -5999,15 +5555,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ValidationOptionsWithSelectedItems"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -6039,7 +5586,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -6108,7 +5655,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -6239,19 +5786,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "enum": [
-                  "UpdateExistingItems",
-                  "CreateNewItems"
-                ],
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/FixItemIdentifierErrorsType"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "enum": [
@@ -6295,7 +5829,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -6372,7 +5906,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -6431,7 +5965,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -6524,7 +6058,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -6593,7 +6127,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -6601,56 +6135,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Imports/{id}/calculationRuleset": {
-      "get": {
-        "tags": [
-          "Imports"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/CalculationRuleset"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CalculationRuleset"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CalculationRuleset"
                 }
               }
             }
@@ -6711,13 +6195,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   }
                 }
               },
@@ -6725,7 +6209,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   }
                 }
               },
@@ -6733,7 +6217,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   }
                 }
               }
@@ -6759,20 +6243,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ItemCategory.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   }
                 ]
               }
@@ -6781,7 +6256,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   }
                 ]
               }
@@ -6790,7 +6265,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   }
                 ]
               }
@@ -6799,7 +6274,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -6862,21 +6337,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemCategory.1"
+                  "$ref": "#/components/schemas/ItemCategory"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemCategory.1"
+                  "$ref": "#/components/schemas/ItemCategory"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemCategory.1"
+                  "$ref": "#/components/schemas/ItemCategory"
                 }
               }
             }
@@ -6910,20 +6385,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ItemCategory.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   }
                 ]
               }
@@ -6932,7 +6398,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   }
                 ]
               }
@@ -6941,7 +6407,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   }
                 ]
               }
@@ -6950,7 +6416,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -6991,7 +6457,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -7034,7 +6500,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -7077,7 +6543,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -7145,13 +6611,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ItemList.1"
+                    "$ref": "#/components/schemas/ItemList"
                   }
                 }
               },
@@ -7159,7 +6625,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ItemList.1"
+                    "$ref": "#/components/schemas/ItemList"
                   }
                 }
               },
@@ -7167,7 +6633,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ItemList.1"
+                    "$ref": "#/components/schemas/ItemList"
                   }
                 }
               }
@@ -7193,20 +6659,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CreateItemList.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/CreateItemList.1"
+                    "$ref": "#/components/schemas/CreateItemList"
                   }
                 ]
               }
@@ -7215,7 +6672,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/CreateItemList.1"
+                    "$ref": "#/components/schemas/CreateItemList"
                   }
                 ]
               }
@@ -7224,7 +6681,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/CreateItemList.1"
+                    "$ref": "#/components/schemas/CreateItemList"
                   }
                 ]
               }
@@ -7233,7 +6690,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -7296,20 +6753,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/UpdateItemList.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/UpdateItemList.1"
+                    "$ref": "#/components/schemas/UpdateItemList"
                   }
                 ]
               }
@@ -7318,7 +6766,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/UpdateItemList.1"
+                    "$ref": "#/components/schemas/UpdateItemList"
                   }
                 ]
               }
@@ -7327,7 +6775,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/UpdateItemList.1"
+                    "$ref": "#/components/schemas/UpdateItemList"
                   }
                 ]
               }
@@ -7336,7 +6784,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -7377,7 +6825,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -7429,7 +6877,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -7508,7 +6956,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -7565,7 +7013,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -7649,7 +7097,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -7748,7 +7196,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -7818,15 +7266,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/UseItemList"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -7858,7 +7297,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -7952,7 +7391,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -8045,7 +7484,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -8123,7 +7562,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -8171,15 +7610,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ItemType"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -8211,7 +7641,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -8274,7 +7704,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -8322,15 +7752,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ItemType"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -8362,7 +7783,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -8403,7 +7824,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -8446,7 +7867,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -8489,7 +7910,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -8523,20 +7944,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingCode.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingCode.1"
+                    "$ref": "#/components/schemas/MarketingCode"
                   }
                 ]
               }
@@ -8545,7 +7957,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingCode.1"
+                    "$ref": "#/components/schemas/MarketingCode"
                   }
                 ]
               }
@@ -8554,7 +7966,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingCode.1"
+                    "$ref": "#/components/schemas/MarketingCode"
                   }
                 ]
               }
@@ -8563,7 +7975,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -8649,13 +8061,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/MarketingCode.1"
+                    "$ref": "#/components/schemas/MarketingCode"
                   }
                 }
               },
@@ -8663,7 +8075,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/MarketingCode.1"
+                    "$ref": "#/components/schemas/MarketingCode"
                   }
                 }
               },
@@ -8671,7 +8083,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/MarketingCode.1"
+                    "$ref": "#/components/schemas/MarketingCode"
                   }
                 }
               }
@@ -8708,21 +8120,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/MarketingCode.1"
+                  "$ref": "#/components/schemas/MarketingCode"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MarketingCode.1"
+                  "$ref": "#/components/schemas/MarketingCode"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MarketingCode.1"
+                  "$ref": "#/components/schemas/MarketingCode"
                 }
               }
             }
@@ -8756,20 +8168,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingCode.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingCode.1"
+                    "$ref": "#/components/schemas/MarketingCode"
                   }
                 ]
               }
@@ -8778,7 +8181,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingCode.1"
+                    "$ref": "#/components/schemas/MarketingCode"
                   }
                 ]
               }
@@ -8787,7 +8190,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingCode.1"
+                    "$ref": "#/components/schemas/MarketingCode"
                   }
                 ]
               }
@@ -8796,7 +8199,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -8839,7 +8242,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -8882,7 +8285,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -8950,13 +8353,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
+                    "$ref": "#/components/schemas/MarketingExclusivity"
                   }
                 }
               },
@@ -8964,7 +8367,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
+                    "$ref": "#/components/schemas/MarketingExclusivity"
                   }
                 }
               },
@@ -8972,7 +8375,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
+                    "$ref": "#/components/schemas/MarketingExclusivity"
                   }
                 }
               }
@@ -8998,20 +8401,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
+                    "$ref": "#/components/schemas/MarketingExclusivity"
                   }
                 ]
               }
@@ -9020,7 +8414,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
+                    "$ref": "#/components/schemas/MarketingExclusivity"
                   }
                 ]
               }
@@ -9029,7 +8423,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
+                    "$ref": "#/components/schemas/MarketingExclusivity"
                   }
                 ]
               }
@@ -9038,7 +8432,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -9101,21 +8495,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/MarketingExclusivity.1"
+                  "$ref": "#/components/schemas/MarketingExclusivity"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MarketingExclusivity.1"
+                  "$ref": "#/components/schemas/MarketingExclusivity"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MarketingExclusivity.1"
+                  "$ref": "#/components/schemas/MarketingExclusivity"
                 }
               }
             }
@@ -9149,20 +8543,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
+                    "$ref": "#/components/schemas/MarketingExclusivity"
                   }
                 ]
               }
@@ -9171,7 +8556,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
+                    "$ref": "#/components/schemas/MarketingExclusivity"
                   }
                 ]
               }
@@ -9180,7 +8565,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
+                    "$ref": "#/components/schemas/MarketingExclusivity"
                   }
                 ]
               }
@@ -9189,7 +8574,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -9232,7 +8617,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -9275,7 +8660,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -9343,13 +8728,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   }
                 }
               },
@@ -9357,7 +8742,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   }
                 }
               },
@@ -9365,7 +8750,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   }
                 }
               }
@@ -9391,20 +8776,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/NonsaleType.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   }
                 ]
               }
@@ -9413,7 +8789,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   }
                 ]
               }
@@ -9422,7 +8798,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   }
                 ]
               }
@@ -9431,7 +8807,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -9494,20 +8870,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/NonsaleType.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   }
                 ]
               }
@@ -9516,7 +8883,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   }
                 ]
               }
@@ -9525,7 +8892,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   }
                 ]
               }
@@ -9534,7 +8901,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -9577,7 +8944,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -9645,13 +9012,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Nutrition.1"
+                    "$ref": "#/components/schemas/Nutrition"
                   }
                 }
               },
@@ -9659,7 +9026,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Nutrition.1"
+                    "$ref": "#/components/schemas/Nutrition"
                   }
                 }
               },
@@ -9667,7 +9034,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Nutrition.1"
+                    "$ref": "#/components/schemas/Nutrition"
                   }
                 }
               }
@@ -9693,15 +9060,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/NutritionDetails"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -9733,7 +9091,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -9796,7 +9154,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -9844,15 +9202,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/NutritionDetails"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -9884,7 +9233,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -9927,7 +9276,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -9961,15 +9310,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -10001,7 +9341,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -10087,7 +9427,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -10146,7 +9486,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -10194,15 +9534,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -10234,7 +9565,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -10277,7 +9608,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -10320,7 +9651,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -10328,90 +9659,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/PriceCalculations/StorePriceCalculations": {
-      "get": {
-        "tags": [
-          "PriceCalculations"
-        ],
-        "parameters": [
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          },
-          {
-            "name": "$skip",
-            "in": "query",
-            "description": "Skips the first n results",
-            "schema": {
-              "type": "number",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "Returns the first n results",
-            "schema": {
-              "type": "number",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Filters the results using oData Notation",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "description": "Orders the results by the fields listed",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/StorePriceCalculationListRow"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/StorePriceCalculationListRow"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/StorePriceCalculationListRow"
-                  }
                 }
               }
             }
@@ -10472,13 +9719,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   }
                 }
               },
@@ -10486,7 +9733,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   }
                 }
               },
@@ -10494,7 +9741,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   }
                 }
               }
@@ -10520,20 +9767,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   }
                 ]
               }
@@ -10542,7 +9780,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   }
                 ]
               }
@@ -10551,7 +9789,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   }
                 ]
               }
@@ -10560,7 +9798,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -10623,21 +9861,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProcurementRule.1"
+                  "$ref": "#/components/schemas/ProcurementRule"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProcurementRule.1"
+                  "$ref": "#/components/schemas/ProcurementRule"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProcurementRule.1"
+                  "$ref": "#/components/schemas/ProcurementRule"
                 }
               }
             }
@@ -10671,20 +9909,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   }
                 ]
               }
@@ -10693,7 +9922,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   }
                 ]
               }
@@ -10702,7 +9931,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   }
                 ]
               }
@@ -10711,7 +9940,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -10752,7 +9981,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -10795,7 +10024,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -10838,7 +10067,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -10906,13 +10135,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   }
                 }
               },
@@ -10920,7 +10149,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   }
                 }
               },
@@ -10928,7 +10157,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   }
                 }
               }
@@ -10954,20 +10183,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   }
                 ]
               }
@@ -10976,7 +10196,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   }
                 ]
               }
@@ -10985,7 +10205,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   }
                 ]
               }
@@ -10994,7 +10214,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -11057,21 +10277,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReplenishmentCode.1"
+                  "$ref": "#/components/schemas/ReplenishmentCode"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReplenishmentCode.1"
+                  "$ref": "#/components/schemas/ReplenishmentCode"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReplenishmentCode.1"
+                  "$ref": "#/components/schemas/ReplenishmentCode"
                 }
               }
             }
@@ -11105,20 +10325,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   }
                 ]
               }
@@ -11127,7 +10338,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   }
                 ]
               }
@@ -11136,7 +10347,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   }
                 ]
               }
@@ -11145,7 +10356,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -11186,7 +10397,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -11229,7 +10440,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -11272,7 +10483,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -11340,7 +10551,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -11388,15 +10599,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ReportCategory"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -11428,7 +10630,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -11491,7 +10693,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -11539,15 +10741,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ReportCategory"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -11579,7 +10772,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -11620,7 +10813,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -11663,7 +10856,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -11706,7 +10899,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -11714,90 +10907,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/RetailPriceCalculationRules": {
-      "get": {
-        "tags": [
-          "RetailPriceCalculationRules"
-        ],
-        "parameters": [
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          },
-          {
-            "name": "$skip",
-            "in": "query",
-            "description": "Skips the first n results",
-            "schema": {
-              "type": "number",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "Returns the first n results",
-            "schema": {
-              "type": "number",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Filters the results using oData Notation",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "description": "Orders the results by the fields listed",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/RetailPriceCalculationRule"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/RetailPriceCalculationRule"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/RetailPriceCalculationRule"
-                  }
                 }
               }
             }
@@ -11858,7 +10967,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -11906,15 +11015,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/RoundingRule"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -11946,7 +11046,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -12009,7 +11109,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -12057,15 +11157,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/RoundingRule"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -12097,7 +11188,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -12140,7 +11231,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -12183,7 +11274,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -12217,15 +11308,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SearchableColor"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -12257,7 +11339,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -12343,7 +11425,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -12402,7 +11484,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -12445,7 +11527,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -12493,15 +11575,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SearchableColor"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -12533,7 +11606,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -12567,15 +11640,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SeasonCode"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -12607,7 +11671,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -12693,7 +11757,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -12752,7 +11816,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -12795,7 +11859,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -12838,7 +11902,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -12886,15 +11950,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SeasonCode"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -12926,7 +11981,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -12960,15 +12015,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SeasonDetails"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -13000,7 +12046,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -13086,7 +12132,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -13145,15 +12191,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SeasonDetails"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -13185,7 +12222,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -13226,7 +12263,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -13274,7 +12311,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -13317,7 +12354,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -13385,7 +12422,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -13433,15 +12470,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberAttribute"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -13473,7 +12501,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -13536,7 +12564,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -13584,15 +12612,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberAttribute"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -13624,7 +12643,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -13667,7 +12686,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -13744,7 +12763,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -13801,15 +12820,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberAttributeValue"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -13841,7 +12851,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -13913,15 +12923,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberAttributeValue"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -13953,7 +12954,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -14003,7 +13004,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -14055,7 +13056,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -14123,7 +13124,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -14171,15 +13172,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberType"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -14211,7 +13203,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -14274,7 +13266,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -14322,15 +13314,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberType"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -14362,7 +13345,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -14403,7 +13386,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -14446,7 +13429,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -14489,7 +13472,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -14566,7 +13549,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -14623,15 +13606,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberTypeAttribute"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -14663,7 +13637,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -14735,15 +13709,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberTypeAttribute"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -14775,7 +13740,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -14845,7 +13810,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -14917,7 +13882,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -14960,7 +13925,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -15044,7 +14009,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -15092,15 +14057,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -15132,7 +14088,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -15195,7 +14151,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -15243,15 +14199,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -15283,7 +14230,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -15324,7 +14271,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -15367,7 +14314,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -15410,7 +14357,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -15478,13 +14425,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   }
                 }
               },
@@ -15492,7 +14439,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   }
                 }
               },
@@ -15500,7 +14447,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   }
                 }
               }
@@ -15526,20 +14473,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Size.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   }
                 ]
               }
@@ -15548,7 +14486,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   }
                 ]
               }
@@ -15557,7 +14495,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   }
                 ]
               }
@@ -15566,7 +14504,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -15629,21 +14567,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Size.1"
+                  "$ref": "#/components/schemas/Size"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Size.1"
+                  "$ref": "#/components/schemas/Size"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Size.1"
+                  "$ref": "#/components/schemas/Size"
                 }
               }
             }
@@ -15677,20 +14615,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Size.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   }
                 ]
               }
@@ -15699,7 +14628,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   }
                 ]
               }
@@ -15708,7 +14637,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   }
                 ]
               }
@@ -15717,7 +14646,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -15760,7 +14689,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -15828,7 +14757,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -15876,15 +14805,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SizeTemplate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -15916,7 +14836,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -15979,7 +14899,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -16027,15 +14947,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SizeTemplate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -16067,7 +14978,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -16110,7 +15021,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -16187,7 +15098,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -16255,15 +15166,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SizeTemplateSize"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -16295,7 +15197,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -16345,15 +15247,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SizeTemplateSize"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -16385,7 +15278,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -16435,7 +15328,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -16503,7 +15396,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -16527,462 +15420,6 @@
                   "items": {
                     "$ref": "#/components/schemas/StoreGroup"
                   }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/StorePrices/{id}/Copy": {
-      "post": {
-        "tags": [
-          "StorePrices"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CopyPrice"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CopyPrice"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CopyPrice"
-                  }
-                ]
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CopyPrice"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreatedPrices"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreatedPrices"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CreatedPrices"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/StorePrices/PriceDateValidate": {
-      "post": {
-        "tags": [
-          "StorePrices"
-        ],
-        "parameters": [
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/StorePriceDateValidationData"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/StorePriceDateValidationData"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/StorePriceDateValidationData"
-                  }
-                ]
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/StorePriceDateValidationData"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationResult"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationResult"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationResult"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/StorePrices/{id}": {
-      "delete": {
-        "tags": [
-          "StorePrices"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/DeletePriceRequest"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/DeletePriceRequest"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/DeletePriceRequest"
-                  }
-                ]
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/DeletePriceRequest"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/StorePrices/GetPriceCounts": {
-      "post": {
-        "tags": [
-          "StorePrices"
-        ],
-        "parameters": [
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/GetPriceCountsRequest"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/GetPriceCountsRequest"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/GetPriceCountsRequest"
-                  }
-                ]
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/GetPriceCountsRequest"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/PriceCounts"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PriceCounts"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PriceCounts"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/StorePrices/GetCorrelatedPrices": {
-      "post": {
-        "tags": [
-          "StorePrices"
-        ],
-        "parameters": [
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/GetCorrelatedPricesRequest"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/GetCorrelatedPricesRequest"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/GetCorrelatedPricesRequest"
-                  }
-                ]
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/GetCorrelatedPricesRequest"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/CorrelatedPrices"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CorrelatedPrices"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CorrelatedPrices"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
                 }
               }
             }
@@ -17009,7 +15446,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -17057,20 +15494,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/TradingUnit.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit.1"
+                    "$ref": "#/components/schemas/TradingUnit"
                   }
                 ]
               }
@@ -17079,7 +15507,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit.1"
+                    "$ref": "#/components/schemas/TradingUnit"
                   }
                 ]
               }
@@ -17088,7 +15516,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit.1"
+                    "$ref": "#/components/schemas/TradingUnit"
                   }
                 ]
               }
@@ -17097,7 +15525,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -17160,20 +15588,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/TradingUnit.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit.1"
+                    "$ref": "#/components/schemas/TradingUnit"
                   }
                 ]
               }
@@ -17182,7 +15601,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit.1"
+                    "$ref": "#/components/schemas/TradingUnit"
                   }
                 ]
               }
@@ -17191,7 +15610,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit.1"
+                    "$ref": "#/components/schemas/TradingUnit"
                   }
                 ]
               }
@@ -17200,7 +15619,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -17243,7 +15662,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -17286,7 +15705,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -17489,7 +15908,7 @@
         ],
         "type": "string"
       },
-      "Brand.1": {
+      "Brand": {
         "required": [
           "description",
           "name"
@@ -17650,286 +16069,6 @@
         },
         "additionalProperties": false
       },
-      "CalculationRow": {
-        "type": "object",
-        "properties": {
-          "calculationRowRuleId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "calculationRulesetRowName": {
-            "type": "string",
-            "nullable": true
-          },
-          "amount": {
-            "maximum": 999999999.99,
-            "minimum": -999999999.99,
-            "type": "number",
-            "format": "double"
-          },
-          "percentDecimal": {
-            "maximum": 9999.999999999,
-            "minimum": -9999.999999999,
-            "type": "number",
-            "format": "double"
-          },
-          "isInputPercent": {
-            "type": "boolean"
-          },
-          "isDirty": {
-            "type": "boolean"
-          },
-          "hasChanged": {
-            "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
-      "CalculationRuleset": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "code": {
-            "type": "string",
-            "nullable": true
-          },
-          "inactive": {
-            "type": "boolean"
-          },
-          "isDefault": {
-            "type": "boolean"
-          },
-          "isInUse": {
-            "type": "boolean"
-          },
-          "createdBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "modifiedBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "modifiedDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "calculationRulesetRows": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CalculationRulesetRow"
-            },
-            "nullable": true
-          },
-          "readOnly": {
-            "type": "boolean"
-          },
-          "displayText": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "CalculationRulesetDefaultValuesRow": {
-        "type": "object",
-        "properties": {
-          "calculationRulesetDefaultValuesId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "calculationRulesetRowId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "percentDecimal": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "CalculationRulesetRow": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "calculationRulesetId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "rowRuleId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "sectionType": {
-            "enum": [
-              "Wholesale",
-              "CostPrice",
-              "SalesPrice",
-              "RecRetailPrice",
-              "SubStoreGroup"
-            ],
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/CalculationRulesetSectionType"
-              }
-            ]
-          },
-          "isPreOrderMaster": {
-            "type": "boolean"
-          },
-          "valueFieldType": {
-            "enum": [
-              "ReadOnly",
-              "Input",
-              "Hidden"
-            ],
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/FieldType"
-              }
-            ]
-          },
-          "percentageFieldType": {
-            "enum": [
-              "ReadOnly",
-              "Input",
-              "Hidden"
-            ],
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/FieldType"
-              }
-            ]
-          },
-          "rank": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "priceCalculationRowValueIndex": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "defaultPercentage": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "defaultValue": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "validator": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/RowValidator"
-              }
-            ],
-            "nullable": true
-          },
-          "allowZeroAmount": {
-            "type": "boolean"
-          },
-          "importRuleValueType": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ValueType"
-              }
-            ],
-            "nullable": true
-          },
-          "display": {
-            "type": "boolean"
-          },
-          "type": {
-            "enum": [
-              "Input",
-              "Summation",
-              "Calculated"
-            ],
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/RowType"
-              }
-            ]
-          },
-          "sign": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/RowSign"
-              }
-            ],
-            "nullable": true
-          },
-          "level": {
-            "enum": [
-              "Predefined",
-              "Custom"
-            ],
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/RowLevel"
-              }
-            ]
-          },
-          "calculationBasis": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "summationElements": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "nullable": true
-          },
-          "exampleAmount": {
-            "type": "number",
-            "format": "double"
-          },
-          "exampleValueIsDirty": {
-            "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
-      "CalculationRulesetSectionType": {
-        "enum": [
-          "Wholesale",
-          "CostPrice",
-          "SalesPrice",
-          "RecRetailPrice",
-          "SubStoreGroup"
-        ],
-        "type": "string"
-      },
       "Classification": {
         "required": [
           "description",
@@ -18042,9 +16181,45 @@
             "format": "double",
             "nullable": true
           },
+          "priceCalculationMinMarginPercent": {
+            "type": "number",
+            "description": "Minimum margin percent for store price calculation warning. Null means no limit configured.",
+            "format": "double",
+            "nullable": true
+          },
+          "priceCalculationMaxMarginPercent": {
+            "type": "number",
+            "description": "Maximum margin percent for store price calculation warning. Null means no limit configured.",
+            "format": "double",
+            "nullable": true
+          },
           "gtinPrefix": {
             "type": "string",
             "description": "Parameter representing what GTIN prefix would you like to have for new items.",
+            "nullable": true
+          },
+          "gtinSeriesMode": {
+            "enum": [
+              "Prefix",
+              "Range"
+            ],
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GtinSeriesMode"
+              }
+            ],
+            "description": "Parameter representing whether GTIN generation uses a prefix or a from-to range."
+          },
+          "gtinRangeFrom": {
+            "type": "integer",
+            "description": "Lower bound of the GTIN/EAN number series range. Only relevant when GtinSeriesMode is Range.",
+            "format": "int64",
+            "nullable": true
+          },
+          "gtinRangeTo": {
+            "type": "integer",
+            "description": "Upper bound of the GTIN/EAN number series range. Only relevant when GtinSeriesMode is Range.",
+            "format": "int64",
             "nullable": true
           },
           "itemImageUrlTemplate": {
@@ -18061,13 +16236,21 @@
             "type": "boolean",
             "description": "Parameter representing whether conversion to EAN20 should be enabled during import"
           },
+          "enableEan7388Conversion": {
+            "type": "boolean",
+            "description": "Parameter representing whether conversion of EAN7388 variable-price codes should be enabled"
+          },
           "manageStoreAssortment": {
             "type": "boolean",
             "description": "Parameter representing whether managing store assortment should be enabled"
           },
+          "enableCampaignValidationOnPriceDeletion": {
+            "type": "boolean",
+            "description": "Parameter representing whether campaign validation should be performed during price deletion"
+          },
           "createLabelsOnlyForItemsInStockWithinLastNumberOfDays": {
             "type": "integer",
-            "description": "Parameter representing whether to create labels only for items in stock within last number of days",
+            "description": "Number of days an item may be out of stock before label generation stops for it. Labels stop only once\r\nthe item is out of stock and its stock has been unchanged for this many days, so an item with stock on\r\nhand always keeps its labels. An item with no stock record counts as out of stock. 0 disables the check.",
             "format": "int32"
           },
           "pricerUrl": {
@@ -18113,11 +16296,28 @@
             ],
             "description": "Configuration for hidden item and price attributes",
             "nullable": true
+          },
+          "priceControl": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PriceControl"
+              }
+            ],
+            "description": "On/off settings for the three price-control mechanisms",
+            "nullable": true
+          },
+          "reservedPluRanges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReservedPluRange"
+            },
+            "description": "Numeric ranges reserved for central PLU values. An empty list means no PLU restriction applies.",
+            "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "Collection.1": {
+      "Collection": {
         "required": [
           "name"
         ],
@@ -18176,7 +16376,7 @@
         },
         "additionalProperties": false
       },
-      "Color.1": {
+      "Color": {
         "type": "object",
         "properties": {
           "id": {
@@ -18271,7 +16471,7 @@
           "brand": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/Brand.1"
+                "$ref": "#/components/schemas/Brand"
               }
             ],
             "nullable": true,
@@ -18553,33 +16753,6 @@
         },
         "additionalProperties": false
       },
-      "CopyPrice": {
-        "type": "object",
-        "properties": {
-          "targetItemIds": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "CorrelatedPrices": {
-        "type": "object",
-        "properties": {
-          "storePrices": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StorePrice.1"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "Country": {
         "type": "object",
         "properties": {
@@ -18633,7 +16806,7 @@
           "deliveryDate": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/DeliveryDate.1"
+                "$ref": "#/components/schemas/DeliveryDate"
               }
             ],
             "nullable": true
@@ -18641,7 +16814,7 @@
         },
         "additionalProperties": false
       },
-      "CreateItemList.1": {
+      "CreateItemList": {
         "type": "object",
         "properties": {
           "name": {
@@ -18662,20 +16835,6 @@
         },
         "additionalProperties": false
       },
-      "CreatedPrices": {
-        "type": "object",
-        "properties": {
-          "ids": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "DeleteDeliveryDatesRequest": {
         "type": "object",
         "properties": {
@@ -18690,26 +16849,7 @@
         },
         "additionalProperties": false
       },
-      "DeletePriceRequest": {
-        "type": "object",
-        "properties": {
-          "itemIds": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "nullable": true
-          },
-          "validToUtc": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "DeliveryDate.1": {
+      "DeliveryDate": {
         "type": "object",
         "properties": {
           "id": {
@@ -18911,72 +17051,12 @@
         },
         "additionalProperties": false
       },
-      "FieldSign": {
-        "enum": [
-          "Positive",
-          "Negative",
-          "None"
-        ],
-        "type": "string"
-      },
-      "FieldType": {
-        "enum": [
-          "ReadOnly",
-          "Input",
-          "Hidden"
-        ],
-        "type": "string"
-      },
       "FixItemIdentifierErrorsType": {
         "enum": [
           "UpdateExistingItems",
           "CreateNewItems"
         ],
         "type": "string"
-      },
-      "GetCorrelatedPricesRequest": {
-        "type": "object",
-        "properties": {
-          "storePriceId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "itemIds": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "GetPriceCountsRequest": {
-        "type": "object",
-        "properties": {
-          "priceType": {
-            "enum": [
-              "Ordinary",
-              "Campaign",
-              "Member"
-            ],
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PriceType.1"
-              }
-            ]
-          },
-          "itemIds": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
       },
       "GroupDetails": {
         "type": "object",
@@ -19039,26 +17119,6 @@
           },
           "alternativeItemGroup": {
             "type": "string",
-            "nullable": true
-          },
-          "calculationRulesetId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "defaultCalculationRuleset": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/CalculationRuleset"
-              }
-            ],
-            "nullable": true
-          },
-          "calculationRulesetDefaultValuesRows": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CalculationRulesetDefaultValuesRow"
-            },
             "nullable": true
           },
           "displayText": {
@@ -19145,6 +17205,13 @@
         ],
         "type": "string"
       },
+      "GtinSeriesMode": {
+        "enum": [
+          "Prefix",
+          "Range"
+        ],
+        "type": "string"
+      },
       "HiddenAttributes": {
         "type": "object",
         "properties": {
@@ -19173,6 +17240,9 @@
             "type": "boolean"
           },
           "bonus": {
+            "type": "boolean"
+          },
+          "itemOriginatingFrom": {
             "type": "boolean"
           }
         },
@@ -19270,6 +17340,11 @@
             "format": "date-time",
             "nullable": true
           },
+          "scheduledImportDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
           "approvalRuleset": {
             "enum": [
               "DefaultItem",
@@ -19332,7 +17407,7 @@
           "storeGroupType": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/StoreGroupType.1"
+                "$ref": "#/components/schemas/StoreGroupType"
               }
             ],
             "nullable": true
@@ -19463,7 +17538,7 @@
           "storeGroupType": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/StoreGroupType.1"
+                "$ref": "#/components/schemas/StoreGroupType"
               }
             ],
             "nullable": true
@@ -19604,23 +17679,11 @@
               }
             ]
           },
-          "errors": {
-            "type": "array",
-            "items": { },
-            "description": "This field is not serialized to JSON.\r\nMapping methods use it to create a query which can be translated to SQL.\r\nUse ItemService.Api.Contracts.PricatImport.ImportItem.ErrorList  property to obtain errors.",
-            "nullable": true
-          },
           "errorList": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ItemValidationError"
             },
-            "nullable": true
-          },
-          "warnings": {
-            "type": "array",
-            "items": { },
-            "description": "This field is not serialized to JSON.\r\nMapping methods use it to create a query which can be translated to SQL.\r\nUse ItemService.Api.Contracts.PricatImport.ImportItem.WarningList  property to obtain errors.",
             "nullable": true
           },
           "warningList": {
@@ -19797,7 +17860,7 @@
           "storeGroupType": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/StoreGroupType.1"
+                "$ref": "#/components/schemas/StoreGroupType"
               }
             ],
             "nullable": true
@@ -20083,7 +18146,7 @@
         "type": "object",
         "additionalProperties": false
       },
-      "ItemCategory.1": {
+      "ItemCategory": {
         "required": [
           "name"
         ],
@@ -20140,7 +18203,7 @@
         },
         "additionalProperties": false
       },
-      "ItemList.1": {
+      "ItemList": {
         "type": "object",
         "properties": {
           "id": {
@@ -20418,7 +18481,15 @@
           "CannotModifyDefaultIngredientQuantities",
           "FastLaneDoesNotSupportNewItems",
           "DefaultIngredientCannotBeDeleted",
-          "IngredientNumberRequiredForDeletion"
+          "IngredientNumberRequiredForDeletion",
+          "InvalidNutritionValue",
+          "InvalidAllergenValue",
+          "InvalidAgeGroupValue",
+          "AgeGroupRequiresActiveSubstance",
+          "SubSupplierItemNoAlreadyExistsOnDifferentItem",
+          "SubSupplierItemNoAlreadyFoundOnPreviousItemInFile",
+          "HighlightedTextNotFound",
+          "IngredientQuantityMustBeGreaterThanZero"
         ],
         "type": "string"
       },
@@ -20484,7 +18555,14 @@
           "SomeAllergensWillNotBeImported",
           "SomeNutritionWillNotBeImported",
           "MultipleIngredientsWithQuantityOne",
-          "IngredientToDeleteDoesNotExist"
+          "IngredientToDeleteDoesNotExist",
+          "RecommendedServiceCodeInvalid",
+          "RecommendedActionCodeRequired",
+          "RecommendedActionCodeNotValidForServiceCode",
+          "RecommendedLocationCodeNotValidForProfile",
+          "RecommendedServiceOnlyAllowedForProfile",
+          "PriceValidToExtendedDueToPromotion",
+          "FuturePriceWillSupersedeImportedPrice"
         ],
         "type": "string"
       },
@@ -20512,7 +18590,7 @@
         },
         "additionalProperties": false
       },
-      "MarketingCode.1": {
+      "MarketingCode": {
         "required": [
           "name"
         ],
@@ -20570,7 +18648,7 @@
         },
         "additionalProperties": false
       },
-      "MarketingExclusivity.1": {
+      "MarketingExclusivity": {
         "required": [
           "description",
           "name"
@@ -20629,7 +18707,7 @@
         },
         "additionalProperties": false
       },
-      "NonsaleType.1": {
+      "NonsaleType": {
         "required": [
           "description",
           "name"
@@ -20683,7 +18761,7 @@
         },
         "additionalProperties": false
       },
-      "Nutrition.1": {
+      "Nutrition": {
         "type": "object",
         "properties": {
           "id": {
@@ -20771,14 +18849,6 @@
         },
         "additionalProperties": false
       },
-      "OrderType": {
-        "enum": [
-          "PreOrder",
-          "Replenishment",
-          "Regular"
-        ],
-        "type": "string"
-      },
       "PackageCode": {
         "enum": [
           "CU",
@@ -20864,75 +18934,26 @@
         },
         "additionalProperties": false
       },
-      "PriceCalculation": {
+      "PriceControl": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
+          "franchisePriceControl": {
+            "type": "boolean",
+            "description": "Franchise stores approve central changes before they take effect. A central retail-price or assortment\r\nchange creates an approval item per franchise store; it takes effect at that store only after approval."
           },
-          "calculationRows": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CalculationRow"
-            },
-            "nullable": true
+          "wholesalePriceCascade": {
+            "type": "boolean",
+            "description": "Automatically pushes cost-side changes (wholesale/net price, supplier discount, freight and the\r\nrecalculated margin) from a profile or price zone down to its store prices. Retail prices are not\r\nchanged and no approval is created."
           },
-          "orderType": {
-            "enum": [
-              "PreOrder",
-              "Replenishment",
-              "Regular"
-            ],
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OrderType"
-              }
-            ]
-          },
-          "status": {
-            "enum": [
-              "Planned",
-              "Active",
-              "Expired"
-            ],
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Status"
-              }
-            ]
-          },
-          "wholesalePriceInSupplierCurrency": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
+          "keepMarginSuggestions": {
+            "type": "boolean",
+            "description": "When a profile's wholesale (cost) price changes without a retail change, creates a suggested retail\r\nprice that keeps the previous margin, for review. Removed if the retail price is changed."
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "On/off settings for the three price-control mechanisms of the price-suggestion job."
       },
-      "PriceCounts": {
-        "type": "object",
-        "properties": {
-          "itemPriceCounts": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "PriceType.1": {
-        "enum": [
-          "Ordinary",
-          "Campaign",
-          "Member"
-        ],
-        "type": "string"
-      },
-      "ProcurementRule.1": {
+      "ProcurementRule": {
         "required": [
           "description",
           "name"
@@ -21010,7 +19031,7 @@
         },
         "additionalProperties": false
       },
-      "ReplenishmentCode.1": {
+      "ReplenishmentCode": {
         "required": [
           "name"
         ],
@@ -21128,19 +19149,22 @@
         },
         "additionalProperties": false
       },
-      "RetailPriceCalculationRule": {
+      "ReservedPluRange": {
         "type": "object",
         "properties": {
-          "id": {
+          "from": {
             "type": "integer",
-            "format": "int32"
+            "description": "Inclusive lower bound.",
+            "format": "int64"
           },
-          "name": {
-            "type": "string",
-            "nullable": true
+          "to": {
+            "type": "integer",
+            "description": "Inclusive upper bound.",
+            "format": "int64"
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "A numeric range reserved for central PLU values. PLU values entered on items must fall outside every reserved range."
       },
       "RoundingAmountOperator": {
         "enum": [
@@ -21219,62 +19243,6 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "RowLevel": {
-        "enum": [
-          "Predefined",
-          "Custom"
-        ],
-        "type": "string"
-      },
-      "RowSign": {
-        "enum": [
-          "Plus",
-          "Minus"
-        ],
-        "type": "string"
-      },
-      "RowType": {
-        "enum": [
-          "Input",
-          "Summation",
-          "Calculated"
-        ],
-        "type": "string"
-      },
-      "RowValidator": {
-        "type": "object",
-        "properties": {
-          "percentMax": {
-            "type": "number",
-            "format": "double"
-          },
-          "percentMin": {
-            "type": "number",
-            "format": "double"
-          },
-          "valueMax": {
-            "type": "number",
-            "format": "double"
-          },
-          "valueMin": {
-            "type": "number",
-            "format": "double"
-          },
-          "forceSign": {
-            "enum": [
-              "Positive",
-              "Negative",
-              "None"
-            ],
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/FieldSign"
-              }
-            ]
           }
         },
         "additionalProperties": false
@@ -21850,15 +19818,7 @@
         },
         "additionalProperties": false
       },
-      "Severity": {
-        "enum": [
-          "Error",
-          "Warning",
-          "Info"
-        ],
-        "type": "string"
-      },
-      "Size.1": {
+      "Size": {
         "required": [
           "defaultDisplaySize",
           "name"
@@ -22071,14 +20031,6 @@
         },
         "additionalProperties": false
       },
-      "Status": {
-        "enum": [
-          "Planned",
-          "Active",
-          "Expired"
-        ],
-        "type": "string"
-      },
       "StoreDetails": {
         "type": "object",
         "properties": {
@@ -22141,7 +20093,7 @@
             ],
             "allOf": [
               {
-                "$ref": "#/components/schemas/StoreGroupType.1"
+                "$ref": "#/components/schemas/StoreGroupType"
               }
             ]
           },
@@ -22160,15 +20112,7 @@
         },
         "additionalProperties": false
       },
-      "StoreGroupLevel": {
-        "enum": [
-          "Profile",
-          "PriceZone",
-          "Store"
-        ],
-        "type": "string"
-      },
-      "StoreGroupType.1": {
+      "StoreGroupType": {
         "enum": [
           "Team",
           "Profile",
@@ -22179,279 +20123,7 @@
         ],
         "type": "string"
       },
-      "StorePrice.1": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "itemId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "correlationKey": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "calculationRuleSet": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/CalculationRuleset"
-              }
-            ],
-            "nullable": true
-          },
-          "storeGroupLevel": {
-            "enum": [
-              "Profile",
-              "PriceZone",
-              "Store"
-            ],
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StoreGroupLevel"
-              }
-            ]
-          },
-          "storeGroup": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StoreGroup"
-              }
-            ],
-            "nullable": true
-          },
-          "priceCalculation": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PriceCalculation"
-              }
-            ],
-            "nullable": true
-          },
-          "validFromUtc": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "validToUtc": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "supplierCurrencyCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "supplierCurrencyExchangeRate": {
-            "type": "number",
-            "format": "double"
-          },
-          "currencyCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "vatCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "isFixedPrice": {
-            "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
-      "StorePriceCalculationListRow": {
-        "type": "object",
-        "properties": {
-          "priceCalculationId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "itemId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "priceId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "orderType": {
-            "enum": [
-              "PreOrder",
-              "Replenishment",
-              "Regular"
-            ],
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OrderType"
-              }
-            ]
-          },
-          "status": {
-            "enum": [
-              "Planned",
-              "Active",
-              "Expired"
-            ],
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Status"
-              }
-            ]
-          },
-          "storeGroupLevel": {
-            "enum": [
-              "Profile",
-              "PriceZone",
-              "Store"
-            ],
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/StoreGroupLevel"
-              }
-            ]
-          },
-          "storeGroups": {
-            "type": "string",
-            "nullable": true
-          },
-          "storeGroupCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "storeGroupId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "currencyCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "calculationRuleSetId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "calculationRuleSetCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "wholesalePrice": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "netPrice": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "retailPriceExVat": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "retailPrice": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "supplierDiscount": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "recommendedRetailPrice": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "marginAmount": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "marginPercent": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "validFromUtc": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "validToUtc": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "createdBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "modifiedBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "modifiedDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "isFixedPrice": {
-            "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
-      "StorePriceDateValidationData": {
-        "type": "object",
-        "properties": {
-          "itemIds": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "nullable": true
-          },
-          "calculationRulesetId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "validFromUtc": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "validToUtc": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "storeGroupIds": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "nullable": true
-          },
-          "excludedPriceIds": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "TradingUnit.1": {
+      "TradingUnit": {
         "required": [
           "tradingUnitTexts"
         ],
@@ -22719,7 +20391,7 @@
         },
         "additionalProperties": false
       },
-      "UpdateItemList.1": {
+      "UpdateItemList": {
         "required": [
           "name"
         ],
@@ -22842,49 +20514,6 @@
         },
         "additionalProperties": false
       },
-      "ValidationFailure": {
-        "type": "object",
-        "properties": {
-          "propertyName": {
-            "type": "string",
-            "nullable": true
-          },
-          "errorMessage": {
-            "type": "string",
-            "nullable": true
-          },
-          "attemptedValue": {
-            "nullable": true
-          },
-          "customState": {
-            "nullable": true
-          },
-          "severity": {
-            "enum": [
-              "Error",
-              "Warning",
-              "Info"
-            ],
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Severity"
-              }
-            ]
-          },
-          "errorCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "formattedMessagePlaceholderValues": {
-            "type": "object",
-            "additionalProperties": {
-              "nullable": true
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "ValidationOptionsWithSelectedItems": {
         "type": "object",
         "properties": {
@@ -22901,38 +20530,6 @@
           }
         },
         "additionalProperties": false
-      },
-      "ValidationResult": {
-        "type": "object",
-        "properties": {
-          "isValid": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "errors": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ValidationFailure"
-            },
-            "nullable": true
-          },
-          "ruleSetsExecuted": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ValueType": {
-        "enum": [
-          "Percent",
-          "PercentDecimal",
-          "Amount"
-        ],
-        "type": "string"
       }
     },
     "securitySchemes": {
@@ -22946,6 +20543,122 @@
   "security": [
     {
       "Bearer": [ ]
+    }
+  ],
+  "tags": [
+    {
+      "name": "Activity"
+    },
+    {
+      "name": "AlternativeGroups"
+    },
+    {
+      "name": "BrandCategories"
+    },
+    {
+      "name": "Brands"
+    },
+    {
+      "name": "Classifications"
+    },
+    {
+      "name": "Collections"
+    },
+    {
+      "name": "Colors"
+    },
+    {
+      "name": "Concession"
+    },
+    {
+      "name": "ConcessionStores"
+    },
+    {
+      "name": "Configuration"
+    },
+    {
+      "name": "Countries"
+    },
+    {
+      "name": "DeliveryDateList"
+    },
+    {
+      "name": "ExcelExportTemplates"
+    },
+    {
+      "name": "FileExport"
+    },
+    {
+      "name": "Imports"
+    },
+    {
+      "name": "ItemCategories"
+    },
+    {
+      "name": "ItemLists"
+    },
+    {
+      "name": "ItemSegmentation"
+    },
+    {
+      "name": "ItemTypes"
+    },
+    {
+      "name": "MarketingCodes"
+    },
+    {
+      "name": "MarketingExclusivities"
+    },
+    {
+      "name": "NonsaleType"
+    },
+    {
+      "name": "Nutritions"
+    },
+    {
+      "name": "PlanningCodes"
+    },
+    {
+      "name": "ProcurementRules"
+    },
+    {
+      "name": "ReplenishmentCodes"
+    },
+    {
+      "name": "ReportCategories"
+    },
+    {
+      "name": "RoundingRecoveryRetailPrices"
+    },
+    {
+      "name": "SearchableColors"
+    },
+    {
+      "name": "SeasonCodes"
+    },
+    {
+      "name": "Seasons"
+    },
+    {
+      "name": "SerialNumberAttributes"
+    },
+    {
+      "name": "SerialNumberTypes"
+    },
+    {
+      "name": "ServiceLevels"
+    },
+    {
+      "name": "Sizes"
+    },
+    {
+      "name": "SizeTemplates"
+    },
+    {
+      "name": "StoreGroups"
+    },
+    {
+      "name": "TradingUnits"
     }
   ]
 }
