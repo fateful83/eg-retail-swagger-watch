@@ -2836,7 +2836,8 @@
           "RecommendedLocationCodeNotValidForProfile",
           "RecommendedServiceOnlyAllowedForProfile",
           "PriceValidToExtendedDueToPromotion",
-          "FuturePriceWillSupersedeImportedPrice"
+          "FuturePriceWillSupersedeImportedPrice",
+          "WholesalePriceAdjustedToNetPrice"
         ],
         "type": "string"
       },
