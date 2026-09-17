@@ -18489,7 +18489,9 @@
           "SubSupplierItemNoAlreadyExistsOnDifferentItem",
           "SubSupplierItemNoAlreadyFoundOnPreviousItemInFile",
           "HighlightedTextNotFound",
-          "IngredientQuantityMustBeGreaterThanZero"
+          "IngredientQuantityMustBeGreaterThanZero",
+          "GtinNotAllowedForLocalItem",
+          "GtinRangeExhausted"
         ],
         "type": "string"
       },
