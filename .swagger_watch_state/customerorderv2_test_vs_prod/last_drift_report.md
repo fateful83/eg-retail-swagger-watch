@@ -1,11 +1,11 @@
 # TEST vs PROD drift detected: CustomerOrderV2
 
-- Time: 2026-09-27T01:57:59Z
+- Time: 2026-09-27T10:53:42Z
 - Severity: breaking
 - TEST Swagger URL: https://customerorderv2service.egretail-test.cloud/swagger/v1/swagger.json
 - PROD Swagger URL: https://customerorderv2service.egretail.cloud/swagger/v1/swagger.json
-- TEST hash: `f1fd4fed8f621edd63e1e93347342d3cd8c52428b75648b0801ea776afceb551`
-- PROD hash: `00dd96f438b17b345ea51f33407610487cb2070d06d9c498a5258e4229909abb`
+- TEST hash: `d8f415e45a3f85a0dd007914edd0f7809ee06df725ea53d3e20dfc582f4b3089`
+- PROD hash: `60b683f304448b0a0fc10f03c0a539e3d1c2b5b231e60a681e098a8a8ef001f5`
 
 ## Summary
 - Only in TEST: 1
