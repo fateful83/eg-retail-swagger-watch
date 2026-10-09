@@ -18491,7 +18491,8 @@
           "HighlightedTextNotFound",
           "IngredientQuantityMustBeGreaterThanZero",
           "GtinNotAllowedForLocalItem",
-          "GtinRangeExhausted"
+          "GtinRangeExhausted",
+          "TaraCannotExceedWeight"
         ],
         "type": "string"
       },
