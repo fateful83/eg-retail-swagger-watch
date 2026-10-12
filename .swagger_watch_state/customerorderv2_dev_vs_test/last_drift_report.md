@@ -1,14 +1,14 @@
 # DEV vs TEST drift detected: CustomerOrderV2
 
-- Time: 2026-10-12T02:43:55Z
+- Time: 2026-10-12T13:36:46Z
 - Severity: breaking
 - DEV Swagger URL: https://customerorderv2service.egretail-dev.cloud/swagger/v1/swagger.json
 - TEST Swagger URL: https://customerorderv2service.egretail-test.cloud/swagger/v1/swagger.json
-- DEV hash: `c011a004f76c21ef538ad77a951d91ab544854c3e19856b6e9f95b65be238846`
-- TEST hash: `e1bf3ef16a638d48e82c83ac046443077975d2c8abc34df5a571b5a106d99f68`
+- DEV hash: `38eba9487310a0cd1a0b2085cc072d8b8dc392673a77ee4c9ae99cf0f476657b`
+- TEST hash: `4e36c70014cb2479213d18282a0717026050e492765fce7920a1d63e04d88cb6`
 
 ## Summary
-- Only in DEV: 19
+- Only in DEV: 20
 - Only in TEST: 0
 - Present in both but different: 7
 
@@ -22,6 +22,7 @@
 - GET /api/gateway/PickLists/{pickListId}
 - PATCH /api/gateway/Orders/drafts/{orderNumber}/submit
 - PATCH /api/gateway/Orders/drafts/{orderNumber}/undoDelete
+- PATCH /api/gateway/Orders/{orderNumber}/cancel
 - PATCH /api/gateway/Orders/{orderNumber}/delivery
 - PATCH /api/gateway/Orders/{orderNumber}/delivery/properties
 - PATCH /api/gateway/Orders/{orderNumber}/fulfillments/{fulfillmentOrderId}/tracking
