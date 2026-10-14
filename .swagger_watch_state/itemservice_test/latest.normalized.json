@@ -584,10 +584,6 @@
             "description": "Flag representing whether tenant uses model or non-model items.",
             "type": "boolean"
           },
-          "usePlanningCodes": {
-            "description": "Flag representing whether tenant uses planning codes or not.",
-            "type": "boolean"
-          },
           "useValuesPerProfile": {
             "description": "Flag representing whether tenant uses values per profile for Warranty Type and ID requirement or not.",
             "type": "boolean"
@@ -2766,7 +2762,15 @@
           "IngredientQuantityMustBeGreaterThanZero",
           "GtinNotAllowedForLocalItem",
           "GtinRangeExhausted",
-          "TaraCannotExceedWeight"
+          "TaraCannotExceedWeight",
+          "IncorrectStorePriceSignOnSupplierDiscount",
+          "IncorrectStorePriceSignOnFreight",
+          "IncorrectStorePriceSignOnRetailerKickback",
+          "IncorrectStorePriceSignOnLocalDiscount1",
+          "IncorrectStorePriceSignOnLocalDiscount2",
+          "IncorrectStorePriceSignOnCalculatedBreakage",
+          "IncorrectStorePriceSignOnCustoms",
+          "IncorrectStorePriceSignOnHandlingCosts"
         ],
         "type": "string"
       },

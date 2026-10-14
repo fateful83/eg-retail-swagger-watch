@@ -16144,10 +16144,6 @@
             "type": "boolean",
             "description": "Based on this flag external item number is generated or not (editible in UI)."
           },
-          "usePlanningCodes": {
-            "type": "boolean",
-            "description": "Flag representing whether tenant uses planning codes or not."
-          },
           "useModelItems": {
             "type": "boolean",
             "description": "Flag representing whether tenant uses model or non-model items."
@@ -18491,7 +18487,16 @@
           "HighlightedTextNotFound",
           "IngredientQuantityMustBeGreaterThanZero",
           "GtinNotAllowedForLocalItem",
-          "GtinRangeExhausted"
+          "GtinRangeExhausted",
+          "TaraCannotExceedWeight",
+          "IncorrectStorePriceSignOnSupplierDiscount",
+          "IncorrectStorePriceSignOnFreight",
+          "IncorrectStorePriceSignOnRetailerKickback",
+          "IncorrectStorePriceSignOnLocalDiscount1",
+          "IncorrectStorePriceSignOnLocalDiscount2",
+          "IncorrectStorePriceSignOnCalculatedBreakage",
+          "IncorrectStorePriceSignOnCustoms",
+          "IncorrectStorePriceSignOnHandlingCosts"
         ],
         "type": "string"
       },
