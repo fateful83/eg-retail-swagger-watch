@@ -14723,6 +14723,116 @@
         },
         "type": "object"
       },
+      "PosApi.UserService.Authenticate_Request": {
+        "additionalProperties": false,
+        "description": "Represents request for `Authenticate` method.",
+        "properties": {
+          "password": {
+            "description": "Password",
+            "nullable": true,
+            "type": "string"
+          },
+          "storeIdentificator": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Common.StoreIdentificator"
+              }
+            ],
+            "description": "The store's identifier.",
+            "nullable": true
+          },
+          "userName": {
+            "description": "Username",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "PosApi.UserService.Authenticate_Response": {
+        "additionalProperties": false,
+        "description": "Represents response for `Authenticate` method.",
+        "properties": {
+          "authenticated": {
+            "description": "True if Authentication is successfull, otherwise false",
+            "type": "boolean"
+          },
+          "user": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PosApi.UserService.User"
+              }
+            ],
+            "description": "User information",
+            "nullable": true
+          }
+        },
+        "type": "object"
+      },
+      "PosApi.UserService.CheckUserExists_Request": {
+        "additionalProperties": false,
+        "description": "Represents request for `CheckUserExists` method.",
+        "properties": {
+          "apiKey": {
+            "description": "Clients secret key.\r\nUsed for determining which tenant the client belongs to and to make sure the client is allowed to access the API",
+            "nullable": true,
+            "type": "string"
+          },
+          "storeIdentificator": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Common.StoreIdentificator"
+              }
+            ],
+            "description": "The store's identifier.\r\nWhen StoreIdentificator is specified together with APIKey, the APIKey must have AllowAnyStoreNumber=true unless it is the API key's own store, otherwise ApiKeyFault will be returned.",
+            "nullable": true
+          },
+          "userName": {
+            "description": "Username",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "PosApi.UserService.CheckUserExists_Response": {
+        "additionalProperties": false,
+        "description": "Represents response for `CheckUserExists` method.",
+        "properties": {
+          "userExists": {
+            "description": "True if the user exists on the specified store, otherwise false.\r\nUsers on the central store 9999 are treated as existing on every store.",
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "PosApi.UserService.User": {
+        "additionalProperties": false,
+        "description": "User information",
+        "properties": {
+          "cultureInfo": {
+            "description": "Gets or sets the users storenumber",
+            "nullable": true,
+            "type": "string"
+          },
+          "firstName": {
+            "description": "Gets or sets the users firstname",
+            "nullable": true,
+            "type": "string"
+          },
+          "lastName": {
+            "description": "Gets or sets the users lastname",
+            "nullable": true,
+            "type": "string"
+          },
+          "storeNumber": {
+            "description": "Gets or sets the users storenumber",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
       "PosApiBadRequestResponse_AbortPendingOperationErrorType": {
         "additionalProperties": false,
         "description": "Returned with most failed requests for the current version of POS API.",
@@ -23440,7 +23550,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-10-15T01:56:44.9062847Z",
+                    "startTime": "2026-10-15T15:49:21.4396634Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
@@ -23719,7 +23829,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-10-15T01:56:44.9062847Z",
+                    "startTime": "2026-10-15T15:49:21.4396634Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
@@ -23998,7 +24108,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-10-15T01:56:44.9062847Z",
+                    "startTime": "2026-10-15T15:49:21.4396634Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
@@ -35618,6 +35728,173 @@
         "summary": "SearchOnHoldReceipt",
         "tags": [
           "ReceiptOnHold"
+        ]
+      }
+    },
+    "/api/UserService/Authenticate": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/*+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/PosApi.UserService.Authenticate_Request"
+                  }
+                ],
+                "description": "Represents request for `Authenticate` method."
+              }
+            },
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/PosApi.UserService.Authenticate_Request"
+                  }
+                ],
+                "description": "Represents request for `Authenticate` method."
+              }
+            },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/PosApi.UserService.Authenticate_Request"
+                  }
+                ],
+                "description": "Represents request for `Authenticate` method."
+              }
+            },
+            "text/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/PosApi.UserService.Authenticate_Request"
+                  }
+                ],
+                "description": "Represents request for `Authenticate` method."
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApi.UserService.Authenticate_Response"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApi.UserService.Authenticate_Response"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApi.UserService.Authenticate_Response"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "summary": "Authenticate user",
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
+    "/api/UserService/CheckUserExists": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/*+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/PosApi.UserService.CheckUserExists_Request"
+                  }
+                ],
+                "description": "Represents request for `CheckUserExists` method."
+              }
+            },
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/PosApi.UserService.CheckUserExists_Request"
+                  }
+                ],
+                "description": "Represents request for `CheckUserExists` method."
+              }
+            },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/PosApi.UserService.CheckUserExists_Request"
+                  }
+                ],
+                "description": "Represents request for `CheckUserExists` method."
+              }
+            },
+            "text/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/PosApi.UserService.CheckUserExists_Request"
+                  }
+                ],
+                "description": "Represents request for `CheckUserExists` method."
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApi.UserService.CheckUserExists_Response"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApi.UserService.CheckUserExists_Response"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApi.UserService.CheckUserExists_Response"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "summary": "Check if a user exists on the given store. The user's password is not validated.",
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
+    "/api/UserService/PingHealth": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "summary": "Can be used to check that the endpoint is up and running",
+        "tags": [
+          "UserService"
         ]
       }
     },
