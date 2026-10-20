@@ -1,11 +1,11 @@
 # DEV vs TEST drift detected: POS API
 
-- Time: 2026-10-20T15:52:46Z
+- Time: 2026-10-20T20:56:37Z
 - Severity: non_breaking
 - DEV Swagger URL: https://posapi.egretail-dev.cloud/swagger/v1/swagger.json
 - TEST Swagger URL: https://posapi.egretail-test.cloud/swagger/v1/swagger.json
-- DEV hash: `9f65afaed41188812a717d61d2ee149aaeeb71ebdaf635825d2e1c7c7da1ddfe`
-- TEST hash: `1b4c65a09c5b1cccea98382fbfcff9b7d3c81d9748eda202970ad17115817aa2`
+- DEV hash: `39c04742fb5068420c6fa6bfb74b0f05a334b08960d37cf2dc7013972a9f0f27`
+- TEST hash: `607da82d86f3c2bb394d878116bf5bec2c7bd634f05c6f468bdda4a536aa19d8`
 
 ## Summary
 - Only in DEV: 3
