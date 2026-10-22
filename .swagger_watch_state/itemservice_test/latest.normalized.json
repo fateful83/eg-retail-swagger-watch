@@ -2770,7 +2770,8 @@
           "IncorrectStorePriceSignOnLocalDiscount2",
           "IncorrectStorePriceSignOnCalculatedBreakage",
           "IncorrectStorePriceSignOnCustoms",
-          "IncorrectStorePriceSignOnHandlingCosts"
+          "IncorrectStorePriceSignOnHandlingCosts",
+          "GtinWithinReservedRange"
         ],
         "type": "string"
       },
