@@ -4852,11 +4852,6 @@
             "format": "double",
             "type": "number"
           },
-          "saleTotalRoundedForCash": {
-            "description": "Sale total of the cart rounded for cash payment",
-            "format": "double",
-            "type": "number"
-          },
           "saletotalAmount": {
             "description": "Subtotal of the cart inclusive VAT. Rounded to 2 decimals.",
             "format": "double",
@@ -23555,7 +23550,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-10-26T21:57:24.4252406Z",
+                    "startTime": "2026-10-25T10:13:38.9150888Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
@@ -23834,7 +23829,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-10-26T21:57:24.4252406Z",
+                    "startTime": "2026-10-25T10:13:38.9150888Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
@@ -24113,7 +24108,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-10-26T21:57:24.4252406Z",
+                    "startTime": "2026-10-25T10:13:38.9150888Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
