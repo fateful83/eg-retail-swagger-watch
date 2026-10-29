@@ -1,11 +1,11 @@
 # Swagger/OpenAPI change detected: ItemService [PROD]
 
-- Time: 2026-10-29T02:58:47Z
-- Fetch completed at: 2026-10-29T02:58:47Z
-- Fetch duration ms: 489
+- Time: 2026-10-29T11:50:33Z
+- Fetch completed at: 2026-10-29T11:50:33Z
+- Fetch duration ms: 608
 - Swagger URL: https://itemservice.egretail.cloud/swagger/v1/swagger.json
-- Previous hash: `0bb630280b00ffc6d939deec5346845a52123dc3e66229acb1bb8a055599ae8b`
-- Current hash: `7cc7f662bff0104087e388cb70dde021c8b5a87c81d100f0d8958451c82177b7`
+- Previous hash: `7cc7f662bff0104087e388cb70dde021c8b5a87c81d100f0d8958451c82177b7`
+- Current hash: `0bb630280b00ffc6d939deec5346845a52123dc3e66229acb1bb8a055599ae8b`
 
 ## Summary
 - Status: breaking
