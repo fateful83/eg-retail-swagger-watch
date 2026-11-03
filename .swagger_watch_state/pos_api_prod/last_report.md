@@ -1,38 +1,10 @@
-# Swagger/OpenAPI change detected: POS API [PROD]
+# Documentation-only change detected: POS API [PROD]
 
-- Time: 2026-11-03T13:04:06Z
-- Fetch completed at: 2026-11-03T13:04:06Z
-- Fetch duration ms: 7373
+- Time: 2026-11-03T22:37:30Z
+- Fetch completed at: 2026-11-03T22:37:30Z
+- Fetch duration ms: 4429
 - Swagger URL: https://posapi.egretail.cloud/swagger/v1/swagger.json
-- Previous hash: `589e8a4ba1e59a9621a76bee9990b4c16a245deaf839e97feb55911cc15fce68`
-- Current hash: `21dfbd33e73ca8fa670869e1a256af476eeb0e78485e5ae538074e22e9f54f47`
+- Previous hash: `21dfbd33e73ca8fa670869e1a256af476eeb0e78485e5ae538074e22e9f54f47`
+- Current hash: `67a7c71e6881e8330fbafd7d650438ee5e4dd12cbcdc83632364e5eb115196aa`
 
-## Summary
-- Status: non_breaking
-- Added operations: 3
-- Removed operations: 0
-- Changed operations: 0
-- Breaking removed operations: 0
-- Breaking changed operations: 0
-- Non-breaking changed operations: 0
-
-## Added
-- GET /api/UserService/PingHealth
-- POST /api/UserService/Authenticate
-- POST /api/UserService/CheckUserExists
-
-## Removed
-- None
-
-## Changed
-- None
-
-## Breaking classification
-- Removed operations: 0
-- None
-
-- Breaking changed operations: 0
-- None
-
-- Non-breaking changed operations: 0
-- None
+No contract-level API changes were detected.
