@@ -1,16 +1,16 @@
 # DEV vs TEST drift detected: CustomerOrderV2
 
-- Time: 2026-11-03T00:05:42Z
+- Time: 2026-11-03T13:03:57Z
 - Severity: breaking
 - DEV Swagger URL: https://customerorderv2service.egretail-dev.cloud/swagger/v1/swagger.json
 - TEST Swagger URL: https://customerorderv2service.egretail-test.cloud/swagger/v1/swagger.json
-- DEV hash: `7d41f57348e8a0b654d782d3af0348b7e62e00e589ee4dbdafd2cb4aab4c35eb`
-- TEST hash: `b35b50210cf1039134bf8a35becef8d522fc5bb02ab5aeff326bd008f36e9c80`
+- DEV hash: `bf051ba5aa5d48fb6ca4fd4f3f7cf9e3c987a321c88c65e28b2d04f7a8e94742`
+- TEST hash: `87d66239bb07d4b05e376f7e53fb7842da84374bc445fac3a87b1b9deba13f47`
 
 ## Summary
 - Only in DEV: 25
 - Only in TEST: 0
-- Present in both but different: 7
+- Present in both but different: 8
 
 ## Only in DEV
 - DELETE /api/gateway/Orders/drafts/{orderNumber}
@@ -50,3 +50,4 @@
 - POST /api/gateway/ServiceOrders/{storeNumber}/{orderNumber}/payment
 - PUT /api/gateway/Orders
 - PUT /api/gateway/Orders/{orderNumber}/lines
+- PUT /api/gateway/Orders/{orderNumber}/lines/{lineNo}/discount
