@@ -1,10 +1,10 @@
 # Documentation-only change detected: POS API [PROD]
 
-- Time: 2026-11-05T22:57:23Z
-- Fetch completed at: 2026-11-05T22:57:23Z
-- Fetch duration ms: 5760
+- Time: 2026-11-06T03:47:05Z
+- Fetch completed at: 2026-11-06T03:47:04Z
+- Fetch duration ms: 6390
 - Swagger URL: https://posapi.egretail.cloud/swagger/v1/swagger.json
-- Previous hash: `99bfbd2cb8e346a5e8bd151b40f469cf86651d446f3651b2c52f1b65f98a59f5`
-- Current hash: `76c721f9f9c787b21cbdca1e921f1aa82619058348638c0232c89e4cb7de061d`
+- Previous hash: `76c721f9f9c787b21cbdca1e921f1aa82619058348638c0232c89e4cb7de061d`
+- Current hash: `d6416c611f5e3ee8fea769fd94965f543ed902b5a7ad643ac92da33cfb305711`
 
 No contract-level API changes were detected.
