@@ -186,7 +186,7 @@
         ],
         "type": "string"
       },
-      "Brand": {
+      "Brand.1": {
         "additionalProperties": false,
         "properties": {
           "brandCategoryCode": {
@@ -591,66 +591,7 @@
         },
         "type": "object"
       },
-      "Collection": {
-        "additionalProperties": false,
-        "properties": {
-          "code": {
-            "description": "A unique code of the collection.",
-            "nullable": true,
-            "type": "string"
-          },
-          "createdBy": {
-            "nullable": true,
-            "type": "string"
-          },
-          "createdDate": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "maxLength": 255,
-            "nullable": true,
-            "type": "string"
-          },
-          "displayText": {
-            "nullable": true,
-            "readOnly": true,
-            "type": "string"
-          },
-          "id": {
-            "format": "int32",
-            "readOnly": true,
-            "type": "integer"
-          },
-          "inactive": {
-            "readOnly": true,
-            "type": "boolean"
-          },
-          "isDefault": {
-            "readOnly": true,
-            "type": "boolean"
-          },
-          "modifiedBy": {
-            "nullable": true,
-            "type": "string"
-          },
-          "modifiedDate": {
-            "format": "date-time",
-            "nullable": true,
-            "type": "string"
-          },
-          "name": {
-            "maxLength": 50,
-            "minLength": 1,
-            "type": "string"
-          }
-        },
-        "required": [
-          "name"
-        ],
-        "type": "object"
-      },
-      "Color": {
+      "Color.1": {
         "additionalProperties": false,
         "properties": {
           "colorGroup": {
@@ -736,7 +677,7 @@
           "brand": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/Brand"
+                "$ref": "#/components/schemas/Brand.1"
               }
             ],
             "nullable": true,
@@ -1066,7 +1007,7 @@
         },
         "type": "object"
       },
-      "CreateItemList": {
+      "CreateItemList.1": {
         "additionalProperties": false,
         "properties": {
           "description": {
@@ -1540,7 +1481,7 @@
           "storeGroupType": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/StoreGroupType"
+                "$ref": "#/components/schemas/StoreGroupType.1"
               }
             ],
             "nullable": true
@@ -1685,7 +1626,7 @@
           "storeGroupType": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/StoreGroupType"
+                "$ref": "#/components/schemas/StoreGroupType.1"
               }
             ],
             "nullable": true
@@ -2126,7 +2067,7 @@
           "storeGroupType": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/StoreGroupType"
+                "$ref": "#/components/schemas/StoreGroupType.1"
               }
             ],
             "nullable": true
@@ -2286,7 +2227,7 @@
         "additionalProperties": false,
         "type": "object"
       },
-      "ItemCategory": {
+      "ItemCategory.1": {
         "additionalProperties": false,
         "properties": {
           "code": {
@@ -2343,7 +2284,7 @@
         ],
         "type": "object"
       },
-      "ItemList": {
+      "ItemList.1": {
         "additionalProperties": false,
         "properties": {
           "count": {
@@ -2753,66 +2694,7 @@
         },
         "type": "object"
       },
-      "MarketingExclusivity": {
-        "additionalProperties": false,
-        "properties": {
-          "code": {
-            "description": "A unique code of the marketing exclusivity.",
-            "nullable": true,
-            "type": "string"
-          },
-          "createdBy": {
-            "nullable": true,
-            "type": "string"
-          },
-          "createdDate": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "maxLength": 255,
-            "type": "string"
-          },
-          "displayText": {
-            "nullable": true,
-            "readOnly": true,
-            "type": "string"
-          },
-          "id": {
-            "format": "int32",
-            "readOnly": true,
-            "type": "integer"
-          },
-          "inactive": {
-            "readOnly": true,
-            "type": "boolean"
-          },
-          "isDefault": {
-            "readOnly": true,
-            "type": "boolean"
-          },
-          "modifiedBy": {
-            "nullable": true,
-            "type": "string"
-          },
-          "modifiedDate": {
-            "format": "date-time",
-            "nullable": true,
-            "type": "string"
-          },
-          "name": {
-            "maxLength": 50,
-            "minLength": 1,
-            "type": "string"
-          }
-        },
-        "required": [
-          "description",
-          "name"
-        ],
-        "type": "object"
-      },
-      "NonsaleType": {
+      "NonsaleType.1": {
         "additionalProperties": false,
         "properties": {
           "code": {
@@ -2866,7 +2748,7 @@
         ],
         "type": "object"
       },
-      "Nutrition": {
+      "Nutrition.1": {
         "additionalProperties": false,
         "properties": {
           "code": {
@@ -2980,7 +2862,7 @@
         },
         "type": "object"
       },
-      "ProcurementRule": {
+      "ProcurementRule.1": {
         "additionalProperties": false,
         "properties": {
           "code": {
@@ -3058,7 +2940,7 @@
         },
         "type": "object"
       },
-      "ReplenishmentCode": {
+      "ReplenishmentCode.1": {
         "additionalProperties": false,
         "properties": {
           "code": {
@@ -3777,75 +3659,7 @@
         ],
         "type": "object"
       },
-      "ServiceLevel": {
-        "additionalProperties": false,
-        "properties": {
-          "code": {
-            "nullable": true,
-            "type": "string"
-          },
-          "createdBy": {
-            "nullable": true,
-            "type": "string"
-          },
-          "createdDate": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "maxLength": 255,
-            "type": "string"
-          },
-          "displayText": {
-            "nullable": true,
-            "readOnly": true,
-            "type": "string"
-          },
-          "id": {
-            "format": "int32",
-            "readOnly": true,
-            "type": "integer"
-          },
-          "inactive": {
-            "readOnly": true,
-            "type": "boolean"
-          },
-          "isDefault": {
-            "readOnly": true,
-            "type": "boolean"
-          },
-          "isDeleted": {
-            "readOnly": true,
-            "type": "boolean"
-          },
-          "modifiedBy": {
-            "nullable": true,
-            "type": "string"
-          },
-          "modifiedDate": {
-            "format": "date-time",
-            "nullable": true,
-            "type": "string"
-          },
-          "name": {
-            "maxLength": 50,
-            "minLength": 1,
-            "type": "string"
-          },
-          "serviceLevelPercent": {
-            "format": "double",
-            "maximum": 100,
-            "minimum": 0.5,
-            "type": "number"
-          }
-        },
-        "required": [
-          "description",
-          "name"
-        ],
-        "type": "object"
-      },
-      "Size": {
+      "Size.1": {
         "additionalProperties": false,
         "properties": {
           "createdBy": {
@@ -4124,7 +3938,7 @@
           "storeGroupType": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/StoreGroupType"
+                "$ref": "#/components/schemas/StoreGroupType.1"
               }
             ],
             "enum": [
@@ -4139,7 +3953,7 @@
         },
         "type": "object"
       },
-      "StoreGroupType": {
+      "StoreGroupType.1": {
         "enum": [
           "Team",
           "Profile",
@@ -4150,7 +3964,7 @@
         ],
         "type": "string"
       },
-      "TradingUnit": {
+      "TradingUnit.1": {
         "additionalProperties": false,
         "properties": {
           "createdBy": {
@@ -4396,7 +4210,7 @@
         ],
         "type": "object"
       },
-      "UpdateItemList": {
+      "UpdateItemList.1": {
         "additionalProperties": false,
         "properties": {
           "description": {
@@ -5337,7 +5151,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Brand"
+                    "$ref": "#/components/schemas/Brand.1"
                   },
                   "type": "array"
                 }
@@ -5345,7 +5159,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Brand"
+                    "$ref": "#/components/schemas/Brand.1"
                   },
                   "type": "array"
                 }
@@ -5353,7 +5167,7 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Brand"
+                    "$ref": "#/components/schemas/Brand.1"
                   },
                   "type": "array"
                 }
@@ -5385,7 +5199,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand"
+                    "$ref": "#/components/schemas/Brand.1"
                   }
                 ]
               }
@@ -5394,7 +5208,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand"
+                    "$ref": "#/components/schemas/Brand.1"
                   }
                 ]
               }
@@ -5403,7 +5217,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand"
+                    "$ref": "#/components/schemas/Brand.1"
                   }
                 ]
               }
@@ -5478,17 +5292,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Brand"
+                  "$ref": "#/components/schemas/Brand.1"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Brand"
+                  "$ref": "#/components/schemas/Brand.1"
                 }
               },
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Brand"
+                  "$ref": "#/components/schemas/Brand.1"
                 }
               }
             },
@@ -5527,7 +5341,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand"
+                    "$ref": "#/components/schemas/Brand.1"
                   }
                 ]
               }
@@ -5536,7 +5350,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand"
+                    "$ref": "#/components/schemas/Brand.1"
                   }
                 ]
               }
@@ -5545,7 +5359,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand"
+                    "$ref": "#/components/schemas/Brand.1"
                   }
                 ]
               }
@@ -6094,422 +5908,6 @@
         ]
       }
     },
-    "/api/Collections": {
-      "get": {
-        "parameters": [
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          },
-          {
-            "description": "Skips the first n results",
-            "in": "query",
-            "name": "$skip",
-            "schema": {
-              "format": "int32",
-              "type": "number"
-            }
-          },
-          {
-            "description": "Returns the first n results",
-            "in": "query",
-            "name": "$top",
-            "schema": {
-              "format": "int32",
-              "type": "number"
-            }
-          },
-          {
-            "description": "Filters the results using oData Notation",
-            "in": "query",
-            "name": "$filter",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Orders the results by the fields listed",
-            "in": "query",
-            "name": "$orderby",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/Collection"
-                  },
-                  "type": "array"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/Collection"
-                  },
-                  "type": "array"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/Collection"
-                  },
-                  "type": "array"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "tags": [
-          "Collections"
-        ]
-      },
-      "post": {
-        "parameters": [
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              }
-            },
-            "description": "OK"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "Collections"
-        ]
-      }
-    },
-    "/api/Collections/{id}": {
-      "delete": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "Collections"
-        ]
-      },
-      "get": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Collection"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Collection"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/Collection"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "tags": [
-          "Collections"
-        ]
-      },
-      "put": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "Collections"
-        ]
-      }
-    },
-    "/api/Collections/{id}/ToggleIsActive": {
-      "post": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "Collections"
-        ]
-      }
-    },
-    "/api/Collections/{id}/ToggleIsDefault": {
-      "post": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "Collections"
-        ]
-      }
-    },
     "/api/Colors/upsertByName": {
       "post": {
         "parameters": [
@@ -6566,7 +5964,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Color"
+                    "$ref": "#/components/schemas/Color.1"
                   },
                   "type": "array"
                 }
@@ -6574,7 +5972,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Color"
+                    "$ref": "#/components/schemas/Color.1"
                   },
                   "type": "array"
                 }
@@ -6582,7 +5980,7 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Color"
+                    "$ref": "#/components/schemas/Color.1"
                   },
                   "type": "array"
                 }
@@ -10443,7 +9841,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ItemCategory"
+                    "$ref": "#/components/schemas/ItemCategory.1"
                   },
                   "type": "array"
                 }
@@ -10451,7 +9849,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ItemCategory"
+                    "$ref": "#/components/schemas/ItemCategory.1"
                   },
                   "type": "array"
                 }
@@ -10459,7 +9857,7 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ItemCategory"
+                    "$ref": "#/components/schemas/ItemCategory.1"
                   },
                   "type": "array"
                 }
@@ -10491,7 +9889,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory"
+                    "$ref": "#/components/schemas/ItemCategory.1"
                   }
                 ]
               }
@@ -10500,7 +9898,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory"
+                    "$ref": "#/components/schemas/ItemCategory.1"
                   }
                 ]
               }
@@ -10509,7 +9907,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory"
+                    "$ref": "#/components/schemas/ItemCategory.1"
                   }
                 ]
               }
@@ -10625,17 +10023,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemCategory"
+                  "$ref": "#/components/schemas/ItemCategory.1"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemCategory"
+                  "$ref": "#/components/schemas/ItemCategory.1"
                 }
               },
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemCategory"
+                  "$ref": "#/components/schemas/ItemCategory.1"
                 }
               }
             },
@@ -10674,7 +10072,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory"
+                    "$ref": "#/components/schemas/ItemCategory.1"
                   }
                 ]
               }
@@ -10683,7 +10081,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory"
+                    "$ref": "#/components/schemas/ItemCategory.1"
                   }
                 ]
               }
@@ -10692,7 +10090,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory"
+                    "$ref": "#/components/schemas/ItemCategory.1"
                   }
                 ]
               }
@@ -10859,7 +10257,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ItemList"
+                    "$ref": "#/components/schemas/ItemList.1"
                   },
                   "type": "array"
                 }
@@ -10867,7 +10265,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ItemList"
+                    "$ref": "#/components/schemas/ItemList.1"
                   },
                   "type": "array"
                 }
@@ -10875,7 +10273,7 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ItemList"
+                    "$ref": "#/components/schemas/ItemList.1"
                   },
                   "type": "array"
                 }
@@ -10907,7 +10305,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/CreateItemList"
+                    "$ref": "#/components/schemas/CreateItemList.1"
                   }
                 ]
               }
@@ -10916,7 +10314,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/CreateItemList"
+                    "$ref": "#/components/schemas/CreateItemList.1"
                   }
                 ]
               }
@@ -10925,7 +10323,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/CreateItemList"
+                    "$ref": "#/components/schemas/CreateItemList.1"
                   }
                 ]
               }
@@ -11042,7 +10440,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/UpdateItemList"
+                    "$ref": "#/components/schemas/UpdateItemList.1"
                   }
                 ]
               }
@@ -11051,7 +10449,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/UpdateItemList"
+                    "$ref": "#/components/schemas/UpdateItemList.1"
                   }
                 ]
               }
@@ -11060,7 +10458,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/UpdateItemList"
+                    "$ref": "#/components/schemas/UpdateItemList.1"
                   }
                 ]
               }
@@ -12172,381 +11570,6 @@
         ]
       }
     },
-    "/api/MarketingExclusivities": {
-      "get": {
-        "parameters": [
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          },
-          {
-            "description": "Skips the first n results",
-            "in": "query",
-            "name": "$skip",
-            "schema": {
-              "format": "int32",
-              "type": "number"
-            }
-          },
-          {
-            "description": "Returns the first n results",
-            "in": "query",
-            "name": "$top",
-            "schema": {
-              "format": "int32",
-              "type": "number"
-            }
-          },
-          {
-            "description": "Filters the results using oData Notation",
-            "in": "query",
-            "name": "$filter",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Orders the results by the fields listed",
-            "in": "query",
-            "name": "$orderby",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
-                  },
-                  "type": "array"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
-                  },
-                  "type": "array"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
-                  },
-                  "type": "array"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "tags": [
-          "MarketingExclusivities"
-        ]
-      },
-      "post": {
-        "parameters": [
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              }
-            },
-            "description": "OK"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "MarketingExclusivities"
-        ]
-      }
-    },
-    "/api/MarketingExclusivities/{id}": {
-      "get": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MarketingExclusivity"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MarketingExclusivity"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/MarketingExclusivity"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "tags": [
-          "MarketingExclusivities"
-        ]
-      },
-      "put": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "MarketingExclusivities"
-        ]
-      }
-    },
-    "/api/MarketingExclusivities/{id}/ToggleIsActive": {
-      "post": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "MarketingExclusivities"
-        ]
-      }
-    },
-    "/api/MarketingExclusivities/{id}/ToggleIsDefault": {
-      "post": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "MarketingExclusivities"
-        ]
-      }
-    },
     "/api/NonsaleType": {
       "get": {
         "parameters": [
@@ -12601,7 +11624,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/NonsaleType"
+                    "$ref": "#/components/schemas/NonsaleType.1"
                   },
                   "type": "array"
                 }
@@ -12609,7 +11632,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/NonsaleType"
+                    "$ref": "#/components/schemas/NonsaleType.1"
                   },
                   "type": "array"
                 }
@@ -12617,7 +11640,7 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/NonsaleType"
+                    "$ref": "#/components/schemas/NonsaleType.1"
                   },
                   "type": "array"
                 }
@@ -12649,7 +11672,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType"
+                    "$ref": "#/components/schemas/NonsaleType.1"
                   }
                 ]
               }
@@ -12658,7 +11681,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType"
+                    "$ref": "#/components/schemas/NonsaleType.1"
                   }
                 ]
               }
@@ -12667,7 +11690,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType"
+                    "$ref": "#/components/schemas/NonsaleType.1"
                   }
                 ]
               }
@@ -12743,7 +11766,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType"
+                    "$ref": "#/components/schemas/NonsaleType.1"
                   }
                 ]
               }
@@ -12752,7 +11775,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType"
+                    "$ref": "#/components/schemas/NonsaleType.1"
                   }
                 ]
               }
@@ -12761,7 +11784,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType"
+                    "$ref": "#/components/schemas/NonsaleType.1"
                   }
                 ]
               }
@@ -12885,7 +11908,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Nutrition"
+                    "$ref": "#/components/schemas/Nutrition.1"
                   },
                   "type": "array"
                 }
@@ -12893,7 +11916,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Nutrition"
+                    "$ref": "#/components/schemas/Nutrition.1"
                   },
                   "type": "array"
                 }
@@ -12901,7 +11924,7 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Nutrition"
+                    "$ref": "#/components/schemas/Nutrition.1"
                   },
                   "type": "array"
                 }
@@ -13217,7 +12240,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ProcurementRule"
+                    "$ref": "#/components/schemas/ProcurementRule.1"
                   },
                   "type": "array"
                 }
@@ -13225,7 +12248,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ProcurementRule"
+                    "$ref": "#/components/schemas/ProcurementRule.1"
                   },
                   "type": "array"
                 }
@@ -13233,7 +12256,7 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ProcurementRule"
+                    "$ref": "#/components/schemas/ProcurementRule.1"
                   },
                   "type": "array"
                 }
@@ -13265,7 +12288,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule"
+                    "$ref": "#/components/schemas/ProcurementRule.1"
                   }
                 ]
               }
@@ -13274,7 +12297,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule"
+                    "$ref": "#/components/schemas/ProcurementRule.1"
                   }
                 ]
               }
@@ -13283,7 +12306,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule"
+                    "$ref": "#/components/schemas/ProcurementRule.1"
                   }
                 ]
               }
@@ -13399,17 +12422,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProcurementRule"
+                  "$ref": "#/components/schemas/ProcurementRule.1"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProcurementRule"
+                  "$ref": "#/components/schemas/ProcurementRule.1"
                 }
               },
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProcurementRule"
+                  "$ref": "#/components/schemas/ProcurementRule.1"
                 }
               }
             },
@@ -13448,7 +12471,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule"
+                    "$ref": "#/components/schemas/ProcurementRule.1"
                   }
                 ]
               }
@@ -13457,7 +12480,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule"
+                    "$ref": "#/components/schemas/ProcurementRule.1"
                   }
                 ]
               }
@@ -13466,7 +12489,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule"
+                    "$ref": "#/components/schemas/ProcurementRule.1"
                   }
                 ]
               }
@@ -13633,7 +12656,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ReplenishmentCode"
+                    "$ref": "#/components/schemas/ReplenishmentCode.1"
                   },
                   "type": "array"
                 }
@@ -13641,7 +12664,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ReplenishmentCode"
+                    "$ref": "#/components/schemas/ReplenishmentCode.1"
                   },
                   "type": "array"
                 }
@@ -13649,7 +12672,7 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/ReplenishmentCode"
+                    "$ref": "#/components/schemas/ReplenishmentCode.1"
                   },
                   "type": "array"
                 }
@@ -13681,7 +12704,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode"
+                    "$ref": "#/components/schemas/ReplenishmentCode.1"
                   }
                 ]
               }
@@ -13690,7 +12713,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode"
+                    "$ref": "#/components/schemas/ReplenishmentCode.1"
                   }
                 ]
               }
@@ -13699,7 +12722,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode"
+                    "$ref": "#/components/schemas/ReplenishmentCode.1"
                   }
                 ]
               }
@@ -13815,17 +12838,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReplenishmentCode"
+                  "$ref": "#/components/schemas/ReplenishmentCode.1"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReplenishmentCode"
+                  "$ref": "#/components/schemas/ReplenishmentCode.1"
                 }
               },
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReplenishmentCode"
+                  "$ref": "#/components/schemas/ReplenishmentCode.1"
                 }
               }
             },
@@ -13864,7 +12887,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode"
+                    "$ref": "#/components/schemas/ReplenishmentCode.1"
                   }
                 ]
               }
@@ -13873,7 +12896,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode"
+                    "$ref": "#/components/schemas/ReplenishmentCode.1"
                   }
                 ]
               }
@@ -13882,7 +12905,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode"
+                    "$ref": "#/components/schemas/ReplenishmentCode.1"
                   }
                 ]
               }
@@ -17453,422 +16476,6 @@
         ]
       }
     },
-    "/api/ServiceLevels": {
-      "get": {
-        "parameters": [
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          },
-          {
-            "description": "Skips the first n results",
-            "in": "query",
-            "name": "$skip",
-            "schema": {
-              "format": "int32",
-              "type": "number"
-            }
-          },
-          {
-            "description": "Returns the first n results",
-            "in": "query",
-            "name": "$top",
-            "schema": {
-              "format": "int32",
-              "type": "number"
-            }
-          },
-          {
-            "description": "Filters the results using oData Notation",
-            "in": "query",
-            "name": "$filter",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Orders the results by the fields listed",
-            "in": "query",
-            "name": "$orderby",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  },
-                  "type": "array"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  },
-                  "type": "array"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  },
-                  "type": "array"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "tags": [
-          "ServiceLevels"
-        ]
-      },
-      "post": {
-        "parameters": [
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              }
-            },
-            "description": "OK"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "ServiceLevels"
-        ]
-      }
-    },
-    "/api/ServiceLevels/{id}": {
-      "delete": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "ServiceLevels"
-        ]
-      },
-      "get": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ServiceLevel"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ServiceLevel"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ServiceLevel"
-                }
-              }
-            },
-            "description": "OK"
-          }
-        },
-        "tags": [
-          "ServiceLevels"
-        ]
-      },
-      "put": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "ServiceLevels"
-        ]
-      }
-    },
-    "/api/ServiceLevels/{id}/ToggleIsActive": {
-      "post": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "ServiceLevels"
-        ]
-      }
-    },
-    "/api/ServiceLevels/{id}/ToggleIsDefault": {
-      "post": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "ServiceLevels"
-        ]
-      }
-    },
     "/api/SizeTemplates": {
       "get": {
         "parameters": [
@@ -18562,7 +17169,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Size"
+                    "$ref": "#/components/schemas/Size.1"
                   },
                   "type": "array"
                 }
@@ -18570,7 +17177,7 @@
               "text/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Size"
+                    "$ref": "#/components/schemas/Size.1"
                   },
                   "type": "array"
                 }
@@ -18578,7 +17185,7 @@
               "text/plain": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/Size"
+                    "$ref": "#/components/schemas/Size.1"
                   },
                   "type": "array"
                 }
@@ -18610,7 +17217,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size"
+                    "$ref": "#/components/schemas/Size.1"
                   }
                 ]
               }
@@ -18619,7 +17226,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size"
+                    "$ref": "#/components/schemas/Size.1"
                   }
                 ]
               }
@@ -18628,7 +17235,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size"
+                    "$ref": "#/components/schemas/Size.1"
                   }
                 ]
               }
@@ -18703,17 +17310,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Size"
+                  "$ref": "#/components/schemas/Size.1"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Size"
+                  "$ref": "#/components/schemas/Size.1"
                 }
               },
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Size"
+                  "$ref": "#/components/schemas/Size.1"
                 }
               }
             },
@@ -18752,7 +17359,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size"
+                    "$ref": "#/components/schemas/Size.1"
                   }
                 ]
               }
@@ -18761,7 +17368,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size"
+                    "$ref": "#/components/schemas/Size.1"
                   }
                 ]
               }
@@ -18770,7 +17377,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size"
+                    "$ref": "#/components/schemas/Size.1"
                   }
                 ]
               }
@@ -18992,7 +17599,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit"
+                    "$ref": "#/components/schemas/TradingUnit.1"
                   }
                 ]
               }
@@ -19001,7 +17608,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit"
+                    "$ref": "#/components/schemas/TradingUnit.1"
                   }
                 ]
               }
@@ -19010,7 +17617,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit"
+                    "$ref": "#/components/schemas/TradingUnit.1"
                   }
                 ]
               }
@@ -19086,7 +17693,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit"
+                    "$ref": "#/components/schemas/TradingUnit.1"
                   }
                 ]
               }
@@ -19095,7 +17702,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit"
+                    "$ref": "#/components/schemas/TradingUnit.1"
                   }
                 ]
               }
@@ -19104,7 +17711,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit"
+                    "$ref": "#/components/schemas/TradingUnit.1"
                   }
                 ]
               }
@@ -19240,9 +17847,6 @@
       "name": "Classifications"
     },
     {
-      "name": "Collections"
-    },
-    {
       "name": "Colors"
     },
     {
@@ -19279,9 +17883,6 @@
       "name": "ItemTypes"
     },
     {
-      "name": "MarketingExclusivities"
-    },
-    {
       "name": "NonsaleType"
     },
     {
@@ -19313,9 +17914,6 @@
     },
     {
       "name": "SerialNumberTypes"
-    },
-    {
-      "name": "ServiceLevels"
     },
     {
       "name": "Sizes"
