@@ -7,11 +7,6 @@
       "directory_name": "customerorderv2_dev",
       "snapshots": [
         {
-          "timestamp": "20260520T015316Z",
-          "normalized": "20260520T015316Z.normalized.json",
-          "hash": "20260520T015316Z.sha256"
-        },
-        {
           "timestamp": "20260520T084750Z",
           "normalized": "20260520T084750Z.normalized.json",
           "hash": "20260520T084750Z.sha256"
@@ -3440,6 +3435,11 @@
           "timestamp": "20261115T220844Z",
           "normalized": "20261115T220844Z.normalized.json",
           "hash": "20261115T220844Z.sha256"
+        },
+        {
+          "timestamp": "20261116T031840Z",
+          "normalized": "20261116T031840Z.normalized.json",
+          "hash": "20261116T031840Z.sha256"
         }
       ]
     },
@@ -3449,11 +3449,6 @@
       "environment": "",
       "directory_name": "customerorderv2_prod",
       "snapshots": [
-        {
-          "timestamp": "20260520T015315Z",
-          "normalized": "20260520T015315Z.normalized.json",
-          "hash": "20260520T015315Z.sha256"
-        },
         {
           "timestamp": "20260520T084749Z",
           "normalized": "20260520T084749Z.normalized.json",
@@ -6893,6 +6888,11 @@
           "timestamp": "20261115T220841Z",
           "normalized": "20261115T220841Z.normalized.json",
           "hash": "20261115T220841Z.sha256"
+        },
+        {
+          "timestamp": "20261116T031836Z",
+          "normalized": "20261116T031836Z.normalized.json",
+          "hash": "20261116T031836Z.sha256"
         }
       ]
     },
@@ -6902,11 +6902,6 @@
       "environment": "",
       "directory_name": "customerorderv2_test",
       "snapshots": [
-        {
-          "timestamp": "20260520T015316Z",
-          "normalized": "20260520T015316Z.normalized.json",
-          "hash": "20260520T015316Z.sha256"
-        },
         {
           "timestamp": "20260520T084750Z",
           "normalized": "20260520T084750Z.normalized.json",
@@ -10296,6 +10291,11 @@
           "timestamp": "20261115T220842Z",
           "normalized": "20261115T220842Z.normalized.json",
           "hash": "20261115T220842Z.sha256"
+        },
+        {
+          "timestamp": "20261116T031837Z",
+          "normalized": "20261116T031837Z.normalized.json",
+          "hash": "20261116T031837Z.sha256"
         }
       ]
     },
@@ -10305,11 +10305,6 @@
       "environment": "",
       "directory_name": "itemservice_dev",
       "snapshots": [
-        {
-          "timestamp": "20260520T015339Z",
-          "normalized": "20260520T015339Z.normalized.json",
-          "hash": "20260520T015339Z.sha256"
-        },
         {
           "timestamp": "20260520T084751Z",
           "normalized": "20260520T084751Z.normalized.json",
@@ -13733,11 +13728,6 @@
       "environment": "",
       "directory_name": "itemservice_prod",
       "snapshots": [
-        {
-          "timestamp": "20260520T015317Z",
-          "normalized": "20260520T015317Z.normalized.json",
-          "hash": "20260520T015317Z.sha256"
-        },
         {
           "timestamp": "20260520T084751Z",
           "normalized": "20260520T084751Z.normalized.json",
@@ -17172,6 +17162,11 @@
           "timestamp": "20261115T220845Z",
           "normalized": "20261115T220845Z.normalized.json",
           "hash": "20261115T220845Z.sha256"
+        },
+        {
+          "timestamp": "20261116T031841Z",
+          "normalized": "20261116T031841Z.normalized.json",
+          "hash": "20261116T031841Z.sha256"
         }
       ]
     },
@@ -17181,11 +17176,6 @@
       "environment": "",
       "directory_name": "itemservice_test",
       "snapshots": [
-        {
-          "timestamp": "20260520T015330Z",
-          "normalized": "20260520T015330Z.normalized.json",
-          "hash": "20260520T015330Z.sha256"
-        },
         {
           "timestamp": "20260520T084752Z",
           "normalized": "20260520T084752Z.normalized.json",
@@ -20625,6 +20615,11 @@
           "timestamp": "20261115T220845Z",
           "normalized": "20261115T220845Z.normalized.json",
           "hash": "20261115T220845Z.sha256"
+        },
+        {
+          "timestamp": "20261116T031843Z",
+          "normalized": "20261116T031843Z.normalized.json",
+          "hash": "20261116T031843Z.sha256"
         }
       ]
     },
@@ -20634,11 +20629,6 @@
       "environment": "",
       "directory_name": "pos_api_dev",
       "snapshots": [
-        {
-          "timestamp": "20260520T015347Z",
-          "normalized": "20260520T015347Z.normalized.json",
-          "hash": "20260520T015347Z.sha256"
-        },
         {
           "timestamp": "20260520T084759Z",
           "normalized": "20260520T084759Z.normalized.json",
@@ -23867,11 +23857,6 @@
       "environment": "",
       "directory_name": "pos_api_prod",
       "snapshots": [
-        {
-          "timestamp": "20260520T015344Z",
-          "normalized": "20260520T015344Z.normalized.json",
-          "hash": "20260520T015344Z.sha256"
-        },
         {
           "timestamp": "20260520T084758Z",
           "normalized": "20260520T084758Z.normalized.json",
@@ -27311,6 +27296,11 @@
           "timestamp": "20261115T220846Z",
           "normalized": "20261115T220846Z.normalized.json",
           "hash": "20261115T220846Z.sha256"
+        },
+        {
+          "timestamp": "20261116T031947Z",
+          "normalized": "20261116T031947Z.normalized.json",
+          "hash": "20261116T031947Z.sha256"
         }
       ]
     },
@@ -27320,11 +27310,6 @@
       "environment": "",
       "directory_name": "pos_api_test",
       "snapshots": [
-        {
-          "timestamp": "20260520T015339Z",
-          "normalized": "20260520T015339Z.normalized.json",
-          "hash": "20260520T015339Z.sha256"
-        },
         {
           "timestamp": "20260520T084758Z",
           "normalized": "20260520T084758Z.normalized.json",
@@ -30724,6 +30709,11 @@
           "timestamp": "20261115T220846Z",
           "normalized": "20261115T220846Z.normalized.json",
           "hash": "20261115T220846Z.sha256"
+        },
+        {
+          "timestamp": "20261116T031946Z",
+          "normalized": "20261116T031946Z.normalized.json",
+          "hash": "20261116T031946Z.sha256"
         }
       ]
     },
@@ -30733,11 +30723,6 @@
       "environment": "",
       "directory_name": "promotionservice_dev",
       "snapshots": [
-        {
-          "timestamp": "20260520T015347Z",
-          "normalized": "20260520T015347Z.normalized.json",
-          "hash": "20260520T015347Z.sha256"
-        },
         {
           "timestamp": "20260520T084800Z",
           "normalized": "20260520T084800Z.normalized.json",
@@ -34121,11 +34106,6 @@
       "environment": "",
       "directory_name": "promotionservice_prod",
       "snapshots": [
-        {
-          "timestamp": "20260520T015347Z",
-          "normalized": "20260520T015347Z.normalized.json",
-          "hash": "20260520T015347Z.sha256"
-        },
         {
           "timestamp": "20260520T084800Z",
           "normalized": "20260520T084800Z.normalized.json",
@@ -37565,6 +37545,11 @@
           "timestamp": "20261115T220847Z",
           "normalized": "20261115T220847Z.normalized.json",
           "hash": "20261115T220847Z.sha256"
+        },
+        {
+          "timestamp": "20261116T032041Z",
+          "normalized": "20261116T032041Z.normalized.json",
+          "hash": "20261116T032041Z.sha256"
         }
       ]
     },
@@ -37574,11 +37559,6 @@
       "environment": "",
       "directory_name": "promotionservice_test",
       "snapshots": [
-        {
-          "timestamp": "20260520T015347Z",
-          "normalized": "20260520T015347Z.normalized.json",
-          "hash": "20260520T015347Z.sha256"
-        },
         {
           "timestamp": "20260520T084800Z",
           "normalized": "20260520T084800Z.normalized.json",
@@ -41018,6 +40998,11 @@
           "timestamp": "20261115T220847Z",
           "normalized": "20261115T220847Z.normalized.json",
           "hash": "20261115T220847Z.sha256"
+        },
+        {
+          "timestamp": "20261116T032041Z",
+          "normalized": "20261116T032041Z.normalized.json",
+          "hash": "20261116T032041Z.sha256"
         }
       ]
     }
