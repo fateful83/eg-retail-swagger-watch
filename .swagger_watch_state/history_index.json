@@ -7,11 +7,6 @@
       "directory_name": "customerorderv2_dev",
       "snapshots": [
         {
-          "timestamp": "20260520T084750Z",
-          "normalized": "20260520T084750Z.normalized.json",
-          "hash": "20260520T084750Z.sha256"
-        },
-        {
           "timestamp": "20260520T142504Z",
           "normalized": "20260520T142504Z.normalized.json",
           "hash": "20260520T142504Z.sha256"
@@ -3440,6 +3435,11 @@
           "timestamp": "20261116T031840Z",
           "normalized": "20261116T031840Z.normalized.json",
           "hash": "20261116T031840Z.sha256"
+        },
+        {
+          "timestamp": "20261116T140355Z",
+          "normalized": "20261116T140355Z.normalized.json",
+          "hash": "20261116T140355Z.sha256"
         }
       ]
     },
@@ -3449,11 +3449,6 @@
       "environment": "",
       "directory_name": "customerorderv2_prod",
       "snapshots": [
-        {
-          "timestamp": "20260520T084749Z",
-          "normalized": "20260520T084749Z.normalized.json",
-          "hash": "20260520T084749Z.sha256"
-        },
         {
           "timestamp": "20260520T142502Z",
           "normalized": "20260520T142502Z.normalized.json",
@@ -6893,6 +6888,11 @@
           "timestamp": "20261116T031836Z",
           "normalized": "20261116T031836Z.normalized.json",
           "hash": "20261116T031836Z.sha256"
+        },
+        {
+          "timestamp": "20261116T140353Z",
+          "normalized": "20261116T140353Z.normalized.json",
+          "hash": "20261116T140353Z.sha256"
         }
       ]
     },
@@ -6902,11 +6902,6 @@
       "environment": "",
       "directory_name": "customerorderv2_test",
       "snapshots": [
-        {
-          "timestamp": "20260520T084750Z",
-          "normalized": "20260520T084750Z.normalized.json",
-          "hash": "20260520T084750Z.sha256"
-        },
         {
           "timestamp": "20260520T142503Z",
           "normalized": "20260520T142503Z.normalized.json",
@@ -10296,6 +10291,11 @@
           "timestamp": "20261116T031837Z",
           "normalized": "20261116T031837Z.normalized.json",
           "hash": "20261116T031837Z.sha256"
+        },
+        {
+          "timestamp": "20261116T140354Z",
+          "normalized": "20261116T140354Z.normalized.json",
+          "hash": "20261116T140354Z.sha256"
         }
       ]
     },
@@ -10305,11 +10305,6 @@
       "environment": "",
       "directory_name": "itemservice_dev",
       "snapshots": [
-        {
-          "timestamp": "20260520T084751Z",
-          "normalized": "20260520T084751Z.normalized.json",
-          "hash": "20260520T084751Z.sha256"
-        },
         {
           "timestamp": "20260520T142505Z",
           "normalized": "20260520T142505Z.normalized.json",
@@ -13719,6 +13714,11 @@
           "timestamp": "20261115T220846Z",
           "normalized": "20261115T220846Z.normalized.json",
           "hash": "20261115T220846Z.sha256"
+        },
+        {
+          "timestamp": "20261116T140357Z",
+          "normalized": "20261116T140357Z.normalized.json",
+          "hash": "20261116T140357Z.sha256"
         }
       ]
     },
@@ -13728,11 +13728,6 @@
       "environment": "",
       "directory_name": "itemservice_prod",
       "snapshots": [
-        {
-          "timestamp": "20260520T084751Z",
-          "normalized": "20260520T084751Z.normalized.json",
-          "hash": "20260520T084751Z.sha256"
-        },
         {
           "timestamp": "20260520T142522Z",
           "normalized": "20260520T142522Z.normalized.json",
@@ -17167,6 +17162,11 @@
           "timestamp": "20261116T031841Z",
           "normalized": "20261116T031841Z.normalized.json",
           "hash": "20261116T031841Z.sha256"
+        },
+        {
+          "timestamp": "20261116T140356Z",
+          "normalized": "20261116T140356Z.normalized.json",
+          "hash": "20261116T140356Z.sha256"
         }
       ]
     },
@@ -17176,11 +17176,6 @@
       "environment": "",
       "directory_name": "itemservice_test",
       "snapshots": [
-        {
-          "timestamp": "20260520T084752Z",
-          "normalized": "20260520T084752Z.normalized.json",
-          "hash": "20260520T084752Z.sha256"
-        },
         {
           "timestamp": "20260520T142516Z",
           "normalized": "20260520T142516Z.normalized.json",
@@ -20620,6 +20615,11 @@
           "timestamp": "20261116T031843Z",
           "normalized": "20261116T031843Z.normalized.json",
           "hash": "20261116T031843Z.sha256"
+        },
+        {
+          "timestamp": "20261116T140356Z",
+          "normalized": "20261116T140356Z.normalized.json",
+          "hash": "20261116T140356Z.sha256"
         }
       ]
     },
@@ -20629,11 +20629,6 @@
       "environment": "",
       "directory_name": "pos_api_dev",
       "snapshots": [
-        {
-          "timestamp": "20260520T084759Z",
-          "normalized": "20260520T084759Z.normalized.json",
-          "hash": "20260520T084759Z.sha256"
-        },
         {
           "timestamp": "20260520T142522Z",
           "normalized": "20260520T142522Z.normalized.json",
@@ -23848,6 +23843,11 @@
           "timestamp": "20261115T220846Z",
           "normalized": "20261115T220846Z.normalized.json",
           "hash": "20261115T220846Z.sha256"
+        },
+        {
+          "timestamp": "20261116T140408Z",
+          "normalized": "20261116T140408Z.normalized.json",
+          "hash": "20261116T140408Z.sha256"
         }
       ]
     },
@@ -23857,11 +23857,6 @@
       "environment": "",
       "directory_name": "pos_api_prod",
       "snapshots": [
-        {
-          "timestamp": "20260520T084758Z",
-          "normalized": "20260520T084758Z.normalized.json",
-          "hash": "20260520T084758Z.sha256"
-        },
         {
           "timestamp": "20260520T142528Z",
           "normalized": "20260520T142528Z.normalized.json",
@@ -27301,6 +27296,11 @@
           "timestamp": "20261116T031947Z",
           "normalized": "20261116T031947Z.normalized.json",
           "hash": "20261116T031947Z.sha256"
+        },
+        {
+          "timestamp": "20261116T140403Z",
+          "normalized": "20261116T140403Z.normalized.json",
+          "hash": "20261116T140403Z.sha256"
         }
       ]
     },
@@ -27310,11 +27310,6 @@
       "environment": "",
       "directory_name": "pos_api_test",
       "snapshots": [
-        {
-          "timestamp": "20260520T084758Z",
-          "normalized": "20260520T084758Z.normalized.json",
-          "hash": "20260520T084758Z.sha256"
-        },
         {
           "timestamp": "20260520T142529Z",
           "normalized": "20260520T142529Z.normalized.json",
@@ -30714,6 +30709,11 @@
           "timestamp": "20261116T031946Z",
           "normalized": "20261116T031946Z.normalized.json",
           "hash": "20261116T031946Z.sha256"
+        },
+        {
+          "timestamp": "20261116T140357Z",
+          "normalized": "20261116T140357Z.normalized.json",
+          "hash": "20261116T140357Z.sha256"
         }
       ]
     },
@@ -30723,11 +30723,6 @@
       "environment": "",
       "directory_name": "promotionservice_dev",
       "snapshots": [
-        {
-          "timestamp": "20260520T084800Z",
-          "normalized": "20260520T084800Z.normalized.json",
-          "hash": "20260520T084800Z.sha256"
-        },
         {
           "timestamp": "20260520T142530Z",
           "normalized": "20260520T142530Z.normalized.json",
@@ -34097,6 +34092,11 @@
           "timestamp": "20261115T220847Z",
           "normalized": "20261115T220847Z.normalized.json",
           "hash": "20261115T220847Z.sha256"
+        },
+        {
+          "timestamp": "20261116T140409Z",
+          "normalized": "20261116T140409Z.normalized.json",
+          "hash": "20261116T140409Z.sha256"
         }
       ]
     },
@@ -34106,11 +34106,6 @@
       "environment": "",
       "directory_name": "promotionservice_prod",
       "snapshots": [
-        {
-          "timestamp": "20260520T084800Z",
-          "normalized": "20260520T084800Z.normalized.json",
-          "hash": "20260520T084800Z.sha256"
-        },
         {
           "timestamp": "20260520T142530Z",
           "normalized": "20260520T142530Z.normalized.json",
@@ -37550,6 +37545,11 @@
           "timestamp": "20261116T032041Z",
           "normalized": "20261116T032041Z.normalized.json",
           "hash": "20261116T032041Z.sha256"
+        },
+        {
+          "timestamp": "20261116T140409Z",
+          "normalized": "20261116T140409Z.normalized.json",
+          "hash": "20261116T140409Z.sha256"
         }
       ]
     },
@@ -37559,11 +37559,6 @@
       "environment": "",
       "directory_name": "promotionservice_test",
       "snapshots": [
-        {
-          "timestamp": "20260520T084800Z",
-          "normalized": "20260520T084800Z.normalized.json",
-          "hash": "20260520T084800Z.sha256"
-        },
         {
           "timestamp": "20260520T142530Z",
           "normalized": "20260520T142530Z.normalized.json",
@@ -41003,6 +40998,11 @@
           "timestamp": "20261116T032041Z",
           "normalized": "20261116T032041Z.normalized.json",
           "hash": "20261116T032041Z.sha256"
+        },
+        {
+          "timestamp": "20261116T140409Z",
+          "normalized": "20261116T140409Z.normalized.json",
+          "hash": "20261116T140409Z.sha256"
         }
       ]
     }
