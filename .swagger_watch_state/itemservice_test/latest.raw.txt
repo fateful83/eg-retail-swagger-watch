@@ -15302,13 +15302,15 @@
             "nullable": true
           },
           "consumerUnitQty": {
-            "type": "integer",
-            "format": "int32",
+            "type": "number",
+            "description": "Quantity in supplier package. Supports up to 3 decimal places.",
+            "format": "double",
             "nullable": true
           },
           "currentConsumerUnitQty": {
-            "type": "integer",
-            "format": "int32",
+            "type": "number",
+            "description": "Quantity in supplier package on the current item. Supports up to 3 decimal places.",
+            "format": "double",
             "nullable": true
           },
           "isBundle": {

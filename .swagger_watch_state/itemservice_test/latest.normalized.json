@@ -1676,9 +1676,10 @@
             "type": "string"
           },
           "consumerUnitQty": {
-            "format": "int32",
+            "description": "Quantity in supplier package. Supports up to 3 decimal places.",
+            "format": "double",
             "nullable": true,
-            "type": "integer"
+            "type": "number"
           },
           "costCarrier": {
             "nullable": true,
@@ -1709,9 +1710,10 @@
             "type": "string"
           },
           "currentConsumerUnitQty": {
-            "format": "int32",
+            "description": "Quantity in supplier package on the current item. Supports up to 3 decimal places.",
+            "format": "double",
             "nullable": true,
-            "type": "integer"
+            "type": "number"
           },
           "currentCostCarrier": {
             "nullable": true,
