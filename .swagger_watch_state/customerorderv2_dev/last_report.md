@@ -1,36 +1,10 @@
-# Swagger/OpenAPI change detected: CustomerOrderV2 [DEV]
+# Documentation-only change detected: CustomerOrderV2 [DEV]
 
-- Time: 2026-11-17T14:57:41Z
-- Fetch completed at: 2026-11-17T14:57:40Z
-- Fetch duration ms: 1641
+- Time: 2026-11-18T00:04:33Z
+- Fetch completed at: 2026-11-18T00:04:31Z
+- Fetch duration ms: 2124
 - Swagger URL: https://customerorderv2service.egretail-dev.cloud/swagger/v1/swagger.json
-- Previous hash: `5e3e7241d67ba2856592976cf5ceeeb16de9710a6e9343c3a25f81d0b61a0248`
-- Current hash: `d597f17fac47bd38e43b53786e7e23efa82ebe9e95848c1ca4833b3637aa3858`
+- Previous hash: `d597f17fac47bd38e43b53786e7e23efa82ebe9e95848c1ca4833b3637aa3858`
+- Current hash: `37694fd08c41e5cf29caaac3583b97660243b2f667c7fe6357b74e06797ec1bf`
 
-## Summary
-- Status: non_breaking
-- Added operations: 1
-- Removed operations: 0
-- Changed operations: 1
-- Breaking removed operations: 0
-- Breaking changed operations: 0
-- Non-breaking changed operations: 1
-
-## Added
-- POST /api/gateway/Orders/search
-
-## Removed
-- None
-
-## Changed
-- GET /api/gateway/Orders
-
-## Breaking classification
-- Removed operations: 0
-- None
-
-- Breaking changed operations: 0
-- None
-
-- Non-breaking changed operations: 1
-  - GET /api/gateway/Orders
+No contract-level API changes were detected.
