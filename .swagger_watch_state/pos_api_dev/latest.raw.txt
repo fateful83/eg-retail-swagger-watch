@@ -1698,19 +1698,19 @@
                 "schema": {
                   "$ref": "#/components/schemas/ItemSale.AddBundleToCart_Response"
                 },
-                "example": {"cart":{"startTime":"2026-11-24T03:30:14.2507667Z","sequenceNumber":122,"items":[{"article":{"ean":"2324","text":"Mountain skis GTX","normalPrice":700.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":0,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":1,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":650.0,"discountDetails":[{"discountType":"ArticleBundle","quantity":1.0,"discountAmountPerQuantity":50.0,"totalDiscountAmount":50.0,"description":"Ski bundle","id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":"9092813","offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"9032","text":"Mountain bindings GTR 900","normalPrice":1200.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":1,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":1050.0,"discountDetails":[{"discountType":"CampaignPrice","quantity":1.0,"discountAmountPerQuantity":150.0,"totalDiscountAmount":150.0,"description":null,"id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":null,"offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"3123","text":"Service item: ski preparation","normalPrice":0.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":2,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":0.0,"discountDetails":[],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":[{"text":"87.4","key":"weight","showToCashier":false},{"text":"2324","key":"appliesTo","showToCashier":false}],"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null}],"currency":"NOK","totals":null,"cartId":{"id":"324234-232-122","revision":5,"hashBasedMessageAuthenticationCode":""},"barCodeData":null,"vaTs":null,"customerOrderNumber":null,"tracingId":null,"externalOrderNumber":null,"orderVersion":null,"payments":null,"delivery":null,"customer":null,"note":null,"operationPending":false,"cartState":"InProgress","loyaltyNumber":null,"notes":null,"loyalty":null,"coupons":null,"externalOrderNumber2":null,"netCostDiscountPercentage":0.0,"customerOrderVariant":null,"mixTimeout":false,"tickets":null,"operator":null,"boardingPassAndFlightInfo":null,"isSealingRequired":null}}
+                "example": {"cart":{"startTime":"2026-11-24T16:32:51.0200808Z","sequenceNumber":122,"items":[{"article":{"ean":"2324","text":"Mountain skis GTX","normalPrice":700.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":0,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":1,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":650.0,"discountDetails":[{"discountType":"ArticleBundle","quantity":1.0,"discountAmountPerQuantity":50.0,"totalDiscountAmount":50.0,"description":"Ski bundle","id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":"9092813","offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"9032","text":"Mountain bindings GTR 900","normalPrice":1200.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":1,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":1050.0,"discountDetails":[{"discountType":"CampaignPrice","quantity":1.0,"discountAmountPerQuantity":150.0,"totalDiscountAmount":150.0,"description":null,"id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":null,"offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"3123","text":"Service item: ski preparation","normalPrice":0.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":2,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":0.0,"discountDetails":[],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":[{"text":"87.4","key":"weight","showToCashier":false},{"text":"2324","key":"appliesTo","showToCashier":false}],"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null}],"currency":"NOK","totals":null,"cartId":{"id":"324234-232-122","revision":5,"hashBasedMessageAuthenticationCode":""},"barCodeData":null,"vaTs":null,"customerOrderNumber":null,"tracingId":null,"externalOrderNumber":null,"orderVersion":null,"payments":null,"delivery":null,"customer":null,"note":null,"operationPending":false,"cartState":"InProgress","loyaltyNumber":null,"notes":null,"loyalty":null,"coupons":null,"externalOrderNumber2":null,"netCostDiscountPercentage":0.0,"customerOrderVariant":null,"mixTimeout":false,"tickets":null,"operator":null,"boardingPassAndFlightInfo":null,"isSealingRequired":null}}
               },
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ItemSale.AddBundleToCart_Response"
                 },
-                "example": {"cart":{"startTime":"2026-11-24T03:30:14.2507667Z","sequenceNumber":122,"items":[{"article":{"ean":"2324","text":"Mountain skis GTX","normalPrice":700.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":0,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":1,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":650.0,"discountDetails":[{"discountType":"ArticleBundle","quantity":1.0,"discountAmountPerQuantity":50.0,"totalDiscountAmount":50.0,"description":"Ski bundle","id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":"9092813","offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"9032","text":"Mountain bindings GTR 900","normalPrice":1200.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":1,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":1050.0,"discountDetails":[{"discountType":"CampaignPrice","quantity":1.0,"discountAmountPerQuantity":150.0,"totalDiscountAmount":150.0,"description":null,"id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":null,"offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"3123","text":"Service item: ski preparation","normalPrice":0.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":2,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":0.0,"discountDetails":[],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":[{"text":"87.4","key":"weight","showToCashier":false},{"text":"2324","key":"appliesTo","showToCashier":false}],"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null}],"currency":"NOK","totals":null,"cartId":{"id":"324234-232-122","revision":5,"hashBasedMessageAuthenticationCode":""},"barCodeData":null,"vaTs":null,"customerOrderNumber":null,"tracingId":null,"externalOrderNumber":null,"orderVersion":null,"payments":null,"delivery":null,"customer":null,"note":null,"operationPending":false,"cartState":"InProgress","loyaltyNumber":null,"notes":null,"loyalty":null,"coupons":null,"externalOrderNumber2":null,"netCostDiscountPercentage":0.0,"customerOrderVariant":null,"mixTimeout":false,"tickets":null,"operator":null,"boardingPassAndFlightInfo":null,"isSealingRequired":null}}
+                "example": {"cart":{"startTime":"2026-11-24T16:32:51.0200808Z","sequenceNumber":122,"items":[{"article":{"ean":"2324","text":"Mountain skis GTX","normalPrice":700.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":0,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":1,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":650.0,"discountDetails":[{"discountType":"ArticleBundle","quantity":1.0,"discountAmountPerQuantity":50.0,"totalDiscountAmount":50.0,"description":"Ski bundle","id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":"9092813","offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"9032","text":"Mountain bindings GTR 900","normalPrice":1200.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":1,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":1050.0,"discountDetails":[{"discountType":"CampaignPrice","quantity":1.0,"discountAmountPerQuantity":150.0,"totalDiscountAmount":150.0,"description":null,"id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":null,"offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"3123","text":"Service item: ski preparation","normalPrice":0.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":2,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":0.0,"discountDetails":[],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":[{"text":"87.4","key":"weight","showToCashier":false},{"text":"2324","key":"appliesTo","showToCashier":false}],"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null}],"currency":"NOK","totals":null,"cartId":{"id":"324234-232-122","revision":5,"hashBasedMessageAuthenticationCode":""},"barCodeData":null,"vaTs":null,"customerOrderNumber":null,"tracingId":null,"externalOrderNumber":null,"orderVersion":null,"payments":null,"delivery":null,"customer":null,"note":null,"operationPending":false,"cartState":"InProgress","loyaltyNumber":null,"notes":null,"loyalty":null,"coupons":null,"externalOrderNumber2":null,"netCostDiscountPercentage":0.0,"customerOrderVariant":null,"mixTimeout":false,"tickets":null,"operator":null,"boardingPassAndFlightInfo":null,"isSealingRequired":null}}
               },
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ItemSale.AddBundleToCart_Response"
                 },
-                "example": {"cart":{"startTime":"2026-11-24T03:30:14.2507667Z","sequenceNumber":122,"items":[{"article":{"ean":"2324","text":"Mountain skis GTX","normalPrice":700.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":0,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":1,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":650.0,"discountDetails":[{"discountType":"ArticleBundle","quantity":1.0,"discountAmountPerQuantity":50.0,"totalDiscountAmount":50.0,"description":"Ski bundle","id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":"9092813","offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"9032","text":"Mountain bindings GTR 900","normalPrice":1200.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":1,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":1050.0,"discountDetails":[{"discountType":"CampaignPrice","quantity":1.0,"discountAmountPerQuantity":150.0,"totalDiscountAmount":150.0,"description":null,"id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":null,"offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"3123","text":"Service item: ski preparation","normalPrice":0.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":2,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":0.0,"discountDetails":[],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":[{"text":"87.4","key":"weight","showToCashier":false},{"text":"2324","key":"appliesTo","showToCashier":false}],"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null}],"currency":"NOK","totals":null,"cartId":{"id":"324234-232-122","revision":5,"hashBasedMessageAuthenticationCode":""},"barCodeData":null,"vaTs":null,"customerOrderNumber":null,"tracingId":null,"externalOrderNumber":null,"orderVersion":null,"payments":null,"delivery":null,"customer":null,"note":null,"operationPending":false,"cartState":"InProgress","loyaltyNumber":null,"notes":null,"loyalty":null,"coupons":null,"externalOrderNumber2":null,"netCostDiscountPercentage":0.0,"customerOrderVariant":null,"mixTimeout":false,"tickets":null,"operator":null,"boardingPassAndFlightInfo":null,"isSealingRequired":null}}
+                "example": {"cart":{"startTime":"2026-11-24T16:32:51.0200808Z","sequenceNumber":122,"items":[{"article":{"ean":"2324","text":"Mountain skis GTX","normalPrice":700.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":0,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":1,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":650.0,"discountDetails":[{"discountType":"ArticleBundle","quantity":1.0,"discountAmountPerQuantity":50.0,"totalDiscountAmount":50.0,"description":"Ski bundle","id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":"9092813","offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"9032","text":"Mountain bindings GTR 900","normalPrice":1200.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":1,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":1050.0,"discountDetails":[{"discountType":"CampaignPrice","quantity":1.0,"discountAmountPerQuantity":150.0,"totalDiscountAmount":150.0,"description":null,"id":null,"discountEffectType":"Amount","discountEffectTypeAmount":0.0,"couponCodeUsed":null,"offerCode":null,"externalOfferNumber":null,"offerNumber":null,"externalPromotionNumber":null}],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":null,"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null},{"article":{"ean":"3123","text":"Service item: ski preparation","normalPrice":0.0,"colorText":null,"colorCode":null,"sizeText":null,"modelId":null,"productInformation":null,"mediaId":null,"timeRequirementStart":null,"timeRequirementEnd":null,"ageRequirement":0,"individNumber":null,"serialNumber":null,"fullText":null,"scripInfo":null,"scanCode":null,"mainEAN":null,"netCost":0.0,"isOpenPrice":false,"expirationDate":null,"colorId":null,"hasGiftReceipt":false,"isSecurityTagged":false,"includedInMultiPack":false,"provider":null},"cartItemIdentificator":2,"quantity":{"quantity":1.0,"unitOfMeasure":"Piece","deliveredNow":0.0,"unitCount":0,"delivered":0.0,"paidNow":0.0,"paid":0.0,"ordered":0.0},"total":0.0,"discountDetails":[],"discountContributions":null,"parentCartItemIdentificator":null,"bundleInfo":{"id":0,"text":"Ski bundle","price":1700.0,"ean":"9092813"},"vat":{"vatPercent":0.0,"vatTotal":0.0},"note":null,"shoppingChannel":null,"deliveryInfo":null,"labelType":null,"notes":[{"text":"87.4","key":"weight","showToCashier":false},{"text":"2324","key":"appliesTo","showToCashier":false}],"fuelInfo":null,"orderedTotal":0.0,"lowestPrice":null,"lowestPriceDiscount":null}],"currency":"NOK","totals":null,"cartId":{"id":"324234-232-122","revision":5,"hashBasedMessageAuthenticationCode":""},"barCodeData":null,"vaTs":null,"customerOrderNumber":null,"tracingId":null,"externalOrderNumber":null,"orderVersion":null,"payments":null,"delivery":null,"customer":null,"note":null,"operationPending":false,"cartState":"InProgress","loyaltyNumber":null,"notes":null,"loyalty":null,"coupons":null,"externalOrderNumber2":null,"netCostDiscountPercentage":0.0,"customerOrderVariant":null,"mixTimeout":false,"tickets":null,"operator":null,"boardingPassAndFlightInfo":null,"isSealingRequired":null}}
               }
             }
           },
@@ -12941,6 +12941,100 @@
         }
       }
     },
+    "/api/ReceiptOnHold/CountOnHoldReceipts": {
+      "post": {
+        "tags": [
+          "ReceiptOnHold"
+        ],
+        "summary": "Counts receipts on hold without returning receipt data. Uses the same filter rules as SearchOnHoldReceipt.",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/PosApi.ReceiptOnHoldService.CountOnHoldReceipts_Request"
+                  }
+                ],
+                "description": "Represents request for `CountOnHoldReceipts` method.\r\nUses the same filter rules as `SearchOnHoldReceipt`, but returns only the number of matching receipts.\r\nDifferences from `SearchOnHoldReceipt`: receipts on the central server and the Shop and Go server are not counted,\r\n`Tags` and `OperatorId` are always applied (also together with `CashRegisterNumber`),\r\nand the count is not limited to the first 1000 receipts."
+              }
+            },
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/PosApi.ReceiptOnHoldService.CountOnHoldReceipts_Request"
+                  }
+                ],
+                "description": "Represents request for `CountOnHoldReceipts` method.\r\nUses the same filter rules as `SearchOnHoldReceipt`, but returns only the number of matching receipts.\r\nDifferences from `SearchOnHoldReceipt`: receipts on the central server and the Shop and Go server are not counted,\r\n`Tags` and `OperatorId` are always applied (also together with `CashRegisterNumber`),\r\nand the count is not limited to the first 1000 receipts."
+              }
+            },
+            "text/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/PosApi.ReceiptOnHoldService.CountOnHoldReceipts_Request"
+                  }
+                ],
+                "description": "Represents request for `CountOnHoldReceipts` method.\r\nUses the same filter rules as `SearchOnHoldReceipt`, but returns only the number of matching receipts.\r\nDifferences from `SearchOnHoldReceipt`: receipts on the central server and the Shop and Go server are not counted,\r\n`Tags` and `OperatorId` are always applied (also together with `CashRegisterNumber`),\r\nand the count is not limited to the first 1000 receipts."
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/PosApi.ReceiptOnHoldService.CountOnHoldReceipts_Request"
+                  }
+                ],
+                "description": "Represents request for `CountOnHoldReceipts` method.\r\nUses the same filter rules as `SearchOnHoldReceipt`, but returns only the number of matching receipts.\r\nDifferences from `SearchOnHoldReceipt`: receipts on the central server and the Shop and Go server are not counted,\r\n`Tags` and `OperatorId` are always applied (also together with `CashRegisterNumber`),\r\nand the count is not limited to the first 1000 receipts."
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApi.ReceiptOnHoldService.CountOnHoldReceipts_Response"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApi.ReceiptOnHoldService.CountOnHoldReceipts_Response"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApi.ReceiptOnHoldService.CountOnHoldReceipts_Response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApiBadRequestResponse_CountOnHoldReceiptsErrorType"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApiBadRequestResponse_CountOnHoldReceiptsErrorType"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApiBadRequestResponse_CountOnHoldReceiptsErrorType"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/ReceiptOnHold/GetOnHoldReceipt": {
       "post": {
         "tags": [
@@ -15076,6 +15170,13 @@
           }
         },
         "additionalProperties": false
+      },
+      "CountOnHoldReceiptsErrorType": {
+        "enum": [
+          "GeneralFault"
+        ],
+        "type": "string",
+        "description": "Possible error types for CountOnHoldReceipts"
       },
       "CreateNewCustomerErrorType": {
         "enum": [
@@ -27965,6 +28066,64 @@
         "type": "string",
         "description": "Set of transaction types"
       },
+      "PosApi.ReceiptOnHoldService.CountOnHoldReceipts_Request": {
+        "type": "object",
+        "properties": {
+          "storeIdentificator": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Common.StoreIdentificator"
+              }
+            ],
+            "description": "The store's identifier.",
+            "nullable": true
+          },
+          "cashRegisterNumber": {
+            "type": "integer",
+            "description": "An optional cash register number. When set, only receipts put on hold on this cash register are counted.",
+            "format": "int32",
+            "nullable": true
+          },
+          "operatorId": {
+            "type": "string",
+            "description": "An optional operator id. When set, only receipts put on hold by this operator are counted.",
+            "nullable": true
+          },
+          "returnOnlyShopAndGoReceipts": {
+            "type": "boolean",
+            "description": "An optional value that specifies whether only self service receipts should be counted."
+          },
+          "tags": {
+            "type": "string",
+            "description": "An optional string tag assigned to the suspended cart.",
+            "nullable": true
+          },
+          "apiKey": {
+            "type": "string",
+            "description": "The API Key is strongly recommended",
+            "nullable": true
+          },
+          "searchTerm": {
+            "type": "string",
+            "description": "An optional search term, matched against the receipt reference code and the operator id like the search term of `SearchOnHoldReceipt`.\r\nIgnored when `CashRegisterNumber` or `OperatorId` is set.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents request for `CountOnHoldReceipts` method.\r\nUses the same filter rules as `SearchOnHoldReceipt`, but returns only the number of matching receipts.\r\nDifferences from `SearchOnHoldReceipt`: receipts on the central server and the Shop and Go server are not counted,\r\n`Tags` and `OperatorId` are always applied (also together with `CashRegisterNumber`),\r\nand the count is not limited to the first 1000 receipts."
+      },
+      "PosApi.ReceiptOnHoldService.CountOnHoldReceipts_Response": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "description": "The number of receipts on hold matching the request filters.",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents response for `CountOnHoldReceipts` method."
+      },
       "PosApi.ReceiptOnHoldService.GetOnHoldReceipt_Request": {
         "type": "object",
         "properties": {
@@ -29763,6 +29922,66 @@
             "allOf": [
               {
                 "$ref": "#/components/schemas/CheckoutCartErrorType"
+              }
+            ],
+            "description": "The type of error. Maps to the fault type in the on-premise version."
+          },
+          "Message": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The error message."
+          },
+          "Reference": {
+            "type": "string",
+            "description": "The error reference. Refer to this id when querying about a specific error.",
+            "format": "uuid"
+          },
+          "Requirements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemSale.RequirementFaultType"
+            },
+            "description": "The types of requirements if the fault is ItemRequirementsNotMet.",
+            "nullable": true
+          },
+          "RequiredAge": {
+            "type": "integer",
+            "description": "Age of the ItemIsAgeRestricted restriction",
+            "format": "int32",
+            "nullable": true
+          },
+          "MaxQuantity": {
+            "type": "integer",
+            "description": "Max quantity of item in the receipt",
+            "format": "int32",
+            "nullable": true
+          },
+          "MessageForCashier": {
+            "type": "string",
+            "description": "Message for cashier if the fault is ItemRequirementsNotMet.",
+            "nullable": true
+          },
+          "FaultCode": {
+            "type": "string",
+            "description": "ExtraIdentifier for the fault",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Returned with most failed requests for the current version of POS API."
+      },
+      "PosApiBadRequestResponse_CountOnHoldReceiptsErrorType": {
+        "required": [
+          "Message",
+          "Reference",
+          "Type"
+        ],
+        "type": "object",
+        "properties": {
+          "Type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CountOnHoldReceiptsErrorType"
               }
             ],
             "description": "The type of error. Maps to the fault type in the on-premise version."

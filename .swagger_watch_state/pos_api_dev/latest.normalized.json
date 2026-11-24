@@ -1544,6 +1544,13 @@
         },
         "type": "object"
       },
+      "CountOnHoldReceiptsErrorType": {
+        "description": "Possible error types for CountOnHoldReceipts",
+        "enum": [
+          "GeneralFault"
+        ],
+        "type": "string"
+      },
       "CreateNewCustomerErrorType": {
         "description": "Possible error types for CreateNewCustomer",
         "enum": [
@@ -14432,6 +14439,64 @@
         ],
         "type": "string"
       },
+      "PosApi.ReceiptOnHoldService.CountOnHoldReceipts_Request": {
+        "additionalProperties": false,
+        "description": "Represents request for `CountOnHoldReceipts` method.\r\nUses the same filter rules as `SearchOnHoldReceipt`, but returns only the number of matching receipts.\r\nDifferences from `SearchOnHoldReceipt`: receipts on the central server and the Shop and Go server are not counted,\r\n`Tags` and `OperatorId` are always applied (also together with `CashRegisterNumber`),\r\nand the count is not limited to the first 1000 receipts.",
+        "properties": {
+          "apiKey": {
+            "description": "The API Key is strongly recommended",
+            "nullable": true,
+            "type": "string"
+          },
+          "cashRegisterNumber": {
+            "description": "An optional cash register number. When set, only receipts put on hold on this cash register are counted.",
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "operatorId": {
+            "description": "An optional operator id. When set, only receipts put on hold by this operator are counted.",
+            "nullable": true,
+            "type": "string"
+          },
+          "returnOnlyShopAndGoReceipts": {
+            "description": "An optional value that specifies whether only self service receipts should be counted.",
+            "type": "boolean"
+          },
+          "searchTerm": {
+            "description": "An optional search term, matched against the receipt reference code and the operator id like the search term of `SearchOnHoldReceipt`.\r\nIgnored when `CashRegisterNumber` or `OperatorId` is set.",
+            "nullable": true,
+            "type": "string"
+          },
+          "storeIdentificator": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Common.StoreIdentificator"
+              }
+            ],
+            "description": "The store's identifier.",
+            "nullable": true
+          },
+          "tags": {
+            "description": "An optional string tag assigned to the suspended cart.",
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "PosApi.ReceiptOnHoldService.CountOnHoldReceipts_Response": {
+        "additionalProperties": false,
+        "description": "Represents response for `CountOnHoldReceipts` method.",
+        "properties": {
+          "count": {
+            "description": "The number of receipts on hold matching the request filters.",
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
       "PosApi.ReceiptOnHoldService.GetOnHoldReceipt_Request": {
         "additionalProperties": false,
         "description": "Represents request for `GetOnHoldReceipt` method.",
@@ -16266,6 +16331,66 @@
             "allOf": [
               {
                 "$ref": "#/components/schemas/CheckoutCartErrorType"
+              }
+            ],
+            "description": "The type of error. Maps to the fault type in the on-premise version."
+          }
+        },
+        "required": [
+          "Message",
+          "Reference",
+          "Type"
+        ],
+        "type": "object"
+      },
+      "PosApiBadRequestResponse_CountOnHoldReceiptsErrorType": {
+        "additionalProperties": false,
+        "description": "Returned with most failed requests for the current version of POS API.",
+        "properties": {
+          "FaultCode": {
+            "description": "ExtraIdentifier for the fault",
+            "nullable": true,
+            "type": "string"
+          },
+          "MaxQuantity": {
+            "description": "Max quantity of item in the receipt",
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "Message": {
+            "description": "The error message.",
+            "minLength": 1,
+            "type": "string"
+          },
+          "MessageForCashier": {
+            "description": "Message for cashier if the fault is ItemRequirementsNotMet.",
+            "nullable": true,
+            "type": "string"
+          },
+          "Reference": {
+            "description": "The error reference. Refer to this id when querying about a specific error.",
+            "format": "uuid",
+            "type": "string"
+          },
+          "RequiredAge": {
+            "description": "Age of the ItemIsAgeRestricted restriction",
+            "format": "int32",
+            "nullable": true,
+            "type": "integer"
+          },
+          "Requirements": {
+            "description": "The types of requirements if the fault is ItemRequirementsNotMet.",
+            "items": {
+              "$ref": "#/components/schemas/ItemSale.RequirementFaultType"
+            },
+            "nullable": true,
+            "type": "array"
+          },
+          "Type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CountOnHoldReceiptsErrorType"
               }
             ],
             "description": "The type of error. Maps to the fault type in the on-premise version."
@@ -23555,7 +23680,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-11-24T03:30:14.2507667Z",
+                    "startTime": "2026-11-24T16:32:51.0200808Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
@@ -23834,7 +23959,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-11-24T03:30:14.2507667Z",
+                    "startTime": "2026-11-24T16:32:51.0200808Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
@@ -24113,7 +24238,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-11-24T03:30:14.2507667Z",
+                    "startTime": "2026-11-24T16:32:51.0200808Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
@@ -35344,6 +35469,100 @@
         "summary": "Can be used to check that the endpoint is up and running",
         "tags": [
           "ReasonCode"
+        ]
+      }
+    },
+    "/api/ReceiptOnHold/CountOnHoldReceipts": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/*+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/PosApi.ReceiptOnHoldService.CountOnHoldReceipts_Request"
+                  }
+                ],
+                "description": "Represents request for `CountOnHoldReceipts` method.\r\nUses the same filter rules as `SearchOnHoldReceipt`, but returns only the number of matching receipts.\r\nDifferences from `SearchOnHoldReceipt`: receipts on the central server and the Shop and Go server are not counted,\r\n`Tags` and `OperatorId` are always applied (also together with `CashRegisterNumber`),\r\nand the count is not limited to the first 1000 receipts."
+              }
+            },
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/PosApi.ReceiptOnHoldService.CountOnHoldReceipts_Request"
+                  }
+                ],
+                "description": "Represents request for `CountOnHoldReceipts` method.\r\nUses the same filter rules as `SearchOnHoldReceipt`, but returns only the number of matching receipts.\r\nDifferences from `SearchOnHoldReceipt`: receipts on the central server and the Shop and Go server are not counted,\r\n`Tags` and `OperatorId` are always applied (also together with `CashRegisterNumber`),\r\nand the count is not limited to the first 1000 receipts."
+              }
+            },
+            "application/json-patch+json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/PosApi.ReceiptOnHoldService.CountOnHoldReceipts_Request"
+                  }
+                ],
+                "description": "Represents request for `CountOnHoldReceipts` method.\r\nUses the same filter rules as `SearchOnHoldReceipt`, but returns only the number of matching receipts.\r\nDifferences from `SearchOnHoldReceipt`: receipts on the central server and the Shop and Go server are not counted,\r\n`Tags` and `OperatorId` are always applied (also together with `CashRegisterNumber`),\r\nand the count is not limited to the first 1000 receipts."
+              }
+            },
+            "text/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/PosApi.ReceiptOnHoldService.CountOnHoldReceipts_Request"
+                  }
+                ],
+                "description": "Represents request for `CountOnHoldReceipts` method.\r\nUses the same filter rules as `SearchOnHoldReceipt`, but returns only the number of matching receipts.\r\nDifferences from `SearchOnHoldReceipt`: receipts on the central server and the Shop and Go server are not counted,\r\n`Tags` and `OperatorId` are always applied (also together with `CashRegisterNumber`),\r\nand the count is not limited to the first 1000 receipts."
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApi.ReceiptOnHoldService.CountOnHoldReceipts_Response"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApi.ReceiptOnHoldService.CountOnHoldReceipts_Response"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApi.ReceiptOnHoldService.CountOnHoldReceipts_Response"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApiBadRequestResponse_CountOnHoldReceiptsErrorType"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApiBadRequestResponse_CountOnHoldReceiptsErrorType"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PosApiBadRequestResponse_CountOnHoldReceiptsErrorType"
+                }
+              }
+            },
+            "description": "Bad Request"
+          }
+        },
+        "summary": "Counts receipts on hold without returning receipt data. Uses the same filter rules as SearchOnHoldReceipt.",
+        "tags": [
+          "ReceiptOnHold"
         ]
       }
     },
