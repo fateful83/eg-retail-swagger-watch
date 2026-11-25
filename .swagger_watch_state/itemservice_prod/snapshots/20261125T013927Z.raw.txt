@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.0.4",
   "info": {
     "title": "Item API",
     "description": "# Internal usage only\r\n\r\nItemService is an API for item maintenance.\r\nAside from managing items, it can be used for maintenance of all kinds of registers that are connected to items (e.g. colors, sizes, seasons etc.).\r\n\r\n## Health check\r\n\r\n[Click](/hc) to see health check status.\r\n",
@@ -42,7 +42,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -126,7 +126,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -174,15 +174,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/AlternativeGroupUpdate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -214,7 +205,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -277,7 +268,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -325,15 +316,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/AlternativeGroupUpdate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -365,7 +347,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -408,7 +390,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -476,7 +458,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -524,15 +506,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/BrandCategory"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -564,7 +537,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -627,7 +600,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -675,15 +648,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/BrandCategory"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -715,7 +679,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -758,7 +722,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -826,13 +790,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   }
                 }
               },
@@ -840,7 +804,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   }
                 }
               },
@@ -848,7 +812,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   }
                 }
               }
@@ -874,20 +838,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Brand.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   }
                 ]
               }
@@ -896,7 +851,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   }
                 ]
               }
@@ -905,7 +860,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   }
                 ]
               }
@@ -914,7 +869,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -977,21 +932,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Brand.1"
+                  "$ref": "#/components/schemas/Brand"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Brand.1"
+                  "$ref": "#/components/schemas/Brand"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Brand.1"
+                  "$ref": "#/components/schemas/Brand"
                 }
               }
             }
@@ -1025,20 +980,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Brand.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   }
                 ]
               }
@@ -1047,7 +993,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   }
                 ]
               }
@@ -1056,7 +1002,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Brand.1"
+                    "$ref": "#/components/schemas/Brand"
                   }
                 ]
               }
@@ -1065,7 +1011,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -1108,7 +1054,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -1151,7 +1097,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -1219,7 +1165,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1267,15 +1213,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Classification"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -1307,7 +1244,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1370,7 +1307,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1418,15 +1355,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Classification"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -1458,7 +1386,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -1519,7 +1447,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -1562,7 +1490,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -1605,441 +1533,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Collections": {
-      "get": {
-        "tags": [
-          "Collections"
-        ],
-        "parameters": [
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          },
-          {
-            "name": "$skip",
-            "in": "query",
-            "description": "Skips the first n results",
-            "schema": {
-              "type": "number",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "Returns the first n results",
-            "schema": {
-              "type": "number",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Filters the results using oData Notation",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "description": "Orders the results by the fields listed",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Collection.1"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Collection.1"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Collection.1"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Collections"
-        ],
-        "parameters": [
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection.1"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection.1"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection.1"
-                  }
-                ]
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection.1"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Collections/{id}": {
-      "get": {
-        "tags": [
-          "Collections"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/Collection.1"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Collection.1"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Collection.1"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Collections"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection.1"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection.1"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection.1"
-                  }
-                ]
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection.1"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Collections"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Collections/{id}/ToggleIsActive": {
-      "post": {
-        "tags": [
-          "Collections"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Collections/{id}/ToggleIsDefault": {
-      "post": {
-        "tags": [
-          "Collections"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -2081,14 +1575,6 @@
                 }
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            },
             "application/json": {
               "schema": {
                 "type": "array",
@@ -2117,13 +1603,13 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Color.1"
+                    "$ref": "#/components/schemas/Color"
                   }
                 }
               },
@@ -2131,7 +1617,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Color.1"
+                    "$ref": "#/components/schemas/Color"
                   }
                 }
               },
@@ -2139,7 +1625,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Color.1"
+                    "$ref": "#/components/schemas/Color"
                   }
                 }
               }
@@ -2211,7 +1697,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -2259,15 +1745,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ConcessionCreate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -2299,7 +1776,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -2362,7 +1839,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -2410,15 +1887,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ConcessionUpdate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -2450,7 +1918,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -2492,7 +1960,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -2535,15 +2003,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CommissionPercentage"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -2575,7 +2034,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -2647,15 +2106,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CommissionPercentage"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -2687,7 +2137,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -2737,7 +2187,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -2789,7 +2239,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -2839,7 +2289,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -2891,15 +2341,6 @@
                 }
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            },
             "application/json": {
               "schema": {
                 "type": "array",
@@ -2931,7 +2372,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -2974,7 +2415,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -3042,7 +2483,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3090,15 +2531,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ConcessionStoresCreateUpdate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -3130,7 +2562,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3193,7 +2625,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3241,15 +2673,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ConcessionStoresCreateUpdate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -3281,7 +2704,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -3333,15 +2756,6 @@
                 }
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            },
             "application/json": {
               "schema": {
                 "type": "array",
@@ -3373,7 +2787,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -3416,7 +2830,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -3450,7 +2864,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3526,7 +2940,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3574,15 +2988,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Country"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -3614,7 +3019,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3673,7 +3078,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -3720,15 +3125,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Country"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -3760,7 +3156,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -3802,7 +3198,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -3844,333 +3240,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/DeliveryDateList/{id}": {
-      "get": {
-        "tags": [
-          "DeliveryDateList"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/DeliveryDateGrid"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/DeliveryDateGrid"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/DeliveryDateGrid"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/DeliveryDateList/{listId}/DeliveryDates": {
-      "post": {
-        "tags": [
-          "DeliveryDateList"
-        ],
-        "parameters": [
-          {
-            "name": "listId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CreateDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CreateDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CreateDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CreateDeliveryDatesRequest"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/DeliveryDateList/DeliveryDates/{id}": {
-      "put": {
-        "tags": [
-          "DeliveryDateList"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/UpdateDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/UpdateDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/UpdateDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/UpdateDeliveryDatesRequest"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "DeliveryDateList"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/DeleteDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/DeleteDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/DeleteDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/DeleteDeliveryDatesRequest"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -4238,7 +3308,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4286,15 +3356,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ExcelExportTemplateCreate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -4326,7 +3387,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4389,15 +3450,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ExcelExportTemplateUpdate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -4429,7 +3481,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -4472,7 +3524,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -4516,7 +3568,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           }
         }
       }
@@ -4574,7 +3626,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4633,7 +3685,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -4681,7 +3733,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -4822,15 +3874,6 @@
                 }
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            },
             "application/json": {
               "schema": {
                 "type": "array",
@@ -4862,7 +3905,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -4905,7 +3948,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -4948,7 +3991,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -5033,7 +4076,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -5092,7 +4135,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -5239,15 +4282,6 @@
                 }
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            },
             "application/json": {
               "schema": {
                 "type": "array",
@@ -5279,7 +4313,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -5436,15 +4470,6 @@
                 }
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            },
             "application/json": {
               "schema": {
                 "type": "array",
@@ -5476,7 +4501,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -5636,15 +4661,6 @@
                 }
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            },
             "application/json": {
               "schema": {
                 "type": "array",
@@ -5676,7 +4692,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -5824,15 +4840,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ValidationOptionsWithSelectedItems"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -5864,7 +4871,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -5933,7 +4940,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -6064,19 +5071,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "enum": [
-                  "UpdateExistingItems",
-                  "CreateNewItems"
-                ],
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/FixItemIdentifierErrorsType"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "enum": [
@@ -6120,7 +5114,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -6197,7 +5191,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -6256,7 +5250,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -6349,7 +5343,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -6418,7 +5412,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -6486,13 +5480,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   }
                 }
               },
@@ -6500,7 +5494,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   }
                 }
               },
@@ -6508,7 +5502,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   }
                 }
               }
@@ -6534,20 +5528,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ItemCategory.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   }
                 ]
               }
@@ -6556,7 +5541,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   }
                 ]
               }
@@ -6565,7 +5550,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   }
                 ]
               }
@@ -6574,7 +5559,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -6637,21 +5622,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemCategory.1"
+                  "$ref": "#/components/schemas/ItemCategory"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemCategory.1"
+                  "$ref": "#/components/schemas/ItemCategory"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ItemCategory.1"
+                  "$ref": "#/components/schemas/ItemCategory"
                 }
               }
             }
@@ -6685,20 +5670,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ItemCategory.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   }
                 ]
               }
@@ -6707,7 +5683,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   }
                 ]
               }
@@ -6716,7 +5692,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ItemCategory.1"
+                    "$ref": "#/components/schemas/ItemCategory"
                   }
                 ]
               }
@@ -6725,7 +5701,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -6766,7 +5742,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -6809,7 +5785,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -6852,7 +5828,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -6920,13 +5896,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ItemList.1"
+                    "$ref": "#/components/schemas/ItemList"
                   }
                 }
               },
@@ -6934,7 +5910,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ItemList.1"
+                    "$ref": "#/components/schemas/ItemList"
                   }
                 }
               },
@@ -6942,7 +5918,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ItemList.1"
+                    "$ref": "#/components/schemas/ItemList"
                   }
                 }
               }
@@ -6968,20 +5944,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CreateItemList.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/CreateItemList.1"
+                    "$ref": "#/components/schemas/CreateItemList"
                   }
                 ]
               }
@@ -6990,7 +5957,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/CreateItemList.1"
+                    "$ref": "#/components/schemas/CreateItemList"
                   }
                 ]
               }
@@ -6999,7 +5966,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/CreateItemList.1"
+                    "$ref": "#/components/schemas/CreateItemList"
                   }
                 ]
               }
@@ -7008,7 +5975,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -7071,20 +6038,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/UpdateItemList.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/UpdateItemList.1"
+                    "$ref": "#/components/schemas/UpdateItemList"
                   }
                 ]
               }
@@ -7093,7 +6051,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/UpdateItemList.1"
+                    "$ref": "#/components/schemas/UpdateItemList"
                   }
                 ]
               }
@@ -7102,7 +6060,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/UpdateItemList.1"
+                    "$ref": "#/components/schemas/UpdateItemList"
                   }
                 ]
               }
@@ -7111,7 +6069,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -7152,7 +6110,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -7204,7 +6162,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -7283,7 +6241,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -7340,7 +6298,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -7424,7 +6382,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -7523,7 +6481,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -7593,15 +6551,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/UseItemList"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -7633,7 +6582,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -7727,7 +6676,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -7820,7 +6769,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -7898,7 +6847,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -7946,15 +6895,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ItemType"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -7986,7 +6926,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -8049,7 +6989,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -8097,15 +7037,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ItemType"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -8137,7 +7068,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -8178,7 +7109,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -8221,7 +7152,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -8264,793 +7195,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/MarketingCodes": {
-      "post": {
-        "tags": [
-          "MarketingCodes"
-        ],
-        "parameters": [
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingCode.1"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingCode.1"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingCode.1"
-                  }
-                ]
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingCode.1"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "MarketingCodes"
-        ],
-        "parameters": [
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          },
-          {
-            "name": "$skip",
-            "in": "query",
-            "description": "Skips the first n results",
-            "schema": {
-              "type": "number",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "Returns the first n results",
-            "schema": {
-              "type": "number",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Filters the results using oData Notation",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "description": "Orders the results by the fields listed",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/MarketingCode.1"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/MarketingCode.1"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/MarketingCode.1"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/MarketingCodes/{id}": {
-      "get": {
-        "tags": [
-          "MarketingCodes"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/MarketingCode.1"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MarketingCode.1"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MarketingCode.1"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "MarketingCodes"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingCode.1"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingCode.1"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingCode.1"
-                  }
-                ]
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingCode.1"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/MarketingCodes/{id}/ToggleIsActive": {
-      "post": {
-        "tags": [
-          "MarketingCodes"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/MarketingCodes/{id}/ToggleIsDefault": {
-      "post": {
-        "tags": [
-          "MarketingCodes"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/MarketingExclusivities": {
-      "get": {
-        "tags": [
-          "MarketingExclusivities"
-        ],
-        "parameters": [
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          },
-          {
-            "name": "$skip",
-            "in": "query",
-            "description": "Skips the first n results",
-            "schema": {
-              "type": "number",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "Returns the first n results",
-            "schema": {
-              "type": "number",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Filters the results using oData Notation",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "description": "Orders the results by the fields listed",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "MarketingExclusivities"
-        ],
-        "parameters": [
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
-                  }
-                ]
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/MarketingExclusivities/{id}": {
-      "get": {
-        "tags": [
-          "MarketingExclusivities"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/MarketingExclusivity.1"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MarketingExclusivity.1"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MarketingExclusivity.1"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "MarketingExclusivities"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
-                  }
-                ]
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity.1"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/MarketingExclusivities/{id}/ToggleIsActive": {
-      "post": {
-        "tags": [
-          "MarketingExclusivities"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/MarketingExclusivities/{id}/ToggleIsDefault": {
-      "post": {
-        "tags": [
-          "MarketingExclusivities"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -9118,13 +7263,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   }
                 }
               },
@@ -9132,7 +7277,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   }
                 }
               },
@@ -9140,7 +7285,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   }
                 }
               }
@@ -9166,20 +7311,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/NonsaleType.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   }
                 ]
               }
@@ -9188,7 +7324,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   }
                 ]
               }
@@ -9197,7 +7333,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   }
                 ]
               }
@@ -9206,7 +7342,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -9269,20 +7405,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/NonsaleType.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   }
                 ]
               }
@@ -9291,7 +7418,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   }
                 ]
               }
@@ -9300,7 +7427,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/NonsaleType.1"
+                    "$ref": "#/components/schemas/NonsaleType"
                   }
                 ]
               }
@@ -9309,7 +7436,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -9352,7 +7479,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -9420,13 +7547,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Nutrition.1"
+                    "$ref": "#/components/schemas/Nutrition"
                   }
                 }
               },
@@ -9434,7 +7561,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Nutrition.1"
+                    "$ref": "#/components/schemas/Nutrition"
                   }
                 }
               },
@@ -9442,7 +7569,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Nutrition.1"
+                    "$ref": "#/components/schemas/Nutrition"
                   }
                 }
               }
@@ -9468,15 +7595,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/NutritionDetails"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -9508,7 +7626,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -9571,7 +7689,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -9619,15 +7737,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/NutritionDetails"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -9659,7 +7768,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -9702,400 +7811,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/PlanningCodes": {
-      "post": {
-        "tags": [
-          "PlanningCodes"
-        ],
-        "parameters": [
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  }
-                ]
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "PlanningCodes"
-        ],
-        "parameters": [
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          },
-          {
-            "name": "$skip",
-            "in": "query",
-            "description": "Skips the first n results",
-            "schema": {
-              "type": "number",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "Returns the first n results",
-            "schema": {
-              "type": "number",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Filters the results using oData Notation",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "description": "Orders the results by the fields listed",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/PlanningCodes/{id}": {
-      "get": {
-        "tags": [
-          "PlanningCodes"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/PlanningCode"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PlanningCode"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PlanningCode"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "PlanningCodes"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  }
-                ]
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/PlanningCodes/{id}/ToggleIsActive": {
-      "post": {
-        "tags": [
-          "PlanningCodes"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/PlanningCodes/{id}/ToggleIsDefault": {
-      "post": {
-        "tags": [
-          "PlanningCodes"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -10163,13 +7879,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   }
                 }
               },
@@ -10177,7 +7893,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   }
                 }
               },
@@ -10185,7 +7901,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   }
                 }
               }
@@ -10211,20 +7927,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   }
                 ]
               }
@@ -10233,7 +7940,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   }
                 ]
               }
@@ -10242,7 +7949,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   }
                 ]
               }
@@ -10251,7 +7958,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -10314,21 +8021,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProcurementRule.1"
+                  "$ref": "#/components/schemas/ProcurementRule"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProcurementRule.1"
+                  "$ref": "#/components/schemas/ProcurementRule"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProcurementRule.1"
+                  "$ref": "#/components/schemas/ProcurementRule"
                 }
               }
             }
@@ -10362,20 +8069,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   }
                 ]
               }
@@ -10384,7 +8082,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   }
                 ]
               }
@@ -10393,7 +8091,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ProcurementRule.1"
+                    "$ref": "#/components/schemas/ProcurementRule"
                   }
                 ]
               }
@@ -10402,7 +8100,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -10443,7 +8141,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -10486,7 +8184,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -10529,7 +8227,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -10597,13 +8295,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   }
                 }
               },
@@ -10611,7 +8309,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   }
                 }
               },
@@ -10619,7 +8317,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   }
                 }
               }
@@ -10645,20 +8343,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   }
                 ]
               }
@@ -10667,7 +8356,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   }
                 ]
               }
@@ -10676,7 +8365,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   }
                 ]
               }
@@ -10685,7 +8374,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -10748,21 +8437,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReplenishmentCode.1"
+                  "$ref": "#/components/schemas/ReplenishmentCode"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReplenishmentCode.1"
+                  "$ref": "#/components/schemas/ReplenishmentCode"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReplenishmentCode.1"
+                  "$ref": "#/components/schemas/ReplenishmentCode"
                 }
               }
             }
@@ -10796,20 +8485,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   }
                 ]
               }
@@ -10818,7 +8498,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   }
                 ]
               }
@@ -10827,7 +8507,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/ReplenishmentCode.1"
+                    "$ref": "#/components/schemas/ReplenishmentCode"
                   }
                 ]
               }
@@ -10836,7 +8516,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -10877,7 +8557,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -10920,7 +8600,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -10963,7 +8643,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -11031,7 +8711,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -11079,15 +8759,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ReportCategory"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -11119,7 +8790,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -11182,7 +8853,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -11230,15 +8901,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ReportCategory"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -11270,7 +8932,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -11311,7 +8973,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -11354,7 +9016,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -11397,7 +9059,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -11465,7 +9127,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -11513,15 +9175,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/RoundingRule"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -11553,7 +9206,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -11616,7 +9269,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -11664,15 +9317,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/RoundingRule"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -11704,7 +9348,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -11747,7 +9391,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -11790,7 +9434,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -11824,15 +9468,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SearchableColor"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -11864,7 +9499,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -11950,7 +9585,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -12009,7 +9644,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -12052,7 +9687,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -12100,15 +9735,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SearchableColor"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -12140,7 +9766,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -12174,15 +9800,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SeasonCode"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -12214,7 +9831,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -12300,7 +9917,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -12359,7 +9976,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -12402,7 +10019,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -12445,7 +10062,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -12493,15 +10110,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SeasonCode"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -12533,7 +10141,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -12567,15 +10175,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SeasonDetails"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -12607,7 +10206,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -12693,7 +10292,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -12752,15 +10351,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SeasonDetails"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -12792,7 +10382,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -12833,7 +10423,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -12881,7 +10471,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -12924,7 +10514,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -12992,7 +10582,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -13040,15 +10630,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberAttribute"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -13080,7 +10661,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -13143,7 +10724,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -13191,15 +10772,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberAttribute"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -13231,7 +10803,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -13274,7 +10846,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -13351,7 +10923,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -13408,15 +10980,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberAttributeValue"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -13448,7 +11011,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -13520,15 +11083,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberAttributeValue"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -13560,7 +11114,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -13610,7 +11164,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -13662,7 +11216,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -13730,7 +11284,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -13778,15 +11332,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberType"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -13818,7 +11363,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -13881,7 +11426,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -13929,15 +11474,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberType"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -13969,7 +11505,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -14010,7 +11546,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -14053,7 +11589,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -14096,7 +11632,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -14173,7 +11709,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -14230,15 +11766,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberTypeAttribute"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -14270,7 +11797,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -14342,15 +11869,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberTypeAttribute"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -14382,7 +11900,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -14452,7 +11970,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -14524,7 +12042,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -14567,7 +12085,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -14591,440 +12109,6 @@
                   "items": {
                     "$ref": "#/components/schemas/SerialNumberTypeAttribute"
                   }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/ServiceLevels": {
-      "get": {
-        "tags": [
-          "ServiceLevels"
-        ],
-        "parameters": [
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          },
-          {
-            "name": "$skip",
-            "in": "query",
-            "description": "Skips the first n results",
-            "schema": {
-              "type": "number",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "Returns the first n results",
-            "schema": {
-              "type": "number",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Filters the results using oData Notation",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "description": "Orders the results by the fields listed",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "ServiceLevels"
-        ],
-        "parameters": [
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/ServiceLevels/{id}": {
-      "get": {
-        "tags": [
-          "ServiceLevels"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ServiceLevel"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ServiceLevel"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ServiceLevel"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "ServiceLevels"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "ServiceLevels"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/ServiceLevels/{id}/ToggleIsActive": {
-      "post": {
-        "tags": [
-          "ServiceLevels"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/ServiceLevels/{id}/ToggleIsDefault": {
-      "post": {
-        "tags": [
-          "ServiceLevels"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "lrs-userid",
-            "in": "header",
-            "description": "Specifies the identifier of the user who triggered the request",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default": "ZGV2ZWxvcGVy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
                 }
               }
             }
@@ -15085,13 +12169,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   }
                 }
               },
@@ -15099,7 +12183,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   }
                 }
               },
@@ -15107,7 +12191,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   }
                 }
               }
@@ -15133,20 +12217,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Size.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   }
                 ]
               }
@@ -15155,7 +12230,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   }
                 ]
               }
@@ -15164,7 +12239,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   }
                 ]
               }
@@ -15173,7 +12248,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -15236,21 +12311,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/Size.1"
+                  "$ref": "#/components/schemas/Size"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Size.1"
+                  "$ref": "#/components/schemas/Size"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Size.1"
+                  "$ref": "#/components/schemas/Size"
                 }
               }
             }
@@ -15284,20 +12359,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Size.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   }
                 ]
               }
@@ -15306,7 +12372,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   }
                 ]
               }
@@ -15315,7 +12381,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/Size.1"
+                    "$ref": "#/components/schemas/Size"
                   }
                 ]
               }
@@ -15324,7 +12390,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -15367,7 +12433,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -15435,7 +12501,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -15483,15 +12549,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SizeTemplate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -15523,7 +12580,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -15586,7 +12643,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -15634,15 +12691,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SizeTemplate"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -15674,7 +12722,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -15717,7 +12765,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -15794,7 +12842,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -15862,15 +12910,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SizeTemplateSize"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -15902,7 +12941,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -15952,15 +12991,6 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SizeTemplateSize"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
@@ -15992,7 +13022,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -16042,7 +13072,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -16110,7 +13140,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -16160,7 +13190,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -16208,20 +13238,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/TradingUnit.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit.1"
+                    "$ref": "#/components/schemas/TradingUnit"
                   }
                 ]
               }
@@ -16230,7 +13251,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit.1"
+                    "$ref": "#/components/schemas/TradingUnit"
                   }
                 ]
               }
@@ -16239,7 +13260,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit.1"
+                    "$ref": "#/components/schemas/TradingUnit"
                   }
                 ]
               }
@@ -16248,7 +13269,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
@@ -16311,20 +13332,11 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/TradingUnit.1"
-                  }
-                ]
-              }
-            },
             "application/json": {
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit.1"
+                    "$ref": "#/components/schemas/TradingUnit"
                   }
                 ]
               }
@@ -16333,7 +13345,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit.1"
+                    "$ref": "#/components/schemas/TradingUnit"
                   }
                 ]
               }
@@ -16342,7 +13354,7 @@
               "schema": {
                 "allOf": [
                   {
-                    "$ref": "#/components/schemas/TradingUnit.1"
+                    "$ref": "#/components/schemas/TradingUnit"
                   }
                 ]
               }
@@ -16351,7 +13363,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -16394,7 +13406,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -16437,7 +13449,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "description": "Validation error",
@@ -16640,7 +13652,7 @@
         ],
         "type": "string"
       },
-      "Brand.1": {
+      "Brand": {
         "required": [
           "description",
           "name"
@@ -16876,17 +13888,13 @@
             "type": "boolean",
             "description": "Based on this flag external item number is generated or not (editible in UI)."
           },
-          "usePlanningCodes": {
-            "type": "boolean",
-            "description": "Flag representing whether tenant uses planning codes or not."
-          },
           "useModelItems": {
             "type": "boolean",
             "description": "Flag representing whether tenant uses model or non-model items."
           },
           "useAssortmentPerProfile": {
             "type": "boolean",
-            "description": "Flag representing whether tenant uses assortment per profile or not.\r\nWhen parameter UsePlanningCodes is enabled, the value of the parameter UseAssortmentPerProfile does not have any impact on the system."
+            "description": "Flag representing whether tenant uses assortment per profile or not."
           },
           "useValuesPerProfile": {
             "type": "boolean",
@@ -16913,9 +13921,45 @@
             "format": "double",
             "nullable": true
           },
+          "priceCalculationMinMarginPercent": {
+            "type": "number",
+            "description": "Minimum margin percent for store price calculation warning. Null means no limit configured.",
+            "format": "double",
+            "nullable": true
+          },
+          "priceCalculationMaxMarginPercent": {
+            "type": "number",
+            "description": "Maximum margin percent for store price calculation warning. Null means no limit configured.",
+            "format": "double",
+            "nullable": true
+          },
           "gtinPrefix": {
             "type": "string",
             "description": "Parameter representing what GTIN prefix would you like to have for new items.",
+            "nullable": true
+          },
+          "gtinSeriesMode": {
+            "enum": [
+              "Prefix",
+              "Range"
+            ],
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GtinSeriesMode"
+              }
+            ],
+            "description": "Parameter representing whether GTIN generation uses a prefix or a from-to range."
+          },
+          "gtinRangeFrom": {
+            "type": "integer",
+            "description": "Lower bound of the GTIN/EAN number series range. Only relevant when GtinSeriesMode is Range.",
+            "format": "int64",
+            "nullable": true
+          },
+          "gtinRangeTo": {
+            "type": "integer",
+            "description": "Upper bound of the GTIN/EAN number series range. Only relevant when GtinSeriesMode is Range.",
+            "format": "int64",
             "nullable": true
           },
           "itemImageUrlTemplate": {
@@ -16932,6 +13976,10 @@
             "type": "boolean",
             "description": "Parameter representing whether conversion to EAN20 should be enabled during import"
           },
+          "enableEan7388Conversion": {
+            "type": "boolean",
+            "description": "Parameter representing whether conversion of EAN7388 variable-price codes should be enabled"
+          },
           "manageStoreAssortment": {
             "type": "boolean",
             "description": "Parameter representing whether managing store assortment should be enabled"
@@ -16942,7 +13990,7 @@
           },
           "createLabelsOnlyForItemsInStockWithinLastNumberOfDays": {
             "type": "integer",
-            "description": "Parameter representing whether to create labels only for items in stock within last number of days",
+            "description": "Number of days an item may be out of stock before label generation stops for it. Labels stop only once\r\nthe item is out of stock and its stock has been unchanged for this many days, so an item with stock on\r\nhand always keeps its labels. An item with no stock record counts as out of stock. 0 disables the check.",
             "format": "int32"
           },
           "pricerUrl": {
@@ -16988,70 +14036,28 @@
             ],
             "description": "Configuration for hidden item and price attributes",
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "Collection.1": {
-        "required": [
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
           },
-          "code": {
-            "type": "string",
-            "description": "A unique code of the collection.",
+          "priceControl": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PriceControl"
+              }
+            ],
+            "description": "On/off settings for the three price-control mechanisms",
             "nullable": true
           },
-          "name": {
-            "maxLength": 50,
-            "minLength": 1,
-            "type": "string"
-          },
-          "description": {
-            "maxLength": 255,
-            "type": "string",
-            "nullable": true
-          },
-          "inactive": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "isDefault": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "displayText": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "createdBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "modifiedBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "modifiedDate": {
-            "type": "string",
-            "format": "date-time",
+          "reservedPluRanges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReservedPluRange"
+            },
+            "description": "Numeric ranges reserved for central PLU values. An empty list means no PLU restriction applies.",
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "Color.1": {
+      "Color": {
         "type": "object",
         "properties": {
           "id": {
@@ -17146,7 +14152,7 @@
           "brand": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/Brand.1"
+                "$ref": "#/components/schemas/Brand"
               }
             ],
             "nullable": true,
@@ -17467,29 +14473,7 @@
         },
         "additionalProperties": false
       },
-      "CreateDeliveryDatesRequest": {
-        "type": "object",
-        "properties": {
-          "deliveryDateListsIds": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "nullable": true
-          },
-          "deliveryDate": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DeliveryDate.1"
-              }
-            ],
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "CreateItemList.1": {
+      "CreateItemList": {
         "type": "object",
         "properties": {
           "name": {
@@ -17506,110 +14490,6 @@
           "inactive": {
             "type": "boolean",
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "DeleteDeliveryDatesRequest": {
-        "type": "object",
-        "properties": {
-          "deliveryDateListsIds": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "DeliveryDate.1": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "identifier": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "date": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "orderDeadlineDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "customDeliveryDate": {
-            "type": "boolean",
-            "description": "If true, the store can override the date."
-          }
-        },
-        "additionalProperties": false
-      },
-      "DeliveryDateGrid": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "identifier": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "date": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "dateWeek": {
-            "type": "string",
-            "nullable": true
-          },
-          "orderDeadlineDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "orderDeadlineDateWeek": {
-            "type": "string",
-            "nullable": true
-          },
-          "customDeliveryDate": {
-            "type": "boolean",
-            "description": "If true, the store can override the date."
-          },
-          "deliveryDateListId": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
-      "DeliveryDateUpdate": {
-        "type": "object",
-        "properties": {
-          "date": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "orderDeadlineDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "customDeliveryDate": {
-            "type": "boolean",
-            "description": "If true, the store can override the date."
           }
         },
         "additionalProperties": false
@@ -17796,11 +14676,6 @@
             "type": "string",
             "nullable": true
           },
-          "calculationRulesetId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
           "displayText": {
             "type": "string",
             "nullable": true,
@@ -17885,6 +14760,13 @@
         ],
         "type": "string"
       },
+      "GtinSeriesMode": {
+        "enum": [
+          "Prefix",
+          "Range"
+        ],
+        "type": "string"
+      },
       "HiddenAttributes": {
         "type": "object",
         "properties": {
@@ -17913,6 +14795,9 @@
             "type": "boolean"
           },
           "bonus": {
+            "type": "boolean"
+          },
+          "itemOriginatingFrom": {
             "type": "boolean"
           }
         },
@@ -18010,6 +14895,11 @@
             "format": "date-time",
             "nullable": true
           },
+          "scheduledImportDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
           "approvalRuleset": {
             "enum": [
               "DefaultItem",
@@ -18072,7 +14962,7 @@
           "storeGroupType": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/StoreGroupType.1"
+                "$ref": "#/components/schemas/StoreGroupType"
               }
             ],
             "nullable": true
@@ -18203,7 +15093,7 @@
           "storeGroupType": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/StoreGroupType.1"
+                "$ref": "#/components/schemas/StoreGroupType"
               }
             ],
             "nullable": true
@@ -18344,23 +15234,11 @@
               }
             ]
           },
-          "errors": {
-            "type": "array",
-            "items": { },
-            "description": "This field is not serialized to JSON.\r\nMapping methods use it to create a query which can be translated to SQL.\r\nUse ItemService.Api.Contracts.PricatImport.ImportItem.ErrorList  property to obtain errors.",
-            "nullable": true
-          },
           "errorList": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ItemValidationError"
             },
-            "nullable": true
-          },
-          "warnings": {
-            "type": "array",
-            "items": { },
-            "description": "This field is not serialized to JSON.\r\nMapping methods use it to create a query which can be translated to SQL.\r\nUse ItemService.Api.Contracts.PricatImport.ImportItem.WarningList  property to obtain errors.",
             "nullable": true
           },
           "warningList": {
@@ -18537,7 +15415,7 @@
           "storeGroupType": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/StoreGroupType.1"
+                "$ref": "#/components/schemas/StoreGroupType"
               }
             ],
             "nullable": true
@@ -18671,10 +15549,6 @@
             "nullable": true
           },
           "currentExternalItemNo": {
-            "type": "string",
-            "nullable": true
-          },
-          "itemPlanningCode": {
             "type": "string",
             "nullable": true
           },
@@ -18823,7 +15697,7 @@
         "type": "object",
         "additionalProperties": false
       },
-      "ItemCategory.1": {
+      "ItemCategory": {
         "required": [
           "name"
         ],
@@ -18880,7 +15754,7 @@
         },
         "additionalProperties": false
       },
-      "ItemList.1": {
+      "ItemList": {
         "type": "object",
         "properties": {
           "id": {
@@ -19145,7 +16019,9 @@
           "IngredientQuantityNotInZeroOneRange",
           "IngredientNameRequired",
           "GrossQuantityCannotBeLessThanNetQuantity",
+          "ManagedByHqAndByStoreCannotBeTrueAtTheSameTime",
           "ItemMustBeIngredientOrHaveIngredientWithQtyOne",
+          "InsufficientAreaAccess",
           "ItemMustBeIngredient",
           "QuantityPerUnitMustBeInRange",
           "NumberOfUnitsMustBeInRange",
@@ -19156,15 +16032,34 @@
           "IngredientNumbersFromMultipleNonAlternativeItems",
           "InvalidAlternativeItem",
           "CannotModifyDefaultIngredientQuantities",
+          "PricePeriodCannotOverlapOnExistingPriceStartDate",
+          "PriceEndDateMustBeLaterThanStartDate",
           "FastLaneDoesNotSupportNewItems",
           "DefaultIngredientCannotBeDeleted",
           "IngredientNumberRequiredForDeletion",
           "InvalidNutritionValue",
           "InvalidAllergenValue",
+          "UnknownSubSupplier",
           "InvalidAgeGroupValue",
           "AgeGroupRequiresActiveSubstance",
           "SubSupplierItemNoAlreadyExistsOnDifferentItem",
-          "SubSupplierItemNoAlreadyFoundOnPreviousItemInFile"
+          "SubSupplierItemNoAlreadyFoundOnPreviousItemInFile",
+          "HighlightedTextNotFound",
+          "IngredientQuantityMustBeGreaterThanZero",
+          "GtinNotAllowedForLocalItem",
+          "GtinRangeExhausted",
+          "TaraCannotExceedWeight",
+          "IncorrectStorePriceSignOnSupplierDiscount",
+          "IncorrectStorePriceSignOnFreight",
+          "IncorrectStorePriceSignOnRetailerKickback",
+          "IncorrectStorePriceSignOnLocalDiscount1",
+          "IncorrectStorePriceSignOnLocalDiscount2",
+          "IncorrectStorePriceSignOnCalculatedBreakage",
+          "IncorrectStorePriceSignOnCustoms",
+          "IncorrectStorePriceSignOnHandlingCosts",
+          "GtinWithinReservedRange",
+          "MeasureCannotBeNegative",
+          "MainSupplierCannotBeDeletedFromCommon"
         ],
         "type": "string"
       },
@@ -19225,17 +16120,23 @@
           "BreakBulkCantBeSetOnTUItem",
           "DepositItemCreatedAsPlaceholder",
           "ShelfLocationCantBeCreated",
+          "SomeAlternativeGTINsWillNotBeImported",
+          "SomeValuesWillNotBeUpdatedDueToInsufficientPermissions",
           "SomeMenuGroupWillNotBeImportedToMenu",
           "SomeIngredientWillNotBeImportedToRecipe",
           "SomeAllergensWillNotBeImported",
           "SomeNutritionWillNotBeImported",
           "MultipleIngredientsWithQuantityOne",
+          "PriceWillNotBeImportedBecauseToDateInPast",
           "IngredientToDeleteDoesNotExist",
           "RecommendedServiceCodeInvalid",
           "RecommendedActionCodeRequired",
           "RecommendedActionCodeNotValidForServiceCode",
           "RecommendedLocationCodeNotValidForProfile",
-          "RecommendedServiceOnlyAllowedForProfile"
+          "RecommendedServiceOnlyAllowedForProfile",
+          "PriceValidToExtendedDueToPromotion",
+          "FuturePriceWillSupersedeImportedPrice",
+          "WholesalePriceAdjustedToNetPrice"
         ],
         "type": "string"
       },
@@ -19263,124 +16164,7 @@
         },
         "additionalProperties": false
       },
-      "MarketingCode.1": {
-        "required": [
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "code": {
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
-            "maxLength": 50,
-            "minLength": 1,
-            "type": "string"
-          },
-          "description": {
-            "maxLength": 255,
-            "type": "string",
-            "nullable": true
-          },
-          "displayText": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "inactive": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "isDefault": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "createdBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "modifiedBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "modifiedDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "MarketingExclusivity.1": {
-        "required": [
-          "description",
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "code": {
-            "type": "string",
-            "description": "A unique code of the marketing exclusivity.",
-            "nullable": true
-          },
-          "name": {
-            "maxLength": 50,
-            "minLength": 1,
-            "type": "string"
-          },
-          "description": {
-            "maxLength": 255,
-            "type": "string"
-          },
-          "inactive": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "isDefault": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "displayText": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "createdBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "modifiedBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "modifiedDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "NonsaleType.1": {
+      "NonsaleType": {
         "required": [
           "description",
           "name"
@@ -19434,7 +16218,7 @@
         },
         "additionalProperties": false
       },
-      "Nutrition.1": {
+      "Nutrition": {
         "type": "object",
         "properties": {
           "id": {
@@ -19529,85 +16313,26 @@
         ],
         "type": "string"
       },
-      "PlanningCode": {
-        "required": [
-          "name"
-        ],
+      "PriceControl": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "code": {
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
-            "maxLength": 50,
-            "minLength": 1,
-            "type": "string"
-          },
-          "description": {
-            "maxLength": 255,
-            "type": "string",
-            "nullable": true
-          },
-          "earliestDelivery": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "latestDelivery": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "inactive": {
+          "franchisePriceControl": {
             "type": "boolean",
-            "readOnly": true
+            "description": "Franchise stores approve central changes before they take effect. A central retail-price or assortment\r\nchange creates an approval item per franchise store; it takes effect at that store only after approval."
           },
-          "isDefault": {
+          "wholesalePriceCascade": {
             "type": "boolean",
-            "readOnly": true
+            "description": "Automatically pushes cost-side changes (wholesale/net price, supplier discount, freight and the\r\nrecalculated margin) from a profile or price zone down to its store prices. Retail prices are not\r\nchanged and no approval is created."
           },
-          "isCurrent": {
-            "type": "boolean"
-          },
-          "displayText": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "appliedInStoreGroups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StoreGroup"
-            },
-            "nullable": true
-          },
-          "createdBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "modifiedBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "modifiedDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
+          "keepMarginSuggestions": {
+            "type": "boolean",
+            "description": "When a profile's wholesale (cost) price changes without a retail change, creates a suggested retail\r\nprice that keeps the previous margin, for review. Removed if the retail price is changed."
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "On/off settings for the three price-control mechanisms of the price-suggestion job."
       },
-      "ProcurementRule.1": {
+      "ProcurementRule": {
         "required": [
           "description",
           "name"
@@ -19685,7 +16410,7 @@
         },
         "additionalProperties": false
       },
-      "ReplenishmentCode.1": {
+      "ReplenishmentCode": {
         "required": [
           "name"
         ],
@@ -19802,6 +16527,23 @@
           }
         },
         "additionalProperties": false
+      },
+      "ReservedPluRange": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "integer",
+            "description": "Inclusive lower bound.",
+            "format": "int64"
+          },
+          "to": {
+            "type": "integer",
+            "description": "Inclusive upper bound.",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A numeric range reserved for central PLU values. PLU values entered on items must fall outside every reserved range."
       },
       "RoundingAmountOperator": {
         "enum": [
@@ -20387,75 +17129,7 @@
         },
         "additionalProperties": false
       },
-      "ServiceLevel": {
-        "required": [
-          "description",
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          },
-          "code": {
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
-            "maxLength": 50,
-            "minLength": 1,
-            "type": "string"
-          },
-          "serviceLevelPercent": {
-            "maximum": 100,
-            "minimum": 0.5,
-            "type": "number",
-            "format": "double"
-          },
-          "description": {
-            "maxLength": 255,
-            "type": "string"
-          },
-          "inactive": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "isDefault": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "isDeleted": {
-            "type": "boolean",
-            "readOnly": true
-          },
-          "displayText": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "createdDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "createdBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "modifiedBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "modifiedDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "Size.1": {
+      "Size": {
         "required": [
           "defaultDisplaySize",
           "name"
@@ -20730,7 +17404,7 @@
             ],
             "allOf": [
               {
-                "$ref": "#/components/schemas/StoreGroupType.1"
+                "$ref": "#/components/schemas/StoreGroupType"
               }
             ]
           },
@@ -20749,7 +17423,7 @@
         },
         "additionalProperties": false
       },
-      "StoreGroupType.1": {
+      "StoreGroupType": {
         "enum": [
           "Team",
           "Profile",
@@ -20760,7 +17434,7 @@
         ],
         "type": "string"
       },
-      "TradingUnit.1": {
+      "TradingUnit": {
         "required": [
           "tradingUnitTexts"
         ],
@@ -21006,29 +17680,7 @@
         },
         "additionalProperties": false
       },
-      "UpdateDeliveryDatesRequest": {
-        "type": "object",
-        "properties": {
-          "deliveryDateListsIds": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "nullable": true
-          },
-          "deliveryDate": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DeliveryDateUpdate"
-              }
-            ],
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "UpdateItemList.1": {
+      "UpdateItemList": {
         "required": [
           "name"
         ],
@@ -21180,6 +17832,104 @@
   "security": [
     {
       "Bearer": [ ]
+    }
+  ],
+  "tags": [
+    {
+      "name": "Activity"
+    },
+    {
+      "name": "AlternativeGroups"
+    },
+    {
+      "name": "BrandCategories"
+    },
+    {
+      "name": "Brands"
+    },
+    {
+      "name": "Classifications"
+    },
+    {
+      "name": "Colors"
+    },
+    {
+      "name": "Concession"
+    },
+    {
+      "name": "ConcessionStores"
+    },
+    {
+      "name": "Configuration"
+    },
+    {
+      "name": "Countries"
+    },
+    {
+      "name": "ExcelExportTemplates"
+    },
+    {
+      "name": "FileExport"
+    },
+    {
+      "name": "Imports"
+    },
+    {
+      "name": "ItemCategories"
+    },
+    {
+      "name": "ItemLists"
+    },
+    {
+      "name": "ItemSegmentation"
+    },
+    {
+      "name": "ItemTypes"
+    },
+    {
+      "name": "NonsaleType"
+    },
+    {
+      "name": "Nutritions"
+    },
+    {
+      "name": "ProcurementRules"
+    },
+    {
+      "name": "ReplenishmentCodes"
+    },
+    {
+      "name": "ReportCategories"
+    },
+    {
+      "name": "RoundingRecoveryRetailPrices"
+    },
+    {
+      "name": "SearchableColors"
+    },
+    {
+      "name": "SeasonCodes"
+    },
+    {
+      "name": "Seasons"
+    },
+    {
+      "name": "SerialNumberAttributes"
+    },
+    {
+      "name": "SerialNumberTypes"
+    },
+    {
+      "name": "Sizes"
+    },
+    {
+      "name": "SizeTemplates"
+    },
+    {
+      "name": "StoreGroups"
+    },
+    {
+      "name": "TradingUnits"
     }
   ]
 }
