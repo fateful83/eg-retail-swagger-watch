@@ -1,3 +1,94 @@
-No change for ItemService [DEV] (63c266c9d9a6)
-Fetch completed at: 2026-11-26T01:12:46Z
-Fetch duration ms: 1011
+# Swagger/OpenAPI change detected: ItemService [DEV]
+
+- Time: 2026-11-26T15:52:38Z
+- Fetch completed at: 2026-11-26T15:52:38Z
+- Fetch duration ms: 1269
+- Swagger URL: https://itemservice.egretail-dev.cloud/swagger/v1/swagger.json
+- Previous hash: `63c266c9d9a6bdf40c95ba1c0416918b916cd49a122f73c1d8273f4aaf19a2ca`
+- Current hash: `a9f195a304c758af5eab00fc12ec707696b8c9f1721ee2174ab1aeec76f18ffd`
+
+## Summary
+- Status: breaking
+- Added operations: 0
+- Removed operations: 0
+- Changed operations: 30
+- Breaking removed operations: 0
+- Breaking changed operations: 30
+- Non-breaking changed operations: 0
+
+## Added
+- None
+
+## Removed
+- None
+
+## Changed
+- GET /api/Brands
+- GET /api/Brands/{id}
+- GET /api/ItemCategories
+- GET /api/ItemCategories/{id}
+- GET /api/ItemLists
+- GET /api/NonsaleType
+- GET /api/Nutritions
+- GET /api/ProcurementRules
+- GET /api/ProcurementRules/{id}
+- GET /api/ReplenishmentCodes
+- GET /api/ReplenishmentCodes/{id}
+- GET /api/Sizes
+- GET /api/Sizes/{id}
+- POST /api/Brands
+- POST /api/Colors/upsertByName
+- POST /api/ItemCategories
+- POST /api/ItemLists
+- POST /api/NonsaleType
+- POST /api/ProcurementRules
+- POST /api/ReplenishmentCodes
+- POST /api/Sizes
+- POST /api/TradingUnits
+- PUT /api/Brands/{id}
+- PUT /api/ItemCategories/{id}
+- PUT /api/ItemLists/{id}
+- PUT /api/NonsaleType/{id}
+- PUT /api/ProcurementRules/{id}
+- PUT /api/ReplenishmentCodes/{id}
+- PUT /api/Sizes/{id}
+- PUT /api/TradingUnits/{id}
+
+## Breaking classification
+- Removed operations: 0
+- None
+
+- Breaking changed operations: 30
+  - GET /api/Brands
+  - GET /api/Brands/{id}
+  - GET /api/ItemCategories
+  - GET /api/ItemCategories/{id}
+  - GET /api/ItemLists
+  - GET /api/NonsaleType
+  - GET /api/Nutritions
+  - GET /api/ProcurementRules
+  - GET /api/ProcurementRules/{id}
+  - GET /api/ReplenishmentCodes
+  - GET /api/ReplenishmentCodes/{id}
+  - GET /api/Sizes
+  - GET /api/Sizes/{id}
+  - POST /api/Brands
+  - POST /api/Colors/upsertByName
+  - POST /api/ItemCategories
+  - POST /api/ItemLists
+  - POST /api/NonsaleType
+  - POST /api/ProcurementRules
+  - POST /api/ReplenishmentCodes
+  - POST /api/Sizes
+  - POST /api/TradingUnits
+  - PUT /api/Brands/{id}
+  - PUT /api/ItemCategories/{id}
+  - PUT /api/ItemLists/{id}
+  - PUT /api/NonsaleType/{id}
+  - PUT /api/ProcurementRules/{id}
+  - PUT /api/ReplenishmentCodes/{id}
+  - PUT /api/Sizes/{id}
+  - PUT /api/TradingUnits/{id}
+
+- Non-breaking changed operations: 0
+- None
