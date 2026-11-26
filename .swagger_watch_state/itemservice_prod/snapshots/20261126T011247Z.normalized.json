@@ -409,7 +409,7 @@
         "additionalProperties": false,
         "properties": {
           "createLabelsOnlyForItemsInStockWithinLastNumberOfDays": {
-            "description": "Parameter representing whether to create labels only for items in stock within last number of days",
+            "description": "Number of days an item may be out of stock before label generation stops for it. Labels stop only once\r\nthe item is out of stock and its stock has been unchanged for this many days, so an item with stock on\r\nhand always keeps its labels. An item with no stock record counts as out of stock. 0 disables the check.",
             "format": "int32",
             "type": "integer"
           },
@@ -425,6 +425,10 @@
             "description": "Parameter representing whether conversion to EAN20 should be enabled during import",
             "type": "boolean"
           },
+          "enableEan7388Conversion": {
+            "description": "Parameter representing whether conversion of EAN7388 variable-price codes should be enabled",
+            "type": "boolean"
+          },
           "generateExternalItemNo": {
             "description": "Based on this flag external item number is generated or not (editible in UI).",
             "type": "boolean"
@@ -433,6 +437,30 @@
             "description": "Parameter representing what GTIN prefix would you like to have for new items.",
             "nullable": true,
             "type": "string"
+          },
+          "gtinRangeFrom": {
+            "description": "Lower bound of the GTIN/EAN number series range. Only relevant when GtinSeriesMode is Range.",
+            "format": "int64",
+            "nullable": true,
+            "type": "integer"
+          },
+          "gtinRangeTo": {
+            "description": "Upper bound of the GTIN/EAN number series range. Only relevant when GtinSeriesMode is Range.",
+            "format": "int64",
+            "nullable": true,
+            "type": "integer"
+          },
+          "gtinSeriesMode": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GtinSeriesMode"
+              }
+            ],
+            "description": "Parameter representing whether GTIN generation uses a prefix or a from-to range.",
+            "enum": [
+              "Prefix",
+              "Range"
+            ]
           },
           "hiddenAttributes": {
             "allOf": [
@@ -476,11 +504,32 @@
             "description": "Parameter representing whether managing store assortment should be enabled",
             "type": "boolean"
           },
+          "priceCalculationMaxMarginPercent": {
+            "description": "Maximum margin percent for store price calculation warning. Null means no limit configured.",
+            "format": "double",
+            "nullable": true,
+            "type": "number"
+          },
+          "priceCalculationMinMarginPercent": {
+            "description": "Minimum margin percent for store price calculation warning. Null means no limit configured.",
+            "format": "double",
+            "nullable": true,
+            "type": "number"
+          },
           "priceCalculatorFallbackPercentDecimal": {
             "description": "Parameter representing what value should be used in price calculation when the calculation gets an out of range value, or a denominator is zero.",
             "format": "double",
             "nullable": true,
             "type": "number"
+          },
+          "priceControl": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PriceControl"
+              }
+            ],
+            "description": "On/off settings for the three price-control mechanisms",
+            "nullable": true
           },
           "priceLocalTimeZoneIana": {
             "description": "A iana time zone, e.g. 'Europe/Oslo'.\r\nhttps://www.iana.org/time-zones",
@@ -507,6 +556,14 @@
             "nullable": true,
             "type": "string"
           },
+          "reservedPluRanges": {
+            "description": "Numeric ranges reserved for central PLU values. An empty list means no PLU restriction applies.",
+            "items": {
+              "$ref": "#/components/schemas/ReservedPluRange"
+            },
+            "nullable": true,
+            "type": "array"
+          },
           "supportedLanguages": {
             "items": {
               "$ref": "#/components/schemas/Language"
@@ -520,15 +577,11 @@
             "type": "string"
           },
           "useAssortmentPerProfile": {
-            "description": "Flag representing whether tenant uses assortment per profile or not.\r\nWhen parameter UsePlanningCodes is enabled, the value of the parameter UseAssortmentPerProfile does not have any impact on the system.",
+            "description": "Flag representing whether tenant uses assortment per profile or not.",
             "type": "boolean"
           },
           "useModelItems": {
             "description": "Flag representing whether tenant uses model or non-model items.",
-            "type": "boolean"
-          },
-          "usePlanningCodes": {
-            "description": "Flag representing whether tenant uses planning codes or not.",
             "type": "boolean"
           },
           "useValuesPerProfile": {
@@ -536,65 +589,6 @@
             "type": "boolean"
           }
         },
-        "type": "object"
-      },
-      "Collection": {
-        "additionalProperties": false,
-        "properties": {
-          "code": {
-            "description": "A unique code of the collection.",
-            "nullable": true,
-            "type": "string"
-          },
-          "createdBy": {
-            "nullable": true,
-            "type": "string"
-          },
-          "createdDate": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "maxLength": 255,
-            "nullable": true,
-            "type": "string"
-          },
-          "displayText": {
-            "nullable": true,
-            "readOnly": true,
-            "type": "string"
-          },
-          "id": {
-            "format": "int32",
-            "readOnly": true,
-            "type": "integer"
-          },
-          "inactive": {
-            "readOnly": true,
-            "type": "boolean"
-          },
-          "isDefault": {
-            "readOnly": true,
-            "type": "boolean"
-          },
-          "modifiedBy": {
-            "nullable": true,
-            "type": "string"
-          },
-          "modifiedDate": {
-            "format": "date-time",
-            "nullable": true,
-            "type": "string"
-          },
-          "name": {
-            "maxLength": 50,
-            "minLength": 1,
-            "type": "string"
-          }
-        },
-        "required": [
-          "name"
-        ],
         "type": "object"
       },
       "Color": {
@@ -1013,28 +1007,6 @@
         },
         "type": "object"
       },
-      "CreateDeliveryDatesRequest": {
-        "additionalProperties": false,
-        "properties": {
-          "deliveryDate": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DeliveryDate"
-              }
-            ],
-            "nullable": true
-          },
-          "deliveryDateListsIds": {
-            "items": {
-              "format": "int32",
-              "type": "integer"
-            },
-            "nullable": true,
-            "type": "array"
-          }
-        },
-        "type": "object"
-      },
       "CreateItemList": {
         "additionalProperties": false,
         "properties": {
@@ -1052,110 +1024,6 @@
           },
           "private": {
             "type": "boolean"
-          }
-        },
-        "type": "object"
-      },
-      "DeleteDeliveryDatesRequest": {
-        "additionalProperties": false,
-        "properties": {
-          "deliveryDateListsIds": {
-            "items": {
-              "format": "int32",
-              "type": "integer"
-            },
-            "nullable": true,
-            "type": "array"
-          }
-        },
-        "type": "object"
-      },
-      "DeliveryDate": {
-        "additionalProperties": false,
-        "properties": {
-          "customDeliveryDate": {
-            "description": "If true, the store can override the date.",
-            "type": "boolean"
-          },
-          "date": {
-            "format": "date-time",
-            "nullable": true,
-            "type": "string"
-          },
-          "id": {
-            "format": "int32",
-            "readOnly": true,
-            "type": "integer"
-          },
-          "identifier": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "orderDeadlineDate": {
-            "format": "date-time",
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "type": "object"
-      },
-      "DeliveryDateGrid": {
-        "additionalProperties": false,
-        "properties": {
-          "customDeliveryDate": {
-            "description": "If true, the store can override the date.",
-            "type": "boolean"
-          },
-          "date": {
-            "format": "date-time",
-            "nullable": true,
-            "type": "string"
-          },
-          "dateWeek": {
-            "nullable": true,
-            "type": "string"
-          },
-          "deliveryDateListId": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "id": {
-            "format": "int32",
-            "readOnly": true,
-            "type": "integer"
-          },
-          "identifier": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "orderDeadlineDate": {
-            "format": "date-time",
-            "nullable": true,
-            "type": "string"
-          },
-          "orderDeadlineDateWeek": {
-            "nullable": true,
-            "type": "string"
-          }
-        },
-        "type": "object"
-      },
-      "DeliveryDateUpdate": {
-        "additionalProperties": false,
-        "properties": {
-          "customDeliveryDate": {
-            "description": "If true, the store can override the date.",
-            "type": "boolean"
-          },
-          "date": {
-            "format": "date-time",
-            "nullable": true,
-            "type": "string"
-          },
-          "orderDeadlineDate": {
-            "format": "date-time",
-            "nullable": true,
-            "type": "string"
           }
         },
         "type": "object"
@@ -1300,11 +1168,6 @@
             "readOnly": true,
             "type": "string"
           },
-          "calculationRulesetId": {
-            "format": "int32",
-            "nullable": true,
-            "type": "integer"
-          },
           "costCarrier": {
             "nullable": true,
             "type": "string"
@@ -1431,6 +1294,13 @@
         ],
         "type": "string"
       },
+      "GtinSeriesMode": {
+        "enum": [
+          "Prefix",
+          "Range"
+        ],
+        "type": "string"
+      },
       "HiddenAttributes": {
         "additionalProperties": false,
         "properties": {
@@ -1438,6 +1308,9 @@
             "type": "boolean"
           },
           "bundle": {
+            "type": "boolean"
+          },
+          "itemOriginatingFrom": {
             "type": "boolean"
           },
           "limitControlGroup": {
@@ -1565,6 +1438,11 @@
               }
             ],
             "nullable": true
+          },
+          "scheduledImportDate": {
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
           },
           "seasonId": {
             "nullable": true,
@@ -1925,12 +1803,6 @@
             "nullable": true,
             "type": "array"
           },
-          "errors": {
-            "description": "This field is not serialized to JSON.\r\nMapping methods use it to create a query which can be translated to SQL.\r\nUse ItemService.Api.Contracts.PricatImport.ImportItem.ErrorList  property to obtain errors.",
-            "items": {},
-            "nullable": true,
-            "type": "array"
-          },
           "externalItemNo": {
             "nullable": true,
             "type": "string"
@@ -2022,10 +1894,6 @@
             "type": "integer"
           },
           "itemName": {
-            "nullable": true,
-            "type": "string"
-          },
-          "itemPlanningCode": {
             "nullable": true,
             "type": "string"
           },
@@ -2238,12 +2106,6 @@
             "items": {
               "$ref": "#/components/schemas/ItemValidationWarning"
             },
-            "nullable": true,
-            "type": "array"
-          },
-          "warnings": {
-            "description": "This field is not serialized to JSON.\r\nMapping methods use it to create a query which can be translated to SQL.\r\nUse ItemService.Api.Contracts.PricatImport.ImportItem.WarningList  property to obtain errors.",
-            "items": {},
             "nullable": true,
             "type": "array"
           },
@@ -2687,7 +2549,9 @@
           "IngredientQuantityNotInZeroOneRange",
           "IngredientNameRequired",
           "GrossQuantityCannotBeLessThanNetQuantity",
+          "ManagedByHqAndByStoreCannotBeTrueAtTheSameTime",
           "ItemMustBeIngredientOrHaveIngredientWithQtyOne",
+          "InsufficientAreaAccess",
           "ItemMustBeIngredient",
           "QuantityPerUnitMustBeInRange",
           "NumberOfUnitsMustBeInRange",
@@ -2698,15 +2562,34 @@
           "IngredientNumbersFromMultipleNonAlternativeItems",
           "InvalidAlternativeItem",
           "CannotModifyDefaultIngredientQuantities",
+          "PricePeriodCannotOverlapOnExistingPriceStartDate",
+          "PriceEndDateMustBeLaterThanStartDate",
           "FastLaneDoesNotSupportNewItems",
           "DefaultIngredientCannotBeDeleted",
           "IngredientNumberRequiredForDeletion",
           "InvalidNutritionValue",
           "InvalidAllergenValue",
+          "UnknownSubSupplier",
           "InvalidAgeGroupValue",
           "AgeGroupRequiresActiveSubstance",
           "SubSupplierItemNoAlreadyExistsOnDifferentItem",
-          "SubSupplierItemNoAlreadyFoundOnPreviousItemInFile"
+          "SubSupplierItemNoAlreadyFoundOnPreviousItemInFile",
+          "HighlightedTextNotFound",
+          "IngredientQuantityMustBeGreaterThanZero",
+          "GtinNotAllowedForLocalItem",
+          "GtinRangeExhausted",
+          "TaraCannotExceedWeight",
+          "IncorrectStorePriceSignOnSupplierDiscount",
+          "IncorrectStorePriceSignOnFreight",
+          "IncorrectStorePriceSignOnRetailerKickback",
+          "IncorrectStorePriceSignOnLocalDiscount1",
+          "IncorrectStorePriceSignOnLocalDiscount2",
+          "IncorrectStorePriceSignOnCalculatedBreakage",
+          "IncorrectStorePriceSignOnCustoms",
+          "IncorrectStorePriceSignOnHandlingCosts",
+          "GtinWithinReservedRange",
+          "MeasureCannotBeNegative",
+          "MainSupplierCannotBeDeletedFromCommon"
         ],
         "type": "string"
       },
@@ -2767,17 +2650,23 @@
           "BreakBulkCantBeSetOnTUItem",
           "DepositItemCreatedAsPlaceholder",
           "ShelfLocationCantBeCreated",
+          "SomeAlternativeGTINsWillNotBeImported",
+          "SomeValuesWillNotBeUpdatedDueToInsufficientPermissions",
           "SomeMenuGroupWillNotBeImportedToMenu",
           "SomeIngredientWillNotBeImportedToRecipe",
           "SomeAllergensWillNotBeImported",
           "SomeNutritionWillNotBeImported",
           "MultipleIngredientsWithQuantityOne",
+          "PriceWillNotBeImportedBecauseToDateInPast",
           "IngredientToDeleteDoesNotExist",
           "RecommendedServiceCodeInvalid",
           "RecommendedActionCodeRequired",
           "RecommendedActionCodeNotValidForServiceCode",
           "RecommendedLocationCodeNotValidForProfile",
-          "RecommendedServiceOnlyAllowedForProfile"
+          "RecommendedServiceOnlyAllowedForProfile",
+          "PriceValidToExtendedDueToPromotion",
+          "FuturePriceWillSupersedeImportedPrice",
+          "WholesalePriceAdjustedToNetPrice"
         ],
         "type": "string"
       },
@@ -2803,123 +2692,6 @@
             "type": "string"
           }
         },
-        "type": "object"
-      },
-      "MarketingCode": {
-        "additionalProperties": false,
-        "properties": {
-          "code": {
-            "nullable": true,
-            "type": "string"
-          },
-          "createdBy": {
-            "nullable": true,
-            "type": "string"
-          },
-          "createdDate": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "maxLength": 255,
-            "nullable": true,
-            "type": "string"
-          },
-          "displayText": {
-            "nullable": true,
-            "readOnly": true,
-            "type": "string"
-          },
-          "id": {
-            "format": "int32",
-            "readOnly": true,
-            "type": "integer"
-          },
-          "inactive": {
-            "readOnly": true,
-            "type": "boolean"
-          },
-          "isDefault": {
-            "readOnly": true,
-            "type": "boolean"
-          },
-          "modifiedBy": {
-            "nullable": true,
-            "type": "string"
-          },
-          "modifiedDate": {
-            "format": "date-time",
-            "nullable": true,
-            "type": "string"
-          },
-          "name": {
-            "maxLength": 50,
-            "minLength": 1,
-            "type": "string"
-          }
-        },
-        "required": [
-          "name"
-        ],
-        "type": "object"
-      },
-      "MarketingExclusivity": {
-        "additionalProperties": false,
-        "properties": {
-          "code": {
-            "description": "A unique code of the marketing exclusivity.",
-            "nullable": true,
-            "type": "string"
-          },
-          "createdBy": {
-            "nullable": true,
-            "type": "string"
-          },
-          "createdDate": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "maxLength": 255,
-            "type": "string"
-          },
-          "displayText": {
-            "nullable": true,
-            "readOnly": true,
-            "type": "string"
-          },
-          "id": {
-            "format": "int32",
-            "readOnly": true,
-            "type": "integer"
-          },
-          "inactive": {
-            "readOnly": true,
-            "type": "boolean"
-          },
-          "isDefault": {
-            "readOnly": true,
-            "type": "boolean"
-          },
-          "modifiedBy": {
-            "nullable": true,
-            "type": "string"
-          },
-          "modifiedDate": {
-            "format": "date-time",
-            "nullable": true,
-            "type": "string"
-          },
-          "name": {
-            "maxLength": 50,
-            "minLength": 1,
-            "type": "string"
-          }
-        },
-        "required": [
-          "description",
-          "name"
-        ],
         "type": "object"
       },
       "NonsaleType": {
@@ -3071,82 +2843,23 @@
         ],
         "type": "string"
       },
-      "PlanningCode": {
+      "PriceControl": {
         "additionalProperties": false,
+        "description": "On/off settings for the three price-control mechanisms of the price-suggestion job.",
         "properties": {
-          "appliedInStoreGroups": {
-            "items": {
-              "$ref": "#/components/schemas/StoreGroup"
-            },
-            "nullable": true,
-            "type": "array"
-          },
-          "code": {
-            "nullable": true,
-            "type": "string"
-          },
-          "createdBy": {
-            "nullable": true,
-            "type": "string"
-          },
-          "createdDate": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "maxLength": 255,
-            "nullable": true,
-            "type": "string"
-          },
-          "displayText": {
-            "nullable": true,
-            "readOnly": true,
-            "type": "string"
-          },
-          "earliestDelivery": {
-            "format": "date-time",
-            "nullable": true,
-            "type": "string"
-          },
-          "id": {
-            "format": "int32",
-            "readOnly": true,
-            "type": "integer"
-          },
-          "inactive": {
-            "readOnly": true,
+          "franchisePriceControl": {
+            "description": "Franchise stores approve central changes before they take effect. A central retail-price or assortment\r\nchange creates an approval item per franchise store; it takes effect at that store only after approval.",
             "type": "boolean"
           },
-          "isCurrent": {
+          "keepMarginSuggestions": {
+            "description": "When a profile's wholesale (cost) price changes without a retail change, creates a suggested retail\r\nprice that keeps the previous margin, for review. Removed if the retail price is changed.",
             "type": "boolean"
           },
-          "isDefault": {
-            "readOnly": true,
+          "wholesalePriceCascade": {
+            "description": "Automatically pushes cost-side changes (wholesale/net price, supplier discount, freight and the\r\nrecalculated margin) from a profile or price zone down to its store prices. Retail prices are not\r\nchanged and no approval is created.",
             "type": "boolean"
-          },
-          "latestDelivery": {
-            "format": "date-time",
-            "nullable": true,
-            "type": "string"
-          },
-          "modifiedBy": {
-            "nullable": true,
-            "type": "string"
-          },
-          "modifiedDate": {
-            "format": "date-time",
-            "nullable": true,
-            "type": "string"
-          },
-          "name": {
-            "maxLength": 50,
-            "minLength": 1,
-            "type": "string"
           }
         },
-        "required": [
-          "name"
-        ],
         "type": "object"
       },
       "ProcurementRule": {
@@ -3343,6 +3056,23 @@
           "description",
           "name"
         ],
+        "type": "object"
+      },
+      "ReservedPluRange": {
+        "additionalProperties": false,
+        "description": "A numeric range reserved for central PLU values. PLU values entered on items must fall outside every reserved range.",
+        "properties": {
+          "from": {
+            "description": "Inclusive lower bound.",
+            "format": "int64",
+            "type": "integer"
+          },
+          "to": {
+            "description": "Inclusive upper bound.",
+            "format": "int64",
+            "type": "integer"
+          }
+        },
         "type": "object"
       },
       "RoundingAmountOperator": {
@@ -3929,74 +3659,6 @@
         ],
         "type": "object"
       },
-      "ServiceLevel": {
-        "additionalProperties": false,
-        "properties": {
-          "code": {
-            "nullable": true,
-            "type": "string"
-          },
-          "createdBy": {
-            "nullable": true,
-            "type": "string"
-          },
-          "createdDate": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "description": {
-            "maxLength": 255,
-            "type": "string"
-          },
-          "displayText": {
-            "nullable": true,
-            "readOnly": true,
-            "type": "string"
-          },
-          "id": {
-            "format": "int32",
-            "readOnly": true,
-            "type": "integer"
-          },
-          "inactive": {
-            "readOnly": true,
-            "type": "boolean"
-          },
-          "isDefault": {
-            "readOnly": true,
-            "type": "boolean"
-          },
-          "isDeleted": {
-            "readOnly": true,
-            "type": "boolean"
-          },
-          "modifiedBy": {
-            "nullable": true,
-            "type": "string"
-          },
-          "modifiedDate": {
-            "format": "date-time",
-            "nullable": true,
-            "type": "string"
-          },
-          "name": {
-            "maxLength": 50,
-            "minLength": 1,
-            "type": "string"
-          },
-          "serviceLevelPercent": {
-            "format": "double",
-            "maximum": 100,
-            "minimum": 0.5,
-            "type": "number"
-          }
-        },
-        "required": [
-          "description",
-          "name"
-        ],
-        "type": "object"
-      },
       "Size": {
         "additionalProperties": false,
         "properties": {
@@ -4548,28 +4210,6 @@
         ],
         "type": "object"
       },
-      "UpdateDeliveryDatesRequest": {
-        "additionalProperties": false,
-        "properties": {
-          "deliveryDate": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DeliveryDateUpdate"
-              }
-            ],
-            "nullable": true
-          },
-          "deliveryDateListsIds": {
-            "items": {
-              "format": "int32",
-              "type": "integer"
-            },
-            "nullable": true,
-            "type": "array"
-          }
-        },
-        "type": "object"
-      },
       "UpdateItemList": {
         "additionalProperties": false,
         "properties": {
@@ -4724,7 +4364,7 @@
     "title": "Item API",
     "version": "v1"
   },
-  "openapi": "3.0.1",
+  "openapi": "3.0.4",
   "paths": {
     "/api/Activity": {
       "get": {
@@ -4785,7 +4425,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -4869,7 +4509,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -4901,15 +4541,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/AlternativeGroupUpdate"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -4951,7 +4582,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -5011,7 +4642,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -5060,15 +4691,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/AlternativeGroupUpdate"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -5082,7 +4704,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -5125,7 +4747,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -5219,7 +4841,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -5251,15 +4873,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/BrandCategory"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -5301,7 +4914,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -5361,7 +4974,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -5410,15 +5023,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/BrandCategory"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -5432,7 +5036,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -5475,7 +5079,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -5569,7 +5173,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -5601,15 +5205,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Brand"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -5651,7 +5246,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -5711,7 +5306,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -5760,15 +5355,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Brand"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -5782,7 +5368,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -5825,7 +5411,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -5868,7 +5454,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -5962,7 +5548,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -5994,15 +5580,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Classification"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -6044,7 +5621,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -6087,7 +5664,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -6145,7 +5722,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -6194,15 +5771,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Classification"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -6236,7 +5804,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -6279,7 +5847,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -6322,7 +5890,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -6337,440 +5905,6 @@
         },
         "tags": [
           "Classifications"
-        ]
-      }
-    },
-    "/api/Collections": {
-      "get": {
-        "parameters": [
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          },
-          {
-            "description": "Skips the first n results",
-            "in": "query",
-            "name": "$skip",
-            "schema": {
-              "format": "int32",
-              "type": "number"
-            }
-          },
-          {
-            "description": "Returns the first n results",
-            "in": "query",
-            "name": "$top",
-            "schema": {
-              "format": "int32",
-              "type": "number"
-            }
-          },
-          {
-            "description": "Filters the results using oData Notation",
-            "in": "query",
-            "name": "$filter",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Orders the results by the fields listed",
-            "in": "query",
-            "name": "$orderby",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/Collection"
-                  },
-                  "type": "array"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/Collection"
-                  },
-                  "type": "array"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/Collection"
-                  },
-                  "type": "array"
-                }
-              }
-            },
-            "description": "Success"
-          }
-        },
-        "tags": [
-          "Collections"
-        ]
-      },
-      "post": {
-        "parameters": [
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              }
-            },
-            "description": "Success"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "Collections"
-        ]
-      }
-    },
-    "/api/Collections/{id}": {
-      "delete": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "Collections"
-        ]
-      },
-      "get": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Collection"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Collection"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/Collection"
-                }
-              }
-            },
-            "description": "Success"
-          }
-        },
-        "tags": [
-          "Collections"
-        ]
-      },
-      "put": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Collection"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "Collections"
-        ]
-      }
-    },
-    "/api/Collections/{id}/ToggleIsActive": {
-      "post": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "Collections"
-        ]
-      }
-    },
-    "/api/Collections/{id}/ToggleIsDefault": {
-      "post": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "Collections"
         ]
       }
     },
@@ -6799,14 +5933,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "items": {
                   "type": "string"
@@ -6860,7 +5986,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -6954,7 +6080,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -6986,15 +6112,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ConcessionCreate"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -7036,7 +6153,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -7078,7 +6195,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -7138,7 +6255,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -7187,15 +6304,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ConcessionUpdate"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -7209,7 +6317,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -7252,7 +6360,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -7304,7 +6412,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -7354,7 +6462,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -7415,15 +6523,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CommissionPercentage"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -7457,7 +6556,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -7509,7 +6608,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -7577,15 +6676,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CommissionPercentage"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -7599,7 +6689,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -7660,15 +6750,6 @@
                 "type": "array"
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "items": {
-                  "format": "int32",
-                  "type": "integer"
-                },
-                "type": "array"
-              }
-            },
             "application/x-jsonlines": {
               "schema": {
                 "items": {
@@ -7691,7 +6772,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -7785,7 +6866,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -7817,15 +6898,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ConcessionStoresCreateUpdate"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -7867,7 +6939,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -7927,7 +6999,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -7976,15 +7048,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ConcessionStoresCreateUpdate"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -7998,7 +7061,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -8041,7 +7104,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -8102,15 +7165,6 @@
                 "type": "array"
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "items": {
-                  "format": "int32",
-                  "type": "integer"
-                },
-                "type": "array"
-              }
-            },
             "application/x-jsonlines": {
               "schema": {
                 "items": {
@@ -8133,7 +7187,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -8185,7 +7239,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -8269,7 +7323,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -8309,15 +7363,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Country"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -8348,7 +7393,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -8407,7 +7452,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -8455,15 +7500,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Country"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -8477,7 +7513,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -8519,7 +7555,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -8561,7 +7597,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -8576,332 +7612,6 @@
         },
         "tags": [
           "Countries"
-        ]
-      }
-    },
-    "/api/DeliveryDateList/DeliveryDates/{id}": {
-      "delete": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/DeleteDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/DeleteDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/DeleteDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/DeleteDeliveryDatesRequest"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "DeliveryDateList"
-        ]
-      },
-      "put": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/UpdateDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/UpdateDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/UpdateDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/UpdateDeliveryDatesRequest"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "DeliveryDateList"
-        ]
-      }
-    },
-    "/api/DeliveryDateList/{id}": {
-      "get": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/DeliveryDateGrid"
-                  },
-                  "type": "array"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/DeliveryDateGrid"
-                  },
-                  "type": "array"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/DeliveryDateGrid"
-                  },
-                  "type": "array"
-                }
-              }
-            },
-            "description": "Success"
-          }
-        },
-        "tags": [
-          "DeliveryDateList"
-        ]
-      }
-    },
-    "/api/DeliveryDateList/{listId}/DeliveryDates": {
-      "post": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "listId",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CreateDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CreateDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CreateDeliveryDatesRequest"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CreateDeliveryDatesRequest"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              }
-            },
-            "description": "Success"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "DeliveryDateList"
         ]
       }
     },
@@ -8981,7 +7691,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -9013,15 +7723,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ExcelExportTemplateCreate"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -9063,7 +7764,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -9124,15 +7825,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ExcelExportTemplateUpdate"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -9146,7 +7838,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -9189,7 +7881,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -9232,7 +7924,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           }
         },
         "summary": "Gets a file for a specified export.",
@@ -9317,7 +8009,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -9410,7 +8102,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -9460,7 +8152,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -9510,7 +8202,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -9612,7 +8304,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -9655,7 +8347,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -9713,7 +8405,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -9755,7 +8447,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -9904,15 +8596,6 @@
                 "type": "array"
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "items": {
-                  "format": "int32",
-                  "type": "integer"
-                },
-                "type": "array"
-              }
-            },
             "application/x-jsonlines": {
               "schema": {
                 "items": {
@@ -9952,7 +8635,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -10101,15 +8784,6 @@
                 "type": "array"
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "items": {
-                  "format": "int32",
-                  "type": "integer"
-                },
-                "type": "array"
-              }
-            },
             "application/x-jsonlines": {
               "schema": {
                 "items": {
@@ -10152,7 +8826,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -10309,19 +8983,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/FixItemIdentifierErrorsType"
-                  }
-                ],
-                "enum": [
-                  "UpdateExistingItems",
-                  "CreateNewItems"
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -10339,7 +9000,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -10488,15 +9149,6 @@
                 "type": "array"
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "items": {
-                  "format": "int32",
-                  "type": "integer"
-                },
-                "type": "array"
-              }
-            },
             "application/x-jsonlines": {
               "schema": {
                 "items": {
@@ -10519,7 +9171,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -10669,15 +9321,6 @@
                 "type": "array"
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "items": {
-                  "format": "int32",
-                  "type": "integer"
-                },
-                "type": "array"
-              }
-            },
             "application/x-jsonlines": {
               "schema": {
                 "items": {
@@ -10717,7 +9360,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -10760,7 +9403,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -10863,7 +9506,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -10896,7 +9539,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -11045,15 +9688,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ValidationOptionsWithSelectedItems"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -11084,7 +9718,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -11145,7 +9779,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -11229,7 +9863,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -11261,15 +9895,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ItemCategory"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -11311,7 +9936,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -11354,7 +9979,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -11412,7 +10037,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -11461,15 +10086,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ItemCategory"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -11483,7 +10099,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -11526,7 +10142,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -11569,7 +10185,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -11663,7 +10279,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -11695,15 +10311,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CreateItemList"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -11745,7 +10352,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -11788,7 +10395,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -11847,15 +10454,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/UpdateItemList"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -11869,7 +10467,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -11941,7 +10539,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -12045,7 +10643,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -12144,7 +10742,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -12203,7 +10801,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -12260,7 +10858,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -12328,15 +10926,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/UseItemList"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -12367,7 +10956,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -12464,7 +11053,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -12557,7 +11146,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -12641,7 +11230,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -12673,15 +11262,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ItemType"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -12723,7 +11303,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -12766,7 +11346,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -12824,7 +11404,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -12873,15 +11453,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ItemType"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -12895,7 +11466,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -12938,7 +11509,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -12981,7 +11552,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -12996,792 +11567,6 @@
         },
         "tags": [
           "ItemTypes"
-        ]
-      }
-    },
-    "/api/MarketingCodes": {
-      "get": {
-        "parameters": [
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          },
-          {
-            "description": "Skips the first n results",
-            "in": "query",
-            "name": "$skip",
-            "schema": {
-              "format": "int32",
-              "type": "number"
-            }
-          },
-          {
-            "description": "Returns the first n results",
-            "in": "query",
-            "name": "$top",
-            "schema": {
-              "format": "int32",
-              "type": "number"
-            }
-          },
-          {
-            "description": "Filters the results using oData Notation",
-            "in": "query",
-            "name": "$filter",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Orders the results by the fields listed",
-            "in": "query",
-            "name": "$orderby",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/MarketingCode"
-                  },
-                  "type": "array"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/MarketingCode"
-                  },
-                  "type": "array"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/MarketingCode"
-                  },
-                  "type": "array"
-                }
-              }
-            },
-            "description": "Success"
-          }
-        },
-        "tags": [
-          "MarketingCodes"
-        ]
-      },
-      "post": {
-        "parameters": [
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingCode"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingCode"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingCode"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingCode"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              }
-            },
-            "description": "Success"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "MarketingCodes"
-        ]
-      }
-    },
-    "/api/MarketingCodes/{id}": {
-      "get": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MarketingCode"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MarketingCode"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/MarketingCode"
-                }
-              }
-            },
-            "description": "Success"
-          }
-        },
-        "tags": [
-          "MarketingCodes"
-        ]
-      },
-      "put": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingCode"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingCode"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingCode"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingCode"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "MarketingCodes"
-        ]
-      }
-    },
-    "/api/MarketingCodes/{id}/ToggleIsActive": {
-      "post": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "MarketingCodes"
-        ]
-      }
-    },
-    "/api/MarketingCodes/{id}/ToggleIsDefault": {
-      "post": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "MarketingCodes"
-        ]
-      }
-    },
-    "/api/MarketingExclusivities": {
-      "get": {
-        "parameters": [
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          },
-          {
-            "description": "Skips the first n results",
-            "in": "query",
-            "name": "$skip",
-            "schema": {
-              "format": "int32",
-              "type": "number"
-            }
-          },
-          {
-            "description": "Returns the first n results",
-            "in": "query",
-            "name": "$top",
-            "schema": {
-              "format": "int32",
-              "type": "number"
-            }
-          },
-          {
-            "description": "Filters the results using oData Notation",
-            "in": "query",
-            "name": "$filter",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Orders the results by the fields listed",
-            "in": "query",
-            "name": "$orderby",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
-                  },
-                  "type": "array"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
-                  },
-                  "type": "array"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
-                  },
-                  "type": "array"
-                }
-              }
-            },
-            "description": "Success"
-          }
-        },
-        "tags": [
-          "MarketingExclusivities"
-        ]
-      },
-      "post": {
-        "parameters": [
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              }
-            },
-            "description": "Success"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "MarketingExclusivities"
-        ]
-      }
-    },
-    "/api/MarketingExclusivities/{id}": {
-      "get": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MarketingExclusivity"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MarketingExclusivity"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/MarketingExclusivity"
-                }
-              }
-            },
-            "description": "Success"
-          }
-        },
-        "tags": [
-          "MarketingExclusivities"
-        ]
-      },
-      "put": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/MarketingExclusivity"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "MarketingExclusivities"
-        ]
-      }
-    },
-    "/api/MarketingExclusivities/{id}/ToggleIsActive": {
-      "post": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "MarketingExclusivities"
-        ]
-      }
-    },
-    "/api/MarketingExclusivities/{id}/ToggleIsDefault": {
-      "post": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "MarketingExclusivities"
         ]
       }
     },
@@ -13861,7 +11646,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -13893,15 +11678,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/NonsaleType"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -13943,7 +11719,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -14004,15 +11780,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/NonsaleType"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -14026,7 +11793,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -14069,7 +11836,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -14163,7 +11930,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -14195,15 +11962,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/NutritionDetails"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -14245,7 +12003,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -14305,7 +12063,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -14354,15 +12112,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/NutritionDetails"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -14376,7 +12125,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -14419,7 +12168,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -14434,399 +12183,6 @@
         },
         "tags": [
           "Nutritions"
-        ]
-      }
-    },
-    "/api/PlanningCodes": {
-      "get": {
-        "parameters": [
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          },
-          {
-            "description": "Skips the first n results",
-            "in": "query",
-            "name": "$skip",
-            "schema": {
-              "format": "int32",
-              "type": "number"
-            }
-          },
-          {
-            "description": "Returns the first n results",
-            "in": "query",
-            "name": "$top",
-            "schema": {
-              "format": "int32",
-              "type": "number"
-            }
-          },
-          {
-            "description": "Filters the results using oData Notation",
-            "in": "query",
-            "name": "$filter",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Orders the results by the fields listed",
-            "in": "query",
-            "name": "$orderby",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  },
-                  "type": "array"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  },
-                  "type": "array"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  },
-                  "type": "array"
-                }
-              }
-            },
-            "description": "Success"
-          }
-        },
-        "tags": [
-          "PlanningCodes"
-        ]
-      },
-      "post": {
-        "parameters": [
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              }
-            },
-            "description": "Success"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "PlanningCodes"
-        ]
-      }
-    },
-    "/api/PlanningCodes/{id}": {
-      "get": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PlanningCode"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PlanningCode"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/PlanningCode"
-                }
-              }
-            },
-            "description": "Success"
-          }
-        },
-        "tags": [
-          "PlanningCodes"
-        ]
-      },
-      "put": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/PlanningCode"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "PlanningCodes"
-        ]
-      }
-    },
-    "/api/PlanningCodes/{id}/ToggleIsActive": {
-      "post": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "PlanningCodes"
-        ]
-      }
-    },
-    "/api/PlanningCodes/{id}/ToggleIsDefault": {
-      "post": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "PlanningCodes"
         ]
       }
     },
@@ -14906,7 +12262,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -14938,15 +12294,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ProcurementRule"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -14988,7 +12335,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -15031,7 +12378,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -15089,7 +12436,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -15138,15 +12485,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ProcurementRule"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -15160,7 +12498,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -15203,7 +12541,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -15246,7 +12584,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -15340,7 +12678,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -15372,15 +12710,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ReplenishmentCode"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -15422,7 +12751,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -15465,7 +12794,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -15523,7 +12852,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -15572,15 +12901,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ReplenishmentCode"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -15594,7 +12914,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -15637,7 +12957,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -15680,7 +13000,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -15774,7 +13094,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -15806,15 +13126,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ReportCategory"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -15856,7 +13167,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -15899,7 +13210,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -15957,7 +13268,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -16006,15 +13317,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ReportCategory"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -16028,7 +13330,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -16071,7 +13373,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -16114,7 +13416,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -16208,7 +13510,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -16240,15 +13542,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/RoundingRule"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -16290,7 +13583,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -16350,7 +13643,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -16399,15 +13692,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/RoundingRule"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -16421,7 +13705,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -16464,7 +13748,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -16507,7 +13791,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -16601,7 +13885,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -16633,15 +13917,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SearchableColor"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -16683,7 +13958,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -16743,7 +14018,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -16792,15 +14067,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SearchableColor"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -16814,7 +14080,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -16857,7 +14123,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -16951,7 +14217,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -16983,15 +14249,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SeasonCode"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -17033,7 +14290,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -17093,7 +14350,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -17142,15 +14399,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SeasonCode"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -17164,7 +14412,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -17207,7 +14455,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -17250,7 +14498,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -17344,7 +14592,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -17376,15 +14624,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SeasonDetails"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -17426,7 +14665,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -17469,7 +14708,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -17527,7 +14766,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -17576,15 +14815,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SeasonDetails"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -17598,7 +14828,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -17641,7 +14871,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -17735,7 +14965,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -17767,15 +14997,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberAttribute"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -17817,7 +15038,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -17877,7 +15098,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -17926,15 +15147,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberAttribute"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -17948,7 +15160,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -17991,7 +15203,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -18094,7 +15306,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -18143,15 +15355,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberAttributeValue"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -18185,7 +15388,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -18237,7 +15440,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -18305,15 +15508,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberAttributeValue"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -18327,7 +15521,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -18379,7 +15573,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -18473,7 +15667,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -18505,15 +15699,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberType"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -18555,7 +15740,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -18598,7 +15783,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -18656,7 +15841,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -18705,15 +15890,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberType"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -18727,7 +15903,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -18770,7 +15946,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -18813,7 +15989,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -18916,7 +16092,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -18965,15 +16141,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberTypeAttribute"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -19007,7 +16174,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -19079,7 +16246,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -19147,15 +16314,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SerialNumberTypeAttribute"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -19189,7 +16347,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -19241,7 +16399,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -19310,445 +16468,11 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
           "SerialNumberTypes"
-        ]
-      }
-    },
-    "/api/ServiceLevels": {
-      "get": {
-        "parameters": [
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          },
-          {
-            "description": "Skips the first n results",
-            "in": "query",
-            "name": "$skip",
-            "schema": {
-              "format": "int32",
-              "type": "number"
-            }
-          },
-          {
-            "description": "Returns the first n results",
-            "in": "query",
-            "name": "$top",
-            "schema": {
-              "format": "int32",
-              "type": "number"
-            }
-          },
-          {
-            "description": "Filters the results using oData Notation",
-            "in": "query",
-            "name": "$filter",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Orders the results by the fields listed",
-            "in": "query",
-            "name": "$orderby",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  },
-                  "type": "array"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  },
-                  "type": "array"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  },
-                  "type": "array"
-                }
-              }
-            },
-            "description": "Success"
-          }
-        },
-        "tags": [
-          "ServiceLevels"
-        ]
-      },
-      "post": {
-        "parameters": [
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "format": "int32",
-                  "type": "integer"
-                }
-              }
-            },
-            "description": "Success"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "ServiceLevels"
-        ]
-      }
-    },
-    "/api/ServiceLevels/{id}": {
-      "delete": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "ServiceLevels"
-        ]
-      },
-      "get": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ServiceLevel"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ServiceLevel"
-                }
-              },
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ServiceLevel"
-                }
-              }
-            },
-            "description": "Success"
-          }
-        },
-        "tags": [
-          "ServiceLevels"
-        ]
-      },
-      "put": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/*+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            },
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            },
-            "text/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/ServiceLevel"
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "ServiceLevels"
-        ]
-      }
-    },
-    "/api/ServiceLevels/{id}/ToggleIsActive": {
-      "post": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "ServiceLevels"
-        ]
-      }
-    },
-    "/api/ServiceLevels/{id}/ToggleIsDefault": {
-      "post": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            }
-          },
-          {
-            "description": "Specifies the identifier of the user who triggered the request",
-            "in": "header",
-            "name": "lrs-userid",
-            "required": true,
-            "schema": {
-              "default": "ZGV2ZWxvcGVy",
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "422": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationErrorBody"
-                }
-              }
-            },
-            "description": "Validation error"
-          }
-        },
-        "tags": [
-          "ServiceLevels"
         ]
       }
     },
@@ -19828,7 +16552,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -19860,15 +16584,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SizeTemplate"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -19910,7 +16625,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -19970,7 +16685,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -20019,15 +16734,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SizeTemplate"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -20041,7 +16747,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -20144,7 +16850,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -20186,7 +16892,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -20254,15 +16960,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SizeTemplateSize"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -20276,7 +16973,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -20344,15 +17041,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/SizeTemplateSize"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -20366,7 +17054,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -20409,7 +17097,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -20503,7 +17191,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -20535,15 +17223,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Size"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -20585,7 +17264,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -20645,7 +17324,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -20694,15 +17373,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/Size"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -20716,7 +17386,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -20759,7 +17429,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -20853,7 +17523,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -20903,7 +17573,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           }
         },
         "tags": [
@@ -20935,15 +17605,6 @@
               }
             },
             "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/TradingUnit"
-                  }
-                ]
-              }
-            },
-            "application/json-patch+json": {
               "schema": {
                 "allOf": [
                   {
@@ -20985,7 +17646,7 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -21046,15 +17707,6 @@
                 ]
               }
             },
-            "application/json-patch+json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/TradingUnit"
-                  }
-                ]
-              }
-            },
             "text/json": {
               "schema": {
                 "allOf": [
@@ -21068,7 +17720,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -21111,7 +17763,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -21154,7 +17806,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "422": {
             "content": {
@@ -21176,6 +17828,104 @@
   "security": [
     {
       "Bearer": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Activity"
+    },
+    {
+      "name": "AlternativeGroups"
+    },
+    {
+      "name": "BrandCategories"
+    },
+    {
+      "name": "Brands"
+    },
+    {
+      "name": "Classifications"
+    },
+    {
+      "name": "Colors"
+    },
+    {
+      "name": "Concession"
+    },
+    {
+      "name": "ConcessionStores"
+    },
+    {
+      "name": "Configuration"
+    },
+    {
+      "name": "Countries"
+    },
+    {
+      "name": "ExcelExportTemplates"
+    },
+    {
+      "name": "FileExport"
+    },
+    {
+      "name": "Imports"
+    },
+    {
+      "name": "ItemCategories"
+    },
+    {
+      "name": "ItemLists"
+    },
+    {
+      "name": "ItemSegmentation"
+    },
+    {
+      "name": "ItemTypes"
+    },
+    {
+      "name": "NonsaleType"
+    },
+    {
+      "name": "Nutritions"
+    },
+    {
+      "name": "ProcurementRules"
+    },
+    {
+      "name": "ReplenishmentCodes"
+    },
+    {
+      "name": "ReportCategories"
+    },
+    {
+      "name": "RoundingRecoveryRetailPrices"
+    },
+    {
+      "name": "SearchableColors"
+    },
+    {
+      "name": "SeasonCodes"
+    },
+    {
+      "name": "Seasons"
+    },
+    {
+      "name": "SerialNumberAttributes"
+    },
+    {
+      "name": "SerialNumberTypes"
+    },
+    {
+      "name": "Sizes"
+    },
+    {
+      "name": "SizeTemplates"
+    },
+    {
+      "name": "StoreGroups"
+    },
+    {
+      "name": "TradingUnits"
     }
   ]
 }
