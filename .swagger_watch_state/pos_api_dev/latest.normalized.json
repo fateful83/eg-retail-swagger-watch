@@ -7194,7 +7194,7 @@
             "type": "array"
           },
           "operator": {
-            "description": "Operator value from the request is ignored and the cart has Operator from the original cart if\r\nArticle is part of customer order and POS parameter keepSalesPersonInCustomerOrderOnlineReturn set to true or\r\nArticle is not part of customer order and  POS parameter KeepSalesPersonInNormalOnlineReturn set to true",
+            "description": "Operator of the return transaction.\r\nIf omitted, the API user is used. A non-numeric operator is replaced by the AlternativeOperatorId parameter when it is configured.\r\nThe salesperson on the return lines follows the operator, except that it is taken from the original cart if\r\nArticle is part of customer order and POS parameter keepSalesPersonInCustomerOrderOnlineReturn set to true or\r\nArticle is not part of customer order and  POS parameter KeepSalesPersonInNormalOnlineReturn set to true",
             "nullable": true,
             "type": "string"
           },
@@ -23680,7 +23680,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-11-27T01:11:09.950993Z",
+                    "startTime": "2026-11-27T15:41:25.1643649Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
@@ -23959,7 +23959,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-11-27T01:11:09.950993Z",
+                    "startTime": "2026-11-27T15:41:25.1643649Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
@@ -24238,7 +24238,7 @@
                     "orderVersion": null,
                     "payments": null,
                     "sequenceNumber": 122,
-                    "startTime": "2026-11-27T01:11:09.950993Z",
+                    "startTime": "2026-11-27T15:41:25.1643649Z",
                     "tickets": null,
                     "totals": null,
                     "tracingId": null,
